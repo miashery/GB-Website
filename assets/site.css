@@ -1254,3 +1254,125 @@ button[type="submit"]:hover {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Clean card treatment for the workshop and play pages */
+.cmp {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.cbox {
+  background: var(--white) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  padding: 24px 26px !important;
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 10px 30px rgba(44,44,44,.06);
+}
+
+.cbox .ctag,
+.ctag {
+  display: inline-flex;
+  width: auto;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 11px;
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.cbox h4 {
+  margin-bottom: 8px;
+}
+
+.cbox p {
+  color: var(--mid);
+  margin-bottom: 0;
+}
+
+.tbl {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.05);
+}
+
+.tbl th,
+.tbl td {
+  padding: 13px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--mid);
+}
+
+.tbl th {
+  color: var(--ink);
+  background: var(--cream-dark);
+  font-size: .82rem;
+}
+
+.tbl tr:last-child td {
+  border-bottom: 0;
+}
+
+.slot-label {
+  min-width: 24px;
+  text-align: center;
+}
+
+.track-header {
+  background: var(--white) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.05);
+}
+
+.track-header .th-left p {
+  color: var(--mid) !important;
+}
+
+.track-toggle {
+  background: var(--cream);
+}
+
+.session-grid {
+  gap: 14px;
+}
+
+.scard,
+.ageband,
+.incl-bar {
+  border-color: var(--border) !important;
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.045);
+}
+
+.sc-pill,
+.track-header .tag {
+  color: var(--ink);
+  background: var(--cream-dark);
+}
+
+.lego-banner,
+.incl-bar {
+  background: var(--white) !important;
+  border-color: var(--border) !important;
+}
+
+@media(max-width: 760px) {
+  .cmp {
+    grid-template-columns: 1fr;
+  }
+
+  .cbox {
+    padding: 20px !important;
+  }
+}

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ebeveyn Desteği | Giggles & Bloom</title>
+<meta name="description" content="Ebeveynler için SSS, uzman yazıları, blog ve psikolojik destek hattı. Akıllı rehberlik sistemi, uzman psikologlara yönlendirme ve anonim sorgu akışı.">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* Flow diagram */
+.flow { display:flex; flex-direction:column; gap:0 }
+.flow-step {
+  display:flex; gap:14px; align-items:flex-start; position:relative; padding-bottom:20px
+}
+.flow-step:last-child { padding-bottom:0 }
+.flow-left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:36px }
+.flow-num {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--sage); color:#fff;
+  display:grid; place-items:center;
+  font-size:.85rem; font-weight:800; flex-shrink:0;
+}
+.flow-line { width:2px; background:var(--sage-light); flex:1; min-height:24px; margin-top:4px }
+.flow-step:last-child .flow-line { display:none }
+.flow-content { padding-top:6px; flex:1 }
+.flow-content strong { font-size:.88rem; color:var(--ink); display:block; margin-bottom:3px }
+.flow-content p { font-size:.79rem; color:var(--mid); margin:0; line-height:1.55 }
+.flow-tag { display:inline-block; font-size:.65rem; font-weight:800; padding:2px 8px; border-radius:12px; text-transform:uppercase; letter-spacing:.4px; margin-top:4px }
+
+/* Expert response options */
+.resp-row { display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid var(--border) }
+.resp-row:last-child { border-bottom:0 }
+.resp-icon { font-size:1.2rem; flex-shrink:0 }
+.resp-label { font-size:.83rem; font-weight:700; color:var(--ink); margin-bottom:2px }
+.resp-desc { font-size:.77rem; color:var(--mid); line-height:1.5 }
+
+/* Content types */
+.content-type { background:var(--cream); border-radius:10px; padding:12px 14px; margin-bottom:8px }
+.content-type:last-child { margin-bottom:0 }
+.content-type strong { font-size:.84rem; color:var(--ink); display:block; margin-bottom:2px }
+.content-type p { font-size:.77rem; color:var(--mid); margin:0; line-height:1.5 }
+.content-type .ct-sub { font-size:.7rem; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe atla / Skip to content</a>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="Giggles &amp; Bloom" class="brand-logo">
+      <div class="brand-text"><div class="name">Giggles &amp; Bloom</div><div class="tag">Kadıköy & Kurtköy</div></div>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html"><span class="tr-only">Ana Sayfa</span><span class="en-only">Home</span></a>
+      <a href="workshops.html"><span class="tr-only">Atölyeler</span><span class="en-only">Workshops</span></a>
+      <a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>
+      <a href="food.html"><span class="tr-only">Kafe</span><span class="en-only">Café</span></a>
+      <a href="workspaces.html"><span class="tr-only">Çalışma Alanı</span><span class="en-only">Cowork</span></a>
+      <a href="library.html"><span class="tr-only">Kitaplık</span><span class="en-only">Library</span></a>
+      <a href="social-lab.html">Social Lab</a>
+      <a class="active" href="wellbeing.html"><span class="tr-only">Destek</span><span class="en-only">Support</span></a>
+      <a href="events.html"><span class="tr-only">Etkinlikler</span><span class="en-only">Events</span></a>
+      <a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>
+      <a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-login" type="button"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></button>
+      <button class="btn-join" type="button"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></button>
+      <button class="lang-sw" id="ls" type="button" onclick="gt()" aria-label="TR/EN">
+      <span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span>
+    </button>
+      <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HEADER -->
+<div class="pt fi">
+  <h1><span class="tr-only">Ebeveyn Desteği</span><span class="en-only">Parent Support</span></h1>
+  <p class="sub"><span class="tr-only">Ebeveynlik zor. Bazen bir cevap yeterlidir. Bazen bir uzman sesine ihtiyaç duyarsınız. G&B her ikisi için de burada — yargılamadan, gizliliğinize saygıyla, her zaman insan dokunuşuyla.</span><span class="en-only">Parenting is hard. Sometimes an answer is enough. Sometimes you need an expert voice. G&B is here for both — without judgment, with respect for your privacy, always with a human touch.</span></p>
+  <div class="pills" style="margin-top:12px">
+    <span class="pill"><span class="tr-only">Ücretsiz rehberlik — tüm ebeveynlere açık</span><span class="en-only">Free guidance — open to all parents</span></span>
+    <span class="pill"><span class="tr-only">Anonim sorgu seçeneği</span><span class="en-only">Anonymous query option</span></span>
+    <span class="pill"><span class="tr-only">KVKK uyumlu</span><span class="en-only">KVKK compliant</span></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero hero-sage fi"><div class="hero-inner"><div>
+  <h2><span class="tr-only">Bir aile her soruya cevap bulabilmeli</span><span class="en-only">Every family deserves access to answers</span></h2>
+  <p><span class="tr-only">Çocuğunuzun davranışı sizi endişelendiriyor mu? Ebeveynlikte bunaldığınızı hissediyor musunuz? Bilmediğiniz bir şeyi sormak istiyor ama nereden başlayacağınızı bilemiyor musunuz? G&B'nin destek sistemi sizi doğru yere yönlendirir — önce mevcut bilgilerle, yetmezse gerçek bir uzmanla.</span><span class="en-only">Does your child's behaviour worry you? Do you feel overwhelmed by parenting? Do you want to ask something you don't know but aren't sure where to start? G&B's support system guides you to the right place — first with existing knowledge, then with a real expert if needed.</span></p>
+  <div class="btns" style="margin-top:14px">
+    <a class="btn btn-p" href="#knowledge"><span class="tr-only">Bilgi Merkezine Git</span><span class="en-only">Go to Knowledge Centre</span></a>
+    <a class="btn" href="#ask-expert"><span class="tr-only">Uzmana Sor →</span><span class="en-only">Ask an Expert →</span></a>
+  </div>
+</div>
+<div class="card">
+  <div class="badge"><span class="dot d-sage"></span><span class="tr-only">Destek Katmanları</span><span class="en-only">Support Layers</span></div>
+  <ul style="list-style:none;padding:0;margin:0">
+    <li style="font-size:.79rem;padding:5px 0;border-bottom:1px solid var(--border);color:var(--mid)">📚 <strong style="color:var(--ink)"><span class="tr-only">Bilgi Merkezi</span><span class="en-only">Knowledge Centre</span></strong> — <span class="tr-only">SSS, uzman yazıları, blog</span><span class="en-only">FAQs, expert articles, blog</span></li>
+    <li style="font-size:.79rem;padding:5px 0;border-bottom:1px solid var(--border);color:var(--mid)">🤖 <strong style="color:var(--ink)"><span class="tr-only">Akıllı Rehberlik</span><span class="en-only">Smart Guidance</span></strong> — <span class="tr-only">İlgili içeriği bulmanızı sağlar</span><span class="en-only">Helps you find relevant content</span></li>
+    <li style="font-size:.79rem;padding:5px 0;border-bottom:1px solid var(--border);color:var(--mid)">✉️ <strong style="color:var(--ink)"><span class="tr-only">Uzmana Sor</span><span class="en-only">Ask an Expert</span></strong> — <span class="tr-only">Psikolog ekibine anonim sorgu</span><span class="en-only">Anonymous query to our psychologist team</span></li>
+    <li style="font-size:.79rem;padding:5px 0;color:var(--mid)">🤝 <strong style="color:var(--ink)"><span class="tr-only">Yönlendirme & Seans</span><span class="en-only">Referral & Session</span></strong> — <span class="tr-only">Gerektiğinde daha derin destek</span><span class="en-only">Deeper support when needed</span></li>
+  </ul>
+</div>
+</div></div>
+
+<!-- KNOWLEDGE CENTRE -->
+<div class="sec fi" id="knowledge">
+  <h3><span class="tr-only">📚 Bilgi Merkezi</span><span class="en-only">📚 Knowledge Centre</span></h3>
+  <p style="font-size:.88rem;color:var(--mid);max-width:640px;margin-bottom:16px;line-height:1.65"><span class="tr-only">Ebeveynlerin en çok ihtiyaç duyduğu bilgileri uzmanlar derledi, sadeleştirdi ve erişilebilir hale getirdi. Dergi makalelerinin karmaşıklığı olmadan, güvenilir bilgi.</span><span class="en-only">The information parents need most, curated, simplified and made accessible by our experts. Reliable knowledge without the complexity of journal articles.</span></p>
+  <div class="g g2" style="gap:10px">
+    <div>
+      <div class="content-type">
+        <div class="ct-sub">SSS / FAQ</div>
+        <strong><span class="tr-only">Sık Sorulan Sorular</span><span class="en-only">Frequently Asked Questions</span></strong>
+        <p><span class="tr-only">Ebeveynlerin en çok sorduğu sorular, uzman ekibimiz tarafından yanıtlanmış. Aylık güncellenip genişletilen, yaşayan bir belge. Her cevap kısa, net ve referanslı.</span><span class="en-only">The questions parents ask most, answered by our expert team. A living document updated and expanded monthly. Every answer short, clear and referenced.</span></p>
+      </div>
+      <div class="content-type">
+        <div class="ct-sub"><span class="tr-only">Uzman Makaleleri</span><span class="en-only">Expert Articles</span></div>
+        <strong><span class="tr-only">Seçilmiş & Sadeleştirilmiş Yayınlar</span><span class="en-only">Selected & Simplified Published Research</span></strong>
+        <p><span class="tr-only">Güvenilir akademik ve klinik yayınlar uzmanlarımız tarafından seçildi, gözden geçirildi ve ebeveynlerin anlayabileceği dile çevrildi. Görsel özet + tam yazı seçeneği.</span><span class="en-only">Trusted academic and clinical publications selected, reviewed and translated into parent-friendly language by our experts. Visual summary + full article option.</span></p>
+      </div>
+    </div>
+    <div>
+      <div class="content-type">
+        <div class="ct-sub">Blog</div>
+        <strong><span class="tr-only">Uzman & Topluluk Blog Yazıları</span><span class="en-only">Expert & Community Blog Posts</span></strong>
+        <p><span class="tr-only">Psikologlarımız ve topluluk uzmanlarından pratik, bağlamsal yazılar. Anonim ebeveyn sorularından derlenen aylık yazılar da dahil — genelleştirilmiş, kişiselleştirilmemiş.</span><span class="en-only">Practical, contextual writing from our psychologists and community experts. Including monthly posts compiled from anonymised parent queries — generalised, never personal.</span></p>
+      </div>
+      <div class="content-type">
+        <div class="ct-sub"><span class="tr-only">Görsel Rehberler</span><span class="en-only">Visual Guides</span></div>
+        <strong><span class="tr-only">Görselleştirilmiş Bilgi</span><span class="en-only">Visualised Knowledge</span></strong>
+        <p><span class="tr-only">Karmaşık gelişimsel ve psikolojik kavramlar, ebeveynlerin günlük kullanımına uygun infografikler ve kısa kartlar halinde. Özellikle görsel öğrenenler için.</span><span class="en-only">Complex developmental and psychological concepts presented as infographics and short cards for daily parent use. Especially useful for visual learners.</span></p>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:.76rem;color:var(--muted);margin-top:10px;padding:10px;background:var(--cream);border-radius:8px"><span class="tr-only">⚠️ Bilgi Merkezi içerikleri genel ebeveyn desteği amacıyla hazırlanmıştır. Tıbbi tanı veya tedavi yerine geçmez. Klinik bir endişeniz varsa bir sağlık uzmanına başvurun.</span><span class="en-only">⚠️ Knowledge Centre content is prepared for general parent support purposes. It does not replace medical diagnosis or treatment. If you have a clinical concern, consult a health professional.</span></p>
+</div>
+
+<!-- SMART GUIDANCE -->
+<div class="sec fi">
+  <h3><span class="tr-only">🤖 Akıllı Rehberlik Sistemi</span><span class="en-only">🤖 Smart Guidance System</span></h3>
+  <p style="font-size:.88rem;color:var(--mid);max-width:640px;margin-bottom:14px;line-height:1.65"><span class="tr-only">Neye ihtiyacınız olduğundan emin değil misiniz? Akıllı rehberlik sistemi, sorunuzu veya kaygınızı anlayarak sizi en ilgili içeriğe yönlendirir. Hızlı, bağlam duyarlı, yargılamayan. Bu sistem tavsiye vermez — yalnızca doğru kaynağı bulmanıza yardımcı olur.</span><span class="en-only">Not sure what you need? The smart guidance system understands your question or concern and directs you to the most relevant content. Fast, context-aware, non-judgmental. This system does not give advice — it only helps you find the right resource.</span></p>
+  <div class="g g3" style="gap:10px">
+    <div class="card ct" style="padding:14px;text-align:center">
+      <div style="font-size:1.6rem;margin-bottom:6px">🔍</div>
+      <strong style="font-size:.84rem"><span class="tr-only">Sorunuzu yazın</span><span class="en-only">Write your question</span></strong>
+      <p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Doğal dilde yazın. "Çocuğum uyumak istemiyor" veya "kendimi çok yorgun hissediyorum."</span><span class="en-only">Write naturally. "My child won't sleep" or "I feel completely exhausted."</span></p>
+    </div>
+    <div class="card ct-c" style="padding:14px;text-align:center">
+      <div style="font-size:1.6rem;margin-bottom:6px">🎯</div>
+      <strong style="font-size:.84rem"><span class="tr-only">İlgili içerik önerilir</span><span class="en-only">Relevant content suggested</span></strong>
+      <p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Sistem SSS'ler, makaleler ve blog yazıları arasından en uygun içerikleri önerir.</span><span class="en-only">The system suggests the most relevant content from FAQs, articles and blog posts.</span></p>
+    </div>
+    <div class="card ct-g" style="padding:14px;text-align:center">
+      <div style="font-size:1.6rem;margin-bottom:6px">✉️</div>
+      <strong style="font-size:.84rem"><span class="tr-only">Yetmezse uzmana ilet</span><span class="en-only">Escalate to expert if needed</span></strong>
+      <p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Mevcut içerik yetmediyse veya daha kişisel bir desteğe ihtiyaç duyduysanız, sorgunuzu doğrudan uzman ekibine iletebilirsiniz.</span><span class="en-only">If existing content isn't enough or you need more personal support, you can send your query directly to the expert team.</span></p>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--muted);margin-top:10px"><span class="tr-only">Akıllı rehberlik sistemi hassas konularda yanlış tavsiye vermemek için özel içerik kurallarıyla çalışır. Acil veya klinik konular doğrudan uzman ekibine yönlendirilir.</span><span class="en-only">The smart guidance system operates with specific content guardrails to avoid giving incorrect advice on sensitive topics. Urgent or clinical matters are routed directly to the expert team.</span></p>
+</div>
+
+<!-- ASK AN EXPERT — FLOW -->
+<div class="sec fi" id="ask-expert">
+  <h3><span class="tr-only">✉️ Uzmana Sor — Nasıl İşliyor?</span><span class="en-only">✉️ Ask an Expert — How It Works</span></h3>
+  <p style="font-size:.88rem;color:var(--mid);max-width:640px;margin-bottom:18px;line-height:1.65"><span class="tr-only">Akıllı rehberlik yetmediğinde, sorgunuzu psikoloji uzmanı ekibimize iletebilirsiniz. İsimsiz gönderebilir, cevap alabilir veya daha ileri yönlendirme isteyebilirsiniz. Tüm süreç gizli ve rıza tabanlı.</span><span class="en-only">When smart guidance isn't enough, you can send your query to our psychology expert team. You can submit anonymously, receive a response or request further direction. The entire process is confidential and consent-based.</span></p>
+
+  <div class="g g2" style="gap:20px;align-items:flex-start">
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">1</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <strong><span class="tr-only">Sorgunuzu gönderin</span><span class="en-only">Submit your query</span></strong>
+          <p><span class="tr-only">Family OS üzerinden veya doğrudan web üzerinden. İsimsiz gönderebilirsiniz — kişisel bilgi paylaşımı zorunlu değildir.</span><span class="en-only">Through Family OS or directly via the web. You can submit anonymously — sharing personal information is not required.</span></p>
+          <span class="flow-tag" style="background:var(--sage-bg);color:var(--sage-dark)"><span class="tr-only">Anonim seçenek mevcut</span><span class="en-only">Anonymous option available</span></span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">2</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <strong><span class="tr-only">Akıllı rehberlik ilk turu yapar</span><span class="en-only">Smart guidance runs the first pass</span></strong>
+          <p><span class="tr-only">Mevcut bilgi tabanında ilgili içerik var mı? Varsa önce size sunulur. Yoksa veya yetersizse sorgu uzman ekibine iletilir.</span><span class="en-only">Is there relevant content in the existing knowledge base? If yes, it's offered to you first. If not or insufficient, the query is forwarded to the expert team.</span></p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">3</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <strong><span class="tr-only">Uzman sorguyu değerlendirir</span><span class="en-only">Expert reviews the query</span></strong>
+          <p><span class="tr-only">Psikoloji uzmanımız sorguyu okur ve en uygun yanıtı belirler. Üç yanıt seçeneği vardır:</span><span class="en-only">Our psychology expert reads the query and determines the most appropriate response. There are three response options:</span></p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">4</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <strong><span class="tr-only">Yanıt & yönlendirme</span><span class="en-only">Response & direction</span></strong>
+          <p><span class="tr-only">Uzmanın belirlediği yanıt size iletilir. Gerekiyorsa bir sonraki adım önerilir.</span><span class="en-only">The expert's determined response is sent to you. If needed, a next step is suggested.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERT RESPONSE OPTIONS -->
+    <div class="card" style="padding:16px">
+      <h4 style="margin-bottom:12px"><span class="tr-only">Uzmanın üç yanıt seçeneği</span><span class="en-only">Expert's three response options</span></h4>
+      <div class="resp-row">
+        <div class="resp-icon">✅</div>
+        <div>
+          <div class="resp-label"><span class="tr-only">Doğrudan yanıt</span><span class="en-only">Direct response</span></div>
+          <div class="resp-desc"><span class="tr-only">Uzman soruyu kabul eder ve kısa, net, pratik bir yanıt yazar. Soru daha sonra anonimleştirilerek SSS veya blog yazısına katkı sağlayabilir.</span><span class="en-only">The expert accepts the query and writes a short, clear, practical response. The question may later be anonymised and contribute to FAQ or blog content.</span></div>
+        </div>
+      </div>
+      <div class="resp-row">
+        <div class="resp-icon">↗️</div>
+        <div>
+          <div class="resp-label"><span class="tr-only">Yönlendirme ile reddetme</span><span class="en-only">Reject with referral</span></div>
+          <div class="resp-desc"><span class="tr-only">Konu bu sistemin kapsamı dışındaysa veya başka bir uzmanlık alanı gerektiriyorsa uzman reddeder ve şunlardan birine yönlendirir: başka bir G&B uzmanı, harici klinik veya psikolog, ilgili bir yardım hattı veya kaynağı, ya da mevcut Bilgi Merkezi içeriği.</span><span class="en-only">If the topic is outside the scope of this system or requires a different specialism, the expert rejects and refers to one of: another G&B expert, an external clinic or psychologist, a relevant helpline or resource, or existing Knowledge Centre content.</span></div>
+        </div>
+      </div>
+      <div class="resp-row" style="border-bottom:0">
+        <div class="resp-icon">📅</div>
+        <div>
+          <div class="resp-label"><span class="tr-only">Bireysel seans önerisi</span><span class="en-only">Individual session recommendation</span></div>
+          <div class="resp-desc"><span class="tr-only">Konu 1:1 görüşme gerektiriyorsa uzman bunu açıkça belirtir ve kendi pratisyenlik adresinde bireysel seans önerir. Bireysel seanslar G&B'de değil, uzmanın kendi ortamında gerçekleşir.</span><span class="en-only">If the topic requires a 1:1 meeting, the expert states this clearly and recommends an individual session at their own practice address. Individual sessions take place at the expert's own premises, not at G&B.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KNOWLEDGE LOOP -->
+<div class="sec fi">
+  <h3><span class="tr-only">Bilgi geri döner — herkese faydası olur</span><span class="en-only">Knowledge comes back — benefiting everyone</span></h3>
+  <p style="font-size:.88rem;color:var(--mid);max-width:640px;margin-bottom:14px;line-height:1.65"><span class="tr-only">Her ay psikoloji uzmanımız yanıtlanan sorguları gözden geçirir. Kişisel bilgi içermeyen, genelleştirilebilir sorular ve yanıtlar anonimleştirilerek SSS güncellemelerine veya blog yazılarına dönüştürülür. Sizin sorunuz bir sonraki ebeveyne de yardımcı olur.</span><span class="en-only">Every month our psychology expert reviews the answered queries. Questions and answers that can be generalised without personal information are anonymised and turned into FAQ updates or blog posts. Your question helps the next parent too.</span></p>
+  <div class="g g3" style="gap:10px">
+    <div class="card ct" style="padding:13px;text-align:center"><div style="font-size:1.4rem;margin-bottom:4px">✉️</div><strong style="font-size:.82rem"><span class="tr-only">Ebeveyn sorusu</span><span class="en-only">Parent query</span></strong><p style="font-size:.75rem;color:var(--mid);margin-top:3px"><span class="tr-only">Anonim ve gizli gönderilir</span><span class="en-only">Submitted anonymously and privately</span></p></div>
+    <div class="card ct-c" style="padding:13px;text-align:center"><div style="font-size:1.4rem;margin-bottom:4px">🧠</div><strong style="font-size:.82rem"><span class="tr-only">Uzman yanıtlar</span><span class="en-only">Expert responds</span></strong><p style="font-size:.75rem;color:var(--mid);margin-top:3px"><span class="tr-only">Kişisel, bağlamsal, pratik</span><span class="en-only">Personal, contextual, practical</span></p></div>
+    <div class="card ct-g" style="padding:13px;text-align:center"><div style="font-size:1.4rem;margin-bottom:4px">📚</div><strong style="font-size:.82rem"><span class="tr-only">Bilgi Merkezine döner</span><span class="en-only">Returns to Knowledge Centre</span></strong><p style="font-size:.75rem;color:var(--mid);margin-top:3px"><span class="tr-only">Anonimleştirilmiş SSS & blog</span><span class="en-only">Anonymised FAQ & blog content</span></p></div>
+  </div>
+  <p style="font-size:.75rem;color:var(--muted);margin-top:10px"><span class="tr-only">Anonimleştirme, kişisel tanımlamaya izin veren hiçbir bilginin kaldırılmadığı bir süreçtir. Uzman bu işlemi yapmadan önce her sorgu için onay gerekli değildir — başlangıçta verdiğiniz genel rıza kapsamında.</span><span class="en-only">Anonymisation means no information allowing personal identification is retained. Your general consent given at the start covers this process — no per-query additional consent needed.</span></p>
+</div>
+
+<!-- PRIVACY -->
+<div class="sec fi">
+  <h3><span class="tr-only">🔒 Gizlilik & güvenlik</span><span class="en-only">🔒 Privacy & safety</span></h3>
+  <div class="g g2" style="gap:10px">
+    <div class="card ct">
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="font-size:.8rem;padding:5px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">Anonim sorgu gönderme seçeneği</span><span class="en-only">Option to submit anonymously</span></li>
+        <li style="font-size:.8rem;padding:5px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">Sorguların hiçbir zaman üçüncü tarafla paylaşılmaması</span><span class="en-only">Queries never shared with third parties</span></li>
+        <li style="font-size:.8rem;padding:5px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">Uzman yalnızca anonim içeriği görür</span><span class="en-only">Expert sees anonymised content only</span></li>
+        <li style="font-size:.8rem;padding:5px 0;color:var(--mid)">✓ <span class="tr-only">KVKK uyumlu veri işleme</span><span class="en-only">KVKK-compliant data processing</span></li>
+      </ul>
+    </div>
+    <div class="card" style="padding:14px;background:var(--cream)">
+      <strong style="font-size:.84rem;color:var(--ink);display:block;margin-bottom:6px"><span class="tr-only">⚠️ Acil veya kriz durumunda</span><span class="en-only">⚠️ In an emergency or crisis</span></strong>
+      <p style="font-size:.78rem;color:var(--mid);line-height:1.6"><span class="tr-only">Bu sistem kriz desteği için tasarlanmamıştır. Kendinize veya başkasına zarar verme düşüncesi yaşıyorsanız, lütfen doğrudan yardım alın:</span><span class="en-only">This system is not designed for crisis support. If you are experiencing thoughts of harm to yourself or others, please seek help directly:</span></p>
+      <ul style="list-style:none;padding:0;margin:8px 0 0;font-size:.78rem">
+        <li style="padding:3px 0;color:var(--ink)">📞 <strong><span class="tr-only">İntihar Önleme Hattı:</span><span class="en-only">Crisis Line:</span></strong> 182</li>
+        <li style="padding:3px 0;color:var(--ink)">📞 <strong><span class="tr-only">ALO Psikiyatri Hattı:</span><span class="en-only">ALO Psychiatry Line:</span></strong> 182</li>
+        <li style="padding:3px 0;color:var(--mid)"><span class="tr-only">veya en yakın acil servise başvurun.</span><span class="en-only">or go to your nearest emergency service.</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="sec fi">
+  <div class="highlight">
+    <h4><span class="tr-only">Sormak ücretsiz. Bilmemek normal.</span><span class="en-only">Asking is free. Not knowing is normal.</span></h4>
+    <p style="font-size:.86rem;color:var(--mid)"><span class="tr-only">Bilgi Merkezine gözatın veya doğrudan bir uzman sorusu gönderin. G&B üyeliği gerekmez. Tüm ebeveynlere açık.</span><span class="en-only">Browse the Knowledge Centre or send a question directly to an expert. G&B membership not required. Open to all parents.</span></p>
+    <div class="btns" style="margin-top:12px">
+      <a class="btn btn-p" href="contact.html"><span class="tr-only">Soru Gönder</span><span class="en-only">Send a Question</span></a>
+      <a class="btn" href="workshops.html"><span class="tr-only">Ebeveyn Atölyeleri →</span><span class="en-only">Parent Workshops →</span></a>
+      <a class="btn" href="social-lab.html">Social Lab →</a>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Giggles &amp; Bloom 🌸</div>
+      <div class="footer-note"><span class="tr-only">Görünmez yükü hafifletmek için buradayız.</span><span class="en-only">We exist to lighten the invisible load.</span></div>
+    </div>
+    <div class="footer-col">
+      <h5><span class="tr-only">Hizmetler</span><span class="en-only">Services</span></h5>
+      <a href="workshops.html"><span class="tr-only">Atölyeler</span><span class="en-only">Workshops</span></a>
+      <a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>
+      <a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>
+      <a href="events.html"><span class="tr-only">Etkinlikler</span><span class="en-only">Events</span></a>
+      <a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>
+    </div>
+    <div class="footer-col">
+      <h5><span class="tr-only">Hesap</span><span class="en-only">Account</span></h5>
+      <a href="https://giggles-bloom.vercel.app/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></a>
+      <a href="https://giggles-bloom.vercel.app/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>
+    </div>
+    <div class="footer-col">
+      <h5><span class="tr-only">Kurumsal</span><span class="en-only">Corporate</span></h5>
+      <a href="corporate/index.html"><span class="tr-only">Hakkımızda</span><span class="en-only">About</span></a>
+      <a href="corporate/governance.html#data"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="yr"></span> Giggles &amp; Bloom · İstanbul</div>
+  </div>
+    <div><div class="footer-brand">Giggles &amp; Bloom 🌸</div><div class="footer-note"><span class="tr-only">Görünmez yükü hafifletmek için buradayız. Kadıköy & Kurtköy, İstanbul.</span><span class="en-only">We exist to lighten the invisible load. Kadıköy & Kurtköy, Istanbul.</span></div></div>
+    <div>
+      <div class="footer-links"><a href="corporate/governance.html#data"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a><a href="corporate/index.html"><span class="tr-only">Kurumsal</span><span class="en-only">Corporate</span></a></div>
+      <div class="footer-meta">© <span id="yr"></span> Giggles &amp; Bloom · Kadıköy &amp; Kurtköy, Istanbul</div>
+    </div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

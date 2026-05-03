@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B2B & Uzman Ortaklıkları | Giggles & Bloom</title>
+<meta name="description" content="Kurumsal B2B etkinlikleri, uzman & danışman ortaklığı, gelecekteki Family OS pazaryeri.">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .ptab { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:20px }
+  .ptab-btn {
+    font-size:.8rem; font-weight:700; padding:7px 14px; border-radius:20px;
+    border:1.5px solid var(--border); background:var(--white); cursor:pointer;
+    transition:all .2s; color:var(--mid); text-decoration:none;
+  }
+  .ptab-btn:hover,.ptab-btn.active { background:var(--sage); color:#fff; border-color:var(--sage) }
+  .ptab-btn.coral.active  { background:var(--coral); border-color:var(--coral) }
+  .ptab-btn.gold.active   { background:var(--gold);  border-color:var(--gold); color:#fff }
+  .section-anchor { scroll-margin-top:80px }
+  .pkg {
+    background:var(--white); border:2px solid var(--border);
+    border-radius:var(--radius); padding:18px;
+    box-shadow:var(--shadow-sm); transition:transform .2s;
+  }
+  .pkg:hover { transform:translateY(-2px); box-shadow:var(--shadow) }
+  .pkg.star { border-color:var(--sage); box-shadow:0 4px 20px rgba(122,158,126,.12) }
+  .pkg h4 { font-size:.92rem; margin-bottom:3px }
+  .pkg .price { font-family:'Fraunces',serif; font-size:1.4rem; font-weight:700; color:var(--ink); margin:8px 0 2px }
+  .pkg .pnote { font-size:.7rem; color:var(--muted); margin-bottom:10px }
+  .pkg ul { list-style:none; padding:0; margin:0 }
+  .pkg ul li { font-size:.78rem; color:var(--mid); padding:3px 0; border-bottom:1px solid rgba(0,0,0,.04) }
+  .pkg ul li::before { content:'✓ '; color:var(--sage); font-weight:700 }
+  .step-r { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px }
+  .step-n { width:26px; height:26px; border-radius:50%; flex-shrink:0; display:grid; place-items:center; font-size:.72rem; font-weight:800; color:#fff; background:var(--sage) }
+  .step-r p { font-size:.8rem; color:var(--mid); margin:2px 0 0; line-height:1.5 }
+  .step-r strong { font-size:.84rem; color:var(--ink) }
+  .cr { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); font-size:.82rem }
+  .cr:last-child { border-bottom:0 }
+  .cr-v { font-family:'Fraunces',serif; font-size:.95rem; font-weight:700; color:var(--sage) }
+  .mphase {
+    border:1.5px solid var(--border); border-radius:var(--radius); padding:16px 18px;
+    position:relative; overflow:hidden;
+  }
+  .mph-tag {
+    position:absolute; top:12px; right:12px;
+    font-size:.62rem; font-weight:800; padding:3px 8px; border-radius:20px;
+    text-transform:uppercase; letter-spacing:.4px;
+  }
+  .mphase h4 { font-size:.88rem; margin-bottom:4px; padding-right:80px }
+  .mphase p  { font-size:.78rem; color:var(--mid); line-height:1.55 }
+  .eb { display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid var(--border) }
+  .eb:last-child { border-bottom:0 }
+  .eb-i { font-size:1.1rem; flex-shrink:0; margin-top:1px }
+  .eb strong { font-size:.84rem; color:var(--ink); display:block }
+  .eb p { font-size:.78rem; color:var(--mid); margin:2px 0 0; line-height:1.5 }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe atla / Skip to content</a>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="brand">
+      <img src="../assets/logo.png" alt="Giggles &amp; Bloom" class="brand-logo">
+      <div class="brand-text"><div class="name">Giggles &amp; Bloom</div><div class="tag"><span class="tr-only">Kurumsal</span><span class="en-only">Corporate</span></div></div>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html"><span class="tr-only">Genel Bakış</span><span class="en-only">Overview</span></a>
+      <a href="about.html"><span class="tr-only">Hakkımızda</span><span class="en-only">About</span></a>
+      <a href="model.html"><span class="tr-only">İş Modeli</span><span class="en-only">Business Model</span></a>
+      <a class="active" href="partners.html"><span class="tr-only">B2B & Uzmanlar</span><span class="en-only">B2B & Experts</span></a>
+      <a href="familyos.html">Family OS</a>
+      <a href="operations.html"><span class="tr-only">Operasyonlar</span><span class="en-only">Operations</span></a>
+      <a href="governance.html"><span class="tr-only">Yönetişim</span><span class="en-only">Governance</span></a>
+      <a href="../index.html" style="border:1px solid var(--border)"><span class="tr-only">Kamu Sitesi</span><span class="en-only">Public Site</span></a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-login" type="button"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></button>
+      <button class="btn-join" type="button"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></button>
+      <button class="lang-sw" id="ls" type="button" onclick="gt()" aria-label="Toggle language TR/EN">
+      <span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span>
+    </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="pt fi">
+  <h1><span class="tr-only">B2B & Ortaklıklar</span><span class="en-only">B2B & Partnerships</span></h1>
+  <p class="sub"><span class="tr-only">Kurumsal iyilik etkinlikleri · Uzman & danışman ortaklığı · Gelecekteki Family OS pazaryeri · Kurumsal & belediye iş birlikleri.</span><span class="en-only">Corporate wellbeing events · Expert & consultant partnership · Future Family OS marketplace · Institutional & municipality collaborations.</span></p>
+</div>
+
+<!-- TAB NAV -->
+<div class="ptab fi">
+  <a class="ptab-btn coral active" href="#b2b"><span class="tr-only">🏢 Kurumsal B2B</span><span class="en-only">🏢 Corporate B2B</span></a>
+  <a class="ptab-btn active" href="#experts"><span class="tr-only">🎓 Uzman Katılımı</span><span class="en-only">🎓 Join as Expert</span></a>
+  <a class="ptab-btn gold active" href="#marketplace"><span class="tr-only">🛒 Pazaryeri 2027+</span><span class="en-only">🛒 Marketplace 2027+</span></a>
+  <a class="ptab-btn active" href="#institutional"><span class="tr-only">🏛️ Kurumsal & Belediye</span><span class="en-only">🏛️ Institutional</span></a>
+</div>
+
+<!-- ══════════════ B2B CORPORATE ══════════════ -->
+<div id="b2b" class="section-anchor">
+<div class="hero hero-coral fi"><div class="hero-inner"><div>
+  <h2><span class="tr-only">Türkiye'nin çocuk kapsayıcı B2B etkinlik alanı</span><span class="en-only">Turkey's child-inclusive B2B event space</span></h2>
+  <p><span class="tr-only">İstanbul'da kurumsal etkinlik mekanı denilince akla otel konferans salonu ya da coworking gelir. İkisi de çocukları hesaba katmaz. Giggles & Bloom, <strong>İstanbul'da tek</strong> çocuk kapsayıcı, profesyonel standartlarda etkinlik alanıdır. Çalışanlar çocuklarıyla gelir — toplantıya tam dikkatlerini verirler, çünkü çocukları kapı ötesinde güvende ve öğreniyor.</span><span class="en-only">Corporate event venues in Istanbul mean hotel conference room or coworking. Neither accounts for children. Giggles & Bloom is <strong>Istanbul's only</strong> child-inclusive, professional-grade event space. Employees bring their children — and give full attention to the meeting, because their children are safe and learning just next door.</span></p>
+  <div class="pills" style="margin-top:12px">
+    <span class="pill">LSP <span class="tr-only">Sertifikalı Eğitmen</span><span class="en-only">Certified Trainer</span></span>
+    <span class="pill"><span class="tr-only">Özel arka alan (50m²)</span><span class="en-only">Private back space (50m²)</span></span>
+    <span class="pill"><span class="tr-only">e-Fatura / KDV'li fatura</span><span class="en-only">Corporate invoice available</span></span>
+    <span class="pill"><span class="tr-only">Fotoğraf onay protokolü</span><span class="en-only">Photo consent protocol</span></span>
+  </div>
+</div>
+<div class="card">
+  <div class="badge"><span class="dot d-coral"></span><span class="tr-only">İdeal B2B Müşteri Profili</span><span class="en-only">Ideal B2B Profile</span></div>
+  <ul style="list-style:none;padding:0;margin:0">
+    <li style="font-size:.8rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">🏥 <span class="tr-only">Hastaneler & sağlık kurumları</span><span class="en-only">Hospitals & healthcare institutions</span></li>
+    <li style="font-size:.8rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">🌍 <span class="tr-only">Uluslararası şirketler (İKY / ERG bütçesi)</span><span class="en-only">Multinationals (HR / ERG budget)</span></li>
+    <li style="font-size:.8rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">🎓 <span class="tr-only">Üniversiteler & araştırma kurumları</span><span class="en-only">Universities & research institutions</span></li>
+    <li style="font-size:.8rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">📊 <span class="tr-only">Danışmanlık, finans, hukuk firmaları</span><span class="en-only">Consulting, finance, law firms</span></li>
+    <li style="font-size:.8rem;padding:3px 0;color:var(--mid)">🌱 <span class="tr-only">Girişimler & takım bazlı scale-up'lar</span><span class="en-only">Startups & team-based scale-ups</span></li>
+  </ul>
+</div>
+</div></div>
+
+<div class="sec fi">
+  <h3 style="margin-bottom:14px"><span class="tr-only">Kurumsal Paketler</span><span class="en-only">Corporate Packages</span></h3>
+  <div class="g g3" style="gap:12px">
+
+    <div class="pkg">
+      <div class="badge"><span class="dot d-coral"></span><span class="tr-only">Yarım Gün</span><span class="en-only">Half Day</span></div>
+      <h4>🧱 LSP <span class="tr-only">— Takım Dinamikleri</span><span class="en-only">— Team Dynamics</span></h4>
+      <div class="price"><span class="tr-only">Teklif ile</span><span class="en-only">By quote</span></div>
+      <div class="pnote"><span class="tr-only">Min. 6 katılımcı · 3–4 saat</span><span class="en-only">Min. 6 participants · 3–4 hours</span></div>
+      <ul>
+        <li><span class="tr-only">İstanbul'un tek sertifikalı LSP eğitmeni</span><span class="en-only">Istanbul's only certified LSP trainer</span></li>
+        <li><span class="tr-only">Takım içgörüsü & strateji hizalaması</span><span class="en-only">Team insight & strategy alignment</span></li>
+        <li><span class="tr-only">Özel 50m² arka alan</span><span class="en-only">Private 50m² back space</span></li>
+        <li><span class="tr-only">Kafe ikramiyeleri dahil</span><span class="en-only">Café refreshments included</span></li>
+        <li><span class="tr-only">Çocuk katılımı opsiyonel</span><span class="en-only">Child inclusion optional</span></li>
+        <li><span class="tr-only">e-Fatura dahil</span><span class="en-only">Corporate invoice included</span></li>
+      </ul>
+    </div>
+
+    <div class="pkg star">
+      <div class="badge"><span class="dot d-sage"></span><span class="tr-only">⭐ Önerilen</span><span class="en-only">⭐ Recommended</span></div>
+      <h4>🌿 <span class="tr-only">Aile Odaklı Ofsite — Tam Gün</span><span class="en-only">Family-Focused Offsite — Full Day</span></h4>
+      <div class="price"><span class="tr-only">Teklif ile</span><span class="en-only">By quote</span></div>
+      <div class="pnote"><span class="tr-only">8–25 yetişkin + çocuklar</span><span class="en-only">8–25 adults + children</span></div>
+      <ul>
+        <li><span class="tr-only">Sabah: LSP veya ebeveynlik ustalık seansı</span><span class="en-only">Morning: LSP or parenting masterclass</span></li>
+        <li><span class="tr-only">Eş zamanlı: Çocuklar için atölye programı</span><span class="en-only">Parallel: Workshop programme for children</span></li>
+        <li><span class="tr-only">Öğle: Özel kafe & restoran menüsü</span><span class="en-only">Lunch: Private café & restaurant menu</span></li>
+        <li><span class="tr-only">Öğleden sonra: Aile bağı atölyesi</span><span class="en-only">Afternoon: Family bonding workshop</span></li>
+        <li><span class="tr-only">Fotoğraf onay protokolü (kurumsal gizlilik)</span><span class="en-only">Photo consent protocol (corporate privacy)</span></li>
+        <li><span class="tr-only">ESG/CSR raporlama desteği</span><span class="en-only">ESG/CSR reporting support</span></li>
+      </ul>
+    </div>
+
+    <div class="pkg">
+      <div class="badge"><span class="dot d-gold"></span><span class="tr-only">Yıllık Sözleşme</span><span class="en-only">Annual Contract</span></div>
+      <h4>📅 <span class="tr-only">İyilik Programı — Yıllık</span><span class="en-only">Wellbeing Programme — Yearly</span></h4>
+      <div class="price"><span class="tr-only">Teklif ile</span><span class="en-only">By quote</span></div>
+      <div class="pnote"><span class="tr-only">4–12 etkinlik/yıl · indirimli</span><span class="en-only">4–12 events/year · discounted</span></div>
+      <ul>
+        <li><span class="tr-only">Yıllık planlama takvimi ile güvence</span><span class="en-only">Annual planning calendar with reserved dates</span></li>
+        <li><span class="tr-only">Çalışan üyelik indirimleri</span><span class="en-only">Employee membership discounts</span></li>
+        <li><span class="tr-only">Öncelikli LSP eğitmeni erişimi</span><span class="en-only">Priority LSP trainer access</span></li>
+        <li><span class="tr-only">Program özelleştirme her dönem</span><span class="en-only">Programme customisation each term</span></li>
+        <li><span class="tr-only">Şehir içi veya şube dışı etkinlik seçeneği</span><span class="en-only">On-site or off-site event option</span></li>
+        <li><span class="tr-only">e-Fatura + yıllık etki raporu</span><span class="en-only">e-Invoice + annual impact report</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="btns" style="margin-top:16px">
+    <a class="btn btn-p" href="../contact.html"><span class="tr-only">Kurumsal Teklif Al</span><span class="en-only">Request Corporate Quote</span></a>
+    <a class="btn" href="familyos.html"><span class="tr-only">ESG Raporlama Desteği →</span><span class="en-only">ESG Reporting Support →</span></a>
+  </div>
+</div>
+</div><!-- /b2b -->
+
+<!-- ══════════════ EXPERTS ══════════════ -->
+<div id="experts" class="section-anchor sec fi">
+<div style="background:var(--sage-bg);border:1px solid var(--sage-light);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:12px">
+  <span style="font-size:1.6rem">🎓</span>
+  <div>
+    <h3 style="margin-bottom:2px"><span class="tr-only">Uzman & Danışman Olarak Katılın</span><span class="en-only">Join as an Expert or Consultant</span></h3>
+    <p style="font-size:.8rem;color:var(--mid);margin:0"><span class="tr-only">Mekân, altyapı ve müşteri tabanı bizden — uzmanlık sizden. Logistikle uğraşmak yerine sunuma odaklanın.</span><span class="en-only">Venue, infrastructure and client base from us — expertise from you. Focus on delivery, not logistics.</span></p>
+  </div>
+</div>
+
+<div class="g g2" style="gap:16px">
+
+  <div class="card ct">
+    <h4><span class="tr-only">Biz sunuyoruz</span><span class="en-only">What we provide</span></h4>
+    <div style="margin-top:10px">
+      <div class="eb"><div class="eb-i">🏠</div><div><strong><span class="tr-only">Hazır mekân & ekipman</span><span class="en-only">Ready venue & equipment</span></strong><p><span class="tr-only">50m² arka oda, tüm mobilya, sunum ekipmanı, LEGO® setleri. Mekan aramanız gerekmez.</span><span class="en-only">50m² back room, all furniture, AV equipment, LEGO® sets. No venue hunting needed.</span></p></div></div>
+      <div class="eb"><div class="eb-i">📅</div><div><strong><span class="tr-only">Rezervasyon & ödeme altyapısı</span><span class="en-only">Booking & payment infrastructure</span></strong><p><span class="tr-only">Airtable + Softr rezervasyon sistemi, PayTR ile güvenli ödeme. Komisyon otomatik hesaplanır.</span><span class="en-only">Airtable + Softr booking system, secure payment via PayTR. Commission calculated automatically.</span></p></div></div>
+      <div class="eb"><div class="eb-i">👥</div><div><strong><span class="tr-only">Hazır müşteri tabanı</span><span class="en-only">Existing client base</span></strong><p><span class="tr-only">Kadıköy topluluğu, üyelerimiz ve aktif aile ağımız. Kendi müşterinizi aramanız gerekmiyor.</span><span class="en-only">Kadıköy community, our members and active family network. No need to find your own clients.</span></p></div></div>
+      <div class="eb"><div class="eb-i">🏷️</div><div><strong><span class="tr-only">Güvenilir marka çatısı</span><span class="en-only">Trusted brand umbrella</span></strong><p><span class="tr-only">G&B markası altında faaliyet — güven inşası için gerekli süreyi önemli ölçüde kısaltır.</span><span class="en-only">Operate under G&B brand umbrella — significantly shortens trust-building time.</span></p></div></div>
+      <div class="eb"><div class="eb-i">📊</div><div><strong><span class="tr-only">Program direktörü koordinasyonu</span><span class="en-only">Programme Director coordination</span></strong><p><span class="tr-only">Planlama, takvim ve aile iletişimini Program Direktörümüz üstlenir. Siz içeriğe odaklanırsınız.</span><span class="en-only">Planning, scheduling and family communications managed by our Programme Director. You focus on content.</span></p></div></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card ct-c" style="margin-bottom:12px">
+      <h4><span class="tr-only">Komisyon Yapısı</span><span class="en-only">Commission Structure</span></h4>
+      <p style="font-size:.78rem;color:var(--mid);margin-bottom:10px"><span class="tr-only">Organizasyon sorumluluğuna göre iki model.</span><span class="en-only">Two models based on who manages the organisation.</span></p>
+      <div style="background:var(--cream-dark);border-radius:10px;padding:12px;margin-bottom:8px">
+        <strong style="font-size:.82rem"><span class="tr-only">Model A — G&B Organize Eder</span><span class="en-only">Model A — G&B Organises</span></strong>
+        <div class="cr"><span style="color:var(--mid)"><span class="tr-only">Uzman payı</span><span class="en-only">Expert share</span></span><span class="cr-v">50%</span></div>
+        <div class="cr"><span style="color:var(--mid)"><span class="tr-only">G&B payı</span><span class="en-only">G&B share</span></span><span class="cr-v">50%</span></div>
+        <p style="font-size:.7rem;color:var(--muted);margin-top:6px"><span class="tr-only">Pazarlama, rezervasyon ve iletişim G&B'den.</span><span class="en-only">Marketing, booking and communication from G&B.</span></p>
+      </div>
+      <div style="background:var(--cream-dark);border-radius:10px;padding:12px">
+        <strong style="font-size:.82rem"><span class="tr-only">Model B — Uzman Organize Eder</span><span class="en-only">Model B — Expert Organises</span></strong>
+        <div class="cr"><span style="color:var(--mid)"><span class="tr-only">Uzman payı</span><span class="en-only">Expert share</span></span><span class="cr-v">70–75%</span></div>
+        <div class="cr"><span style="color:var(--mid)"><span class="tr-only">G&B altyapı ücreti</span><span class="en-only">G&B infrastructure fee</span></span><span class="cr-v">25–30%</span></div>
+        <p style="font-size:.7rem;color:var(--muted);margin-top:6px"><span class="tr-only">Uzman kendi tanıtımını yönetir. G&B mekân & destek sağlar.</span><span class="en-only">Expert manages own promotion. G&B provides venue & support.</span></p>
+      </div>
+    </div>
+    <div class="card" style="padding:14px">
+      <h4 style="font-size:.88rem;margin-bottom:10px"><span class="tr-only">Başvuru Süreci</span><span class="en-only">Application Process</span></h4>
+      <div class="step-r"><div class="step-n">1</div><div><strong><span class="tr-only">Başvuru</span><span class="en-only">Application</span></strong><p><span class="tr-only">Uzmanlık alanı, hedef kitle ve seans formatını iletişim formuyla gönderin.</span><span class="en-only">Send your expertise, audience and session format via the contact form.</span></p></div></div>
+      <div class="step-r"><div class="step-n">2</div><div><strong><span class="tr-only">Program Direktörü ile görüşme</span><span class="en-only">Meeting with Programme Director</span></strong><p><span class="tr-only">Uyum, takvim ve öğrenme çıktılarını değerlendiririz.</span><span class="en-only">We assess fit, scheduling and learning outcomes together.</span></p></div></div>
+      <div class="step-r"><div class="step-n">3</div><div><strong><span class="tr-only">Pilot seans</span><span class="en-only">Pilot session</span></strong><p><span class="tr-only">G&B ailelerimizle tek ücretsiz veya indirimli seans. Her iki taraf uyumu değerlendirir.</span><span class="en-only">Single free or discounted pilot with G&B families. Both sides evaluate the fit.</span></p></div></div>
+      <div class="step-r"><div class="step-n">4</div><div><strong><span class="tr-only">Sözleşme & sezonluk takvim</span><span class="en-only">Contract & seasonal schedule</span></strong><p><span class="tr-only">Net komisyon yapısı ve fikri mülkiyet korumasıyla iş birliği başlar.</span><span class="en-only">Collaboration begins with clear commission and IP protection.</span></p></div></div>
+      <div class="btns" style="margin-top:4px">
+        <a class="btn btn-p" href="../contact.html"><span class="tr-only">Uzman Başvurusu</span><span class="en-only">Apply as Expert</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" style="margin-top:16px">
+  <h4 style="margin-bottom:10px"><span class="tr-only">Kimlerle çalışmak istiyoruz?</span><span class="en-only">Who are we looking for?</span></h4>
+  <div class="g g4" style="gap:8px">
+    <div class="card" style="padding:12px"><div style="font-size:1.2rem;margin-bottom:3px">🧠</div><strong style="font-size:.8rem"><span class="tr-only">Psikolog & Terapist</span><span class="en-only">Psychologist & Therapist</span></strong><p style="font-size:.74rem;color:var(--mid)"><span class="tr-only">Çocuk gelişimi, ebeveynlik danışmanlığı, sosyal-duygusal öğrenme.</span><span class="en-only">Child development, parenting counselling, SEL.</span></p></div>
+    <div class="card" style="padding:12px"><div style="font-size:1.2rem;margin-bottom:3px">🔬</div><strong style="font-size:.8rem">STEM & Maker</strong><p style="font-size:.74rem;color:var(--mid)"><span class="tr-only">Mühendislik, robotik, kodlama, bilim — çocuk grupları.</span><span class="en-only">Engineering, robotics, coding, science — child groups.</span></p></div>
+    <div class="card" style="padding:12px"><div style="font-size:1.2rem;margin-bottom:3px">🎨</div><strong style="font-size:.8rem"><span class="tr-only">Sanat & Yaratıcılık</span><span class="en-only">Art & Creativity</span></strong><p style="font-size:.74rem;color:var(--mid)"><span class="tr-only">Suluboya, seramik, süreç sanatı — her yaş.</span><span class="en-only">Watercolor, ceramics, process art — all ages.</span></p></div>
+    <div class="card" style="padding:12px"><div style="font-size:1.2rem;margin-bottom:3px">📚</div><strong style="font-size:.8rem"><span class="tr-only">Dil & Okuryazarlık</span><span class="en-only">Language & Literacy</span></strong><p style="font-size:.74rem;color:var(--mid)"><span class="tr-only">İngilizce, Arapça, Fransızca — çocuk odaklı.</span><span class="en-only">English, Arabic, French — child-focused.</span></p></div>
+    <div class="card" style="padding:12px"><div style="font-size:1.2rem;margin-bottom:3px">🧘</div><strong style="font-size:.8rem"><span class="tr-only">Hareket & Beden</span><span class="en-only">Movement & Body</span></strong><p style="font-size:.74rem;color:var(--mid)"><span class="tr-only">Çocuk yogası, farkındalık — kapsayıcı format.</span><span class="en-only">Kids yoga, mindfulness — inclusive format.</span></p></div>
+    <div class="card" style="padding:12px"><div style="font-size:1.2rem;margin-bottom:3px">👑</div><strong style="font-size:.8rem"><span class="tr-only">Liderlik & Koçluk</span><span class="en-only">Leadership & Coaching</span></strong><p style="font-size:.74rem;color:var(--mid)"><span class="tr-only">Genç liderlik, girişimcilik — gençler & yetişkinler.</span><span class="en-only">Teen leadership, entrepreneurship — teens & adults.</span></p></div>
+    <div class="card" style="padding:12px"><div style="font-size:1.2rem;margin-bottom:3px">🎵</div><strong style="font-size:.8rem"><span class="tr-only">Müzik & İfade</span><span class="en-only">Music & Expression</span></strong><p style="font-size:.74rem;color:var(--mid)"><span class="tr-only">Enstrüman, ritim, podcast prodüksiyon.</span><span class="en-only">Instrument, rhythm, podcast production.</span></p></div>
+    <div class="card" style="padding:12px"><div style="font-size:1.2rem;margin-bottom:3px">🌿</div><strong style="font-size:.8rem"><span class="tr-only">İyilik & Ebeveynlik</span><span class="en-only">Wellbeing & Parenting</span></strong><p style="font-size:.74rem;color:var(--mid)"><span class="tr-only">Yeni anne grupları, tükenmişlik önleme.</span><span class="en-only">New mother groups, burnout prevention.</span></p></div>
+  </div>
+</div>
+</div><!-- /experts -->
+
+<!-- ══════════════ MARKETPLACE ══════════════ -->
+<div id="marketplace" class="section-anchor sec fi">
+<div style="background:var(--gold-bg);border:1px solid var(--gold-light);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:12px">
+  <span style="font-size:1.6rem">🛒</span>
+  <div>
+    <h3 style="margin-bottom:2px"><span class="tr-only">Family OS Pazaryeri — 2027+</span><span class="en-only">Family OS Marketplace — 2027+</span></h3>
+    <p style="font-size:.8rem;color:var(--mid);margin:0"><span class="tr-only">Ailelerin ihtiyacı olan her hizmeti tek, güvenilir platformda buluşturan ekosistem.</span><span class="en-only">Bringing every service families need onto one trusted platform.</span></p>
+  </div>
+</div>
+
+<p style="font-size:.87rem;color:var(--mid);max-width:700px;margin-bottom:18px"><span class="tr-only">Türkiye'de aile hizmetleri dağınık: özel ders için ayrı site, spor için başka, sanat okulu için başka. Her biri ayrı kayıt, ayrı ödeme, ayrı güven kararı. Family OS bu dağınıklığı bir araya getirir — G&B'nin güven katmanıyla doğrulanmış servis sağlayıcılar, tek rezervasyon akışı, tek ödeme. Bu, rakiplerin kopyalayamayacağı bir pazar konumudur: <strong>ilişkinin derinliğine</strong> dayanır, fiyata değil.</span><span class="en-only">Family services in Turkey are fragmented: one site for tutoring, another for sports, another for arts school. Each with separate registration, separate payment, separate trust decision. Family OS brings this together — service providers verified through G&B's trust layer, single booking flow, single payment. This is a market position competitors cannot copy: it rests on <strong>relationship depth</strong>, not price.</span></p>
+
+<div class="g g2" style="gap:10px;margin-bottom:16px">
+  <div class="mphase" style="border-color:var(--sage-light)">
+    <div class="mph-tag" style="background:var(--sage-bg);color:var(--sage-dark)"><span class="tr-only">2027 Lansmanı</span><span class="en-only">2027 Launch</span></div>
+    <h4>📚 <span class="tr-only">Özel Ders & Eğitim</span><span class="en-only">Tutoring & Education</span></h4>
+    <p><span class="tr-only">Doğrulanmış bireysel öğretmenler & eğitim merkezleri. Matematik, fen, dil, müzik, sanat. G&B güven filtresinden geçmiş, derecelendirilmiş ve aile yorumları ile.</span><span class="en-only">Verified tutors & education centres. Maths, science, language, music, art. Filtered through G&B trust layer, rated and with family reviews.</span></p>
+  </div>
+  <div class="mphase" style="border-color:var(--sage-light)">
+    <div class="mph-tag" style="background:var(--sage-bg);color:var(--sage-dark)"><span class="tr-only">2027 Lansmanı</span><span class="en-only">2027 Launch</span></div>
+    <h4>🏃 <span class="tr-only">Spor & Hareket</span><span class="en-only">Sports & Movement</span></h4>
+    <p><span class="tr-only">Jimnastik, yüzme, dans, futbol, martial arts. Çevrimiçi rezervasyon, ücret karşılaştırma ve aile değerlendirmeleri.</span><span class="en-only">Gymnastics, swimming, dance, football, martial arts. Online booking, fee comparison and family reviews.</span></p>
+  </div>
+  <div class="mphase" style="border-color:var(--gold-light)">
+    <div class="mph-tag" style="background:var(--gold-bg);color:#8B6000"><span class="tr-only">2027 Lansmanı</span><span class="en-only">2027 Launch</span></div>
+    <h4>🎨 <span class="tr-only">Sanat, Müzik & Yaratıcılık</span><span class="en-only">Arts, Music & Creativity</span></h4>
+    <p><span class="tr-only">Resim atölyeleri, müzik okulları, tiyatro kursları, dans stüdyoları. Dönemlik veya bireysel seans rezervasyonu.</span><span class="en-only">Painting studios, music schools, theatre courses, dance studios. Seasonal or individual session booking.</span></p>
+  </div>
+  <div class="mphase" style="border-color:var(--gold-light)">
+    <div class="mph-tag" style="background:var(--gold-bg);color:#8B6000"><span class="tr-only">2027 Lansmanı</span><span class="en-only">2027 Launch</span></div>
+    <h4>🏫 <span class="tr-only">Okul Başvurusu & Kreş</span><span class="en-only">School Enrolment & Nursery</span></h4>
+    <p><span class="tr-only">Özel ilkokullar, anaokulları ve kreşler için bilgi, karşılaştırma ve başvuru desteği. Tam kamuya açık olmayan kurumlar dahil. Ailelerin en çok zaman harcadığı araştırma alanını kolaylaştırıyoruz.</span><span class="en-only">Information, comparison and application support for private primary schools, kindergartens and nurseries. Including institutions not fully publicly accessible. Simplifying the research area where families spend the most time.</span></p>
+  </div>
+  <div class="mphase" style="border-color:var(--lav-light)">
+    <div class="mph-tag" style="background:var(--lav-light);color:#6b4f9e">2028+</div>
+    <h4>🌍 <span class="tr-only">Yakın Çevre Aile Etkinlikleri</span><span class="en-only">Local Family Activities</span></h4>
+    <p><span class="tr-only">Yakınımızdaki diğer aile merkezleri, müzeler, doğa kampları, deneyim etkinlikleri. G&B çözüm ortağı olduğu etkinliklere rezervasyon.</span><span class="en-only">Other family centres, museums, nature camps, experience events near us. Booking for activities where G&B is the solution partner.</span></p>
+  </div>
+  <div class="mphase" style="border-color:var(--lav-light)">
+    <div class="mph-tag" style="background:var(--lav-light);color:#6b4f9e">2028+</div>
+    <h4>🩺 <span class="tr-only">Sağlık & Psikoloji</span><span class="en-only">Health & Psychology</span></h4>
+    <p><span class="tr-only">Çocuk gelişim uzmanları, konuşma terapistleri, pedagoji danışmanları, aile koçları. G&B doğrulamasıyla güvende.</span><span class="en-only">Child development specialists, speech therapists, pedagogy consultants, family coaches. Verified through G&B's trust layer.</span></p>
+  </div>
+</div>
+
+<div class="card ct-g" style="margin-bottom:14px">
+  <h4><span class="tr-only">Pazaryeri Komisyon Modeli (2027+)</span><span class="en-only">Marketplace Commission Model (2027+)</span></h4>
+  <div class="cr"><span style="color:var(--mid)"><span class="tr-only">Standart listeleme & rezervasyon ücreti</span><span class="en-only">Standard listing & booking fee</span></span><span class="cr-v">5–10%</span></div>
+  <div class="cr"><span style="color:var(--mid)"><span class="tr-only">Ücretsiz listeleme (doğrulama koşullu)</span><span class="en-only">Free listing (verification required)</span></span><span class="cr-v">0%</span></div>
+  <div class="cr"><span style="color:var(--mid)"><span class="tr-only">Öne çıkan listeleme (opsiyonel paket)</span><span class="en-only">Featured listing (optional package)</span></span><span class="cr-v"><span class="tr-only">Sabit ücret</span><span class="en-only">Fixed fee</span></span></div>
+  <p style="font-size:.75rem;color:var(--muted);margin-top:8px"><span class="tr-only">Komisyon oranları erken benimseyenlerle birlikte belirleniyor. Erken ortak olun, lansman avantajlarından yararlanın.</span><span class="en-only">Commission rates being finalised with early adopters. Join early to benefit from launch advantages.</span></p>
+</div>
+
+<div class="highlight">
+  <h4 style="margin-bottom:6px"><span class="tr-only">💡 Pazaryerine katılmak ister misiniz?</span><span class="en-only">💡 Interested in joining the marketplace?</span></h4>
+  <p style="font-size:.85rem;color:var(--mid)"><span class="tr-only">Pazaryeri geliştirme aşamasında. Erken benimseyenler listesine katılarak lansman öncesi avantajlardan yararlanabilirsiniz.</span><span class="en-only">The marketplace is in development. Join our early adopter list to benefit from pre-launch advantages.</span></p>
+  <div class="btns" style="margin-top:10px">
+    <a class="btn btn-p" href="../contact.html"><span class="tr-only">Erken Benimseyenler Listesi</span><span class="en-only">Early Adopter List</span></a>
+    <a class="btn" href="familyos.html"><span class="tr-only">Family OS Vizyonu →</span><span class="en-only">Family OS Vision →</span></a>
+  </div>
+</div>
+</div><!-- /marketplace -->
+
+<!-- ══════════════ INSTITUTIONAL ══════════════ -->
+<div id="institutional" class="section-anchor sec fi">
+  <h3><span class="tr-only">🏛️ Kurumsal & Belediye İş Birlikleri</span><span class="en-only">🏛️ Institutional & Municipality Collaborations</span></h3>
+  <div class="g g2" style="gap:12px">
+    <div class="card cl">
+      <h4><span class="tr-only">Milli Eğitim Bakanlığı (MEB)</span><span class="en-only">Ministry of Education (MEB)</span></h4>
+      <p><span class="tr-only">Atölye akreditasyonu, okul ortaklık programları, öğretmen mesleki gelişim seansları. MEB görüşmeleri devam etmektedir.</span><span class="en-only">Workshop accreditation, school partnership programmes, teacher professional development sessions. MEB discussions ongoing.</span></p>
+    </div>
+    <div class="card cl">
+      <h4><span class="tr-only">Kadıköy & İstanbul Belediyeleri</span><span class="en-only">Municipalities</span></h4>
+      <p><span class="tr-only">Topluluk aile iyilik projeleri, çok dilli aile entegrasyon programları, kültürel etkinlik iş birlikleri.</span><span class="en-only">Community family wellbeing projects, multilingual family integration programmes, cultural event collaborations.</span></p>
+    </div>
+    <div class="card cl">
+      <h4><span class="tr-only">Üniversiteler & Araştırma</span><span class="en-only">Universities & Research</span></h4>
+      <p><span class="tr-only">Çocuk gelişimi araştırma iş birlikleri, staj programları, akademik program danışmanlığı.</span><span class="en-only">Child development research collaborations, internship programmes, academic programme consultancy.</span></p>
+    </div>
+    <div class="card cl">
+      <h4><span class="tr-only">Sağlık Kurumları & Klinikler</span><span class="en-only">Healthcare & Clinics</span></h4>
+      <p><span class="tr-only">Yönlendirme yolları (psikolog, pediatrist), ortak anne-bebek sağlığı programları, klinik güvenilirlik ortaklıkları.</span><span class="en-only">Referral pathways (psychologist, paediatrician), joint maternal-infant health programmes, clinical credibility partnerships.</span></p>
+    </div>
+  </div>
+  <div class="btns" style="margin-top:14px">
+    <a class="btn btn-p" href="../contact.html"><span class="tr-only">Kurumsal İletişim</span><span class="en-only">Institutional Contact</span></a>
+  </div>
+</div>
+
+</main>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">Giggles &amp; Bloom 🌸</div><div class="footer-note"><span class="tr-only">Bu bölüm kurumsal bilgilendirme amaçlıdır.</span><span class="en-only">This section is for corporate information only.</span></div></div>
+    <div>
+      <div class="footer-links"><a href="governance.html#data"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a><a href="../index.html"><span class="tr-only">Kamu Sitesi</span><span class="en-only">Public Site</span></a></div>
+      <div class="footer-meta">© <span id="yr"></span> Giggles &amp; Bloom · Kadıköy &amp; Kurtköy, Istanbul</div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

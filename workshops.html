@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atölyeler | Giggles & Bloom</title>
+<meta name="description" content="Dört iz, 50+ atölye. Çocuklar, ebeveynler ve aileler için.">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root {
+    --t1: #1A6B8A; --t1l: #E3F4F9; --t1b: #B8DFF0;
+    --t2: #7B4F9E; --t2l: #F3EDF9; --t2b: #D9C8EE;
+    --t3: #C17A2A; --t3l: #FDF3E7; --t3b: #F0D0A0;
+    --t4: #B5272B; --t4l: #FDEAEA; --t4b: #EFB8B8;
+    --lego: #D4A000; --legol: #FEF8E1;
+  }
+  .lego-banner {
+    background: var(--legol); border: 1.5px solid var(--lego);
+    border-radius: var(--radius); padding: 14px 20px;
+    display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
+  }
+  .lego-banner .lb-icon { font-size: 1.8rem; flex-shrink: 0 }
+  .lego-banner h4 { font-size: .95rem; color: #8B6000; margin-bottom: 2px }
+  .lego-banner p  { font-size: .82rem; color: #7A5500; margin: 0 }
+  .track-header {
+    border-radius: var(--radius); padding: 20px 22px;
+    margin-bottom: 4px; border: 2px solid;
+    cursor: pointer; display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 12px;
+    transition: box-shadow .2s; user-select: none;
+  }
+  .track-header:hover { box-shadow: var(--shadow) }
+  .track-header .th-left h3 { font-size: 1.05rem; margin-bottom: 3px }
+  .track-header .th-left p  { font-size: .82rem; line-height: 1.5 }
+  .th-badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 20px; font-size: .68rem; font-weight: 700;
+    color: #fff; margin-bottom: 7px;
+  }
+  .track-toggle {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1.5px solid; display: grid; place-items: center;
+    font-size: .75rem; transition: transform .3s;
+    background: var(--white); flex-shrink: 0;
+  }
+  .track-section.open .track-toggle { transform: rotate(180deg) }
+  .session-grid {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px; padding: 12px 0 24px;
+    animation: fadeIn .3s ease;
+  }
+  .track-section.open .session-grid { display: grid }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+  .scard {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px;
+    box-shadow: var(--shadow-sm); border-left: 3px solid;
+  }
+  .scard h4 { font-size: .88rem; margin-bottom: 5px }
+  .scard p  { font-size: .8rem; color: var(--mid); line-height: 1.55; margin-bottom: 8px }
+  .sc-meta { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px }
+  .sc-pill {
+    font-size: .68rem; font-weight: 700; padding: 3px 8px;
+    border-radius: 10px; background: var(--cream-dark); color: var(--mid);
+  }
+  .slot-label {
+    display: inline-block; padding: 2px 8px;
+    border-radius: 10px; font-size: .7rem; font-weight: 700; color: #fff;
+  }
+  .ageband { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; background: var(--white); border: 1px solid var(--border) }
+  .ab-dot  { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0 }
+  .ab-label { font-size: .78rem; font-weight: 700; color: var(--ink) }
+  .ab-desc  { font-size: .74rem; color: var(--mid); margin-top: 1px }
+  .incl-bar {
+    background: var(--sage-bg); border: 1px solid var(--sage-light);
+    border-radius: var(--radius); padding: 14px 18px;
+    display: flex; align-items: center; gap: 10px; font-size: .85rem;
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe atla / Skip to content</a>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="Giggles &amp; Bloom" class="brand-logo">
+      <div class="brand-text">
+        <div class="name">Giggles &amp; Bloom</div>
+        <div class="tag"><span class="tr-only">Kamuya açık</span><span class="en-only">Public</span></div>
+      </div>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html"><span class="tr-only">Ana Sayfa</span><span class="en-only">Home</span></a>
+      <a class="active" href="workshops.html"><span class="tr-only">Atölyeler</span><span class="en-only">Workshops</span></a>
+      <a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>
+      <a href="food.html"><span class="tr-only">Kafe</span><span class="en-only">Café</span></a>
+      <a href="workspaces.html"><span class="tr-only">Çalışma Alanı</span><span class="en-only">Cowork</span></a>
+      <a href="library.html"><span class="tr-only">Kitaplık</span><span class="en-only">Library</span></a>
+      <a href="social-lab.html">Social Lab</a>
+      <a href="wellbeing.html"><span class="tr-only">Destek</span><span class="en-only">Support</span></a>
+      <a href="events.html"><span class="tr-only">Etkinlikler</span><span class="en-only">Events</span></a>
+      <a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>
+      <a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-login" type="button"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></button>
+      <button class="btn-join" type="button"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></button>
+      <button class="lang-sw" id="ls" type="button" onclick="gt()" aria-label="TR/EN">
+      <span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span>
+    </button>
+      <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="pt fi">
+  <h1><span class="tr-only">Atölyeler</span><span class="en-only">Workshops</span></h1>
+  <p class="sub"><span class="tr-only">Dört iz, 50+ seans. Merak, bağlantı, denge ve liderlik — çocuklar, ebeveynler ve aileler için.</span><span class="en-only">Four tracks, 50+ sessions. Curiosity, connection, balance, and leadership — for children, parents, and families.</span></p>
+</div>
+
+<!-- TWO TYPES -->
+<div class="cmp fi">
+  <div class="cbox" style="border-color:#66bb6a;background:#f1f8e9">
+    <div class="ctag" style="background:#66bb6a"><span class="tr-only">🎮 OYUN ATÖLYELERİ</span><span class="en-only">🎮 PLAY WORKSHOPS</span></div>
+    <h4><span class="tr-only">Günlük — Tam Zamanlı Personel</span><span class="en-only">Daily — Full-Time Staff</span></h4>
+    <p><span class="tr-only">Sabit saatlerde, günde 2-3 kez. Fiyatlandırma için Oyun sayfasına bakın.</span><span class="en-only">Fixed hours, 2-3 times daily. See the Play page for pricing.</span></p>
+    <div class="btns"><a class="btn btn-p" href="play.html"><span class="tr-only">Oyun Alanı & Fiyatlar →</span><span class="en-only">Play Area & Pricing →</span></a></div>
+  </div>
+  <div class="cbox" style="border-color:var(--coral);background:var(--coral-bg)">
+    <div class="ctag" style="background:var(--coral)"><span class="tr-only">🎓 SERİ ATÖLYELERİ</span><span class="en-only">🎓 SERIES WORKSHOPS</span></div>
+    <h4><span class="tr-only">Uzmanlar — 4 İz, 50+ Tür</span><span class="en-only">Experts — 4 Tracks, 50+ Types</span></h4>
+    <p><span class="tr-only">Psikologlar, STEM eğitimcileri, dil uzmanları, sanatçılar. Sezonluk program takvimi ile planlanır.</span><span class="en-only">Psychologists, STEM educators, language specialists, artists. Planned on seasonal programme calendars.</span></p>
+  </div>
+</div>
+
+<!-- LEGO BANNER -->
+<div class="lego-banner fi">
+  <div class="lb-icon">🧱</div>
+  <div>
+    <h4><span class="tr-only">LEGO® Serious Play® — İmza Metodolojimiz</span><span class="en-only">LEGO® Serious Play® — Our Signature Methodology</span></h4>
+    <p><span class="tr-only">İstanbul'un tek sertifikalı LSP eğitmeniyle. Çocuklardan kurumsal ekiplere, tüm izlere entegre edilmiştir.</span><span class="en-only">With Istanbul's only certified LSP trainer. Woven across all tracks — from children to corporate teams.</span></p>
+  </div>
+</div>
+
+<!-- SLOTS TABLE -->
+<div class="sec fi">
+  <h3><span class="tr-only">📅 Günlük Seans Takvimi</span><span class="en-only">📅 Daily Session Schedule</span></h3>
+  <p class="desc"><span class="tr-only">Arka oda dört sabit zaman dilimiyle çalışır.</span><span class="en-only">The back workshop room runs on four fixed daily slots.</span></p>
+  <div style="overflow-x:auto">
+  <table class="tbl">
+    <thead><tr>
+      <th><span class="tr-only">Dilim</span><span class="en-only">Slot</span></th>
+      <th><span class="tr-only">Saat</span><span class="en-only">Time</span></th>
+      <th><span class="tr-only">Birincil Kitle</span><span class="en-only">Primary Audience</span></th>
+      <th><span class="tr-only">İz</span><span class="en-only">Track</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="slot-label" style="background:#7B4F9E">A</span></td><td>10:00–11:00</td><td><span class="tr-only">Ev hanımları, büyükanneler, evde ebeveynler</span><span class="en-only">Housewives, grandparents, at-home parents</span></td><td><span class="tr-only">Bağlan & Ait Ol · Geliş & Dengele</span><span class="en-only">Connect & Belong · Thrive & Balance</span></td></tr>
+      <tr><td><span class="slot-label" style="background:#5a8a5a">B</span></td><td>13:00–14:00</td><td><span class="tr-only">Esnek / Kısa seanslar</span><span class="en-only">Flexible / Short drop-ins</span></td><td><span class="tr-only">Karma</span><span class="en-only">Mixed</span></td></tr>
+      <tr><td><span class="slot-label" style="background:#1A6B8A">C</span></td><td>15:00–16:30</td><td><span class="tr-only">Çocuklar 6–12 · Topluluk</span><span class="en-only">Children 6–12 · Community</span></td><td><span class="tr-only">Büyü & Keşfet · Bağlan & Ait Ol</span><span class="en-only">Grow & Discover · Connect & Belong</span></td></tr>
+      <tr><td><span class="slot-label" style="background:#B5272B">D</span></td><td>17:00–19:00</td><td><span class="tr-only">Yetişkinler · Gençler · Kurumsal</span><span class="en-only">Adults · Teens · Corporate</span></td><td><span class="tr-only">Geliş & Dengele · Liderlik & İnşa Et</span><span class="en-only">Thrive & Balance · Lead & Build</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- TRACKS -->
+<div class="sec fi">
+  <h3><span class="tr-only">Dört İz — Seans kartları için başlığa tıklayın</span><span class="en-only">Four Tracks — Click a track to see session cards</span></h3>
+
+  <!-- T1 -->
+  <div class="track-section" id="t1">
+    <div class="track-header" style="border-color:var(--t1b);background:var(--t1l)" onclick="toggleTrack('t1')">
+      <div class="th-left">
+        <div class="th-badge" style="background:var(--t1)">Track 1</div>
+        <h3><span class="tr-only">🔬 Büyü & Keşfet</span><span class="en-only">🔬 Grow & Discover</span></h3>
+        <p style="color:var(--t1)"><span class="tr-only">Merak, beceri ve yaratıcı zekâ. STEM, Maker, Sanat, Dil, Yaratıcı Yazarlık.</span><span class="en-only">Curiosity, capability and creative intelligence. STEM, Maker, Art, Language, Creative Writing.</span></p>
+        <div class="tags" style="margin-top:8px"><span class="tag"><span class="tr-only">Çocuklar 2–12</span><span class="en-only">Children 2–12</span></span><span class="tag"><span class="tr-only">Gençler</span><span class="en-only">Teens</span></span><span class="tag"><span class="tr-only">Dilim C</span><span class="en-only">Slot C</span></span></div>
+      </div>
+      <div class="track-toggle" style="border-color:var(--t1);color:var(--t1)">▼</div>
+    </div>
+    <div class="session-grid">
+      <div class="scard" style="border-left-color:var(--t1)">
+        <h4><span class="tr-only">🧪 Erken STEM Kaşifleri</span><span class="en-only">🧪 Early STEM Explorers</span></h4>
+        <p><span class="tr-only">Küçük bilim insanları için günlük ön alan premium seansı. Rehberli deney, basit mühendislik, yaratıcı keşif.</span><span class="en-only">Premium front-area session on designated days. Guided experiments, simple engineering and creative discovery for the youngest scientists.</span></p>
+        <div class="sc-meta"><span class="sc-pill">2–5</span><span class="sc-pill"><span class="tr-only">Tek seans</span><span class="en-only">Single session</span></span><span class="sc-pill"><span class="tr-only">Malzeme dahil</span><span class="en-only">Materials incl.</span></span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t1)">
+        <h4><span class="tr-only">⚙️ Yapım Atölyesi Serisi</span><span class="en-only">⚙️ Maker Lab Series</span></h4>
+        <p><span class="tr-only">Robot yapımı, devreler, köprü yarışmaları, karton şehirler. Her seride somut bir proje çıktısı.</span><span class="en-only">Robot building, circuits, bridge challenges, cardboard cities. Each series ends with a tangible project.</span></p>
+        <div class="sc-meta"><span class="sc-pill">6–12</span><span class="sc-pill">6-<span class="tr-only">haftalık</span><span class="en-only">week series</span></span><span class="sc-pill">Dilim C</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t1)">
+        <h4><span class="tr-only">🎨 Profesyonel Sanat Serisi</span><span class="en-only">🎨 Professional Art Series</span></h4>
+        <p><span class="tr-only">Suluboya, kolaj, seramik, heykel ve süreç sanatı. Usta bir sanat eğitmeni eşliğinde yapılandırılmış ilerleme.</span><span class="en-only">Watercolor, collage, ceramics, sculpture, process art. Structured progression with a specialist art instructor.</span></p>
+        <div class="sc-meta"><span class="sc-pill">6–12</span><span class="sc-pill">4-<span class="tr-only">haftalık</span><span class="en-only">week series</span></span><span class="sc-pill">Dilim C</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t1)">
+        <h4><span class="tr-only">📚 Dil & Okuryazarlık</span><span class="en-only">📚 Language & Literacy</span></h4>
+        <p><span class="tr-only">TR · EN · AR · FR — okuma desteği, ödev yardımı ve dil eğlencesi. Dönemlik, okul müfredatıyla uyumlu.</span><span class="en-only">TR · EN · AR · FR — literacy boosters, homework support and language fun. Term-based, aligned with school curriculum.</span></p>
+        <div class="sc-meta"><span class="sc-pill">6–12</span><span class="sc-pill">8-<span class="tr-only">haftalık dönem</span><span class="en-only">week term</span></span><span class="sc-pill">Dilim C</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t1)">
+        <h4><span class="tr-only">✍️ Yaratıcı Yazarlık & Hikâye Anlatımı</span><span class="en-only">✍️ Creative Writing & Storytelling</span></h4>
+        <p><span class="tr-only">Kendi kitaplarını yazan çocuklar. Podcast mini-stüdyo, sosyal medya hikâyeciliği ve sesli hikâye kayıtları.</span><span class="en-only">Children who write their own books. Podcast mini-studio, social storytelling and audio story recordings.</span></p>
+        <div class="sc-meta"><span class="sc-pill">8–14</span><span class="sc-pill">4–6-<span class="tr-only">haftalık</span><span class="en-only">week series</span></span><span class="sc-pill">Dilim C</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- T2 -->
+  <div class="track-section" id="t2" style="margin-top:8px">
+    <div class="track-header" style="border-color:var(--t2b);background:var(--t2l)" onclick="toggleTrack('t2')">
+      <div class="th-left">
+        <div class="th-badge" style="background:var(--t2)">Track 2</div>
+        <h3><span class="tr-only">🤝 Bağlan & Ait Ol</span><span class="en-only">🤝 Connect & Belong</span></h3>
+        <p style="color:var(--t2)"><span class="tr-only">İlişkiler, topluluk ve sessiz ait olma duygusu. En kapsayıcı izimiz — tüm yaşlar dahil.</span><span class="en-only">Relationships, community and the quiet sense of belonging. Our most inclusive track — all ages welcome.</span></p>
+        <div class="tags" style="margin-top:8px"><span class="tag"><span class="tr-only">Tüm yaşlar</span><span class="en-only">All ages</span></span><span class="tag"><span class="tr-only">Büyükanneler</span><span class="en-only">Grandparents</span></span><span class="tag"><span class="tr-only">Topluluk</span><span class="en-only">Community</span></span><span class="tag"><span class="tr-only">Dilim A + D</span><span class="en-only">Slot A + D</span></span></div>
+      </div>
+      <div class="track-toggle" style="border-color:var(--t2);color:var(--t2)">▼</div>
+    </div>
+    <div class="session-grid">
+      <div class="scard" style="border-left-color:var(--t2)">
+        <h4><span class="tr-only">👵 Büyükanne & Büyükbaba Çemberi</span><span class="en-only">👵 Grandparent Circle</span></h4>
+        <p><span class="tr-only">Aylık devam eden buluşma. Kuşaklar arası bağ, el sanatları, dijital okuryazarlık. Torunlarıyla gelebilirler — biz oyun alanında gözetliyoruz.</span><span class="en-only">Ongoing monthly gathering. Intergenerational bonds, traditional crafts, digital literacy. Grandchildren welcome — we supervise their play.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Büyükanneler/Büyükbabalar</span><span class="en-only">Grandparents</span></span><span class="sc-pill"><span class="tr-only">Aylık üyelik</span><span class="en-only">Monthly membership</span></span><span class="sc-pill">Dilim A</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t2)">
+        <h4><span class="tr-only">💕 Sosyal & Duygusal Beceriler Laboratuvarı</span><span class="en-only">💕 Social & Emotional Skills Lab</span></h4>
+        <p><span class="tr-only">Çatışma çözümü, takım çalışması, duygusal zekâ oyunları. Uzman psikolog liderliğinde çocuk grupları için.</span><span class="en-only">Conflict resolution, teamwork, emotional intelligence games. Expert psychologist-led sessions for child groups.</span></p>
+        <div class="sc-meta"><span class="sc-pill">6–12</span><span class="sc-pill">4-<span class="tr-only">haftalık</span><span class="en-only">week series</span></span><span class="sc-pill">Dilim C</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t2)">
+        <h4><span class="tr-only">🏡 Aile Bağı Atölyesi</span><span class="en-only">🏡 Family Bonding Workshop</span></h4>
+        <p><span class="tr-only">Ebeveyn ve çocuk birlikte katılır. Ortak proje, iletişim alıştırmaları ve birlikte zaman. Haftasonları veya akşam seansları.</span><span class="en-only">Parent and child attend together. Shared project, communication exercises, quality time. Weekends or evening sessions.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Karışık aile</span><span class="en-only">Mixed family</span></span><span class="sc-pill">1–2 <span class="tr-only">seans</span><span class="en-only">sessions</span></span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t2)">
+        <h4><span class="tr-only">🌍 Çok Kültürlü Topluluk Akşamı</span><span class="en-only">🌍 Multicultural Community Evening</span></h4>
+        <p><span class="tr-only">"Dünyamı Tanı" — farklı kültürlerden aileler bir araya gelir. Yemek, müzik, hikâye ve kültürel paylaşım. Aylık, sübvanse ya da ücretsiz.</span><span class="en-only">"Meet My World" — families from different cultures come together. Food, music, stories and cultural exchange. Monthly, subsidised or free entry.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Tüm aileler</span><span class="en-only">All families</span></span><span class="sc-pill"><span class="tr-only">Aylık</span><span class="en-only">Monthly</span></span><span class="sc-pill">Dilim D</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t2)">
+        <h4><span class="tr-only">👨 Babalar Akşamı</span><span class="en-only">👨 Fathers' Evening</span></h4>
+        <p><span class="tr-only">Aile merkezlerinin çoğunun görmezden geldiği bir kitle. Babalar burada görünür ve değer görür. Aylık, sosyal ve pratik odaklı.</span><span class="en-only">An audience most family centres overlook entirely. Fathers are seen and valued here. Monthly, social and practical focus.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Babalar</span><span class="en-only">Fathers</span></span><span class="sc-pill"><span class="tr-only">Aylık</span><span class="en-only">Monthly</span></span><span class="sc-pill">Dilim D</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- T3 -->
+  <div class="track-section" id="t3" style="margin-top:8px">
+    <div class="track-header" style="border-color:var(--t3b);background:var(--t3l)" onclick="toggleTrack('t3')">
+      <div class="th-left">
+        <div class="th-badge" style="background:var(--t3)">Track 3</div>
+        <h3><span class="tr-only">🌿 Geliş & Dengele</span><span class="en-only">🌿 Thrive & Balance</span></h3>
+        <p style="color:var(--t3)"><span class="tr-only">Ruh sağlığı, duygusal direnç ve ebeveynlik. Uzman psikolog destekli seanslar.</span><span class="en-only">Mental wellbeing, emotional resilience and parenting. Specialist psychologist-supported sessions.</span></p>
+        <div class="tags" style="margin-top:8px"><span class="tag"><span class="tr-only">Ebeveynler</span><span class="en-only">Parents</span></span><span class="tag"><span class="tr-only">Yeni Anneler</span><span class="en-only">New Mothers</span></span><span class="tag"><span class="tr-only">Gençler</span><span class="en-only">Teens</span></span><span class="tag"><span class="tr-only">Dilim A + D</span><span class="en-only">Slot A + D</span></span></div>
+      </div>
+      <div class="track-toggle" style="border-color:var(--t3);color:var(--t3)">▼</div>
+    </div>
+    <div class="session-grid">
+      <div class="scard" style="border-left-color:var(--t3)">
+        <h4><span class="tr-only">🌸 Kadın İyilik Çemberi</span><span class="en-only">🌸 Women's Wellbeing Circle</span></h4>
+        <p><span class="tr-only">Psikolog eşliğinde, nazik ve klinik olmayan grup seansları. Yalnızlık ya da bunalım yaşayan anneler için güvenli bir alan. Devam eden aylık üyelik.</span><span class="en-only">Psychologist-facilitated, gentle and non-clinical group sessions. A safe space for mothers experiencing isolation or overwhelm. Ongoing monthly membership.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Anneler</span><span class="en-only">Mothers</span></span><span class="sc-pill"><span class="tr-only">Aylık üyelik</span><span class="en-only">Monthly membership</span></span><span class="sc-pill">Dilim A</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t3)">
+        <h4><span class="tr-only">👶 Yeni Anneler Destek Grubu</span><span class="en-only">👶 New Mothers' Support Group</span></h4>
+        <p><span class="tr-only">Pratik ve duygusal destek. Program Direktörü liderliğinde. Doğum sonrası yalnızlık, bebek bakımı, aile uyumu.</span><span class="en-only">Practical and emotional support, run by our Programme Director. Postnatal isolation, infant care, family adjustment.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Yeni anneler</span><span class="en-only">New mothers</span></span><span class="sc-pill">4-<span class="tr-only">haftalık</span><span class="en-only">week series</span></span><span class="sc-pill">Dilim A</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t3)">
+        <h4><span class="tr-only">🤰 Doğuma Hazırlık Serisi</span><span class="en-only">🤰 Pregnancy Preparation Series</span></h4>
+        <p><span class="tr-only">Doğum, yenidoğan bakımı ve aile uyumu. Uzman sağlık profesyonelleriyle işbirliğinde yürütülür.</span><span class="en-only">Birth preparation, newborn care and family adjustment. Run in collaboration with specialist health professionals.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Hamile kadınlar</span><span class="en-only">Pregnant women</span></span><span class="sc-pill">4-<span class="tr-only">haftalık</span><span class="en-only">week series</span></span><span class="sc-pill">Dilim A</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t3)">
+        <h4><span class="tr-only">🧘 Farkındalık & Hareket</span><span class="en-only">🧘 Mindfulness & Movement</span></h4>
+        <p><span class="tr-only">Çocuk yogası, ebeveyn farkındalık pratiği, hareket oyunları. Otizm ve DEHB dostu kapsayıcı format.</span><span class="en-only">Kids yoga, parent mindfulness practice, movement games. Inclusive, autism and ADHD-friendly format.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Tüm yaşlar</span><span class="en-only">All ages</span></span><span class="sc-pill"><span class="tr-only">Haftalık / aylık</span><span class="en-only">Weekly / monthly</span></span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t3)">
+        <h4><span class="tr-only">📖 Ebeveynlik Ustalık Sınıfı</span><span class="en-only">📖 Parenting Masterclass Series</span></h4>
+        <p><span class="tr-only">Aile psikologu liderliğinde premium akşam serisi. Ekran süresi, bağımlılık önleme, öfke yönetimi, nesiller arası iletişim.</span><span class="en-only">Premium evening series led by our family psychologist. Screen time, addiction prevention, anger management, bridging generational gaps.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Ebeveynler</span><span class="en-only">Parents</span></span><span class="sc-pill">4-<span class="tr-only">haftalık</span><span class="en-only">week series</span></span><span class="sc-pill">Dilim D</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- T4 -->
+  <div class="track-section" id="t4" style="margin-top:8px">
+    <div class="track-header" style="border-color:var(--t4b);background:var(--t4l)" onclick="toggleTrack('t4')">
+      <div class="th-left">
+        <div class="th-badge" style="background:var(--t4)">Track 4</div>
+        <h3><span class="tr-only">🏆 Liderlik & İnşa Et</span><span class="en-only">🏆 Lead & Build</span></h3>
+        <p style="color:var(--t4)"><span class="tr-only">Liderlik, problem çözme ve yaratıcı düşünce. LEGO® Serious Play® imzalı metodolojimizin evi.</span><span class="en-only">Leadership, problem-solving and creative thinking. Home of our LEGO® Serious Play® signature methodology.</span></p>
+        <div class="tags" style="margin-top:8px"><span class="tag"><span class="tr-only">Yetişkinler</span><span class="en-only">Adults</span></span><span class="tag">Teens 13–17</span><span class="tag"><span class="tr-only">Kurumsal / B2B</span><span class="en-only">Corporate / B2B</span></span><span class="tag">Dilim D</span></div>
+      </div>
+      <div class="track-toggle" style="border-color:var(--t4);color:var(--t4)">▼</div>
+    </div>
+    <div class="session-grid">
+      <div class="scard" style="border-left-color:var(--lego);background:var(--legol)">
+        <h4><span class="tr-only">🧱 LSP — Takım Dinamikleri</span><span class="en-only">🧱 LSP — Team Dynamics</span></h4>
+        <p><span class="tr-only">İstanbul'un tek sertifikalı LSP eğitmeniyle şirket ekipleri için yarım günlük seans. Takım içgörüsü, yaratıcı problem çözme, strateji hizalaması.</span><span class="en-only">Half-day for company teams with Istanbul's only certified LSP trainer. Team insight, creative problem-solving, strategy alignment.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Kurumsal</span><span class="en-only">Corporate</span></span><span class="sc-pill"><span class="tr-only">Min. 6 kişi</span><span class="en-only">Min. 6 people</span></span><span class="sc-pill"><a href="corporate/index.html" style="color:inherit"><span class="tr-only">Teklif al →</span><span class="en-only">Get a quote →</span></a></span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--lego);background:var(--legol)">
+        <h4><span class="tr-only">🧱 LSP — Aile Versiyonu</span><span class="en-only">🧱 LSP — Family Edition</span></h4>
+        <p><span class="tr-only">Ebeveynler ve çocuklar birlikte inşa eder, paylaşır ve keşfeder. Aylık premium akşam etkinliği.</span><span class="en-only">Parents and children build, share and discover together. Monthly premium evening event.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Karışık aile</span><span class="en-only">Mixed family</span></span><span class="sc-pill"><span class="tr-only">Aylık</span><span class="en-only">Monthly</span></span><span class="sc-pill">Dilim D</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t4)">
+        <h4><span class="tr-only">🚀 Genç Liderlik Programı</span><span class="en-only">🚀 Teen Leadership Programme</span></h4>
+        <p><span class="tr-only">Güven, girişimci düşünce ve liderlik. Gençler gerçek projeler üretir, sunum yapar ve geri bildirim alır.</span><span class="en-only">Confidence, entrepreneurial thinking and leadership. Teens work on real projects, present and receive feedback.</span></p>
+        <div class="sc-meta"><span class="sc-pill">Teens 13–17</span><span class="sc-pill">4–6-<span class="tr-only">haftalık</span><span class="en-only">week series</span></span><span class="sc-pill">Dilim D</span></div>
+      </div>
+      <div class="scard" style="border-left-color:var(--t4)">
+        <h4><span class="tr-only">💡 Yaratıcı Problem Çözme Laboratuvarı</span><span class="en-only">💡 Creative Problem-Solving Lab</span></h4>
+        <p><span class="tr-only">Yetişkinler ve gençler için. Tasarım düşüncesi, senaryo egzersizleri ve takım çalışması. Tek veya iki seans.</span><span class="en-only">For adults and teens. Design thinking, scenario exercises and teamwork. One or two sessions.</span></p>
+        <div class="sc-meta"><span class="sc-pill"><span class="tr-only">Yetişkinler / Gençler</span><span class="en-only">Adults / Teens</span></span><span class="sc-pill">1–2 <span class="tr-only">seans</span><span class="en-only">sessions</span></span><span class="sc-pill">Dilim D</span></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /sec -->
+
+<!-- AGE BANDS -->
+<div class="sec fi">
+  <h3><span class="tr-only">Yaş Grupları</span><span class="en-only">Age Bands</span></h3>
+  <div class="g g3" style="gap:10px">
+    <div class="ageband"><div class="ab-dot" style="background:#FFD54F"></div><div><div class="ab-label"><span class="tr-only">Küçük Çocuklar</span><span class="en-only">Toddlers</span> · 2–3</div><div class="ab-desc"><span class="tr-only">Sadece ön alan oyun. Ebeveyn eşliği zorunlu.</span><span class="en-only">Front area play only. Parent must be present.</span></div></div></div>
+    <div class="ageband"><div class="ab-dot" style="background:#81C784"></div><div><div class="ab-label"><span class="tr-only">Küçük Kaşifler</span><span class="en-only">Little Explorers</span> · 2–5</div><div class="ab-desc"><span class="tr-only">Ön alan oyun + Erken STEM Kaşifleri.</span><span class="en-only">Front area play + Early STEM Explorers.</span></div></div></div>
+    <div class="ageband"><div class="ab-dot" style="background:#FF8A65"></div><div><div class="ab-label"><span class="tr-only">Gökyüzü Zıplayıcıları</span><span class="en-only">Sky Jumpers</span> · 4–10</div><div class="ab-desc"><span class="tr-only">SkyNet. Yaş + kilo + davranış kriteri uygulanır.</span><span class="en-only">SkyNet zone. Age + weight + behaviour criteria apply.</span></div></div></div>
+    <div class="ageband"><div class="ab-dot" style="background:var(--t1)"></div><div><div class="ab-label"><span class="tr-only">Genç Yapımcılar</span><span class="en-only">Young Makers</span> · 6–12</div><div class="ab-desc"><span class="tr-only">Tüm arka oda seri atölyeleri.</span><span class="en-only">All back-room series workshops.</span></div></div></div>
+    <div class="ageband"><div class="ab-dot" style="background:var(--t4)"></div><div><div class="ab-label">Teens · 13–17</div><div class="ab-desc"><span class="tr-only">Track 1 ileri seriler + Track 4 Genç Liderlik.</span><span class="en-only">Track 1 advanced + Track 4 Teen Leadership.</span></div></div></div>
+    <div class="ageband"><div class="ab-dot" style="background:var(--t3)"></div><div><div class="ab-label"><span class="tr-only">Ebeveynler & Yetişkinler</span><span class="en-only">Parents & Adults</span> · 18+</div><div class="ab-desc"><span class="tr-only">Tüm Track 2, 3 ve 4 yetişkin seansları.</span><span class="en-only">All Track 2, 3 and 4 adult sessions.</span></div></div></div>
+  </div>
+</div>
+
+<!-- INCLUSIVE -->
+<div class="sec fi">
+  <div class="incl-bar">
+    <span style="font-size:1.3rem">♿</span>
+    <div>
+      <strong><span class="tr-only">Kapsayıcı Tasarım</span><span class="en-only">Inclusive Design</span></strong>
+      <span style="font-size:.82rem;color:var(--mid);margin-left:8px"><span class="tr-only">Tüm atölyeler otizm ve DEHB dostu uyum protokolleriyle tasarlanmıştır. Sessiz kafe saatleri ve duyusal dostu STEM seansları mevcuttur.</span><span class="en-only">All workshops are designed with autism and ADHD-friendly accommodation protocols. Quiet café hours and sensory-friendly STEM sessions available.</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="sec fi">
+  <div class="highlight">
+    <h3 style="margin-bottom:8px"><span class="tr-only">Kayıt & Seans Takvimi</span><span class="en-only">Enrolment & Schedule</span></h3>
+    <p style="font-size:.88rem;color:var(--mid);margin-bottom:14px"><span class="tr-only">Sezonluk program takvimi her dönem öncesinde yayınlanır. Kayıt talebi ve bilgi için bize ulaşın.</span><span class="en-only">Seasonal programme calendars are published ahead of each term. Reach out to enquire or request enrolment.</span></p>
+    <div class="btns">
+      <a class="btn btn-p" href="contact.html"><span class="tr-only">Kayıt Talebi</span><span class="en-only">Request Enrolment</span></a>
+      <a class="btn" href="play.html"><span class="tr-only">Oyun Alanı Fiyatları</span><span class="en-only">Play Area Pricing</span></a>
+      <a class="btn" href="corporate/index.html"><span class="tr-only">Kurumsal LSP</span><span class="en-only">Corporate LSP</span></a>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Giggles &amp; Bloom 🌸</div>
+      <div class="footer-note"><span class="tr-only">Görünmez yükü hafifletmek için buradayız.</span><span class="en-only">We exist to lighten the invisible load.</span></div>
+    </div>
+    <div class="footer-col">
+      <h5><span class="tr-only">Hizmetler</span><span class="en-only">Services</span></h5>
+      <a class="active" href="workshops.html"><span class="tr-only">Atölyeler</span><span class="en-only">Workshops</span></a>
+      <a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>
+      <a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>
+      <a href="events.html"><span class="tr-only">Etkinlikler</span><span class="en-only">Events</span></a>
+      <a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>
+    </div>
+    <div class="footer-col">
+      <h5><span class="tr-only">Hesap</span><span class="en-only">Account</span></h5>
+      <a href="https://giggles-bloom.vercel.app/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></a>
+      <a href="https://giggles-bloom.vercel.app/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>
+    </div>
+    <div class="footer-col">
+      <h5><span class="tr-only">Kurumsal</span><span class="en-only">Corporate</span></h5>
+      <a href="corporate/index.html"><span class="tr-only">Hakkımızda</span><span class="en-only">About</span></a>
+      <a href="corporate/governance.html#data"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="yr"></span> Giggles &amp; Bloom · İstanbul</div>
+  </div>
+    <div>
+      <div class="footer-brand">Giggles &amp; Bloom 🌸</div>
+      <div class="footer-note"><span class="tr-only">Bu site temel bilgi ve rezervasyon talebi içindir.</span><span class="en-only">This site is for information and booking requests.</span></div>
+    </div>
+    <div>
+      <div class="footer-links">
+        <a href="corporate/governance.html#data"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>
+        <a href="corporate/index.html"><span class="tr-only">Kurumsal</span><span class="en-only">Corporate</span></a>
+      </div>
+      <div class="footer-meta">© <span id="yr"></span> Giggles &amp; Bloom · Kadıköy &amp; Kurtköy, Istanbul</div>
+    </div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+<script>
+function toggleTrack(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>

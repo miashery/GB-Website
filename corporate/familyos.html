@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Family OS — "Tell Your Story" | Giggles & Bloom</title>
+<meta name="description" content="Family OS: hikâye günlüğü, ortak aile planlayıcısı, çocuk gelişim takibi, ruh hali izleme, ebeveyn pod'ları ve uzman danışmanlığı. 2027 lansmanı.">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+/* ── Feature Rows ── */
+.fr { display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid var(--border) }
+.fr:last-child { border-bottom:0 }
+.fr-icon { font-size:1.5rem; flex-shrink:0; margin-top:1px }
+.fr-label { font-size:.88rem; font-weight:700; color:var(--ink); margin-bottom:3px }
+.fr-sub   { font-size:.76rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.4px; margin-bottom:3px }
+.fr-desc  { font-size:.8rem; color:var(--mid); line-height:1.6 }
+
+/* ── Feature Module Cards ── */
+.fmod {
+  background:var(--white); border:2px solid var(--border);
+  border-radius:var(--radius); overflow:hidden;
+  box-shadow:var(--shadow-sm); transition:transform .2s;
+}
+.fmod:hover { transform:translateY(-2px); box-shadow:var(--shadow) }
+.fmod-head {
+  display:flex; align-items:center; gap:10px;
+  padding:14px 16px; border-bottom:1px solid var(--border);
+  background:var(--cream);
+}
+.fmod-icon { font-size:1.4rem }
+.fmod-title { font-size:.92rem; font-weight:700; color:var(--ink) }
+.fmod-tag   { font-size:.65rem; font-weight:800; padding:2px 8px; border-radius:12px; margin-left:auto; text-transform:uppercase; letter-spacing:.4px; flex-shrink:0 }
+.fmod-body  { padding:14px 16px }
+.fmod-body p { font-size:.8rem; color:var(--mid); line-height:1.6; margin-bottom:10px }
+.fmod-body ul { list-style:none; padding:0; margin:0 }
+.fmod-body ul li { font-size:.78rem; color:var(--mid); padding:3px 0; border-bottom:1px solid rgba(0,0,0,.04) }
+.fmod-body ul li::before { content:'→ '; color:var(--sage); font-weight:700 }
+.fmod-body ul li:last-child { border-bottom:0 }
+
+/* ── Phase Timeline ── */
+.phase-row { display:flex; gap:16px; margin-bottom:20px; align-items:flex-start }
+.phase-num {
+  min-width:42px; height:42px; border-radius:50%;
+  background:var(--sage); color:#fff;
+  display:grid; place-items:center;
+  font-family:'Fraunces',serif; font-size:1rem; font-weight:700;
+  flex-shrink:0;
+}
+.phase-line { width:2px; min-height:50px; background:var(--sage-light); flex-shrink:0; margin:42px 0 0 20px }
+.phase-content { padding-top:8px }
+.phase-content strong { font-size:.9rem; color:var(--ink); display:block; margin-bottom:4px }
+.phase-content p { font-size:.79rem; color:var(--mid); line-height:1.55; margin:0 }
+.phase-year { font-size:.7rem; font-weight:800; color:var(--sage); text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px }
+
+/* ── Pain → Solution rows ── */
+.ps-row { display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid var(--border) }
+.ps-row:last-child { border-bottom:0 }
+.ps-pain { font-size:.78rem; color:var(--coral); flex:1 }
+.ps-arrow { font-size:.9rem; flex-shrink:0; color:var(--mid) }
+.ps-sol  { font-size:.78rem; color:var(--sage-dark); flex:1; font-weight:600 }
+
+/* ── Loop visual ── */
+.loop { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; padding:16px; background:var(--cream); border-radius:var(--radius); }
+.loop-item { background:var(--white); border:1.5px solid var(--border); border-radius:20px; padding:6px 14px; font-size:.78rem; font-weight:600; color:var(--ink); white-space:nowrap }
+.loop-arrow { font-size:1rem; color:var(--sage); flex-shrink:0 }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe atla / Skip to content</a>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="brand">
+      <img src="../assets/logo.png" alt="Giggles &amp; Bloom" class="brand-logo">
+      <div class="brand-text"><div class="name">Giggles &amp; Bloom</div><div class="tag"><span class="tr-only">Kurumsal</span><span class="en-only">Corporate</span></div></div>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html"><span class="tr-only">Genel Bakış</span><span class="en-only">Overview</span></a>
+      <a href="about.html"><span class="tr-only">Hakkımızda</span><span class="en-only">About</span></a>
+      <a href="model.html"><span class="tr-only">İş Modeli</span><span class="en-only">Business Model</span></a>
+      <a href="partners.html"><span class="tr-only">B2B & Uzmanlar</span><span class="en-only">B2B & Experts</span></a>
+      <a class="active" href="familyos.html">Family OS</a>
+      <a href="operations.html"><span class="tr-only">Operasyonlar</span><span class="en-only">Operations</span></a>
+      <a href="governance.html"><span class="tr-only">Yönetişim</span><span class="en-only">Governance</span></a>
+      <a href="../index.html" style="border:1px solid var(--border)"><span class="tr-only">Kamu Sitesi</span><span class="en-only">Public Site</span></a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-login" type="button"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></button>
+      <button class="btn-join" type="button"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></button>
+      <button class="lang-sw" id="ls" type="button" onclick="gt()" aria-label="Toggle language TR/EN">
+      <span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span>
+    </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ════════════════ PAGE HEADER ════════════════ -->
+<div class="pt fi">
+  <h1>Family OS</h1>
+  <p class="sub"><span class="tr-only">Günlük aile yaşamının görünmez yükünü hafifleten dijital destek platformu. Rezervasyon uygulaması değil — hikâye tutma, planlama, ruh hali takibi, gelişim izleme, topluluk ve uzman danışmanlığı. Fiziksel mekânımızın güven çapasını her güne taşır.</span><span class="en-only">A digital support platform that lightens the invisible load of daily family life. Not a booking app — story keeping, planning, mood tracking, development monitoring, community and expert consultancy. It carries the trust anchor of our physical space into every day.</span></p>
+  <div class="pills" style="margin-top:12px">
+    <span class="pill">2027 <span class="tr-only">Lansmanı</span><span class="en-only">Launch</span></span>
+    <span class="pill">KVKK <span class="tr-only">Uyumlu</span><span class="en-only">Compliant</span></span>
+    <span class="pill"><span class="tr-only">Gizlilik Önce</span><span class="en-only">Privacy First</span></span>
+    <span class="pill"><span class="tr-only">Akıllı Rehberlik → İnsan Uzman</span><span class="en-only">Smart Guidance → Human Expert</span></span>
+  </div>
+</div>
+
+<!-- ════════════════ INVISIBLE LOAD SECTION ════════════════ -->
+<div class="hero hero-coral fi"><div class="hero-inner"><div>
+  <h2><span class="tr-only">Asıl sorun: görünmez zihinsel yük</span><span class="en-only">The real problem: the invisible mental load</span></h2>
+  <p><span class="tr-only">Çoğu ebeveyn uygulaması rezervasyonu kolaylaştırır. Hiçbiri asıl sorunu çözmez: ebeveynliğin görünmez bilişsel yükünü. Tüm randevuları, tercihleri, programları akılda tutmak. Her aktiviteyi araştırıp güvenli bir şekilde elemek. Çakışan takvimleri koordine etmek. Duygusal yükün büyük bölümünü anneler taşır — babalar genellikle istenince yardım eder, ama <em>düşünme</em>, <em>planlama</em>, <em>endişe</em> annededir.</span><span class="en-only">Most parent apps make booking easier. None solves the real problem: the invisible cognitive load of parenting. Keeping track of all appointments, preferences, schedules. Researching and safely vetting every activity. Coordinating conflicting calendars. Mothers carry the majority of the emotional load — fathers often help when asked, but the <em>thinking</em>, <em>planning</em>, <em>worrying</em> stays with the mother.</span></p>
+  <p><span class="tr-only"><strong>Family OS bunu değiştirir.</strong> Ortak planlayıcı, görev atama ve çift yönlü görünürlük, yükü gerçek anlamda paylaştırmayı mümkün kılar — sadece hatırlatmayı değil.</span><span class="en-only"><strong>Family OS changes this.</strong> The shared planner, task assignment and two-way visibility make it genuinely possible to share the load — not just reminders, but actual redistribution.</span></p>
+</div>
+<div class="card">
+  <div class="badge"><span class="dot d-coral"></span><span class="tr-only">Sorun → Çözüm</span><span class="en-only">Pain → Solution</span></div>
+  <div class="ps-row"><div class="ps-pain"><span class="tr-only">Anneler her şeyi akılda tutar</span><span class="en-only">Mothers remember everything</span></div><div class="ps-arrow">→</div><div class="ps-sol"><span class="tr-only">Ortak aile planlayıcısı</span><span class="en-only">Shared family planner</span></div></div>
+  <div class="ps-row"><div class="ps-pain"><span class="tr-only">Babalar "sormaya" bağlı yardım eder</span><span class="en-only">Fathers help only when asked</span></div><div class="ps-arrow">→</div><div class="ps-sol"><span class="tr-only">Görev atama & kabul</span><span class="en-only">Task assignment & acceptance</span></div></div>
+  <div class="ps-row"><div class="ps-pain"><span class="tr-only">Çocuğun gelişimi takip edilemiyor</span><span class="en-only">Child's development can't be tracked</span></div><div class="ps-arrow">→</div><div class="ps-sol"><span class="tr-only">Çocuk başına gelişim profili</span><span class="en-only">Per-child development profile</span></div></div>
+  <div class="ps-row"><div class="ps-pain"><span class="tr-only">Ebeveyn tükenmişliği fark edilmiyor</span><span class="en-only">Parent burnout goes unnoticed</span></div><div class="ps-arrow">→</div><div class="ps-sol"><span class="tr-only">Ruh hali takibi + nazik uyarılar</span><span class="en-only">Mood tracking + gentle prompts</span></div></div>
+  <div class="ps-row"><div class="ps-pain"><span class="tr-only">Ebeveynlik yalnız ve yargılayıcı hissettiriyor</span><span class="en-only">Parenting feels lonely and judged</span></div><div class="ps-arrow">→</div><div class="ps-sol"><span class="tr-only">Güvenli, moderasyonlu pod'lar</span><span class="en-only">Safe, moderated pods</span></div></div>
+</div>
+</div></div>
+
+<!-- ════════════════ TELL YOUR STORY ════════════════ -->
+<div class="sec fi">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+    <span style="font-size:1.6rem">📖</span>
+    <h3 style="margin:0"><span class="tr-only">"Hikâyeni Anlat" Felsefesi</span><span class="en-only">"Tell Your Story" Philosophy</span></h3>
+  </div>
+  <p style="font-size:.9rem;color:var(--mid);max-width:680px;margin-bottom:18px;line-height:1.7"><span class="tr-only">Family OS'un kalbinde <strong>"Tell Your Story"</strong> vardır — ailenin hikâyesini güvenli bir şekilde saklayan, zaman içinde örüntüleri gören, yargılamadan destekleyen bir çerçeve. Günlük oyun fotoğrafından anne tükenmişliğine kadar her şey bu çerçeve içinde anlam kazanır.</span><span class="en-only">At the heart of Family OS is <strong>"Tell Your Story"</strong> — a framework that safely keeps a family's story, sees patterns over time, and supports without judgment. From a daily play photo to a mother's burnout moment, everything finds meaning within this framework.</span></p>
+
+  <div class="g g2" style="gap:14px">
+
+    <!-- FAMILY JOURNAL -->
+    <div class="fmod">
+      <div class="fmod-head">
+        <div class="fmod-icon">📓</div>
+        <div>
+          <div class="fmod-title"><span class="tr-only">Aile Günlüğü</span><span class="en-only">Family Journal</span></div>
+          <div style="font-size:.72rem;color:var(--mid)"><span class="tr-only">Paylaşılan aile belleği</span><span class="en-only">Shared family memory</span></div>
+        </div>
+        <span class="fmod-tag" style="background:var(--sage-bg);color:var(--sage-dark)">2027</span>
+      </div>
+      <div class="fmod-body">
+        <p><span class="tr-only">Ortak bir aile belleği defteri. Her iki ebeveyn de katkı sağlayabilir. Çocuklar büyüdükçe kendi sayfaları olur. Her gün birkaç fotoğraf, bir not — yıllar sonra "o günü hatırlar mısın?" sorusunun cevabı.</span><span class="en-only">A shared family memory notebook. Both parents can contribute. Children get their own pages as they grow. A few photos, a note each day — the answer to "do you remember that day?" years later.</span></p>
+        <ul>
+          <li><span class="tr-only">Her iki ebeveyn yazabilir, fotoğraf ekleyebilir</span><span class="en-only">Both parents can write and add photos</span></li>
+          <li><span class="tr-only">Çocuk başına ayrı bölüm</span><span class="en-only">Separate section per child</span></li>
+          <li><span class="tr-only">Atölye sonrası otomatik hatırlatma: "Bugünkü eseri yükle!"</span><span class="en-only">Post-workshop auto-prompt: "Upload today's creation!"</span></li>
+          <li><span class="tr-only">Şifreli ve özel — hiçbir zaman satılmaz</span><span class="en-only">Encrypted and private — never sold</span></li>
+          <li><span class="tr-only">"Hikâyeni Gör" zaman çizelgesi görünümü</span><span class="en-only">"See Your Story" timeline view</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- INDIVIDUAL PARENT PLANNER -->
+    <div class="fmod">
+      <div class="fmod-head">
+        <div class="fmod-icon">🗓️</div>
+        <div>
+          <div class="fmod-title"><span class="tr-only">Bireysel Ebeveyn Planlayıcısı</span><span class="en-only">Individual Parent Planner</span></div>
+          <div style="font-size:.72rem;color:var(--mid)"><span class="tr-only">Kişisel takvim & yapılacaklar</span><span class="en-only">Personal calendar & to-dos</span></div>
+        </div>
+        <span class="fmod-tag" style="background:var(--sage-bg);color:var(--sage-dark)">2027</span>
+      </div>
+      <div class="fmod-body">
+        <p><span class="tr-only">Her ebeveynin kendi görünümü. Kişisel randevular, ilaç hatırlatıcıları, okul toplantıları, G&B rezervasyonları. Ortak görünümle değil, kendi öncelikleriyle organize olur.</span><span class="en-only">Each parent's own view. Personal appointments, medication reminders, school meetings, G&B bookings. Organised around their own priorities, not just a shared view.</span></p>
+        <ul>
+          <li><span class="tr-only">G&B rezervasyonları otomatik takvime eklenir</span><span class="en-only">G&B bookings added to calendar automatically</span></li>
+          <li><span class="tr-only">Kişisel yapılacaklar listesi (ortak liste değil)</span><span class="en-only">Personal to-do list (not just the shared one)</span></li>
+          <li><span class="tr-only">İlaç, doktor randevusu, okul etkinlikleri hatırlatıcıları</span><span class="en-only">Medication, doctor appointment, school event reminders</span></li>
+          <li><span class="tr-only">Ruh hali ile entegre — stresli bir haftayı arka planda görür</span><span class="en-only">Integrated with mood — sees a stressful week in the background</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SHARED FAMILY PLANNER + TASK ASSIGNMENT -->
+    <div class="fmod" style="border-color:var(--sage);grid-column:span 2">
+      <div class="fmod-head" style="background:var(--sage-bg)">
+        <div class="fmod-icon">🤝</div>
+        <div>
+          <div class="fmod-title"><span class="tr-only">Ortak Aile Planlayıcısı — Görev Atama</span><span class="en-only">Shared Family Planner — Task Assignment</span></div>
+          <div style="font-size:.72rem;color:var(--mid)"><span class="tr-only">Görünmez yükü görünür kılan ve paylaştıran araç</span><span class="en-only">The tool that makes the invisible load visible — and shared</span></div>
+        </div>
+        <span class="fmod-tag" style="background:var(--sage);color:#fff">⭐ 2027</span>
+      </div>
+      <div class="fmod-body">
+        <p><span class="tr-only">Family OS'un en kritik özelliği. Aile yönetiminin görünmez yükünü <strong>paylaşılabilir, atanabilir ve kabul edilebilir</strong> hale getirir. Annelerin zihninde tutulan her şeyi listeye taşır — ve her öğenin sahibi olur.</span><span class="en-only">The most critical feature of Family OS. Makes the invisible load of family management <strong>shareable, assignable and accepted</strong>. Moves everything kept in a mother's mind to a list — and every item gets an owner.</span></p>
+        <div class="g g3" style="gap:10px;margin-top:4px">
+          <div style="background:var(--cream);border-radius:10px;padding:12px">
+            <strong style="font-size:.82rem;display:block;margin-bottom:6px"><span class="tr-only">📋 Ortak Görev Listesi</span><span class="en-only">📋 Shared Task List</span></strong>
+            <ul>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Aile görevi oluştur (iki taraf da görebilir)</span><span class="en-only">Create family task (both can see)</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Kategoriler: okul, sağlık, ev, aktivite</span><span class="en-only">Categories: school, health, home, activity</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Öncelik & son tarih atanabilir</span><span class="en-only">Priority & deadline can be assigned</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Tamamlandığında bildirim gönderilir</span><span class="en-only">Notification sent on completion</span></li>
+            </ul>
+          </div>
+          <div style="background:var(--cream);border-radius:10px;padding:12px">
+            <strong style="font-size:.82rem;display:block;margin-bottom:6px"><span class="tr-only">👤 Görev Atama</span><span class="en-only">👤 Task Assignment</span></strong>
+            <ul>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Görevi bir ebeveyne ata</span><span class="en-only">Assign a task to one parent</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Diğer ebeveyn görevi kabul eder veya müzakere eder</span><span class="en-only">Other parent accepts or negotiates</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Hiçbiri kabul edilmezse nazik hatırlatma</span><span class="en-only">Gentle reminder if neither accepted</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Haftalık yük dengesi özeti</span><span class="en-only">Weekly load balance summary</span></li>
+            </ul>
+          </div>
+          <div style="background:var(--cream);border-radius:10px;padding:12px">
+            <strong style="font-size:.82rem;display:block;margin-bottom:6px"><span class="tr-only">📊 Yük Dengesi Görünümü</span><span class="en-only">📊 Load Balance View</span></strong>
+            <ul>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Bu hafta kim ne yaptı? Görsel özet</span><span class="en-only">Who did what this week? Visual summary</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Suçlamak için değil, farkındalık için</span><span class="en-only">Not for blame — for awareness</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Tekrarlayan görevleri otomatik planla</span><span class="en-only">Auto-schedule recurring tasks</span></li>
+              <li style="font-size:.76rem;color:var(--mid);padding:2px 0"><span class="tr-only">Çakışan programları vurgular</span><span class="en-only">Highlights conflicting schedules</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHILD DEVELOPMENT TRACKER -->
+    <div class="fmod">
+      <div class="fmod-head">
+        <div class="fmod-icon">🌱</div>
+        <div>
+          <div class="fmod-title"><span class="tr-only">Çocuk Gelişim Takibi</span><span class="en-only">Child Development Tracker</span></div>
+          <div style="font-size:.72rem;color:var(--mid)"><span class="tr-only">Çocuk başına profil & kilometre taşları</span><span class="en-only">Per-child profile & milestones</span></div>
+        </div>
+        <span class="fmod-tag" style="background:var(--gold-bg);color:#8B6000">2027</span>
+      </div>
+      <div class="fmod-body">
+        <p><span class="tr-only">Her çocuk için ayrı profil. Ailevi tıbbi notlar, öğrenme tercihleri, duyusal hassasiyetler, atölyedeki ilerleme. Bir dahaki atölye önerisi profili dikkate alır.</span><span class="en-only">Separate profile for each child. Family medical notes, learning preferences, sensory sensitivities, workshop progress. The next workshop recommendation takes the profile into account.</span></p>
+        <ul>
+          <li><span class="tr-only">Çocuk başına ayrı profil (birden fazla çocuk desteklenir)</span><span class="en-only">Separate profile per child (multiple children supported)</span></li>
+          <li><span class="tr-only">Kilometre taşları: ilk adım, ilk kelime, ilk proje</span><span class="en-only">Milestones: first step, first word, first project</span></li>
+          <li><span class="tr-only">Öğrenme stili tercihleri (görsel, kinestetik, işitsel)</span><span class="en-only">Learning style preferences (visual, kinaesthetic, auditory)</span></li>
+          <li><span class="tr-only">Atölye katılım geçmişi & uzman notları</span><span class="en-only">Workshop attendance history & expert notes</span></li>
+          <li><span class="tr-only">Duyusal tercihler & adaptasyon notları</span><span class="en-only">Sensory preferences & adaptation notes</span></li>
+          <li><span class="tr-only">Sağlık notları (ebeveynin yönetiminde, şifreli)</span><span class="en-only">Health notes (parent-managed, encrypted)</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MOOD TRACKING -->
+    <div class="fmod">
+      <div class="fmod-head">
+        <div class="fmod-icon">😊</div>
+        <div>
+          <div class="fmod-title"><span class="tr-only">Ebeveyn Ruh Hali Takibi</span><span class="en-only">Parent Mood Tracking</span></div>
+          <div style="font-size:.72rem;color:var(--mid)"><span class="tr-only">Yargılamadan farkındalık</span><span class="en-only">Awareness without judgment</span></div>
+        </div>
+        <span class="fmod-tag" style="background:var(--sage-bg);color:var(--sage-dark)">2027</span>
+      </div>
+      <div class="fmod-body">
+        <p><span class="tr-only">Günlük tek bir emoji girişi. Zaman içinde bir trend grafiğine dönüşür. Platform ne zaman ne önerecek — mola mı? Nefes egzersizi mi? Uzman görüşmesi mi? — karar vermek için bağlamı kullanır.</span><span class="en-only">One emoji entry per day. Over time it becomes a trend chart. The platform uses the context to decide when to suggest what — a break? A breathing exercise? An expert consultation?</span></p>
+        <ul>
+          <li><span class="tr-only">Bir emoji → ruh hali seçildi. İkinci adım yok, zorlama yok.</span><span class="en-only">One emoji → mood logged. No second step, no pressure.</span></li>
+          <li><span class="tr-only">Haftalık & aylık trend grafiği</span><span class="en-only">Weekly & monthly trend chart</span></li>
+          <li><span class="tr-only">Örüntü tespiti: "Bu ay Çarşamba akşamları zor geçiyor"</span><span class="en-only">Pattern detection: "Wednesday evenings have been hard this month"</span></li>
+          <li><span class="tr-only">Yalnızca ebeveyn görebilir — eşine veya uzmana görünmez</span><span class="en-only">Only the parent can see — invisible to partner or expert</span></li>
+          <li><span class="tr-only">Bildirimleri 7 güne kadar susturabilir</span><span class="en-only">Can mute prompts for up to 7 days</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /tell your story -->
+
+<!-- ════════════════ COMMUNITY PODS ════════════════ -->
+<div class="sec fi">
+  <h3><span class="tr-only">👥 Topluluk Pod'ları</span><span class="en-only">👥 Community Pods</span></h3>
+  <p style="font-size:.87rem;color:var(--mid);max-width:660px;margin-bottom:16px"><span class="tr-only">Küçük, güvenli, moderasyonlu gruplar. Sosyal medyanın performatif bağlantısına karşı gerçek bir alternatif. 8–12 ebeveyn, ortak konu veya deneyim etrafında organize.</span><span class="en-only">Small, safe, moderated groups. A genuine alternative to social media's performative connection. 8–12 parents, organised around a shared theme or experience.</span></p>
+  <div class="g g3" style="gap:10px">
+    <div class="card ct">
+      <h4><span class="tr-only">Pod Türleri</span><span class="en-only">Pod Types</span></h4>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">🧠 <span class="tr-only">Nöroçeşitlilik ailesi desteği</span><span class="en-only">Neurodiversity family support</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">💻 <span class="tr-only">Çalışan anneler</span><span class="en-only">Working mothers</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">🌍 <span class="tr-only">Expat aileler (İngilizce)</span><span class="en-only">Expat families (English)</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">👶 <span class="tr-only">Yeni ebeveynler</span><span class="en-only">New parents</span></li>
+        <li style="font-size:.79rem;padding:3px 0;color:var(--mid)">📚 <span class="tr-only">Atölye temalı (STEM, sanat, dil)</span><span class="en-only">Workshop-themed (STEM, art, language)</span></li>
+      </ul>
+    </div>
+    <div class="card ct-c">
+      <h4><span class="tr-only">Pod Özellikleri</span><span class="en-only">Pod Features</span></h4>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">8–12 ebeveyn (büyük grup değil)</span><span class="en-only">8–12 parents (not a large group)</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">G&B tarafından moderasyon</span><span class="en-only">Moderated by G&B</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">Anonim katılım seçeneği</span><span class="en-only">Anonymous participation option</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">Uzman danışmanlığa yönlendirme</span><span class="en-only">Pathway to expert consultation</span></li>
+        <li style="font-size:.79rem;padding:3px 0;color:var(--mid)">✓ <span class="tr-only">Topluluk kuralları zorunluluğu</span><span class="en-only">Community guidelines enforcement</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4><span class="tr-only">🩺 Uzman Danışmanlık Yolu</span><span class="en-only">🩺 Expert Escalation Path</span></h4>
+      <p style="font-size:.79rem;color:var(--mid);margin-bottom:8px"><span class="tr-only">Ebeveyn pod'da veya ruh hali takibinde zorluk işareti verirse — tamamen kendi iradesiyle — bir uzman danışmanlığı önerilir. Psödonimlize edilmiş: uzman PII görmez.</span><span class="en-only">If a parent signals struggle in a pod or through mood tracking — entirely at their own discretion — an expert consultation is offered. Pseudonymised: the expert does not see PII.</span></p>
+      <div style="font-size:.76rem;color:var(--muted);background:var(--cream);padding:8px;border-radius:8px"><span class="tr-only">Uzman danışmanlık her zaman insan desteklidir. Akıllı rehberlik sistemi yalnızca ebeveynin doğru kaynağa ulaşmasını kolaylaştırır — karar her zaman ebeveyne aittir.</span><span class="en-only">Expert consultation is always human-backed. The smart guidance system only helps the parent reach the right resource — the decision always belongs to the parent.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ PHYSICAL → DIGITAL LOOP ════════════════ -->
+<div class="sec fi">
+  <h3><span class="tr-only">Fiziksel → Dijital Döngü</span><span class="en-only">Physical → Digital Loop</span></h3>
+  <p style="font-size:.87rem;color:var(--mid);max-width:640px;margin-bottom:14px"><span class="tr-only">Family OS yalnız çalışmaz. Fiziksel mekânımız güveni inşa eder — Family OS o güveni günlük hayata taşır. Her atölye, her kafe ziyareti, her oyun seansı dijital bir dokunuş noktası yaratır.</span><span class="en-only">Family OS does not work alone. Our physical space builds trust — Family OS carries that trust into daily life. Every workshop, every café visit, every play session creates a digital touch point.</span></p>
+  <div class="loop">
+    <div class="loop-item"><span class="tr-only">🏠 Atölye katılımı</span><span class="en-only">🏠 Workshop attendance</span></div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-item"><span class="tr-only">📱 Uygulama katılımı</span><span class="en-only">📱 App engagement</span></div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-item"><span class="tr-only">👥 Topluluk bağlantısı</span><span class="en-only">👥 Community connection</span></div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-item"><span class="tr-only">😊 Ruh hali & kilometre taşı</span><span class="en-only">😊 Mood & milestone</span></div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-item"><span class="tr-only">🌸 Sadakat & yenileme</span><span class="en-only">🌸 Loyalty & renewal</span></div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-item"><span class="tr-only">📚 Daha fazla atölye</span><span class="en-only">📚 More workshops</span></div>
+  </div>
+  <div class="g g3" style="gap:10px;margin-top:12px">
+    <div class="card" style="padding:12px">
+      <strong style="font-size:.82rem"><span class="tr-only">Atölye → Anı</span><span class="en-only">Workshop → Memory</span></strong>
+      <p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Atölje biter → "Bugünkü STEM projesini yükle!" bildirimi. Çocuğun eseri günlüğe eklenir, Bloom Points kazanılır.</span><span class="en-only">Workshop ends → "Upload today's STEM project!" notification. Child's creation added to journal, Bloom Points earned.</span></p>
+    </div>
+    <div class="card" style="padding:12px">
+      <strong style="font-size:.82rem"><span class="tr-only">Kafe → Nokta</span><span class="en-only">Café → Points</span></strong>
+      <p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Her kafe harcaması Bloom Points kazandırır. Puanlar bir sonraki rezervasyona veya atölye kaydına uygulanır.</span><span class="en-only">Every café spend earns Bloom Points. Points apply to the next booking or workshop enrolment.</span></p>
+    </div>
+    <div class="card" style="padding:12px">
+      <strong style="font-size:.82rem"><span class="tr-only">Mekân → Güven</span><span class="en-only">Space → Trust</span></strong>
+      <p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Fiziksel mekânda inşa edilen güven, dijital platforma transfer olur. Sadece uygulama olan rakipler bu katmana sahip değil.</span><span class="en-only">Trust built in the physical space transfers to the digital platform. Competitors who are app-only don't have this layer.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ PSYCHOLOGICAL SUPPORT SYSTEM ════════════════ -->
+<div class="sec fi">
+  <h3><span class="tr-only">🧠 Psikolojik Destek Sistemi — Mimari</span><span class="en-only">🧠 Psychological Support System — Architecture</span></h3>
+  <p style="font-size:.87rem;color:var(--mid);max-width:660px;margin-bottom:16px;line-height:1.65"><span class="tr-only">Family OS'un en hassas ve en stratejik katmanı. Ebeveynlere genel bilgi ile kişiselleştirilmiş uzman desteği arasında özenle tasarlanmış bir köprü sunar. Sistem üç katmanlıdır ve her katman bir sonrakini tetikler. Tüm katmanlarda insan kararı egemendir.</span><span class="en-only">The most sensitive and most strategic layer of Family OS. Offers parents a carefully designed bridge between general information and personalised expert support. The system has three layers, each triggering the next. Human decision is sovereign at every layer.</span></p>
+
+  <!-- LAYER 1: KNOWLEDGE BASE -->
+  <div class="card ct" style="margin-bottom:12px">
+    <h4 style="margin-bottom:10px">📚 <span class="tr-only">Katman 1 — Psikoloji Bilgi Merkezi</span><span class="en-only">Layer 1 — Psychology Knowledge Centre</span></h4>
+    <div class="g g3" style="gap:10px">
+      <div style="background:var(--cream);border-radius:8px;padding:12px">
+        <strong style="font-size:.81rem;display:block;margin-bottom:4px">SSS / FAQ</strong>
+        <p style="font-size:.76rem;color:var(--mid);margin:0"><span class="tr-only">En sık sorulan ebeveynlik ve çocuk gelişimi soruları uzman ekibi tarafından yanıtlanmış. Aylık derleme ve güncelleme. Canlı, büyüyen belge.</span><span class="en-only">Most frequently asked parenting and child development questions answered by the expert team. Monthly curation and update. A living, growing document.</span></p>
+      </div>
+      <div style="background:var(--cream);border-radius:8px;padding:12px">
+        <strong style="font-size:.81rem;display:block;margin-bottom:4px"><span class="tr-only">Seçilmiş & Sadeleştirilmiş Yayınlar</span><span class="en-only">Selected & Simplified Publications</span></strong>
+        <p style="font-size:.76rem;color:var(--mid);margin:0"><span class="tr-only">Güvenilir akademik ve klinik yayınlar uzmanlar tarafından gözden geçirilmiş ve ebeveyn dostu dile çevrilmiş. Görsel özet + tam metin seçeneği.</span><span class="en-only">Trusted academic and clinical publications reviewed by experts and translated into parent-friendly language. Visual summary + full text option.</span></p>
+      </div>
+      <div style="background:var(--cream);border-radius:8px;padding:12px">
+        <strong style="font-size:.81rem;display:block;margin-bottom:4px">Blog</strong>
+        <p style="font-size:.76rem;color:var(--mid);margin:0"><span class="tr-only">Uzman ve topluluk blog yazıları. Aylık uzman derlemesi: anonimleştirilmiş gerçek ebeveyn sorgularından genelleştirilmiş içerik üretir.</span><span class="en-only">Expert and community blog posts. Monthly expert curation: generalised content produced from anonymised real parent queries.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 2: SMART GUIDANCE -->
+  <div class="card" style="margin-bottom:12px;border-left:4px solid var(--sage)">
+    <h4 style="margin-bottom:8px">🎯 <span class="tr-only">Katman 2 — Akıllı Rehberlik Sistemi</span><span class="en-only">Layer 2 — Smart Guidance System</span></h4>
+    <p style="font-size:.8rem;color:var(--mid);margin-bottom:10px"><span class="tr-only">Ebeveyn bir sorgu gönderdiğinde sistem önce bilgi tabanında arar. Bağlama duyarlı, konu sınıflandırmalı, içerik eşleştirmeli bir triage katmanı. Hassas konularda yanlış tavsiye vermemek için özel içerik koruma kurallarıyla çalışır — klinik ve kriz sorguları otomatik olarak uzman ekibine yönlendirilir.</span><span class="en-only">When a parent submits a query, the system first searches the knowledge base. A context-aware, topic-classified, content-matching triage layer. Operates with specific content guardrails to avoid incorrect advice on sensitive topics — clinical and crisis queries are automatically routed to the expert team.</span></p>
+    <div class="g g3" style="gap:8px">
+      <div class="card ct" style="padding:10px">
+        <strong style="font-size:.78rem"><span class="tr-only">Konu sınıflandırma</span><span class="en-only">Topic classification</span></strong>
+        <p style="font-size:.73rem;color:var(--mid);margin-top:3px"><span class="tr-only">Sorgu kategorize edilir: gelişimsel, davranışsal, duygusal, ilişkisel, klinik</span><span class="en-only">Query categorised: developmental, behavioural, emotional, relational, clinical</span></p>
+      </div>
+      <div class="card ct-c" style="padding:10px">
+        <strong style="font-size:.78rem"><span class="tr-only">İçerik koruma kuralları</span><span class="en-only">Content guardrails</span></strong>
+        <p style="font-size:.73rem;color:var(--mid);margin-top:3px"><span class="tr-only">Sistem tanı, tedavi veya kriz müdahalesine girmez. Bu konular direkt uzman yönlendirmesi alır</span><span class="en-only">System doesn't enter diagnosis, treatment or crisis intervention. These topics receive direct expert routing</span></p>
+      </div>
+      <div class="card ct-g" style="padding:10px">
+        <strong style="font-size:.78rem"><span class="tr-only">Kriz yönlendirmesi</span><span class="en-only">Crisis routing</span></strong>
+        <p style="font-size:.73rem;color:var(--mid);margin-top:3px"><span class="tr-only">Acil veya kriz sinyalleri tespit edilirse: yardım hattı ve direkt uzman yönlendirmesi</span><span class="en-only">If urgent or crisis signals detected: helpline and direct expert routing</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 3: EXPERT QUERY FLOW -->
+  <div class="card" style="border-left:4px solid var(--coral)">
+    <h4 style="margin-bottom:10px">✉️ <span class="tr-only">Katman 3 — Uzman Sorgu Akışı & Yanıt Protokolü</span><span class="en-only">Layer 3 — Expert Query Flow & Response Protocol</span></h4>
+    <p style="font-size:.8rem;color:var(--mid);margin-bottom:12px"><span class="tr-only">Akıllı rehberlik yetmediğinde ebeveyn sorguyu psikoloji uzmanı ekibine iletebilir. Anonim gönderilebilir. Uzmanın üç yanıt seçeneği vardır:</span><span class="en-only">When smart guidance isn't enough, the parent can forward the query to the psychology expert team. Can be submitted anonymously. The expert has three response options:</span></p>
+    <div class="g g3" style="gap:10px">
+      <div style="background:rgba(122,158,126,.07);border:1px solid var(--sage-light);border-radius:10px;padding:12px">
+        <strong style="font-size:.82rem;color:var(--sage-dark);display:block;margin-bottom:4px">✅ <span class="tr-only">Doğrudan yanıt</span><span class="en-only">Direct response</span></strong>
+        <p style="font-size:.76rem;color:var(--mid);margin:0"><span class="tr-only">Uzman kabul eder ve kısa, pratik yanıt yazar. Soru daha sonra anonimleştirilerek SSS/blog'a katkı sağlar.</span><span class="en-only">Expert accepts and writes a short, practical response. Question later anonymised and contributes to FAQ/blog.</span></p>
+      </div>
+      <div style="background:rgba(212,168,83,.07);border:1px solid var(--gold-bg);border-radius:10px;padding:12px">
+        <strong style="font-size:.82rem;color:#8B6000;display:block;margin-bottom:4px">↗️ <span class="tr-only">Yönlendirme ile reddetme</span><span class="en-only">Reject with referral</span></strong>
+        <p style="font-size:.76rem;color:var(--mid);margin:0"><span class="tr-only">Kapsam dışı veya farklı uzmanlık gerektiriyorsa: başka G&B uzmanı, harici klinik, yardım hattı veya Bilgi Merkezi içeriğine yönlendirilir.</span><span class="en-only">If out of scope or requires different specialism: referred to another G&B expert, external clinic, helpline, or Knowledge Centre content.</span></p>
+      </div>
+      <div style="background:rgba(200,100,100,.06);border:1px solid #ffd0d0;border-radius:10px;padding:12px">
+        <strong style="font-size:.82rem;color:#c0392b;display:block;margin-bottom:4px">📅 <span class="tr-only">Bireysel seans önerisi</span><span class="en-only">Individual session recommendation</span></strong>
+        <p style="font-size:.76rem;color:var(--mid);margin:0"><span class="tr-only">1:1 görüşme gerektiriyorsa uzman kendi pratisyenliğinde bireysel seans önerir. G&B'de değil, uzmanın kendi ortamında.</span><span class="en-only">If 1:1 meeting required, expert recommends individual session at their own practice. Not at G&B — at the expert's own premises.</span></p>
+      </div>
+    </div>
+
+    <!-- KNOWLEDGE LOOP -->
+    <div style="margin-top:14px;padding:12px;background:var(--cream);border-radius:8px">
+      <strong style="font-size:.82rem;display:block;margin-bottom:4px"><span class="tr-only">📚 Bilgi döngüsü: aylık derleme</span><span class="en-only">📚 Knowledge loop: monthly curation</span></strong>
+      <p style="font-size:.77rem;color:var(--mid);margin:0"><span class="tr-only">Her ay uzman yanıtlanan sorguları gözden geçirir. Kişisel bilgi içermeyen, genelleştirilebilir soru-yanıt çiftleri anonimleştirilerek SSS güncellemelerine veya blog yazılarına dönüştürülür. Sistem kendini besler ve her ebeveynin sorusu bir sonrakine yardım eder.</span><span class="en-only">Every month the expert reviews answered queries. Question-answer pairs that can be generalised without personal information are anonymised and turned into FAQ updates or blog posts. The system feeds itself — every parent's question helps the next.</span></p>
+    </div>
+
+    <!-- PRIVACY NOTE -->
+    <div style="margin-top:10px;padding:10px 12px;border:1px solid var(--border);border-radius:8px">
+      <strong style="font-size:.78rem;display:block;margin-bottom:3px"><span class="tr-only">🔒 Gizlilik mimarisi</span><span class="en-only">🔒 Privacy architecture</span></strong>
+      <p style="font-size:.74rem;color:var(--mid);margin:0"><span class="tr-only">Anonim sorgu seçeneği · Uzman psödonimlize içerik görür · Sorgular üçüncü tarafla paylaşılmaz · KVKK uyumlu · Akıllı rehberlik katmanı PII'ye erişmez</span><span class="en-only">Anonymous query option · Expert sees pseudonymised content · Queries never shared with third parties · KVKK compliant · Smart guidance layer has no access to PII</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ SOCIAL LAB CONNECTION ════════════════ -->
+<div class="sec fi">
+  <h3><span class="tr-only">🔬 Social Lab — Family OS'un Fiziksel Kanıt Motoru</span><span class="en-only">🔬 Social Lab — Family OS's Physical Evidence Engine</span></h3>
+  <div class="g g2" style="gap:14px;align-items:flex-start">
+    <div>
+      <p style="font-size:.86rem;color:var(--mid);line-height:1.7"><span class="tr-only">Social Lab, Üsküdar Üniversitesi Psikoloji Bölümü ile ortaklıkta Kadıköy arka atölye odasında yürütülen araştırma ve topluluk deney alanıdır. Family OS için üç kritik işlev yerine getirir:</span><span class="en-only">The Social Lab is a research and community experimentation space running in the Kadıköy back workshop room, in partnership with Üsküdar University's Psychology Department. It serves three critical functions for Family OS:</span></p>
+      <ul style="list-style:none;padding:0;margin:10px 0 0;font-size:.8rem">
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);color:var(--mid)">🔬 <span class="tr-only">Çocuk gelişimi ve ebeveyn-çocuk etkileşimi araştırması → Family OS araçlarını kanıtla besler</span><span class="en-only">Child development and parent-child interaction research → feeds Family OS tools with evidence</span></li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);color:var(--mid)">🧪 <span class="tr-only">Yeni bağlantı ve düzenlenme formatları deneme → işe yarayanlar atölye takviminde ölçeklenir</span><span class="en-only">Testing new connection and regulation formats → what works scales into the workshop calendar</span></li>
+        <li style="padding:5px 0;color:var(--mid)">📚 <span class="tr-only">Psikoloji Bilgi Merkezi içeriğini besler → uzman tarafından onaylanmış, gerçek bağlam testi edilmiş materyal</span><span class="en-only">Feeds the Psychology Knowledge Centre content → expert-approved, real-context-tested material</span></li>
+      </ul>
+    </div>
+    <div class="card ct" style="padding:14px">
+      <strong style="font-size:.84rem;display:block;margin-bottom:8px"><span class="tr-only">Social Lab → Family OS döngüsü</span><span class="en-only">Social Lab → Family OS loop</span></strong>
+      <div style="font-size:.76rem;color:var(--mid);display:flex;flex-direction:column;gap:6px">
+        <div style="background:var(--cream);padding:6px 10px;border-radius:6px"><strong style="color:var(--ink)"><span class="tr-only">Gözlem</span><span class="en-only">Observation</span></strong> → <span class="tr-only">ailelerle gerçek seanslar</span><span class="en-only">real sessions with families</span></div>
+        <div style="text-align:center;color:var(--sage);font-weight:700">↓</div>
+        <div style="background:var(--cream);padding:6px 10px;border-radius:6px"><strong style="color:var(--ink)"><span class="tr-only">Analiz</span><span class="en-only">Analysis</span></strong> → <span class="tr-only">üniversite araştırmacıları bulgular çıkarır</span><span class="en-only">university researchers extract findings</span></div>
+        <div style="text-align:center;color:var(--sage);font-weight:700">↓</div>
+        <div style="background:var(--cream);padding:6px 10px;border-radius:6px"><strong style="color:var(--ink)"><span class="tr-only">Uygulama</span><span class="en-only">Application</span></strong> → <span class="tr-only">Family OS araçları ve G&B programı güncellenir</span><span class="en-only">Family OS tools and G&B programme updated</span></div>
+      </div>
+      <a href="../social-lab.html" style="display:block;margin-top:10px;font-size:.78rem;color:var(--sage);font-weight:600"><span class="tr-only">Social Lab hakkında daha fazla →</span><span class="en-only">More about the Social Lab →</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ MARKETPLACE 2027+ ════════════════ -->
+<div class="sec fi">
+  <h3><span class="tr-only">🛒 Aile Hizmetleri Pazaryeri <span style="font-size:.7rem;font-weight:600;color:var(--gold);vertical-align:middle">2027+</span></span><span class="en-only">🛒 Family Services Marketplace <span style="font-size:.7rem;font-weight:600;color:var(--gold);vertical-align:middle">2027+</span></span></h3>
+  <p style="font-size:.87rem;color:var(--mid);max-width:640px;margin-bottom:14px"><span class="tr-only">Family OS'un güven katmanı bir kez kurulunca, dışarıdaki hizmetleri de platformda birleştirebiliriz. Özel ders, spor, sanat okulu, kreş, okul başvurusu — tümü G&B doğrulama filtresinden geçmiş, tek rezervasyon akışıyla.</span><span class="en-only">Once Family OS's trust layer is established, we can bring external services onto the platform too. Tutoring, sports, arts school, nursery, school application — all passed through G&B's verification filter, with a single booking flow.</span></p>
+  <div class="g g2" style="gap:10px">
+    <div class="card ct" style="padding:13px"><strong style="font-size:.83rem">📚 <span class="tr-only">Özel Ders & Eğitim</span><span class="en-only">Tutoring & Education</span></strong><p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Matematik, fen, dil, müzik — G&B güven filtresinden geçmiş.</span><span class="en-only">Maths, science, language, music — verified through G&B trust filter.</span></p></div>
+    <div class="card ct-c" style="padding:13px"><strong style="font-size:.83rem">🏃 <span class="tr-only">Spor & Hareket</span><span class="en-only">Sports & Movement</span></strong><p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Jimnastik, yüzme, dans, futbol — online rezervasyon, aile değerlendirmeleri.</span><span class="en-only">Gymnastics, swimming, dance, football — online booking, family reviews.</span></p></div>
+    <div class="card ct-g" style="padding:13px"><strong style="font-size:.83rem">🎨 <span class="tr-only">Sanat, Müzik & Yaratıcılık</span><span class="en-only">Arts, Music & Creativity</span></strong><p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Resim atölyeleri, müzik okulları, tiyatro, dans stüdyoları.</span><span class="en-only">Painting studios, music schools, theatre, dance studios.</span></p></div>
+    <div class="card" style="padding:13px"><strong style="font-size:.83rem">🏫 <span class="tr-only">Okul & Kreş Başvurusu</span><span class="en-only">School & Nursery Enrolment</span></strong><p style="font-size:.76rem;color:var(--mid);margin-top:4px"><span class="tr-only">Özel ilkokullar, anaokulları ve kreşler için bilgi, karşılaştırma ve başvuru desteği.</span><span class="en-only">Information, comparison and application support for private primary schools, nurseries and kindergartens.</span></p></div>
+  </div>
+  <p style="font-size:.76rem;color:var(--muted);margin-top:10px"><span class="tr-only">Pazaryeri kapsamı 2027 lansmanıyla netleşecektir. Erken ortak listesi açık — <a href="partners.html#marketplace" style="color:var(--sage)">detaylar için →</a></span><span class="en-only">Marketplace scope will be confirmed at 2027 launch. Early partner list is open — <a href="partners.html#marketplace" style="color:var(--sage)">details →</a></span></p>
+</div>
+
+<!-- ════════════════ PRIVACY ════════════════ -->
+<div class="sec fi">
+  <h3><span class="tr-only">🔒 Gizlilik & KVKK</span><span class="en-only">🔒 Privacy & KVKK</span></h3>
+  <div class="g g2" style="gap:12px">
+    <div class="card ct">
+      <h4><span class="tr-only">2027 Lansmanında</span><span class="en-only">At 2027 Launch</span></h4>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">SSL/TLS şifreleme (transit)</span><span class="en-only">SSL/TLS encryption (in transit)</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">AES-256 şifreleme (depolama)</span><span class="en-only">AES-256 encryption (at rest)</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">Uzman görüşmeleri psödonimlize</span><span class="en-only">Expert consultations pseudonymised</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">✓ <span class="tr-only">Rol bazlı erişim (personel ruh hali verisini göremez)</span><span class="en-only">Role-based access (staff cannot see mood data)</span></li>
+        <li style="font-size:.79rem;padding:3px 0;color:var(--mid)">✓ <span class="tr-only">Üçüncü tarafla asla satılmaz</span><span class="en-only">Never sold to third parties</span></li>
+      </ul>
+    </div>
+    <div class="card ct-g">
+      <h4><span class="tr-only">2028+ Hedef</span><span class="en-only">2028+ Target</span></h4>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">◎ <span class="tr-only">Uçtan uca şifreleme (ruh hali & anılar)</span><span class="en-only">End-to-end encryption (mood & memories)</span></li>
+        <li style="font-size:.79rem;padding:3px 0;border-bottom:1px solid var(--border);color:var(--mid)">◎ <span class="tr-only">İstemci tarafı şifreleme (sunucu bile göremez)</span><span class="en-only">Client-side encryption (server cannot read either)</span></li>
+        <li style="font-size:.79rem;padding:3px 0;color:var(--mid)">◎ <span class="tr-only">Tam sıfır-bilgi kasası mimarisi</span><span class="en-only">Full zero-knowledge vault architecture</span></li>
+      </ul>
+      <p style="font-size:.73rem;color:var(--muted);margin-top:8px"><span class="tr-only">Yıl 1'de güvenilir ve yasal. Yıl 2'de gelir bunu desteklediğinde kriptografik mükemmelliğe geçiş.</span><span class="en-only">Year 1: reliable and legally compliant. Year 2: transition to cryptographic excellence when revenue supports it.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ ROADMAP ════════════════ -->
+<div class="sec fi">
+  <h3><span class="tr-only">Aşamalı Yol Haritası</span><span class="en-only">Phased Roadmap</span></h3>
+  <p style="font-size:.86rem;color:var(--mid);max-width:600px;margin-bottom:16px"><span class="tr-only">Her özelliği önce kanıtla, sonra katman ekle. Müşterilere karşı dürüst: henüz yapamadığımız şeyi vaat etmiyoruz.</span><span class="en-only">Prove each feature first, then add layers. Honest with customers: we don't promise what we can't yet deliver.</span></p>
+  <div class="card ct" style="padding:20px">
+
+    <div class="phase-row">
+      <div><div class="phase-num">1</div></div>
+      <div class="phase-content">
+        <div class="phase-year">2026 — <span class="tr-only">Fiziksel Lansman</span><span class="en-only">Physical Launch</span></div>
+        <strong><span class="tr-only">Mekân, altyapı ve temel rezervasyon</span><span class="en-only">Space, infrastructure and core booking</span></strong>
+        <p><span class="tr-only">Kadıköy açılışı (15 Şubat 2026). Airtable + Softr + PayTR MVP. Manuel rezervasyon akışları. Bloom Points başlangıç versiyonu. Uzman komisyon takibi. Güveni fiziksel mekânda in-oluştur.</span><span class="en-only">Kadıköy opening (February 15 2026). Airtable + Softr + PayTR MVP. Manual booking flows. Bloom Points initial version. Expert commission tracking. Build trust in the physical space first.</span></p>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div><div class="phase-num">2</div></div>
+      <div class="phase-content">
+        <div class="phase-year">2026 Mart–Nisan · <span class="tr-only">Uzman & Ortak Altyapısı</span><span class="en-only">Expert & Partner Infrastructure</span></div>
+        <strong><span class="tr-only">Uzman portalı, ortak listelemesi, inceleme sistemi</span><span class="en-only">Expert portal, partner listing, review system</span></strong>
+        <p><span class="tr-only">Uzman başvuru akışı. İlk ortak (pilot). Rezervasyon derecelendirme sistemi. Kalite mekanizmaları önceden yürürlükte.</span><span class="en-only">Expert application flow. First partner pilot. Booking rating system. Quality mechanisms in place early.</span></p>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div><div class="phase-num">3</div></div>
+      <div class="phase-content">
+        <div class="phase-year">2026 Mayıs–Haziran · <span class="tr-only">Family OS Temel</span><span class="en-only">Family OS Core</span></div>
+        <strong><span class="tr-only">Ruh hali takibi, kilometre taşı günlüğü, nazik uyarılar</span><span class="en-only">Mood tracking, milestone journal, gentle prompts</span></strong>
+        <p><span class="tr-only">Duygusal OS'un ilk versiyonu. Temel gizlilik kontrolleri. Aile günlüğü başlıyor. Ortak planlayıcı beta. Atölye sonrası otomatik uyarılar aktif.</span><span class="en-only">First version of emotional OS. Basic privacy controls. Family journal starts. Shared planner beta. Post-workshop auto-prompts active.</span></p>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div><div class="phase-num">4</div></div>
+      <div class="phase-content">
+        <div class="phase-year">2026 Haziran–Temmuz · <span class="tr-only">Pod'lar & Topluluk</span><span class="en-only">Pods & Community</span></div>
+        <strong><span class="tr-only">Moderasyonlu pod'lar, uzman danışmanlık yolu</span><span class="en-only">Moderated pods, expert escalation pathway</span></strong>
+        <p><span class="tr-only">Tek pilot pod ile başla — ilk ayda bizzat modere et. Protokolleri belgeleyip uygula. 3–5 pod'a ölçeklendir. Uzman danışmanlık akışını başlat.</span><span class="en-only">Start with a single pilot pod — moderate personally in the first month. Document and refine protocols. Scale to 3–5 pods. Launch expert consultation flow.</span></p>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div><div class="phase-num">5</div></div>
+      <div class="phase-content">
+        <div class="phase-year">2027 Ocak · <span class="tr-only">Family OS Tam Lansman</span><span class="en-only">Family OS Full Launch</span></div>
+        <strong><span class="tr-only">Dedicated uygulama, gelişmiş planlayıcı, çocuk gelişim takibi, pazaryeri başlangıcı</span><span class="en-only">Dedicated app, advanced planner, child development tracker, marketplace launch</span></strong>
+        <p><span class="tr-only">Bireysel + ortak planlayıcılar, görev atama, çocuk profilleri, ilk pazaryeri kategorileri (özel ders, spor, sanat). Üç taraflı platform olgunluğa ulaşır.</span><span class="en-only">Individual + shared planners, task assignment, child profiles, first marketplace categories (tutoring, sports, arts). Three-sided platform reaches maturity.</span></p>
+      </div>
+    </div>
+
+    <div class="phase-row" style="margin-bottom:0">
+      <div><div class="phase-num" style="background:var(--gold)">6</div></div>
+      <div class="phase-content">
+        <div class="phase-year" style="color:var(--gold)">2028+ · <span class="tr-only">Ölçekleme & Kriptografik Mükemmellik</span><span class="en-only">Scale & Cryptographic Excellence</span></div>
+        <strong><span class="tr-only">Türkiye geneli, uluslararasılaşma, sıfır-bilgi şifreleme, Lyra AI asistanı</span><span class="en-only">Turkey-wide, internationalisation, zero-knowledge encryption, Lyra AI assistant</span></strong>
+        <p><span class="tr-only">Yeni şubeler. Doğu Avrupa & Kanada pilot. Pazaryeri genişlemesi: sağlık, okul kaydı. Uçtan uca şifreleme. "Lyra" yapay zeka asistan pilot.</span><span class="en-only">New branches. Eastern Europe & Canada pilot. Marketplace expansion: health, school enrolment. End-to-end encryption. "Lyra" AI assistant pilot.</span></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════ TECH STACK ════════════════ -->
+<div class="sec fi">
+  <h3><span class="tr-only">Teknik Altyapı</span><span class="en-only">Technical Infrastructure</span></h3>
+  <p style="font-size:.86rem;color:var(--mid);max-width:620px;margin-bottom:14px"><span class="tr-only">No-code ağırlıklı yapı. Türkiye uyumluluğu önce. Güvenilirlik, kesim kenar özelliklerden önce gelir.</span><span class="en-only">No-code-first architecture. Turkey compliance first. Reliability before cutting-edge features.</span></p>
+  <div class="g g4" style="gap:10px">
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:1.3rem;margin-bottom:4px">🗄️</div><strong style="font-size:.85rem">Airtable</strong><p style="font-size:.76rem;color:var(--mid);margin-top:3px"><span class="tr-only">30+ tablo. Aileler, çocuklar, atölyeler, Bloom Points, uzman komisyonları, planlayıcı.</span><span class="en-only">30+ tables. Families, children, workshops, Bloom Points, expert commissions, planner.</span></p></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:1.3rem;margin-bottom:4px">🖥️</div><strong style="font-size:.85rem">Softr</strong><p style="font-size:.76rem;color:var(--mid);margin-top:3px"><span class="tr-only">Aile portalı, uzman portalı, personel portalı. Rezervasyon akışları ve dashboard'lar.</span><span class="en-only">Family portal, expert portal, staff portal. Booking flows and dashboards.</span></p></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:1.3rem;margin-bottom:4px">⚙️</div><strong style="font-size:.85rem">Make.com</strong><p style="font-size:.76rem;color:var(--mid);margin-top:3px"><span class="tr-only">Otomasyon: onay e-postaları, komisyon hesabı, Bloom Points, atölye sonrası uyarılar.</span><span class="en-only">Automation: confirmation emails, commission calculation, Bloom Points, post-workshop prompts.</span></p></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:1.3rem;margin-bottom:4px">💳</div><strong style="font-size:.85rem">PayTR</strong><p style="font-size:.76rem;color:var(--mid);margin-top:3px"><span class="tr-only">Online + SoftPOS ödemeleri. e-Fatura (Paraşüt). PCI-DSS uyumlu. 3D Secure.</span><span class="en-only">Online + SoftPOS payments. e-Invoice (Paraşüt). PCI-DSS compliant. 3D Secure.</span></p></div>
+  </div>
+</div>
+
+<div class="sec fi">
+  <div class="highlight">
+    <h4><span class="tr-only">Family OS hakkında daha fazla bilgi</span><span class="en-only">Learn more about Family OS</span></h4>
+    <p style="font-size:.86rem;color:var(--mid)"><span class="tr-only">Erken erişim listesine katılmak, yatırımcı soruları veya teknik mimari detayları için bize ulaşın.</span><span class="en-only">To join the early access list, for investor questions or technical architecture details, get in touch.</span></p>
+    <div class="btns" style="margin-top:12px">
+      <a class="btn btn-p" href="../contact.html"><span class="tr-only">Erken Erişim Listesi</span><span class="en-only">Early Access List</span></a>
+      <a class="btn" href="model.html"><span class="tr-only">İş Modeli →</span><span class="en-only">Business Model →</span></a>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">Giggles &amp; Bloom 🌸</div><div class="footer-note"><span class="tr-only">Bu bölüm kurumsal bilgilendirme amaçlıdır.</span><span class="en-only">This section is for corporate information only.</span></div></div>
+    <div>
+      <div class="footer-links"><a href="governance.html#data"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a><a href="../index.html"><span class="tr-only">Kamu Sitesi</span><span class="en-only">Public Site</span></a></div>
+      <div class="footer-meta">© <span id="yr"></span> Giggles &amp; Bloom · Kadıköy &amp; Kurtköy, Istanbul</div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

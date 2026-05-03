@@ -464,14 +464,38 @@ footer{
 /* ══════════════════════════════
    LANGUAGE TOGGLE
 ══════════════════════════════ */
-[lang='tr'] .en-only,.en-only{display:none}
-[lang='en'] .en-only{display:inline}
-[lang='en'] .tr-only{display:none}
-.tr-only{display:inline}
-[lang='tr'] .en-only-b,[lang='tr'] .en-only-flex{display:none!important}
-[lang='en'] .tr-only-b,[lang='en'] .tr-only-flex{display:none!important}
-[lang='en'] .en-only-b{display:block!important}
-[lang='en'] .en-only-flex{display:flex!important}
+.en-only,
+.en-only-b,
+.en-only-flex,
+[lang='en'] .tr-only,
+[lang='en'] .tr-only-b,
+[lang='en'] .tr-only-flex {
+  display: none !important;
+}
+
+.tr-only {
+  display: inline;
+}
+
+.tr-only-b {
+  display: block;
+}
+
+.tr-only-flex {
+  display: flex;
+}
+
+[lang='en'] .en-only {
+  display: inline !important;
+}
+
+[lang='en'] .en-only-b {
+  display: block !important;
+}
+
+[lang='en'] .en-only-flex {
+  display: flex !important;
+}
 
 /* ══════════════════════════════
    RESPONSIVE
@@ -928,10 +952,7 @@ p:last-child {
   margin-bottom: 0;
 }
 
-/* Better bilingual text handling */
-.en-only, .tr-only {
-  display: inline;
-}
+/* Bilingual visibility is controlled in the language toggle section above. */
 
 /* Improved link styling */
 a {

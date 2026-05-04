@@ -546,6 +546,14 @@ footer{
   background:var(--white);padding:24px;
   box-shadow:var(--shadow-lg);overflow-y:auto;
 }
+.nav-open{overflow:hidden}
+.mobile-nav-brand{
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  padding:6px 42px 18px 4px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:12px;
+}
 .mobile-nav-close{
   position:absolute;top:16px;right:16px;
   background:var(--cream-dark);border:none;border-radius:8px;
@@ -560,6 +568,14 @@ footer{
 }
 .mobile-nav-inner .nav-links a:hover{background:var(--sage-bg)}
 .mobile-nav-inner .nav-links a.active{color:var(--sage-dark)}
+.mobile-nav-actions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+}
 
 /* App store badges placeholder */
 .app-cta{
@@ -1279,7 +1295,9 @@ button[type="submit"]:hover {
   border-radius: 999px;
   padding: 5px 11px;
   margin-bottom: 12px;
-  color: #fff;
+  background: var(--sage-bg) !important;
+  border: 1px solid var(--sage-light);
+  color: var(--sage-dark);
   font-size: .72rem;
   font-weight: 700;
   line-height: 1.2;
@@ -1288,11 +1306,14 @@ button[type="submit"]:hover {
 
 .cbox h4 {
   margin-bottom: 8px;
+  font-size: 1.08rem;
+  line-height: 1.25;
 }
 
 .cbox p {
   color: var(--mid);
   margin-bottom: 0;
+  line-height: 1.6;
 }
 
 .tbl {
@@ -1334,6 +1355,7 @@ button[type="submit"]:hover {
   background: var(--white) !important;
   border: 1px solid var(--border) !important;
   box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.05);
+  align-items: center;
 }
 
 .track-header .th-left p {
@@ -1355,6 +1377,15 @@ button[type="submit"]:hover {
   box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.045);
 }
 
+.scard {
+  border-left-width: 0 !important;
+  border-top: 3px solid var(--sage-light);
+}
+
+.scard h4 {
+  line-height: 1.25;
+}
+
 .sc-pill,
 .track-header .tag {
   color: var(--ink);
@@ -1367,6 +1398,109 @@ button[type="submit"]:hover {
   border-color: var(--border) !important;
 }
 
+.availability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.availability-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--sage);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.05);
+}
+
+.availability-card.limited {
+  border-left-color: var(--gold);
+}
+
+.availability-card.full {
+  border-left-color: var(--coral);
+}
+
+.availability-card strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+}
+
+.availability-card span {
+  display: block;
+  color: var(--mid);
+  font-size: .83rem;
+  margin-top: 2px;
+}
+
+.menu-highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.menu-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.045);
+}
+
+.mc-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 7px;
+}
+
+.mc-top strong {
+  font-family: 'Fraunces', serif;
+  line-height: 1.2;
+}
+
+.mc-top span {
+  color: var(--sage-dark);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.menu-card p {
+  color: var(--mid);
+  font-size: .82rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.track-header {
+  min-height: 124px;
+}
+
+.track-header .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.track-header .tag,
+.tags .tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: var(--white);
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--mid);
+}
+
 @media(max-width: 760px) {
   .cmp {
     grid-template-columns: 1fr;
@@ -1374,5 +1508,23 @@ button[type="submit"]:hover {
 
   .cbox {
     padding: 20px !important;
+  }
+
+  .availability-grid,
+  .menu-highlight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .availability-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .availability-card .btn {
+    width: 100%;
+  }
+
+  .track-header {
+    min-height: 0;
   }
 }

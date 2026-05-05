@@ -1,4 +1,4 @@
-const APP_URL = 'https://giggles-bloom.vercel.app';
+﻿const APP_URL = 'https://giggles-bloom.vercel.app';
 let gl = 'tr';
 let feedData = null;
 
@@ -140,8 +140,8 @@ function ensureMobileNav() {
       '<div class="mobile-nav-brand">Giggles &amp; Bloom</div>' +
       '<div class="nav-links">' + nav.innerHTML + '</div>' +
       '<div class="mobile-nav-actions">' +
-        '<button class="btn-login" type="button"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></button>' +
-        '<button class="btn-join" type="button"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></button>' +
+        '<button class="btn-login" type="button"><span class="tr-only">GiriÅŸ Yap</span><span class="en-only">Sign In</span></button>' +
+        '<button class="btn-join" type="button"><span class="tr-only">Ãœye Ol</span><span class="en-only">Join</span></button>' +
       '</div>' +
     '</div>';
   document.body.appendChild(drawer);
@@ -188,35 +188,35 @@ function normalizeFooter() {
     '<div class="footer-inner">' +
       '<div>' +
         '<div class="footer-brand">Giggles &amp; Bloom</div>' +
-        '<div class="footer-note"><span class="tr-only">Görünmez yükü hafifletmek için buradayız.</span><span class="en-only">We exist to lighten the invisible load.</span></div>' +
+        '<div class="footer-note"><span class="tr-only">GÃ¶rÃ¼nmez yÃ¼kÃ¼ hafifletmek iÃ§in buradayÄ±z.</span><span class="en-only">We exist to lighten the invisible load.</span></div>' +
       '</div>' +
       '<div class="footer-col">' +
-        '<h5><span class="tr-only">Keşfet</span><span class="en-only">Explore</span></h5>' +
-        '<a href="workshops.html"><span class="tr-only">Atölyeler</span><span class="en-only">Workshops</span></a>' +
+        '<h5><span class="tr-only">KeÅŸfet</span><span class="en-only">Explore</span></h5>' +
+        '<a href="workshops.html"><span class="tr-only">AtÃ¶lyeler</span><span class="en-only">Workshops</span></a>' +
         '<a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>' +
         '<a href="food.html"><span class="tr-only">Kafe</span><span class="en-only">Cafe</span></a>' +
-        '<a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>' +
+        '<a href="membership.html"><span class="tr-only">Ãœyelik</span><span class="en-only">Membership</span></a>' +
       '</div>' +
       '<div class="footer-col">' +
         '<h5><span class="tr-only">Hesap</span><span class="en-only">Account</span></h5>' +
-        '<a href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></a>' +
-        '<a href="' + APP_URL + '/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>' +
+        '<a href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Ãœye Ol</span><span class="en-only">Join</span></a>' +
+        '<a href="' + APP_URL + '/auth/signin" target="_blank" rel="noopener"><span class="tr-only">GiriÅŸ Yap</span><span class="en-only">Sign In</span></a>' +
       '</div>' +
       '<div class="footer-col">' +
-        '<h5><span class="tr-only">Kurumsal</span><span class="en-only">Company</span></h5>' +
-        '<a href="corporate/index.html"><span class="tr-only">Hakkımızda</span><span class="en-only">About</span></a>' +
-        '<a href="corporate/governance.html#data"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>' +
-        '<a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>' +
+        '<h5><span class="tr-only">Yardim</span><span class="en-only">Help</span></h5>' +
+        '<a href="contact.html"><span class="tr-only">HakkÄ±mÄ±zda</span><span class="en-only">About</span></a>' +
+        '<a href="privacy.html"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>' +
+        '<a href="contact.html"><span class="tr-only">Ä°letiÅŸim</span><span class="en-only">Contact</span></a>' +
       '</div>' +
     '</div>' +
-    '<div class="footer-bottom">© <span data-year></span> Giggles &amp; Bloom · Kadıköy &amp; Kurtköy, Istanbul</div>';
+    '<div class="footer-bottom">Â© <span data-year></span> Giggles &amp; Bloom Â· KadÄ±kÃ¶y &amp; KurtkÃ¶y, Istanbul</div>';
   updateYears();
 }
 
 async function loadDynamicFeed() {
   const feed = document.getElementById('dynamic-feed');
   if (feed) {
-    feed.innerHTML = '<div class="feed-loading"><div class="feed-spinner"></div><span>' + escapeHtml(gl === 'tr' ? 'Yükleniyor...' : 'Loading...') + '</span></div>';
+    feed.innerHTML = '<div class="feed-loading"><div class="feed-spinner"></div><span>' + escapeHtml(gl === 'tr' ? 'YÃ¼kleniyor...' : 'Loading...') + '</span></div>';
   }
 
   try {
@@ -263,13 +263,13 @@ function renderFeed(container, data) {
     items.push({
       type: 'workshop',
       title: isTr ? workshop.name_tr : workshop.name_en,
-      date: workshop.starts_at ? formatDate(workshop.starts_at) : (isTr ? 'Takvim yakında' : 'Schedule coming soon'),
+      date: workshop.starts_at ? formatDate(workshop.starts_at) : (isTr ? 'Takvim yakÄ±nda' : 'Schedule coming soon'),
       branch: branchLabel(workshop.branch_id),
     });
   });
 
   if (!items.length) {
-    container.innerHTML = '<div class="feed-empty">' + escapeHtml(isTr ? 'Yakında yeni programlar yayınlanacak.' : 'New programmes will be published soon.') + '</div>';
+    container.innerHTML = '<div class="feed-empty">' + escapeHtml(isTr ? 'YakÄ±nda yeni programlar yayÄ±nlanacak.' : 'New programmes will be published soon.') + '</div>';
     return;
   }
 
@@ -281,9 +281,9 @@ function renderDynamicFallback() {
   if (feed) {
     const isTr = gl === 'tr';
     const fallbackItems = [
-      { type: 'workshop', title: isTr ? 'STEM Keşif Serisi' : 'STEM Discovery Series', date: isTr ? 'Takvim yakında' : 'Schedule coming soon', branch: 'Kadıköy' },
-      { type: 'workshop', title: isTr ? 'Ebeveyn Ustalık Sınıfı' : 'Parenting Masterclass', date: isTr ? 'Sezonluk program' : 'Seasonal programme', branch: 'Kadıköy' },
-      { type: 'event', title: isTr ? 'Topluluk Buluşmaları' : 'Community Gatherings', date: isTr ? 'Aylık' : 'Monthly', branch: 'Kurtköy' },
+      { type: 'workshop', title: isTr ? 'STEM KeÅŸif Serisi' : 'STEM Discovery Series', date: isTr ? 'Takvim yakÄ±nda' : 'Schedule coming soon', branch: 'KadÄ±kÃ¶y' },
+      { type: 'workshop', title: isTr ? 'Ebeveyn UstalÄ±k SÄ±nÄ±fÄ±' : 'Parenting Masterclass', date: isTr ? 'Sezonluk program' : 'Seasonal programme', branch: 'KadÄ±kÃ¶y' },
+      { type: 'event', title: isTr ? 'Topluluk BuluÅŸmalarÄ±' : 'Community Gatherings', date: isTr ? 'AylÄ±k' : 'Monthly', branch: 'KurtkÃ¶y' },
     ];
     feed.innerHTML = fallbackItems.map(renderFeedCard).join('');
   }
@@ -295,7 +295,7 @@ function renderDynamicFallback() {
 function renderFeedCard(item) {
   const tag = item.type === 'event'
     ? (gl === 'tr' ? 'Etkinlik' : 'Event')
-    : (gl === 'tr' ? 'Atölye' : 'Workshop');
+    : (gl === 'tr' ? 'AtÃ¶lye' : 'Workshop');
   const cls = item.type === 'event' ? 'coral' : '';
   const href = item.type === 'event' ? 'events.html' : 'workshops.html';
 
@@ -303,7 +303,7 @@ function renderFeedCard(item) {
     '<span class="fc-tag ' + cls + '">' + escapeHtml(tag) + '</span>' +
     '<h4>' + escapeHtml(item.title || '') + '</h4>' +
     '<div class="fc-meta">' + escapeHtml(item.date || '') + '</div>' +
-    '<div class="fc-branch">' + escapeHtml(gl === 'tr' ? 'Şube: ' : 'Location: ') + escapeHtml(item.branch || '') + '</div>' +
+    '<div class="fc-branch">' + escapeHtml(gl === 'tr' ? 'Åžube: ' : 'Location: ') + escapeHtml(item.branch || '') + '</div>' +
     '</a>';
 }
 
@@ -322,20 +322,20 @@ function renderPlayAvailability(items) {
     const cls = item.status === 'full' ? 'full' : item.status === 'limited' ? 'limited' : 'available';
     return '<div class="availability-card ' + cls + '">' +
       '<div><strong>' + escapeHtml(label) + '</strong><span>' + escapeHtml(availabilityText(item.status, item.remaining_today)) + '</span></div>' +
-      '<a class="btn btn-sm btn-secondary" href="contact.html">' + escapeHtml(gl === 'tr' ? 'Giriş Talebi' : 'Request Entry') + '</a>' +
+      '<a class="btn btn-sm btn-secondary" href="contact.html">' + escapeHtml(gl === 'tr' ? 'GiriÅŸ Talebi' : 'Request Entry') + '</a>' +
     '</div>';
   }).join('');
 }
 
 function availabilityText(status, remaining) {
-  if (status === 'full') return gl === 'tr' ? 'Bugün dolu' : 'Full today';
+  if (status === 'full') return gl === 'tr' ? 'BugÃ¼n dolu' : 'Full today';
   if (status === 'limited') {
-    if (Number.isFinite(remaining)) return gl === 'tr' ? 'Sınırlı yer: ' + remaining : 'Limited: ' + remaining + ' spots';
-    return gl === 'tr' ? 'Sınırlı yer' : 'Limited availability';
+    if (Number.isFinite(remaining)) return gl === 'tr' ? 'SÄ±nÄ±rlÄ± yer: ' + remaining : 'Limited: ' + remaining + ' spots';
+    return gl === 'tr' ? 'SÄ±nÄ±rlÄ± yer' : 'Limited availability';
   }
-  if (status === 'enquire') return gl === 'tr' ? 'Bilgi alın' : 'Enquire';
-  if (Number.isFinite(remaining)) return gl === 'tr' ? 'Müsait: ' + remaining : 'Available: ' + remaining + ' spots';
-  return gl === 'tr' ? 'Müsait' : 'Available';
+  if (status === 'enquire') return gl === 'tr' ? 'Bilgi alÄ±n' : 'Enquire';
+  if (Number.isFinite(remaining)) return gl === 'tr' ? 'MÃ¼sait: ' + remaining : 'Available: ' + remaining + ' spots';
+  return gl === 'tr' ? 'MÃ¼sait' : 'Available';
 }
 
 function renderMenuHighlights(items) {
@@ -343,7 +343,7 @@ function renderMenuHighlights(items) {
   if (!container) return;
 
   if (!items.length) {
-    container.innerHTML = '<p class="feed-empty">' + escapeHtml(gl === 'tr' ? 'Menü yakında yayınlanacak.' : 'Menu highlights coming soon.') + '</p>';
+    container.innerHTML = '<p class="feed-empty">' + escapeHtml(gl === 'tr' ? 'MenÃ¼ yakÄ±nda yayÄ±nlanacak.' : 'Menu highlights coming soon.') + '</p>';
     return;
   }
 
@@ -358,15 +358,15 @@ function renderMenuHighlights(items) {
 }
 
 function branchLabel(branchId) {
-  if (branchId === 'kadikoy') return 'Kadıköy';
-  if (branchId === 'kurtkoy') return 'Kurtköy';
+  if (branchId === 'kadikoy') return 'KadÄ±kÃ¶y';
+  if (branchId === 'kurtkoy') return 'KurtkÃ¶y';
   return branchId || '';
 }
 
 function formatPrice(kurus) {
   const value = Number(kurus);
   if (!Number.isFinite(value)) return '';
-  return '₺' + Math.round(value / 100).toLocaleString(gl === 'tr' ? 'tr-TR' : 'en-GB');
+  return 'â‚º' + Math.round(value / 100).toLocaleString(gl === 'tr' ? 'tr-TR' : 'en-GB');
 }
 
 function formatDate(iso) {

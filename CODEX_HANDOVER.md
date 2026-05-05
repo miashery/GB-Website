@@ -90,3 +90,23 @@ Verification:
 - `rg -n 'ðŸ|Ã|Â|â|Ä|Å' workshops.html play.html` returns no matches.
 - A PowerShell local href scan found all relative HTML links point to existing files.
 - Attempting to start a local background HTTP server from this sandbox was blocked by the workspace policy, so production/mobile browser QA still needs to happen after deploy.
+
+### Public Website: Remove Public Corporate Pages
+
+- Removed public `corporate/*.html` pages from the deploy because they contain strategy, partnership, operating model, and commercial material that should not be publicly browsable.
+- Replaced public links that pointed into `corporate/` with safe public destinations:
+  - `contact.html` for B2B, expert, partnership, about, and request conversations;
+  - `privacy.html` for data/privacy references;
+  - `membership.html` where the old public CTA was really about the family portal/member experience.
+- Added `privacy.html` as a minimal public-safe privacy and data principles page.
+- Updated `assets/site.js` footer normalization so it no longer injects links to the corporate folder.
+- Bumped the public service-worker cache name to `gb-public-v2` so older cached corporate pages are cleared after deployment.
+
+Future recommendation:
+
+- For B2B/partnership material, create a separate private proposal pack or mini-site later, with time-bound signed links or password-protected Vercel preview/proposal URLs. Public pages should only invite enquiries and avoid pricing, internal strategy, operating model, or founder-sensitive detail.
+
+Verification:
+
+- No remaining `corporate/` references were found in public HTML/CSS/JS.
+- A PowerShell local href scan found all remaining public local links point to existing files.

@@ -59,19 +59,22 @@ img{max-width:100%;display:block}
 /* ══════════════════════════════
    HEADER
 ══════════════════════════════ */
-.header{
+.header,
+.site-header{
   position:sticky;top:0;z-index:100;
   background:rgba(250,248,244,.88);
   backdrop-filter:saturate(160%) blur(18px);
   -webkit-backdrop-filter:saturate(160%) blur(18px);
   border-bottom:1px solid var(--border);
 }
-.header-inner{
+.header-inner,
+.bar{
   max-width:1200px;margin:0 auto;padding:10px 24px;
   display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.brand-logo{width:40px;height:40px;border-radius:12px;object-fit:contain}
+.brand-logo,
+.brand img{width:40px;height:40px;border-radius:12px;object-fit:contain;flex:0 0 40px}
 .brand-text .name{font-family:'Fraunces',serif;font-weight:700;font-size:14.5px;color:var(--ink)}
 .brand-text .tag{font-size:10px;color:var(--muted);margin-top:1px}
 
@@ -119,6 +122,34 @@ img{max-width:100%;display:block}
 .lang-sw.en .lk{transform:translateX(26px)}
 .lang-sw:not(.en) .ll.t{color:var(--ink);background:var(--sage-bg)}
 .lang-sw.en .ll.e{color:var(--ink);background:var(--sage-bg)}
+
+.lang {
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-xs);
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 4px;
+  padding: 4px 6px;
+}
+
+.lang span {
+  border-radius: 16px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 5px 8px;
+}
+
+.lang:not(.en) span:first-child,
+.lang.en span:last-child {
+  background: var(--sage-bg);
+  color: var(--sage-dark);
+}
 
 /* ══════════════════════════════
    MAIN LAYOUT
@@ -2011,4 +2042,37 @@ footer .footer-bottom {
   .membership-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* v13 tighter public typography: calmer content hierarchy */
+.sec h3,
+.sec-h {
+  font-size: clamp(1.18rem, 1.9vw, 1.48rem);
+  letter-spacing: 0;
+}
+
+.hero h2 {
+  font-size: clamp(1.12rem, 1.8vw, 1.42rem);
+  letter-spacing: 0;
+}
+
+.clean-card-grid .card h4,
+.card h4,
+.track-card h3,
+.feature-card h3,
+.tier-name {
+  font-size: .92rem;
+  letter-spacing: 0;
+}
+
+.card p,
+.track-card p,
+.feature-card p,
+.tier-card p,
+.desc {
+  font-size: .82rem;
+}
+
+.tier-price {
+  font-size: clamp(1.35rem, 2.1vw, 1.7rem);
 }

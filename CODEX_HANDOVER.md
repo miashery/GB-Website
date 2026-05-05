@@ -188,3 +188,20 @@ Verification:
 - Local relative-link scan reports no missing public links.
 - Targeted scan no longer finds the known broken fragments from the screenshots (`?5.000`, `m?`, `LEGO?`, malformed `<div <`, duplicated card tags, or mojibake fragments) in the repaired files.
 - Browser screenshot verification is still blocked in this sandbox by Windows `EPERM`; after deploy, do a visual refresh on desktop and mobile.
+
+### Public Website: Header Compatibility and Typography Tightening
+
+- Added CSS compatibility for both public header markup styles:
+  - older pages use `.header` / `.header-inner` / `.brand-logo`;
+  - rebuilt pages use `.site-header` / `.bar` / plain `.brand img`.
+- This prevents the logo/header from rendering oversized on rebuilt pages such as Cafe, Library, Cowork, Social Lab, Support, Events, Membership, and Contact.
+- Added styling for the newer `.lang` language toggle so it matches the older compact switcher scale.
+- Tightened in-page typography:
+  - smaller section headings such as "Two Programme Types";
+  - smaller card headings such as "Play Workshops";
+  - calmer card body text and membership price scale.
+
+Verification:
+
+- `git diff --check` passes.
+- Public HTML parser check passes.

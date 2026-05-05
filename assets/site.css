@@ -1856,3 +1856,159 @@ button[type="submit"]:hover {
     gap: 10px;
   }
 }
+
+/* v12 site-wide page consistency and public-page polish */
+.pt h1 {
+  font-size: clamp(2rem, 3.2vw, 2.45rem);
+  line-height: 1.08;
+}
+
+.pt .sub {
+  font-size: .94rem;
+  line-height: 1.55;
+}
+
+.sec h3,
+.sec-h {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  line-height: 1.12;
+}
+
+.hero h2 {
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  line-height: 1.18;
+}
+
+.hero p,
+.card p,
+.highlight p,
+.info-grid span {
+  font-size: .88rem;
+  line-height: 1.58;
+}
+
+.clean-card-grid .card,
+.price-card,
+.track-card,
+.feature-card {
+  min-height: 0;
+}
+
+.clean-card-grid .card h4,
+.track-card h3,
+.feature-card h3 {
+  font-size: 1rem;
+  line-height: 1.28;
+}
+
+.price-card strong {
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  line-height: 1.08;
+}
+
+.metric-card {
+  text-align: center;
+}
+
+.metric-number {
+  color: var(--sage-dark);
+  font-family: 'Fraunces', serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 800;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.info-grid > div {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 14px 16px;
+}
+
+.info-grid strong {
+  color: var(--ink);
+  display: block;
+  font-size: .82rem;
+  margin-bottom: 4px;
+}
+
+.info-grid span {
+  color: var(--mid);
+  display: block;
+}
+
+.section-actions {
+  margin-top: 16px;
+}
+
+.membership-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.membership-grid .tier-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+}
+
+.membership-grid .tier-card .btn {
+  justify-content: center;
+  margin-top: auto;
+}
+
+.tier-card.premium {
+  background: var(--gold-bg);
+  border-color: var(--gold);
+}
+
+.btn-gold {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+  font-weight: 800;
+}
+
+.btn-gold:hover {
+  background: #be9139;
+  border-color: #be9139;
+  color: #fff;
+}
+
+footer .footer-bottom {
+  display: block;
+}
+
+@media(max-width: 900px) {
+  .info-grid,
+  .membership-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media(max-width: 640px) {
+  .pt h1 {
+    font-size: 2rem;
+  }
+
+  .info-grid,
+  .membership-grid {
+    grid-template-columns: 1fr;
+  }
+}

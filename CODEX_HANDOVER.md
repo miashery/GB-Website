@@ -150,3 +150,41 @@ Verification:
 - Homepage parser check passes.
 - `git diff --check` passes.
 - Browser screenshot verification was attempted with the bundled Playwright package, but this sandbox cannot launch the local browser executable due to Windows `EPERM`; production visual QA still needs a quick refresh after deploy.
+
+### Public Website: Site-Wide Page Consistency Repair
+
+- Rebuilt the most visibly inconsistent public pages with clean, valid bilingual markup:
+  - `food.html`
+  - `library.html`
+  - `workspaces.html`
+  - `events.html`
+  - `membership.html`
+  - `contact.html`
+  - `social-lab.html`
+  - `wellbeing.html`
+- Replaced fragile Turkish text with HTML-safe entities so Windows/Git/Vercel/browser encoding does not turn Turkish characters into question marks.
+- Removed malformed mixed-language labels and broken card markup from:
+  - cafe menu cards;
+  - library branch and service cards;
+  - cowork practical-information section;
+  - event cards;
+  - membership pricing cards;
+  - contact request cards;
+  - Social Lab and Parent Support sections.
+- Kept corporate/B2B material public-safe: public pages now only invite contact for private proposals instead of linking to public corporate detail pages.
+- Fixed shared `assets/site.js` footer normalization and dynamic price formatting so injected content no longer shows placeholder question marks.
+- Added v12 shared CSS to normalize:
+  - page-title scale;
+  - hero heading scale;
+  - card typography;
+  - price and track card size;
+  - cowork info-grid layout;
+  - membership pricing-grid layout;
+  - mobile stacking.
+
+Verification:
+
+- HTML parser check passes across public `.html` files.
+- Local relative-link scan reports no missing public links.
+- Targeted scan no longer finds the known broken fragments from the screenshots (`?5.000`, `m?`, `LEGO?`, malformed `<div <`, duplicated card tags, or mojibake fragments) in the repaired files.
+- Browser screenshot verification is still blocked in this sandbox by Windows `EPERM`; after deploy, do a visual refresh on desktop and mobile.

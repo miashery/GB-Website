@@ -209,7 +209,7 @@ function normalizeFooter() {
         '<a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>' +
       '</div>' +
     '</div>' +
-    '<div class="footer-bottom">? <span data-year></span> Giggles &amp; Bloom ? Kadıköy &amp; Kurtköy, Istanbul</div>';
+    '<div class="footer-bottom"><div>&copy; <span data-year></span> Giggles &amp; Bloom &mdash; Kadıköy &amp; Kurtköy, Istanbul</div></div>';
   updateYears();
 }
 
@@ -366,7 +366,7 @@ function branchLabel(branchId) {
 function formatPrice(kurus) {
   const value = Number(kurus);
   if (!Number.isFinite(value)) return '';
-  return '?' + Math.round(value / 100).toLocaleString(gl === 'tr' ?'tr-TR' : 'en-GB');
+  return '₺' + Math.round(value / 100).toLocaleString(gl === 'tr' ?'tr-TR' : 'en-GB');
 }
 
 function formatDate(iso) {

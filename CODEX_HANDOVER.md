@@ -110,3 +110,19 @@ Verification:
 
 - No remaining `corporate/` references were found in public HTML/CSS/JS.
 - A PowerShell local href scan found all remaining public local links point to existing files.
+
+### Public Website: Encoding Repair After Corporate Cleanup
+
+- The broad corporate-link cleanup caused Turkish UTF-8 text to display as mojibake on the deployed site.
+- Repaired public HTML and shared script text back to valid UTF-8.
+- Removed remaining broken decorative emoji fragments where they were presentation-only.
+- Restored normal dash characters in public prose.
+
+Verification:
+
+- UTF-8 runtime check confirms the homepage hero now reads correctly:
+  - `İstanbul'da İlk — Kadıköy & Kurtköy`
+  - `Ebeveynler nefes alır. Çocuklar büyür.`
+  - `Giggles & Bloom bir oyun kafesi değil.`
+- Mojibake scan for common broken fragments returns no matches across public HTML/CSS/JS.
+- `git diff --check` passes.

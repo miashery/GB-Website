@@ -126,3 +126,27 @@ Verification:
   - `Giggles & Bloom bir oyun kafesi değil.`
 - Mojibake scan for common broken fragments returns no matches across public HTML/CSS/JS.
 - `git diff --check` passes.
+
+### Public Website: Homepage Layout and Centre Photography Polish
+
+- Added optimized WebP centre photos in `assets/centres/` from the founder-provided Kadıköy/Kurtköy raw photos:
+  - `kadikoy-day.webp`
+  - `kurtkoy-day.webp`
+  - `kurtkoy-night.webp`
+- Added a homepage “Our Spaces / Mekânlarımız” section using those photos so the page no longer has a long empty middle area.
+- Fixed remaining homepage markup fragments left after earlier encoding cleanup:
+  - malformed location and email `<div>` elements;
+  - missing `<h4>` opening tags in service/hour cards;
+  - placeholder question marks in CTAs, prices, active badges, square-metre labels, and LEGO® Serious Play® text.
+- Added v11 homepage CSS for:
+  - photo cards with stable aspect and caption overlay;
+  - cleaner branch cards;
+  - tighter section rhythm;
+  - improved mobile stacking for the new photo section.
+
+Verification:
+
+- Local href scan reports all relative public links resolve.
+- Homepage parser check passes.
+- `git diff --check` passes.
+- Browser screenshot verification was attempted with the bundled Playwright package, but this sandbox cannot launch the local browser executable due to Windows `EPERM`; production visual QA still needs a quick refresh after deploy.

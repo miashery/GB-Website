@@ -2076,3 +2076,168 @@ footer .footer-bottom {
 .tier-price {
   font-size: clamp(1.35rem, 2.1vw, 1.7rem);
 }
+
+/* v14 visual warmth pass: restore pastel character without losing polish */
+.hero {
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(122, 158, 126, .12), transparent 32%),
+    radial-gradient(circle at 88% 16%, rgba(212, 168, 83, .13), transparent 30%),
+    radial-gradient(circle at 78% 88%, rgba(232, 112, 106, .09), transparent 34%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-sage {
+  background:
+    linear-gradient(135deg, rgba(238, 244, 239, .92), rgba(255, 255, 255, .82) 48%, rgba(245, 230, 192, .28)),
+    var(--white);
+}
+
+.hero-coral {
+  background:
+    linear-gradient(135deg, rgba(254, 242, 241, .92), rgba(255, 255, 255, .84) 50%, rgba(238, 244, 239, .34)),
+    var(--white);
+}
+
+.hero-gold {
+  background:
+    linear-gradient(135deg, rgba(253, 248, 237, .95), rgba(255, 255, 255, .84) 50%, rgba(212, 232, 245, .26)),
+    var(--white);
+}
+
+.hero-lav {
+  background:
+    linear-gradient(135deg, rgba(228, 221, 240, .54), rgba(255, 255, 255, .86) 50%, rgba(238, 244, 239, .34)),
+    var(--white);
+}
+
+.clean-card-grid .card,
+.feature-card,
+.track-card,
+.price-card,
+.hours-card,
+.info-grid > div,
+.feed-card,
+.menu-card {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .94), rgba(250, 248, 244, .72)),
+    var(--white);
+}
+
+.clean-card-grid .card:nth-child(4n + 1),
+.track-card:nth-child(4n + 1),
+.feature-card:nth-child(4n + 1) {
+  border-top: 3px solid var(--sage-light);
+  background:
+    linear-gradient(145deg, rgba(238, 244, 239, .72), rgba(255, 255, 255, .94)),
+    var(--white);
+}
+
+.clean-card-grid .card:nth-child(4n + 2),
+.track-card:nth-child(4n + 2),
+.feature-card:nth-child(4n + 2) {
+  border-top: 3px solid var(--gold-light);
+  background:
+    linear-gradient(145deg, rgba(253, 248, 237, .74), rgba(255, 255, 255, .94)),
+    var(--white);
+}
+
+.clean-card-grid .card:nth-child(4n + 3),
+.track-card:nth-child(4n + 3),
+.feature-card:nth-child(4n + 3) {
+  border-top: 3px solid var(--coral-light);
+  background:
+    linear-gradient(145deg, rgba(254, 242, 241, .74), rgba(255, 255, 255, .94)),
+    var(--white);
+}
+
+.clean-card-grid .card:nth-child(4n + 4),
+.track-card:nth-child(4n + 4),
+.feature-card:nth-child(4n + 4) {
+  border-top: 3px solid var(--sky-light);
+  background:
+    linear-gradient(145deg, rgba(212, 232, 245, .62), rgba(255, 255, 255, .94)),
+    var(--white);
+}
+
+.highlight {
+  background:
+    linear-gradient(135deg, rgba(238, 244, 239, .96), rgba(255, 255, 255, .72) 58%, rgba(245, 230, 192, .46)),
+    var(--sage-bg);
+  border-color: rgba(122, 158, 126, .24);
+}
+
+.badge {
+  background:
+    linear-gradient(135deg, rgba(250, 248, 244, .95), rgba(255, 255, 255, .82));
+  border-color: rgba(184, 176, 164, .36);
+}
+
+.badge .dot,
+.dot {
+  box-shadow: 0 0 0 4px rgba(122, 158, 126, .12);
+}
+
+.chip-row span {
+  background: rgba(238, 244, 239, .82);
+  border: 1px solid rgba(122, 158, 126, .22);
+  border-radius: 999px;
+  color: var(--sage-dark);
+  display: inline-flex;
+  font-size: .78rem;
+  font-weight: 800;
+  margin: 4px 6px 4px 0;
+  padding: 7px 12px;
+}
+
+.membership-grid .tier-card:nth-child(1) {
+  background: linear-gradient(145deg, rgba(238, 244, 239, .78), rgba(255, 255, 255, .94));
+}
+
+.membership-grid .tier-card:nth-child(2) {
+  background: linear-gradient(145deg, rgba(253, 248, 237, .76), rgba(255, 255, 255, .94));
+}
+
+.membership-grid .tier-card:nth-child(3) {
+  background: linear-gradient(145deg, rgba(238, 244, 239, .88), rgba(255, 255, 255, .94));
+}
+
+.membership-grid .tier-card:nth-child(4) {
+  background: linear-gradient(145deg, rgba(212, 232, 245, .62), rgba(255, 255, 255, .94));
+}
+
+.membership-grid .tier-card:nth-child(5),
+.tier-card.premium {
+  background: linear-gradient(145deg, rgba(253, 248, 237, .9), rgba(255, 255, 255, .92));
+}
+
+.tier-icon {
+  filter: saturate(1.08);
+}
+
+.card:hover,
+.track-card:hover,
+.feature-card:hover,
+.price-card:hover,
+.tier-card:hover,
+.info-grid > div:hover {
+  border-color: rgba(122, 158, 126, .36);
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 12px 34px rgba(122, 158, 126, .13);
+}
+
+.home-centres {
+  background:
+    linear-gradient(135deg, rgba(238, 244, 239, .86), rgba(255, 255, 255, .88) 44%, rgba(253, 248, 237, .76)),
+    var(--white);
+}

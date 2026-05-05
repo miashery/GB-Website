@@ -205,3 +205,20 @@ Verification:
 
 - `git diff --check` passes.
 - Public HTML parser check passes.
+
+### Public Website: Visual Warmth Pass
+
+- Restored gentle pastel character after the cleanup pass made the public site feel too pale.
+- Added a v14 shared CSS layer with:
+  - soft sage/gold/coral radial accents in hero blocks;
+  - warmer page-specific hero backgrounds;
+  - alternating pastel card surfaces for feature, track, price, and clean-card grids;
+  - richer highlight panels;
+  - compact pastel chips;
+  - membership cards with distinct but restrained pastel backgrounds;
+  - warmer hover states.
+- Kept the repaired structure, compact headers, and tightened typography intact.
+
+Verification:
+
+- `git diff --check` passes.

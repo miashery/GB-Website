@@ -222,3 +222,22 @@ Verification:
 Verification:
 
 - `git diff --check` passes.
+
+### Public Website: Social Lab Content Expansion
+
+- Expanded `social-lab.html` so it no longer feels sparse.
+- Added public-safe sections covering:
+  - the purpose of Social Lab as a research-informed family learning space;
+  - what the university/psychology partnership enables;
+  - what Social Lab does: observation, expert translation, community circles, programme improvement, privacy, and partnerships;
+  - Neighbourhood Circle / Mahalle Cemberi as a family-community format;
+  - how Kurtkoy can act as a neighbourhood satellite while Kadikoy acts as the larger workshop/research/event hub;
+  - benefits for families, children, experts, and the local community;
+  - privacy, consent, child-safety, and parent-safety principles.
+- Kept wording public-safe and avoided confidential corporate strategy detail.
+
+Verification:
+
+- `social-lab.html` parser check passes.
+- Local links on `social-lab.html` resolve.
+- `git diff --check` passes.

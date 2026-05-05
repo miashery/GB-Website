@@ -1528,3 +1528,132 @@ button[type="submit"]:hover {
     min-height: 0;
   }
 }
+
+/* v10 public page polish: Workshops and Play */
+.feature-card {
+  min-height: 190px;
+}
+
+.feature-card h3,
+.price-card strong,
+.track-card h3 {
+  letter-spacing: 0;
+}
+
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.price-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.05);
+}
+
+.price-card strong {
+  display: block;
+  margin: 12px 0 6px;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.price-card p {
+  color: var(--mid);
+  font-size: .86rem;
+  line-height: 1.55;
+}
+
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.track-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--sage);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 8px 24px rgba(44,44,44,.05);
+}
+
+.track-card > span {
+  display: inline-flex;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: var(--cream-dark);
+  color: var(--mid);
+  padding: 4px 9px;
+  font-size: .68rem;
+  font-weight: 800;
+}
+
+.track-card h3 {
+  font-size: 1.05rem;
+}
+
+.track-card p {
+  margin: 0;
+  color: var(--mid);
+  font-size: .83rem;
+  line-height: 1.55;
+}
+
+.track-blue { border-top-color: var(--sky); }
+.track-lav { border-top-color: var(--lav); }
+.track-gold { border-top-color: var(--gold); }
+.track-coral { border-top-color: var(--coral); }
+
+.hero .card h3 {
+  margin-bottom: 8px;
+}
+
+.hero .btns {
+  margin-top: 16px;
+}
+
+.dynamic-section {
+  box-shadow: 0 1px 2px rgba(44,44,44,.03), 0 10px 30px rgba(44,44,44,.055);
+}
+
+@media(max-width: 920px) {
+  .track-grid,
+  .price-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media(max-width: 640px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+  }
+
+  .track-grid,
+  .price-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .price-card,
+  .track-card,
+  .feature-card {
+    min-height: 0;
+  }
+
+  .dynamic-section {
+    padding: 20px;
+  }
+
+  .dynamic-section .ds-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

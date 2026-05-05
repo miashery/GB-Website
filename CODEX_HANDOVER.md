@@ -60,3 +60,33 @@ Relevant commit:
 - Ensure every dynamic section has a useful loading/empty/error state.
 - Confirm PWA install behavior and service worker behavior on production domain.
 - Replace temporary visual assets with final brand-approved photography/illustration when available.
+
+## 2026-05-05
+
+### Public Website: Workshops and Play Redesign
+
+- Rebuilt `workshops.html` with a cleaner structure closer to the Cafe page:
+  - calmer hero section;
+  - two programme-type cards;
+  - four-track overview cards;
+  - daily session rhythm table;
+  - dynamic live programmes section using `id="dynamic-feed"`;
+  - cleaner enrolment CTA.
+- Rebuilt `play.html` with:
+  - calmer hero section;
+  - clear daily entry pricing;
+  - two play-zone cards;
+  - pricing cards;
+  - dynamic availability section using `id="play-availability"`;
+  - account/membership CTAs.
+- Added shared v10 CSS in `assets/site.css` for:
+  - feature cards;
+  - pricing cards;
+  - workshop track cards;
+  - improved mobile behavior for hero, dynamic sections, pricing, and track grids.
+
+Verification:
+
+- `rg -n 'ðŸ|Ã|Â|â|Ä|Å' workshops.html play.html` returns no matches.
+- A PowerShell local href scan found all relative HTML links point to existing files.
+- Attempting to start a local background HTTP server from this sandbox was blocked by the workspace policy, so production/mobile browser QA still needs to happen after deploy.

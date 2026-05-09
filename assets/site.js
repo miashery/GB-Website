@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
   ) {
     loadDynamicFeed();
   }
+
+  if (document.getElementById('membership-grid')) {
+    loadMembershipPackages();
+  }
 });
 
 function preparePwaShell() {
@@ -353,6 +357,87 @@ function renderMenuHighlights(items) {
     return '<div class="menu-card">' +
       '<div class="mc-top"><strong>' + escapeHtml(name || '') + '</strong><span>' + escapeHtml(formatPrice(item.price)) + '</span></div>' +
       (desc ?'<p>' + escapeHtml(desc) + '</p>' : '') +
+    '</div>';
+  }).join('');
+}
+
+async function loadMembershipPackages() {
+  try {
+    const res = await fetch(APP_URL + '/api/public/memberships', {
+      mode: 'cors',
+      headers: { Accept: 'application/json' },
+    });
+    if (!res.ok) throw new Error('API ' + res.status);
+    const data = await res.json();
+    renderMembershipGrid(data.tiers || []);
+  } catch (error) {
+    renderMembershipFallback();
+  }
+}
+
+function renderMembershipGrid(tiers) {
+  const container = document.getElementById('membership-grid');
+  if (!container) return;
+
+  if (!tiers.length) {
+    renderMembershipFallback();
+    return;
+  }
+
+  const isTr = gl === 'tr';
+  container.innerHTML = tiers.map(function(tier) {
+    const name = isTr ? tier.name_tr : tier.name_en;
+    const desc = isTr ? tier.description_tr : tier.description_en;
+    const features = (isTr ? tier.features_tr : tier.features_en) || [];
+    const badge = isTr ? tier.badge_tr : tier.badge_en;
+    const cta = isTr ? tier.cta_tr : tier.cta_en;
+    const price = Math.round(tier.price_monthly / 100).toLocaleString(isTr ? 'tr-TR' : 'en-GB');
+    const isFeatured = tier.is_featured;
+    const isPremium = tier.color === 'gold';
+
+    return '<div class="tier-card' + (isFeatured ? ' featured' : '') + (isPremium && !isFeatured ? ' premium' : '') + '">' +
+      (badge ? '<div class="tier-badge">' + escapeHtml(badge) + '</div>' : '') +
+      (tier.icon ? '<div class="tier-icon">' + escapeHtml(tier.icon) + '</div>' : '') +
+      '<div class="tier-name">' + escapeHtml(name || '') + '</div>' +
+      '<div class="tier-price">&#8378;' + price + '<span> / ' + (isTr ? 'ay' : 'mo') + '</span></div>' +
+      (desc ? '<p>' + escapeHtml(desc) + '</p>' : '') +
+      (features.length
+        ? '<ul class="tier-features">' + features.map(function(f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('') + '</ul>'
+        : '') +
+      '<a class="btn ' + (isPremium ? 'btn-gold' : 'btn-p') + '" data-tier-cta href="' + APP_URL + '/auth/signup">' +
+        escapeHtml(cta || (isTr ? 'Başla' : 'Get started')) +
+      '</a>' +
+    '</div>';
+  }).join('');
+
+  // Re-wire CTA links since they were just rendered
+  container.querySelectorAll('[data-tier-cta]').forEach(function(el) {
+    el.target = '_blank';
+    el.rel = 'noopener';
+  });
+}
+
+function renderMembershipFallback() {
+  const container = document.getElementById('membership-grid');
+  if (!container) return;
+  const isTr = gl === 'tr';
+
+  const fallbackTiers = [
+    { name: isTr ? 'Esnek Aile Paketi' : 'Flex Family', price: isTr ? '5.000' : '5,000', features: isTr ? ['3 Oyun Atölyesi', '2 Uzman Atölyesi', '%10 Kafe İndirimi'] : ['3 Play Workshops', '2 Expert Workshops', '10% cafe discount'], icon: '🌿', cta: isTr ? 'Flex ile Başla' : 'Start with Flex', featured: false, premium: false },
+    { name: isTr ? 'Hafta Sonu Aile' : 'Weekend Family', price: isTr ? '6.000' : '6,000', features: isTr ? ['6 Oyun Atölyesi', '4 Uzman Atölyesi', '1 Kitap Ödünç'] : ['6 Play Workshops', '4 Expert Workshops', '1 book loan'], icon: '☀️', cta: isTr ? 'Hafta Sonu' : 'Weekend', featured: false, premium: false },
+    { name: 'Workshop Explorer', price: isTr ? '8.000' : '8,000', badge: isTr ? 'En Popüler' : 'Most Popular', features: isTr ? ['Sınırsız Oyun Atölyesi', '8 Uzman Atölyesi', 'Öncelikli Rezervasyon'] : ['Unlimited Play Workshops', '8 Expert Workshops', 'Priority booking'], icon: '🚀', cta: isTr ? 'Explorer ile Başla' : 'Start Explorer', featured: true, premium: false },
+    { name: 'Remote + Play', price: isTr ? '8.000' : '8,000', features: isTr ? ['Sınırsız Çalışma Alanı', 'Sınırsız Oyun Atölyesi', '3 Kitap Ödünç'] : ['Unlimited coworking', 'Unlimited Play Workshops', '3 book loans'], icon: '💻', cta: 'Remote + Play', featured: false, premium: false },
+    { name: 'All-Access', price: isTr ? '12.000' : '12,000', features: isTr ? ['Sınırsız Her Şey', '5 Kitap Ödünç', 'VIP Etkinlik Davetleri'] : ['Everything unlimited', '5 book loans', 'VIP event invitations'], icon: '👑', cta: 'All-Access', featured: false, premium: true },
+  ];
+
+  container.innerHTML = fallbackTiers.map(function(t) {
+    return '<div class="tier-card' + (t.featured ? ' featured' : '') + (t.premium ? ' premium' : '') + '">' +
+      (t.badge ? '<div class="tier-badge">' + escapeHtml(t.badge) + '</div>' : '') +
+      '<div class="tier-icon">' + escapeHtml(t.icon) + '</div>' +
+      '<div class="tier-name">' + escapeHtml(t.name) + '</div>' +
+      '<div class="tier-price">&#8378;' + t.price + '<span> / ' + (isTr ? 'ay' : 'mo') + '</span></div>' +
+      '<ul class="tier-features">' + t.features.map(function(f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('') + '</ul>' +
+      '<a class="btn ' + (t.premium ? 'btn-gold' : 'btn-p') + '" href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener">' + escapeHtml(t.cta) + '</a>' +
     '</div>';
   }).join('');
 }

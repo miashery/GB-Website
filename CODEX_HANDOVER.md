@@ -2,6 +2,28 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-05-20
+
+### Public Website Membership Fallback Claim Safety
+
+- Reviewed the external launch-hardening analysis that flagged risky static fallback membership claims.
+- Updated `assets/site.js` fallback membership cards so they no longer claim "unlimited everything" or unlimited play/coworking.
+- Updated the homepage static membership cards with the same fair-use language.
+- Fallback cards now use fair-use wording and include a no-rollover/capacity/availability note when live package data cannot load.
+- This keeps the public website conservative if the dynamic webapp membership API fails.
+
+## 2026-05-12
+
+### Public Website Dynamic Branch Cleanup
+
+- Reviewed the current homepage dynamic branch changes.
+- Kept the public site static and API-fed, matching the existing architecture.
+- Updated `assets/site.js` branch-hours rendering to use branch data returned by the webapp public endpoint instead of hardcoded per-branch contact assumptions.
+- Local public-site checks:
+  - `node --check assets/site.js` passes.
+  - Local relative href scan reports all public local links resolve.
+  - Targeted mojibake/broken-fragment scan for public HTML/CSS/JS returns no matches.
+
 ## 2026-05-04
 
 ### Public Website Repair and Polish

@@ -120,7 +120,7 @@
         </a>
       </div>
     </div>
-    <div class="hero-branch-stack">
+    <div class="hero-branch-stack" id="branch-hero-stack">
       <div class="card hero-branch-card hero-branch-card-main">
         <div class="badge"><span class="dot d-sage"></span><span class="tr-only">Kadıköy — Açık</span><span class="en-only">Kadıköy — Open</span></div>
         <p style="font-size:.83rem;color:var(--mid);line-height:1.6">
@@ -155,7 +155,7 @@
      STATS ROW
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="stats-row fi">
-  <div class="stat">
+  <div class="stat" id="stat-sqm">
     <div class="s-num">161<span style="font-size:1rem">m²</span></div>
     <div class="s-label"><span class="tr-only">Kadıköy Merkezi</span><span class="en-only">Kadıköy Centre</span></div>
   </div>
@@ -167,7 +167,7 @@
     <div class="s-num">5</div>
     <div class="s-label"><span class="tr-only">Üyelik Paketi</span><span class="en-only">Membership Tiers</span></div>
   </div>
-  <div class="stat">
+  <div class="stat" id="stat-branches">
     <div class="s-num">2</div>
     <div class="s-label"><span class="tr-only">İstanbul Şubesi</span><span class="en-only">Istanbul Locations</span></div>
   </div>
@@ -376,7 +376,7 @@
       <div class="tier-price">₺8.000<span> / <span class="tr-only">ay</span><span class="en-only">mo</span></span></div>
       <div class="tier-desc"><span class="tr-only">G&B'yi birincil öğrenme ve gelişim alanı olarak gören aileler için.</span><span class="en-only">For families who see G&B as their primary learning and development space.</span></div>
       <ul class="tier-features">
-        <li><span class="tr-only">Sınırsız Oyun Atölyesi</span><span class="en-only">Unlimited Play Workshops</span></li>
+        <li><span class="tr-only">Adil kullanım oyun hakkı</span><span class="en-only">Fair-use play access</span></li>
         <li><span class="tr-only">8 Uzman Atölyesi / ay</span><span class="en-only">8 Expert Workshops / mo</span></li>
         <li><span class="tr-only">2 Kitap ödünç hakkı</span><span class="en-only">2 book loan rights</span></li>
         <li><span class="tr-only">Öncelikli rezervasyon</span><span class="en-only">Priority booking</span></li>
@@ -393,8 +393,8 @@
       <div class="tier-price">₺8.000<span> / <span class="tr-only">ay</span><span class="en-only">mo</span></span></div>
       <div class="tier-desc"><span class="tr-only">Çalışan ebeveynler için: üretken çalışma alanı + güvenli oyun, aynı anda.</span><span class="en-only">For working parents: productive workspace + safe play, simultaneously.</span></div>
       <ul class="tier-features">
-        <li><span class="tr-only">Sınırsız çalışma alanı</span><span class="en-only">Unlimited coworking</span></li>
-        <li><span class="tr-only">Sınırsız Oyun Atölyesi</span><span class="en-only">Unlimited Play Workshops</span></li>
+        <li><span class="tr-only">Adil kullanım çalışma alanı</span><span class="en-only">Fair-use coworking access</span></li>
+        <li><span class="tr-only">Adil kullanım oyun hakkı</span><span class="en-only">Fair-use play access</span></li>
         <li><span class="tr-only">3 Kitap ödünç hakkı</span><span class="en-only">3 book loan rights</span></li>
         <li><span class="tr-only">Kafe indirimi %20</span><span class="en-only">20% café discount</span></li>
       </ul>
@@ -407,9 +407,9 @@
       <div class="tier-icon">👑</div>
       <div class="tier-name"><span class="tr-only">All-Access</span><span class="en-only">All-Access</span></div>
       <div class="tier-price">₺12.000<span> / <span class="tr-only">ay</span><span class="en-only">mo</span></span></div>
-      <div class="tier-desc"><span class="tr-only">G&B'yi tam bir aile işletim ortağı olarak isteyen aileler için — sınırsız erişim.</span><span class="en-only">For families who want G&B as a full family operating partner — unlimited access.</span></div>
+      <div class="tier-desc"><span class="tr-only">G&B'yi tam bir aile işletim ortağı olarak isteyen aileler için — geniş kapsam ve adil kullanım.</span><span class="en-only">For families who want G&B as a full family operating partner — broad access with fair-use rules.</span></div>
       <ul class="tier-features">
-        <li><span class="tr-only">Her şey sınırsız</span><span class="en-only">Everything unlimited</span></li>
+        <li><span class="tr-only">Geniş kapsam + adil kullanım</span><span class="en-only">Broad access with fair-use rules</span></li>
         <li><span class="tr-only">5 Kitap ödünç hakkı</span><span class="en-only">5 book loan rights</span></li>
         <li><span class="tr-only">VIP etkinlik davetleri</span><span class="en-only">VIP event invitations</span></li>
         <li><span class="tr-only">Kafe indirimi %25</span><span class="en-only">25% café discount</span></li>
@@ -485,7 +485,7 @@
 <div class="sec fi">
   <div class="sec-label"><span class="tr-only">Ziyaret</span><span class="en-only">Visit</span></div>
   <h2 class="sec-h"><span class="tr-only">Bizi ziyaret edin</span><span class="en-only">Come visit us</span></h2>
-  <div class="hours-grid">
+  <div class="hours-grid" id="branch-hours-grid">
     <div class="hours-card">
       <h4><span class="tr-only">Kadıköy Merkezi</span><span class="en-only">Kadıköy Main</span></h4>
       <div class="hours-row"><span class="day"><span class="tr-only">Pazartesi — Cuma</span><span class="en-only">Monday — Friday</span></span><span class="time">09:00 — 20:00</span></div>

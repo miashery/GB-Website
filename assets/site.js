@@ -248,6 +248,7 @@ function renderDynamicContent() {
   if (feed) renderFeed(feed, feedData);
   renderPlayAvailability(feedData.playAvailability || []);
   renderMenuHighlights(feedData.menuHighlights || []);
+  renderBranches(feedData.playAvailability || []);
 }
 
 function renderFeed(container, data) {
@@ -425,10 +426,14 @@ function renderMembershipFallback() {
   const fallbackTiers = [
     { name: isTr ? 'Esnek Aile Paketi' : 'Flex Family', price: isTr ? '5.000' : '5,000', features: isTr ? ['3 Oyun Atölyesi', '2 Uzman Atölyesi', '%10 Kafe İndirimi'] : ['3 Play Workshops', '2 Expert Workshops', '10% cafe discount'], icon: '🌿', cta: isTr ? 'Flex ile Başla' : 'Start with Flex', featured: false, premium: false },
     { name: isTr ? 'Hafta Sonu Aile' : 'Weekend Family', price: isTr ? '6.000' : '6,000', features: isTr ? ['6 Oyun Atölyesi', '4 Uzman Atölyesi', '1 Kitap Ödünç'] : ['6 Play Workshops', '4 Expert Workshops', '1 book loan'], icon: '☀️', cta: isTr ? 'Hafta Sonu' : 'Weekend', featured: false, premium: false },
-    { name: 'Workshop Explorer', price: isTr ? '8.000' : '8,000', badge: isTr ? 'En Popüler' : 'Most Popular', features: isTr ? ['Sınırsız Oyun Atölyesi', '8 Uzman Atölyesi', 'Öncelikli Rezervasyon'] : ['Unlimited Play Workshops', '8 Expert Workshops', 'Priority booking'], icon: '🚀', cta: isTr ? 'Explorer ile Başla' : 'Start Explorer', featured: true, premium: false },
-    { name: 'Remote + Play', price: isTr ? '8.000' : '8,000', features: isTr ? ['Sınırsız Çalışma Alanı', 'Sınırsız Oyun Atölyesi', '3 Kitap Ödünç'] : ['Unlimited coworking', 'Unlimited Play Workshops', '3 book loans'], icon: '💻', cta: 'Remote + Play', featured: false, premium: false },
-    { name: 'All-Access', price: isTr ? '12.000' : '12,000', features: isTr ? ['Sınırsız Her Şey', '5 Kitap Ödünç', 'VIP Etkinlik Davetleri'] : ['Everything unlimited', '5 book loans', 'VIP event invitations'], icon: '👑', cta: 'All-Access', featured: false, premium: true },
+    { name: 'Workshop Explorer', price: isTr ? '8.000' : '8,000', badge: isTr ? 'En Popüler' : 'Most Popular', features: isTr ? ['Adil kullanım oyun hakkı', '8 Uzman Atölyesi', 'Öncelikli Rezervasyon'] : ['Fair-use play access', '8 Expert Workshops', 'Priority booking'], icon: '🚀', cta: isTr ? 'Explorer ile Başla' : 'Start Explorer', featured: true, premium: false },
+    { name: 'Remote + Play', price: isTr ? '8.000' : '8,000', features: isTr ? ['Adil kullanım çalışma alanı', 'Adil kullanım oyun hakkı', '3 Kitap Ödünç'] : ['Fair-use coworking access', 'Fair-use play access', '3 book loans'], icon: '💻', cta: 'Remote + Play', featured: false, premium: false },
+    { name: 'All-Access', price: isTr ? '12.000' : '12,000', features: isTr ? ['Geniş kapsam + adil kullanım', '5 Kitap Ödünç', 'Öncelikli etkinlik davetleri'] : ['Broad access with fair-use rules', '5 book loans', 'Priority event invitations'], icon: '👑', cta: 'All-Access', featured: false, premium: true },
   ];
+
+  const note = isTr
+    ? 'Canlı paket bilgileri yüklenemediğinde gösterilen güvenli özet. Aylık haklar devretmez; kullanım kapasite, uygunluk ve üyelik koşullarına bağlıdır.'
+    : 'Safe summary shown when live package data cannot load. Monthly benefits do not roll over; use depends on capacity, availability, and membership terms.';
 
   container.innerHTML = fallbackTiers.map(function(t) {
     return '<div class="tier-card' + (t.featured ? ' featured' : '') + (t.premium ? ' premium' : '') + '">' +
@@ -439,10 +444,71 @@ function renderMembershipFallback() {
       '<ul class="tier-features">' + t.features.map(function(f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('') + '</ul>' +
       '<a class="btn ' + (t.premium ? 'btn-gold' : 'btn-p') + '" href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener">' + escapeHtml(t.cta) + '</a>' +
     '</div>';
-  }).join('');
+  }).join('') + '<p class="feed-empty" style="grid-column:1/-1">' + escapeHtml(note) + '</p>';
+}
+
+function renderBranches(branches) {
+  if (!branches || !branches.length) return;
+  const isTr = gl === 'tr';
+
+  // 1. Hero stack
+  const heroStack = document.getElementById('branch-hero-stack');
+  if (heroStack) {
+    const portalCard = heroStack.querySelector('.card:last-child');
+    const branchCards = branches.map(function(b) {
+      const dotCls = b.branch_id === 'kadikoy' ? 'd-sage' : 'd-gold';
+      const badge = isTr ? b.badge_tr : b.badge_en;
+      const desc = isTr ? b.description_tr : b.description_en;
+      const district = b.address_district || (b.branch_id === 'kadikoy' ? 'Kadıköy' : 'Kurtköy');
+
+      return '<div class="card hero-branch-card">' +
+        '<div class="badge"><span class="dot ' + dotCls + '"></span>' + escapeHtml(badge || '') + '</div>' +
+        '<p style="font-size:.83rem;color:var(--mid);line-height:1.6">' +
+          '<strong>' + (b.floor_area_sqm || 0) + 'm²</strong> — ' + escapeHtml(desc || '') +
+        '</p>' +
+        '<div class="micro-location">' + escapeHtml(district) + ', İstanbul</div>' +
+      '</div>';
+    }).join('');
+
+    heroStack.innerHTML = branchCards + (portalCard ? portalCard.outerHTML : '');
+    wireAccountButtons(); // Re-wire the portal button
+  }
+
+  // 2. Stats
+  const statSqm = document.getElementById('stat-sqm');
+  if (statSqm) {
+    const main = branches.find(function(b) { return b.branch_id === 'kadikoy'; }) || branches[0];
+    statSqm.innerHTML = '<div class="s-num">' + (main.floor_area_sqm || 0) + '<span style="font-size:1rem">m²</span></div>' +
+      '<div class="s-label">' + escapeHtml(isTr ? main.name_tr : main.name_en) + '</div>';
+  }
+  const statCount = document.getElementById('stat-branches');
+  if (statCount) {
+    statCount.innerHTML = '<div class="s-num">' + branches.length + '</div>' +
+      '<div class="s-label"><span class="tr-only">İstanbul Şubesi</span><span class="en-only">Istanbul Locations</span></div>';
+  }
+
+  // 3. Hours
+  const hoursGrid = document.getElementById('branch-hours-grid');
+  if (hoursGrid) {
+    hoursGrid.innerHTML = branches.map(function(b) {
+      const email = b.email || 'info@ggbloom.org';
+      const hours = (b.opening_time && b.closing_time)
+        ? escapeHtml(b.opening_time.slice(0, 5)) + ' — ' + escapeHtml(b.closing_time.slice(0, 5))
+        : '09:00 — 19:00';
+      return '<div class="hours-card">' +
+        '<h4>' + escapeHtml(isTr ? b.name_tr : b.name_en) + '</h4>' +
+        '<div class="hours-row"><span class="day">' + (isTr ? 'Her gun' : 'Daily') + '</span><span class="time">' + hours + '</span></div>' +
+        '<div style="margin-top:12px;font-size:.78rem;color:var(--muted)">E-mail: <a href="mailto:' + escapeHtml(email) + '">' + escapeHtml(email) + '</a></div>' +
+      '</div>';
+    }).join('');
+  }
 }
 
 function branchLabel(branchId) {
+  if (feedData && feedData.playAvailability) {
+    const b = feedData.playAvailability.find(function(x) { return x.branch_id === branchId; });
+    if (b) return gl === 'tr' ? b.name_tr : b.name_en;
+  }
   if (branchId === 'kadikoy') return 'Kadıköy';
   if (branchId === 'kurtkoy') return 'Kurtköy';
   return branchId || '';

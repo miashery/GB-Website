@@ -94,6 +94,13 @@ function wireAccountButtons() {
     el.target = '_blank';
     el.rel = 'noopener';
   });
+
+  document.querySelectorAll('[data-app-path]').forEach(function(el) {
+    const path = el.getAttribute('data-app-path') || '/';
+    el.href = APP_URL + path;
+    el.target = '_blank';
+    el.rel = 'noopener';
+  });
 }
 
 function revealOnScroll() {
@@ -424,11 +431,11 @@ function renderMembershipFallback() {
   const isTr = gl === 'tr';
 
   const fallbackTiers = [
-    { name: isTr ? 'Esnek Aile Paketi' : 'Flex Family', price: isTr ? '5.000' : '5,000', features: isTr ? ['3 Oyun Atölyesi', '2 Uzman Atölyesi', '%10 Kafe İndirimi'] : ['3 Play Workshops', '2 Expert Workshops', '10% cafe discount'], icon: '🌿', cta: isTr ? 'Flex ile Başla' : 'Start with Flex', featured: false, premium: false },
-    { name: isTr ? 'Hafta Sonu Aile' : 'Weekend Family', price: isTr ? '6.000' : '6,000', features: isTr ? ['6 Oyun Atölyesi', '4 Uzman Atölyesi', '1 Kitap Ödünç'] : ['6 Play Workshops', '4 Expert Workshops', '1 book loan'], icon: '☀️', cta: isTr ? 'Hafta Sonu' : 'Weekend', featured: false, premium: false },
-    { name: 'Workshop Explorer', price: isTr ? '8.000' : '8,000', badge: isTr ? 'En Popüler' : 'Most Popular', features: isTr ? ['Adil kullanım oyun hakkı', '8 Uzman Atölyesi', 'Öncelikli Rezervasyon'] : ['Fair-use play access', '8 Expert Workshops', 'Priority booking'], icon: '🚀', cta: isTr ? 'Explorer ile Başla' : 'Start Explorer', featured: true, premium: false },
-    { name: 'Remote + Play', price: isTr ? '8.000' : '8,000', features: isTr ? ['Adil kullanım çalışma alanı', 'Adil kullanım oyun hakkı', '3 Kitap Ödünç'] : ['Fair-use coworking access', 'Fair-use play access', '3 book loans'], icon: '💻', cta: 'Remote + Play', featured: false, premium: false },
-    { name: 'All-Access', price: isTr ? '12.000' : '12,000', features: isTr ? ['Geniş kapsam + adil kullanım', '5 Kitap Ödünç', 'Öncelikli etkinlik davetleri'] : ['Broad access with fair-use rules', '5 book loans', 'Priority event invitations'], icon: '👑', cta: 'All-Access', featured: false, premium: true },
+    { name: isTr ? 'Esnek Aile Paketi' : 'Flex Family', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Üye erişimi ve dönemsel avantajlar', 'Esnek rezervasyon ritmi', 'Haklar aylık sıfırlanır'] : ['Member access and seasonal advantages', 'Flexible booking rhythm', 'Benefits reset monthly'], icon: '🌿', cta: isTr ? 'Flex ile Başla' : 'Start with Flex', featured: false, premium: false },
+    { name: isTr ? 'Hafta Sonu Aile' : 'Weekend Family', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Hafta sonu aile ritmi', 'Uygunluk oldukça öncelikli rezervasyon', 'Kapasite ve şube kuralları geçerli'] : ['Weekend family rhythm', 'Priority booking where available', 'Capacity and branch rules apply'], icon: '☀️', cta: isTr ? 'Hafta Sonu' : 'Weekend', featured: false, premium: false },
+    { name: 'Workshop Explorer', price: isTr ? 'Canlı detay' : 'Live details', badge: isTr ? 'En Popüler' : 'Most Popular', features: isTr ? ['Atölye odaklı aylık kullanım', 'Uzman ve gelişim programlarına erişim', 'Haklar devretmez'] : ['Workshop-focused monthly use', 'Access to expert and growth programmes', 'Benefits do not roll over'], icon: '🚀', cta: isTr ? 'Explorer ile Başla' : 'Start Explorer', featured: true, premium: false },
+    { name: 'Remote + Play', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Çalışma alanı + oyun birlikte', 'Çocuk oyun alanı uygunluğa bağlı', 'Şube kapasitesi geçerlidir'] : ['Workspace and play together', 'Child play area subject to availability', 'Branch capacity applies'], icon: '💻', cta: 'Remote + Play', featured: false, premium: false },
+    { name: 'All-Access', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['En geniş üyelik kapsamı', 'Adil kullanım ve kapasite kuralları', 'Haklar aylık sıfırlanır'] : ['Broadest membership scope', 'Fair-use and capacity rules apply', 'Benefits reset monthly'], icon: '👑', cta: 'All-Access', featured: false, premium: true },
   ];
 
   const note = isTr
@@ -440,7 +447,7 @@ function renderMembershipFallback() {
       (t.badge ? '<div class="tier-badge">' + escapeHtml(t.badge) + '</div>' : '') +
       '<div class="tier-icon">' + escapeHtml(t.icon) + '</div>' +
       '<div class="tier-name">' + escapeHtml(t.name) + '</div>' +
-      '<div class="tier-price">&#8378;' + t.price + '<span> / ' + (isTr ? 'ay' : 'mo') + '</span></div>' +
+      '<div class="tier-price">' + escapeHtml(t.price) + '</div>' +
       '<ul class="tier-features">' + t.features.map(function(f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('') + '</ul>' +
       '<a class="btn ' + (t.premium ? 'btn-gold' : 'btn-p') + '" href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener">' + escapeHtml(t.cta) + '</a>' +
     '</div>';

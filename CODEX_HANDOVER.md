@@ -2,6 +2,35 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-05-25
+
+### Public Website Launch Trust Cleanup
+
+- Removed launch-risk claims from the homepage such as "first in Istanbul" / "Turkey's first" positioning and replaced them with safer family-third-space language.
+- Replaced placeholder testimonial-style quotes with honest launch promise cards, so the public site no longer implies real customer testimonials before launch proof exists.
+- Softened the homepage membership preview:
+  - removed hardcoded price/benefit promises from homepage cards;
+  - added clear language that live package details are managed through the webapp;
+  - stated that monthly benefits reset, do not roll over, and depend on capacity/availability.
+- Updated Kurtkoy public copy to show soft opening now and full opening planned for Monday, 1 June 2026.
+- Added `info@ggbloom.org` as the public email for both Kadikoy and Kurtkoy contact surfaces.
+- Rebuilt `contact.html` into readable, maintainable markup while preserving navigation, account CTAs, footer links, and shared script behavior.
+
+Verification:
+
+- `node --check assets/site.js` passes.
+- `git diff --check` passes.
+- Targeted public-claim scan no longer finds the removed first/only/testimonial phrases.
+- Basic mojibake scans for `â`, `Ã`, and `Â` return no public-site matches.
+
+## 2026-05-24
+
+### Public Website Book Catalog Link
+
+- Added a live catalogue CTA to `library.html` so public visitors can open the webapp `/catalog` page from the Bookstore & Library page.
+- Added shared `data-app-path` handling in `assets/site.js`, so public-site links to app surfaces are generated from the central `APP_URL` instead of duplicating app URLs in multiple scripts.
+- The static fallback `href` still points at `https://giggles-bloom.vercel.app/catalog` so the link remains usable even if JavaScript is unavailable.
+
 ## 2026-05-20
 
 ### Public Website Membership Fallback Claim Safety

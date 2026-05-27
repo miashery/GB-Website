@@ -233,6 +233,8 @@ main{flex:1;max-width:1200px;margin:0 auto;padding:32px 24px 72px;width:100%}
 .card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 .card h4{font-size:.98rem;margin-bottom:6px}
 .card p{font-size:.84rem;color:var(--mid);line-height:1.6}
+.clean-list{margin-top:12px;padding-left:18px;color:var(--mid);font-size:.84rem;line-height:1.7}
+.clean-list li{margin:4px 0}
 
 /* Coloured top-border cards */
 .ct  {border-top:3px solid var(--sage)}
@@ -247,6 +249,31 @@ main{flex:1;max-width:1200px;margin:0 auto;padding:32px 24px 72px;width:100%}
   border:1.5px solid var(--sage-light);border-radius:var(--radius);
   padding:24px 28px;
 }
+
+.form-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-sm);
+}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.form-full{grid-column:1/-1}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field span,.check-row span:first-child{font-size:.74rem;font-weight:800;color:var(--mid);text-transform:uppercase;letter-spacing:.04em}
+.form-field input,.form-field select,.form-field textarea{
+  width:100%;border:1px solid var(--border);border-radius:12px;background:var(--cream);
+  color:var(--ink);font:inherit;font-size:.9rem;padding:10px 12px;outline:none;
+}
+.form-field textarea{min-height:96px;resize:vertical}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(122,158,126,.14)}
+.check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.check-row{
+  display:flex;align-items:flex-start;gap:8px;border:1px solid var(--border);
+  border-radius:12px;background:var(--cream);padding:10px 12px;font-size:.84rem;color:var(--mid);
+}
+.check-row input{margin-top:3px}
+.form-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.form-status{min-height:22px;font-size:.86rem;font-weight:700;color:var(--mid)}
+.form-status.success{color:var(--sage-dark)}
+.form-status.error{color:var(--coral-dark)}
 
 /* Info card */
 .info-card{

@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('membership-grid')) {
     loadMembershipPackages();
   }
+
+  wireEventRequestForms();
 });
 
 function preparePwaShell() {
@@ -100,6 +102,71 @@ function wireAccountButtons() {
     el.href = APP_URL + path;
     el.target = '_blank';
     el.rel = 'noopener';
+  });
+}
+
+function wireEventRequestForms() {
+  document.querySelectorAll('[data-event-request-form]').forEach(function(form) {
+    const status = form.querySelector('[data-event-request-status]');
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      if (status) {
+        status.textContent = gl === 'tr' ? 'Gönderiliyor...' : 'Sending...';
+        status.className = 'form-status';
+      }
+
+      const data = new FormData(form);
+      const payload = {
+        source: 'public_site',
+        locale: gl,
+        branch_id: data.get('branch_id'),
+        event_type: data.get('event_type'),
+        requester_name: data.get('requester_name'),
+        requester_phone: data.get('requester_phone'),
+        requester_email: data.get('requester_email'),
+        child_name: data.get('child_name'),
+        child_age: data.get('child_age'),
+        age_range: data.get('age_range'),
+        expected_children_count: Number(data.get('expected_children_count') || 0),
+        expected_adults_count: Number(data.get('expected_adults_count') || 0),
+        preferred_date: data.get('preferred_date'),
+        preferred_time_window: data.get('preferred_time_window'),
+        food_cafe_needs: data.get('food_cafe_needs'),
+        cake_notes: data.get('cake_notes'),
+        play_area_needed: data.get('play_area_needed') === 'on',
+        guided_activity_needed: data.get('guided_activity_needed') === 'on',
+        workspace_needed: data.get('workspace_needed') === 'on',
+        budget_range: data.get('budget_range'),
+        notes: data.get('notes'),
+        kvkk_contact_consent: data.get('kvkk_contact_consent') === 'on',
+        company_website: data.get('company_website') || '',
+      };
+
+      try {
+        const response = await fetch(APP_URL + '/api/public/event-requests', {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const body = await response.json().catch(function() { return {}; });
+        if (!response.ok) throw new Error(body.error || 'Request failed');
+        form.reset();
+        if (status) {
+          status.textContent = gl === 'tr'
+            ? 'Talebiniz alındı. Ekibimiz sizinle iletişime geçecek.'
+            : 'Request received. Our team will contact you.';
+          status.className = 'form-status success';
+        }
+      } catch (error) {
+        if (status) {
+          status.textContent = gl === 'tr'
+            ? 'Talep gönderilemedi. Lütfen bilgileri kontrol edip tekrar deneyin.'
+            : 'Could not send the request. Please check the details and try again.';
+          status.className = 'form-status error';
+        }
+      }
+    });
   });
 }
 

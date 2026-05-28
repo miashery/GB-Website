@@ -2,6 +2,22 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-05-29
+
+### Public Website Turkish And Encoding Cleanup
+
+- Fixed visible Turkish text on `privacy.html`, including navigation labels, auth CTAs, privacy principles, and KVKK request copy.
+- Fixed `membership.html` title/description metadata from ASCII Turkish to proper `Üyelik`.
+- Replaced the customer-visible ASCII Turkish `Atolyeler` label with proper `Atölyeler`.
+- Cleaned corrupted separator comments in `index.html` so future maintenance scans do not keep rediscovering the same mojibake.
+- No booking, payment, branch, event request, membership, or tracking logic was changed.
+
+Verification:
+
+- `node --check assets/site.js` passes.
+- `git diff --check` passes.
+- Targeted scans no longer find the fixed `privacy.html` ASCII Turkish strings or the corrupted `index.html` comment separators.
+
 ## 2026-05-25
 
 ### Public Website Launch Trust Cleanup

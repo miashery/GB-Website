@@ -4,6 +4,21 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-05-29
 
+### Precise Public Brand Polish
+
+- Aligned the later public-site cream override to the canonical `#FDF8F0`, so Chrome/Edge should no longer drift between yellowish/white page backgrounds because of competing cream values.
+- Changed the homepage membership CTA banner from sage gradient to brand teal.
+- Replaced homepage membership-tier emoji icons with mono line SVG icons using `stroke-width="1.5"`.
+- Updated dynamic/fallback membership rendering in `assets/site.js` so API-fed tier icons also render through the same mono icon system instead of returning to emoji.
+- No booking, payment, branch, event request, membership logic, or tracking logic was changed.
+
+Verification:
+
+- `node --check assets/site.js` passes.
+- `git diff --check` passes.
+
+## 2026-05-29
+
 ### Public Website Turkish And Encoding Cleanup
 
 - Fixed visible Turkish text on `privacy.html`, including navigation labels, auth CTAs, privacy principles, and KVKK request copy.

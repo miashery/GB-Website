@@ -646,11 +646,11 @@ footer{
 
 /* Membership CTA banner */
 .join-banner{
-  background:linear-gradient(135deg,var(--sage),var(--sage-dark));
+  background:var(--brand-teal);
   border-radius:var(--radius);padding:36px 40px;
   color:#fff;display:grid;grid-template-columns:1fr auto;
   align-items:center;gap:24px;margin-top:32px;
-  box-shadow:0 8px 32px rgba(93,127,97,.25);
+  box-shadow:0 8px 32px rgba(45,111,138,.24);
 }
 .join-banner h2{color:#fff;font-size:clamp(1.3rem,2.5vw,1.9rem);margin-bottom:8px}
 .join-banner p{color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.6}
@@ -1118,7 +1118,7 @@ select:focus-visible,
   --mid: #4d514c;
   --muted: #6f746d;
   --border: #ded8cc;
-  --cream: #fbfaf7;
+  --cream: #FDF8F0;
   --cream-dark: #f1ede5;
   --sage-dark: #456f4a;
   --coral-dark: #b94742;
@@ -1127,6 +1127,7 @@ select:focus-visible,
 body {
   line-height: 1.62;
   text-rendering: optimizeLegibility;
+  background-color: #FDF8F0;
 }
 
 h1,
@@ -2249,7 +2250,40 @@ footer .footer-bottom {
 }
 
 .tier-icon {
-  filter: saturate(1.08);
+  align-items: center;
+  color: var(--brand-teal);
+  display: inline-flex;
+  filter: none;
+  justify-content: center;
+  min-height: 34px;
+}
+
+.gb-line-icon {
+  align-items: center;
+  color: var(--brand-teal);
+  display: inline-flex;
+  justify-content: center;
+}
+
+.gb-line-icon svg {
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.card h4 .gb-line-icon {
+  margin-right: 8px;
+  transform: translateY(3px);
+}
+
+.diff-card .dc-icon.gb-line-icon {
+  color: var(--brand-teal);
+  font-size: 1rem;
+}
+
+.tier-icon .gb-line-icon svg {
+  height: 28px;
+  width: 28px;
 }
 
 .card:hover,

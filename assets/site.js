@@ -512,6 +512,30 @@ async function loadMembershipPackages() {
   }
 }
 
+const GB_TIER_ICONS = {
+  leaf: '<span class="gb-line-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20c-3.5-1.2-6-4.5-6-8.3C5 6.4 9.3 3 19 3c0 9.7-3.4 14-8.7 14H8"/><path d="M7 17c2.5-3.6 5.4-6.1 9-8"/></svg></span>',
+  sun: '<span class="gb-line-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg></span>',
+  rocket: '<span class="gb-line-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.1.9-1.7 2.5-1.5 4 1.5.2 3.1-.4 4-1.5"/><path d="M14 4.5c2.3-.8 4.3-.7 5.5-.2.5 1.2.6 3.2-.2 5.5-1 2.9-3.2 5.9-6.5 8.2l-6.8-6.8c2.3-3.3 5.3-5.5 8-6.7Z"/><path d="M15 9a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"/><path d="M7.5 13.5 5 14l-1.5-1.5 3-2.2M10.5 16.5 10 19l1.5 1.5 2.2-3"/></svg></span>',
+  laptop: '<span class="gb-line-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2.5 19h19"/><path d="M8 19h8"/></svg></span>',
+  crown: '<span class="gb-line-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 4.5 4L12 5l4.5 7L21 8l-2 11H5L3 8Z"/><path d="M6 19h12"/></svg></span>',
+};
+
+function membershipIconKey(value) {
+  const normalized = String(value || '').trim().toLowerCase();
+  if (!normalized) return '';
+  if (normalized === 'leaf' || normalized === '\u{1F33F}' || normalized.includes('flex')) return 'leaf';
+  if (normalized === 'sun' || normalized === '\u2600\ufe0f' || normalized === '\u2600' || normalized.includes('weekend')) return 'sun';
+  if (normalized === 'rocket' || normalized === '\u{1F680}' || normalized.includes('explorer')) return 'rocket';
+  if (normalized === 'laptop' || normalized === '\u{1F4BB}' || normalized.includes('remote')) return 'laptop';
+  if (normalized === 'crown' || normalized === '\u{1F451}' || normalized.includes('all-access')) return 'crown';
+  return '';
+}
+
+function tierIconHtml(value) {
+  const key = membershipIconKey(value);
+  return key ? '<div class="tier-icon">' + GB_TIER_ICONS[key] + '</div>' : '';
+}
+
 function renderMembershipGrid(tiers) {
   const container = document.getElementById('membership-grid');
   if (!container) return;
@@ -534,7 +558,7 @@ function renderMembershipGrid(tiers) {
 
     return '<div class="tier-card' + (isFeatured ? ' featured' : '') + (isPremium && !isFeatured ? ' premium' : '') + '">' +
       (badge ? '<div class="tier-badge">' + escapeHtml(badge) + '</div>' : '') +
-      (tier.icon ? '<div class="tier-icon">' + escapeHtml(tier.icon) + '</div>' : '') +
+      tierIconHtml(tier.icon || tier.name_en || tier.name_tr) +
       '<div class="tier-name">' + escapeHtml(name || '') + '</div>' +
       '<div class="tier-price">&#8378;' + price + '<span> / ' + (isTr ? 'ay' : 'mo') + '</span></div>' +
       (desc ? '<p>' + escapeHtml(desc) + '</p>' : '') +
@@ -560,11 +584,11 @@ function renderMembershipFallback() {
   const isTr = gl === 'tr';
 
   const fallbackTiers = [
-    { name: isTr ? 'Esnek Aile Paketi' : 'Flex Family', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Üye erişimi ve dönemsel avantajlar', 'Esnek rezervasyon ritmi', 'Haklar aylık sıfırlanır'] : ['Member access and seasonal advantages', 'Flexible booking rhythm', 'Benefits reset monthly'], icon: '🌿', cta: isTr ? 'Flex ile Başla' : 'Start with Flex', featured: false, premium: false },
-    { name: isTr ? 'Hafta Sonu Aile' : 'Weekend Family', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Hafta sonu aile ritmi', 'Uygunluk oldukça öncelikli rezervasyon', 'Kapasite ve şube kuralları geçerli'] : ['Weekend family rhythm', 'Priority booking where available', 'Capacity and branch rules apply'], icon: '☀️', cta: isTr ? 'Hafta Sonu' : 'Weekend', featured: false, premium: false },
-    { name: 'Workshop Explorer', price: isTr ? 'Canlı detay' : 'Live details', badge: isTr ? 'En Popüler' : 'Most Popular', features: isTr ? ['Atölye odaklı aylık kullanım', 'Uzman ve gelişim programlarına erişim', 'Haklar devretmez'] : ['Workshop-focused monthly use', 'Access to expert and growth programmes', 'Benefits do not roll over'], icon: '🚀', cta: isTr ? 'Explorer ile Başla' : 'Start Explorer', featured: true, premium: false },
-    { name: 'Remote + Play', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Çalışma alanı + oyun birlikte', 'Çocuk oyun alanı uygunluğa bağlı', 'Şube kapasitesi geçerlidir'] : ['Workspace and play together', 'Child play area subject to availability', 'Branch capacity applies'], icon: '💻', cta: 'Remote + Play', featured: false, premium: false },
-    { name: 'All-Access', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['En geniş üyelik kapsamı', 'Adil kullanım ve kapasite kuralları', 'Haklar aylık sıfırlanır'] : ['Broadest membership scope', 'Fair-use and capacity rules apply', 'Benefits reset monthly'], icon: '👑', cta: 'All-Access', featured: false, premium: true },
+    { name: isTr ? 'Esnek Aile Paketi' : 'Flex Family', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Üye erişimi ve dönemsel avantajlar', 'Esnek rezervasyon ritmi', 'Haklar aylık sıfırlanır'] : ['Member access and seasonal advantages', 'Flexible booking rhythm', 'Benefits reset monthly'], icon: 'leaf', cta: isTr ? 'Flex ile Başla' : 'Start with Flex', featured: false, premium: false },
+    { name: isTr ? 'Hafta Sonu Aile' : 'Weekend Family', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Hafta sonu aile ritmi', 'Uygunluk oldukça öncelikli rezervasyon', 'Kapasite ve şube kuralları geçerli'] : ['Weekend family rhythm', 'Priority booking where available', 'Capacity and branch rules apply'], icon: 'sun', cta: isTr ? 'Hafta Sonu' : 'Weekend', featured: false, premium: false },
+    { name: 'Workshop Explorer', price: isTr ? 'Canlı detay' : 'Live details', badge: isTr ? 'En Popüler' : 'Most Popular', features: isTr ? ['Atölye odaklı aylık kullanım', 'Uzman ve gelişim programlarına erişim', 'Haklar devretmez'] : ['Workshop-focused monthly use', 'Access to expert and growth programmes', 'Benefits do not roll over'], icon: 'rocket', cta: isTr ? 'Explorer ile Başla' : 'Start Explorer', featured: true, premium: false },
+    { name: 'Remote + Play', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['Çalışma alanı + oyun birlikte', 'Çocuk oyun alanı uygunluğa bağlı', 'Şube kapasitesi geçerlidir'] : ['Workspace and play together', 'Child play area subject to availability', 'Branch capacity applies'], icon: 'laptop', cta: 'Remote + Play', featured: false, premium: false },
+    { name: 'All-Access', price: isTr ? 'Canlı detay' : 'Live details', features: isTr ? ['En geniş üyelik kapsamı', 'Adil kullanım ve kapasite kuralları', 'Haklar aylık sıfırlanır'] : ['Broadest membership scope', 'Fair-use and capacity rules apply', 'Benefits reset monthly'], icon: 'crown', cta: 'All-Access', featured: false, premium: true },
   ];
 
   const note = isTr
@@ -574,7 +598,7 @@ function renderMembershipFallback() {
   container.innerHTML = fallbackTiers.map(function(t) {
     return '<div class="tier-card' + (t.featured ? ' featured' : '') + (t.premium ? ' premium' : '') + '">' +
       (t.badge ? '<div class="tier-badge">' + escapeHtml(t.badge) + '</div>' : '') +
-      '<div class="tier-icon">' + escapeHtml(t.icon) + '</div>' +
+      tierIconHtml(t.icon) +
       '<div class="tier-name">' + escapeHtml(t.name) + '</div>' +
       '<div class="tier-price">' + escapeHtml(t.price) + '</div>' +
       '<ul class="tier-features">' + t.features.map(function(f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('') + '</ul>' +

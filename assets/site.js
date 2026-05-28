@@ -43,6 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
     loadDynamicFeed();
   }
 
+  if (document.querySelector('[data-experience-rate]')) {
+    loadExperienceRates();
+  }
+
   if (document.getElementById('membership-grid')) {
     loadMembershipPackages();
   }
@@ -310,6 +314,64 @@ async function loadDynamicFeed() {
     feedData = null;
     renderDynamicFallback();
   }
+}
+
+async function loadExperienceRates() {
+  try {
+    const res = await fetch(APP_URL + '/api/public/experience-offerings', {
+      mode: 'cors',
+      headers: { Accept: 'application/json' },
+    });
+    if (!res.ok) throw new Error('API ' + res.status);
+    const data = await res.json();
+    renderExperienceRates(data.offerings || []);
+  } catch (error) {
+    renderExperienceRates([]);
+  }
+}
+
+function renderExperienceRates(offerings) {
+  const byKey = {};
+  offerings.forEach(function(item) {
+    byKey[item.branch_id + ':' + item.offering_key] = item;
+  });
+
+  document.querySelectorAll('[data-experience-rate]').forEach(function(el) {
+    const key = el.getAttribute('data-experience-rate') || '';
+    const locale = el.getAttribute('data-rate-locale') || gl;
+    const offering = byKey[key];
+    if (!offering) return;
+    el.textContent = experienceRateText(offering, locale);
+  });
+}
+
+function experienceRateText(offering, locale) {
+  const isTr = locale === 'tr';
+  const price = Number(offering.price_kurus);
+  const priceText = Number.isFinite(price) && price > 0
+    ? (isTr ? '₺' : 'TRY ') + Math.round(price / 100).toLocaleString(isTr ? 'tr-TR' : 'en-GB')
+    : '';
+
+  if (offering.mode === 'paid' && priceText) {
+    if (offering.offering_key === 'open_play') {
+      return isTr ? priceText + ' aynı gün açık oyun erişimi' : priceText + ' same-day open play access';
+    }
+    if (offering.offering_key === 'play_workshop') {
+      return isTr ? 'Atölye fiyatı: ' + priceText : 'Workshop price: ' + priceText;
+    }
+    if (offering.offering_key === 'workspace') {
+      return isTr ? 'Çalışma alanı fiyatı: ' + priceText : 'Workspace price: ' + priceText;
+    }
+    return isTr ? 'Fiyat: ' + priceText : 'Price: ' + priceText;
+  }
+
+  if (offering.mode === 'complimentary_with_purchase') {
+    return isTr ? 'Kapasiteye bağlı olarak alışverişle ücretsiz' : 'Complimentary with purchase, subject to capacity';
+  }
+  if (offering.mode === 'complimentary') {
+    return isTr ? 'Ücretsiz, kapasiteye bağlı' : 'Complimentary, subject to capacity';
+  }
+  return isTr ? 'Fiyat/talep bilgisi için ekiple görüşün' : 'Ask the team for price/request details';
 }
 
 function renderDynamicContent() {

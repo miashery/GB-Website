@@ -4,6 +4,23 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-05-29
 
+### Warmth Sprint V2 Public Polish
+
+- Added the shared cozy card tokens to `assets/site.css`: cozy shadows, soft radius, organic feature-card radius, single brand accent, and warm hairline.
+- Replaced the top homepage branch real-estate card with a warmer "Today at Giggles & Bloom" moment while keeping branch/location detail elsewhere on the page.
+- De-rainbowed the homepage "Six things that set us apart" cards by removing per-card inline colour bars.
+- Replaced the six feature-card emoji icons with mono line SVGs using `stroke-width="1.5"`.
+- Added final CSS overrides for the `.diff-card`, `.dc-icon`, `.today-card`, and public card depth selectors so the late stylesheet polish wins consistently.
+- No booking, payment, branch, event request, membership, tracking, or webapp operational logic was changed.
+
+Verification:
+
+- `node --check assets/site.js` passes.
+- `git diff --check` passes.
+- Local browser preview was blocked by the browser tool/extension, so visual confirmation should happen after redeploy.
+
+## 2026-05-29
+
 ### Precise Public Brand Polish
 
 - Aligned the later public-site cream override to the canonical `#FDF8F0`, so Chrome/Edge should no longer drift between yellowish/white page backgrounds because of competing cream values.

@@ -32,6 +32,12 @@
   --shadow-sm:   0 2px 10px rgba(0,0,0,.05);
   --shadow:      0 4px 24px rgba(0,0,0,.07);
   --shadow-lg:   0 12px 48px rgba(0,0,0,.10);
+  --shadow-cozy: 0 4px 20px rgba(44, 42, 39, .06);
+  --shadow-cozy-lift: 0 10px 34px rgba(44, 42, 39, .10);
+  --radius-soft: 20px;
+  --radius-blob: 28px 22px 26px 20px;
+  --accent: #2D6F8A;
+  --hairline: #EAE2D4;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -2300,4 +2306,132 @@ footer .footer-bottom {
   background:
     linear-gradient(135deg, rgba(238, 244, 239, .86), rgba(255, 255, 255, .88) 44%, rgba(253, 248, 237, .76)),
     var(--white);
+}
+
+/* Warmth Sprint v2: additive cozy polish, no operational/print surfaces. */
+.card,
+.tier-card,
+.hours-card,
+.feed-card,
+.testimonial-grid > *,
+.hero-branch-card {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-cozy);
+}
+
+.diff-card {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(253, 248, 240, .72)),
+    var(--white);
+  border: 1px solid var(--hairline) !important;
+  border-top: 1px solid var(--hairline) !important;
+  border-radius: var(--radius-blob);
+  box-shadow: var(--shadow-cozy);
+  min-height: 222px;
+  padding: 26px 24px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.diff-card.fi-d1,
+.diff-card.fi-d2,
+.diff-card.fi-d3,
+.diff-card.fi-d4,
+.diff-card.fi-d5,
+.diff-card.fi-d6 {
+  border-top-color: var(--hairline) !important;
+}
+
+.diff-card:hover {
+  border-color: rgba(45, 111, 138, .26) !important;
+  box-shadow: var(--shadow-cozy-lift);
+  transform: translateY(-3px);
+}
+
+.diff-card .dc-icon,
+.diff-card .dc-icon.gb-line-icon {
+  align-items: center;
+  background: #F3EEE4;
+  border-radius: 16px 14px 18px 13px;
+  color: var(--accent);
+  display: flex;
+  font-size: 1rem;
+  height: 52px;
+  justify-content: center;
+  margin-bottom: 14px;
+  width: 52px;
+}
+
+.diff-card .dc-icon svg,
+.diff-card .dc-icon.gb-line-icon svg {
+  height: 26px;
+  width: 26px;
+}
+
+.diff-card h4 {
+  color: var(--accent);
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.12rem;
+  line-height: 1.2;
+  margin: 0 0 6px;
+}
+
+.today-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(251, 246, 236, .94)),
+    var(--white);
+  border-left: 0;
+}
+
+.today-head {
+  align-items: center;
+  color: var(--accent);
+  display: flex;
+  font-size: .78rem;
+  font-weight: 700;
+  gap: 8px;
+  letter-spacing: .04em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.today-time {
+  color: #8A8273;
+  letter-spacing: 0;
+  margin-left: auto;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.today-dot {
+  background: var(--sage);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(74, 124, 107, .15);
+  flex: 0 0 auto;
+  height: 8px;
+  width: 8px;
+}
+
+.today-line {
+  color: #3A372F;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.06rem;
+  line-height: 1.5;
+  margin: 10px 0 0;
+}
+
+.hero-branch-card-main,
+.hero-branch-card-satellite {
+  border-left-color: var(--accent);
+}
+
+@media(max-width: 560px) {
+  .today-head {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .today-time {
+    margin-left: 16px;
+  }
 }

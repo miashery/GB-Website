@@ -119,13 +119,17 @@
       </div>
     </div>
     <div class="hero-branch-stack" id="branch-hero-stack">
-      <div class="card hero-branch-card hero-branch-card-main">
-        <div class="badge"><span class="dot d-sage"></span><span class="tr-only">Kadıköy — Açık</span><span class="en-only">Kadıköy — Open</span></div>
-        <p style="font-size:.83rem;color:var(--mid);line-height:1.6">
-          <span class="tr-only"><strong>161m²</strong> — Daha büyük yaş gruplu oyun alanları, atölye odası, kütüphane, çalışma istasyonları ve kafe. Veli gözetiminde Açık Oyun ve planlı atölyeler için ana merkez.</span>
-          <span class="en-only"><strong>161m²</strong> — Larger age-zoned play areas, workshop room, library, work stations, and café. Main centre for parent-supervised Open Play and scheduled workshops.</span>
+      <div class="card hero-branch-card today-card">
+        <div class="today-head">
+          <span class="today-dot"></span>
+          <span class="tr-only">Bugün Giggles &amp; Bloom'da</span>
+          <span class="en-only">Today at Giggles &amp; Bloom</span>
+          <time class="today-time">14:20 · Kadıköy</time>
+        </div>
+        <p class="today-line">
+          <span class="tr-only">Maya ve kardeşi kütüphane köşesinde birlikte kitap okuyor.</span>
+          <span class="en-only">Maya and her little brother are reading together in the library nook.</span>
         </p>
-        <div class="micro-location">Kadıköy, İstanbul</div>
       </div>
       <div class="card hero-branch-card hero-branch-card-satellite">
         <div class="badge"><span class="dot d-gold"></span><span class="tr-only">Kurtköy — Uydu Şube</span><span class="en-only">Kurtköy — Satellite</span></div>
@@ -206,33 +210,72 @@
   <h2 class="sec-h"><span class="tr-only">Bizi fark yaratan 6 şey</span><span class="en-only">Six things that set us apart</span></h2>
   <p class="desc"><span class="tr-only">İstanbul'da pek çok oyun kafesi var. Biz oyun kafesi değiliz.</span><span class="en-only">There are many play cafés in Istanbul. We are not a play café.</span></p>
   <div class="g g3" style="gap:14px">
-    <div class="diff-card fi fi-d1" style="border-top-color:var(--sage)">
-      <div class="dc-icon">🎓</div>
+    <div class="diff-card fi fi-d1">
+      <div class="dc-icon gb-line-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10 12 5 2 10l10 5 10-5Z"></path>
+          <path d="M6 12.5v3.5c2.7 2 9.3 2 12 0v-3.5"></path>
+          <path d="M22 10v5"></path>
+        </svg>
+      </div>
       <h4><span class="tr-only">Uzman seri atölyeler</span><span class="en-only">Expert series workshops</span></h4>
       <p><span class="tr-only">Psikologlar, STEM eğitimcileri, dil uzmanları ve sanatçılar tarafından sunulan 50+ seans türü. Her seri, ilerleyen öğrenme çıktılarıyla tasarlanmıştır — aktivite değil, gelişim.</span><span class="en-only">50+ session types delivered by psychologists, STEM educators, language specialists and artists. Designed with progressive learning outcomes — not activity, development.</span></p>
     </div>
-    <div class="diff-card fi fi-d2" style="border-top-color:var(--coral)">
-      <div class="dc-icon">🧱</div>
+    <div class="diff-card fi fi-d2">
+      <div class="dc-icon gb-line-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="13" width="8" height="7" rx="1.5"></rect>
+          <rect x="13" y="13" width="8" height="7" rx="1.5"></rect>
+          <rect x="8" y="5" width="8" height="7" rx="1.5"></rect>
+          <path d="M6 13v-2m4 2v-2m6 2v-2m4 2v-2m-9-6V3m4 2V3"></path>
+        </svg>
+      </div>
       <h4><span class="tr-only">LEGO® Serious Play® — imza metodoloji</span><span class="en-only">LEGO® Serious Play® — signature method</span></h4>
       <p><span class="tr-only">İstanbul'un tek sertifikalı LSP eğitmeni bünyemizde. Çocuktan kurumsal ekibe, tüm izlerimize entegre.</span><span class="en-only">Istanbul's only certified LSP trainer in our team. Woven across all tracks from children to corporate teams.</span></p>
     </div>
-    <div class="diff-card fi fi-d3" style="border-top-color:var(--gold)">
-      <div class="dc-icon">👨‍👩‍👧</div>
+    <div class="diff-card fi fi-d3">
+      <div class="dc-icon gb-line-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="8" cy="8" r="3"></circle>
+          <circle cx="17" cy="9" r="2.5"></circle>
+          <path d="M3.5 19c.6-3.1 2.2-5 4.5-5s3.9 1.9 4.5 5"></path>
+          <path d="M13.5 18.5c.5-2.4 1.7-3.8 3.5-3.8s3 1.4 3.5 3.8"></path>
+        </svg>
+      </div>
       <h4><span class="tr-only">Ebeveyn ve çocuk için — aynı anda</span><span class="en-only">For parent and child — at the same time</span></h4>
       <p><span class="tr-only">Çalışma istasyonları, kadın iyilik çemberleri, babalar akşamları — çocuğunuz oynarken siz de gelişiyorsunuz.</span><span class="en-only">Working stations, women's wellbeing circles, fathers' evenings — while your child plays, you grow too.</span></p>
     </div>
-    <div class="diff-card fi fi-d1" style="border-top-color:var(--sky)">
-      <div class="dc-icon">🤝</div>
+    <div class="diff-card fi fi-d1">
+      <div class="dc-icon gb-line-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"></path>
+          <path d="M4 15.5h3.2l1.2-2.3 2 4 1.4-2.7H15"></path>
+        </svg>
+      </div>
       <h4><span class="tr-only">Gerçek topluluk — sosyal medya değil</span><span class="en-only">Real community — not social media</span></h4>
       <p><span class="tr-only">Babalar akşamı, büyükanne çemberi, çok kültürlü etkinlikler, yeni anneler grubu. Gösteriş için değil, bağlantı için.</span><span class="en-only">Fathers' evenings, grandparent circles, multicultural events, new mothers' support groups. For connection, not performance.</span></p>
     </div>
-    <div class="diff-card fi fi-d2" style="border-top-color:var(--lav)">
-      <div class="dc-icon">♿</div>
+    <div class="diff-card fi fi-d2">
+      <div class="dc-icon gb-line-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="4" r="2"></circle>
+          <path d="M10 8h4l1 5"></path>
+          <path d="M8.5 13h7"></path>
+          <path d="M7 19a5 5 0 0 1 2.3-8.4"></path>
+          <path d="M16.5 15.5A4 4 0 1 1 12 11"></path>
+        </svg>
+      </div>
       <h4><span class="tr-only">Kapsayıcı tasarım — ilk günden beri</span><span class="en-only">Inclusive design — from day one</span></h4>
       <p><span class="tr-only">Otizm ve DEHB dostu sesyon protokolleri, sessiz kafe saatleri, duyusal dostu STEM seansları. Türkiye'de bir ilk.</span><span class="en-only">Autism and ADHD-friendly session protocols, quiet café hours, sensory-friendly STEM sessions. A first in Turkey.</span></p>
     </div>
-    <div class="diff-card fi fi-d3" style="border-top-color:#5a8a5a">
-      <div class="dc-icon">🔬</div>
+    <div class="diff-card fi fi-d3">
+      <div class="dc-icon gb-line-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 3h6"></path>
+          <path d="M10 3v6.5L5.5 18A2 2 0 0 0 7.3 21h9.4a2 2 0 0 0 1.8-3L14 9.5V3"></path>
+          <path d="M8 16h8"></path>
+        </svg>
+      </div>
       <h4><span class="tr-only">Social Lab — Üsküdar Üniversitesi</span><span class="en-only">Social Lab — Üsküdar University</span></h4>
       <p><span class="tr-only">Üsküdar Üniversitesi Psikoloji Bölümü ortaklığıyla yürütülen araştırma ve topluluk laboratuvarı. Kanıta dayalı aile programlaması.</span><span class="en-only">Research and community lab run in partnership with Üsküdar University Psychology Dept. Evidence-based family programming.</span></p>
     </div>

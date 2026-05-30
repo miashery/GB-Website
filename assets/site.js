@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
   preparePwaShell();
   ensureMobileNav();
   normalizeFooter();
+  enhancePublicCardIcons();
 
   try {
     const savedLang = localStorage.getItem('gb_lang');
@@ -192,6 +193,38 @@ function revealOnScroll() {
   document.querySelectorAll('.fi').forEach(function(el) {
     obs.observe(el);
   });
+}
+
+function enhancePublicCardIcons() {
+  const headings = document.querySelectorAll([
+    '.clean-card-grid .card h4',
+    '.g.g4 > .card h4',
+  ].join(','));
+
+  headings.forEach(function(heading, index) {
+    if (heading.dataset.gbIconReady === '1') return;
+
+    stripLeadingClipart(heading);
+
+    const icon = document.createElement('span');
+    icon.className = 'gb-card-icon gb-card-icon-' + ((index % 6) + 1);
+    icon.setAttribute('aria-hidden', 'true');
+    icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c.9 2.8 2.7 4.6 5.5 5.5-2.8.9-4.6 2.7-5.5 5.5-.9-2.8-2.7-4.6-5.5-5.5 2.8-.9 4.6-2.7 5.5-5.5Z"/><path d="M5.5 14.5c.45 1.35 1.3 2.2 2.6 2.65-1.3.45-2.15 1.3-2.6 2.65-.45-1.35-1.3-2.2-2.6-2.65 1.3-.45 2.15-1.3 2.6-2.65Z"/><path d="M18.5 15c.35 1.05 1 1.7 2 2-.95.35-1.6 1-2 2-.35-1-1-1.65-2-2 1-.3 1.65-.95 2-2Z"/></svg>';
+    heading.insertBefore(icon, heading.firstChild);
+    heading.dataset.gbIconReady = '1';
+  });
+}
+
+function stripLeadingClipart(heading) {
+  const first = heading.firstChild;
+  if (!first || first.nodeType !== Node.TEXT_NODE) return;
+
+  const cleaned = first.nodeValue.replace(/^[\s\u00a0]*(?:[\u2600-\u27BF]|[\uD83C-\uDBFF][\uDC00-\uDFFF]|\uFE0F)+\s*/u, '');
+  if (cleaned.trim()) {
+    first.nodeValue = cleaned;
+  } else {
+    first.remove();
+  }
 }
 
 function ensureMobileNav() {

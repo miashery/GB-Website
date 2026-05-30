@@ -2579,3 +2579,105 @@ footer .footer-bottom {
 .clean-card-grid .ct-g { border-top-color: var(--gold) !important; }
 .clean-card-grid .ct-l { border-top-color: var(--lav) !important; }
 .clean-card-grid .ct-s { border-top-color: var(--sky) !important; }
+
+/* Public navigation and icon rhythm pass.
+   Keep teal for portal/system actions; let public pages carry warmer pillar colour. */
+.nav a:hover,
+.mobile-nav-inner .nav-links a:hover {
+  background: var(--cream-dark);
+  border-color: rgba(184, 176, 164, .36);
+  color: var(--ink);
+}
+
+.nav a.active,
+.mobile-nav-inner .nav-links a.active {
+  background: rgba(255, 255, 255, .72);
+  border-color: rgba(184, 176, 164, .42);
+  box-shadow: inset 0 -2px 0 var(--coral);
+  color: var(--ink);
+}
+
+.nav a.active[href*="workshops"],
+.mobile-nav-inner .nav-links a.active[href*="workshops"] {
+  box-shadow: inset 0 -2px 0 var(--sage);
+}
+
+.nav a.active[href*="library"],
+.nav a.active[href*="membership"],
+.mobile-nav-inner .nav-links a.active[href*="library"],
+.mobile-nav-inner .nav-links a.active[href*="membership"] {
+  box-shadow: inset 0 -2px 0 var(--gold);
+}
+
+.nav a.active[href*="wellbeing"],
+.nav a.active[href*="social-lab"],
+.mobile-nav-inner .nav-links a.active[href*="wellbeing"],
+.mobile-nav-inner .nav-links a.active[href*="social-lab"] {
+  box-shadow: inset 0 -2px 0 var(--lav);
+}
+
+.nav a.active[href*="workspaces"],
+.mobile-nav-inner .nav-links a.active[href*="workspaces"] {
+  box-shadow: inset 0 -2px 0 var(--sky);
+}
+
+.clean-card-grid .card h4,
+.g.g4 > .card h4 {
+  align-items: center;
+  display: flex;
+  gap: 9px;
+}
+
+.gb-card-icon {
+  align-items: center;
+  border-radius: 11px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+.gb-card-icon svg {
+  height: 19px;
+  width: 19px;
+}
+
+.gb-card-icon-1 { background: var(--sage-bg); color: var(--sage-dark); }
+.gb-card-icon-2 { background: var(--coral-bg); color: var(--coral-dark); }
+.gb-card-icon-3 { background: var(--gold-bg); color: #7a5a0a; }
+.gb-card-icon-4 { background: var(--lav-light); color: #5a4180; }
+.gb-card-icon-5 { background: var(--sky-light); color: #2d6a94; }
+.gb-card-icon-6 { background: rgba(253, 238, 237, .72); color: var(--coral-dark); }
+
+.tier-card .tier-icon {
+  border-radius: 14px;
+  box-shadow: none;
+  height: 44px;
+  margin-bottom: 12px;
+  min-height: 44px;
+  width: 44px;
+}
+
+.tier-card:nth-child(1) .tier-icon { background: var(--sage-bg); color: var(--sage-dark); }
+.tier-card:nth-child(2) .tier-icon { background: var(--gold-bg); color: #7a5a0a; }
+.tier-card:nth-child(3) .tier-icon { background: var(--coral-bg); color: var(--coral-dark); }
+.tier-card:nth-child(4) .tier-icon { background: var(--sky-light); color: #2d6a94; }
+.tier-card:nth-child(5) .tier-icon { background: var(--lav-light); color: #5a4180; }
+
+.tier-card:nth-child(1) .gb-line-icon,
+.tier-card:nth-child(1) .tier-icon .gb-line-icon { color: var(--sage-dark); }
+.tier-card:nth-child(2) .gb-line-icon,
+.tier-card:nth-child(2) .tier-icon .gb-line-icon { color: #7a5a0a; }
+.tier-card:nth-child(3) .gb-line-icon,
+.tier-card:nth-child(3) .tier-icon .gb-line-icon { color: var(--coral-dark); }
+.tier-card:nth-child(4) .gb-line-icon,
+.tier-card:nth-child(4) .tier-icon .gb-line-icon { color: #2d6a94; }
+.tier-card:nth-child(5) .gb-line-icon,
+.tier-card:nth-child(5) .tier-icon .gb-line-icon { color: #5a4180; }
+
+.tier-card:nth-child(1) .btn { background: var(--sage); border-color: var(--sage); color: #fff; }
+.tier-card:nth-child(2) .btn { background: #8a6a1f; border-color: #8a6a1f; color: #fff; }
+.tier-card:nth-child(3) .btn { background: var(--coral); border-color: var(--coral); color: #fff; }
+.tier-card:nth-child(4) .btn { background: #2d6a94; border-color: #2d6a94; color: #fff; }
+.tier-card:nth-child(5) .btn { background: #5a4180; border-color: #5a4180; color: #fff; }

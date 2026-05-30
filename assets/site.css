@@ -2435,3 +2435,147 @@ footer .footer-bottom {
     margin-left: 16px;
   }
 }
+
+/* Public colour warmth pass.
+   Public website only: restore cosy pillar colour while keeping teal as chrome. */
+.hero-home {
+  background:
+    linear-gradient(135deg, rgba(238, 244, 239, .68), rgba(255, 255, 255, .82) 48%, rgba(253, 246, 232, .42)),
+    var(--white);
+}
+
+.hero-home::before,
+.hero-home::after {
+  display: block;
+}
+
+.hero-home::before {
+  background: radial-gradient(circle, rgba(155, 142, 196, .14), transparent 68%);
+}
+
+.hero-home::after {
+  background: radial-gradient(circle, rgba(201, 149, 42, .12), transparent 68%);
+}
+
+.hero-sage,
+.hero-coral,
+.hero-gold,
+.hero-lav,
+.hero-sky {
+  border-left: 3px solid var(--sage);
+}
+
+.hero-sage {
+  background:
+    linear-gradient(135deg, rgba(235, 242, 238, .95), rgba(255, 255, 255, .86) 50%, rgba(253, 246, 232, .26)),
+    var(--white);
+  border-left-color: var(--sage);
+}
+
+.hero-coral {
+  background:
+    linear-gradient(135deg, rgba(253, 238, 237, .95), rgba(255, 255, 255, .86) 50%, rgba(235, 242, 238, .26)),
+    var(--white);
+  border-left-color: var(--coral);
+}
+
+.hero-gold {
+  background:
+    linear-gradient(135deg, rgba(253, 246, 232, .98), rgba(255, 255, 255, .86) 50%, rgba(232, 243, 248, .26)),
+    var(--white);
+  border-left-color: var(--gold);
+}
+
+.hero-lav {
+  background:
+    linear-gradient(135deg, rgba(237, 233, 247, .96), rgba(255, 255, 255, .86) 50%, rgba(235, 242, 238, .26)),
+    var(--white);
+  border-left-color: var(--lav);
+}
+
+.hero-sky {
+  background:
+    linear-gradient(135deg, rgba(235, 245, 251, .96), rgba(255, 255, 255, .88) 50%, rgba(253, 246, 232, .22)),
+    var(--white);
+  border-left-color: var(--sky);
+}
+
+.btn-p:hover,
+.btn-primary:hover {
+  background: #245a70;
+  border-color: #245a70;
+  color: #fff;
+}
+
+.join-banner {
+  background:
+    linear-gradient(135deg, rgba(224, 112, 96, .96) 0%, rgba(184, 90, 77, .98) 100%),
+    var(--coral);
+  box-shadow: 0 8px 32px rgba(224, 112, 96, .28);
+}
+
+.join-banner p {
+  color: rgba(255, 255, 255, .86);
+}
+
+.btn-white,
+.btn-white:hover {
+  color: var(--coral-dark) !important;
+}
+
+.badge-sage {
+  background: var(--sage-bg);
+  border-color: var(--sage-light);
+  color: var(--sage-dark);
+}
+
+.badge-coral {
+  background: var(--coral-bg);
+  border-color: var(--coral-light);
+  color: var(--coral-dark);
+}
+
+.badge-gold {
+  background: var(--gold-bg);
+  border-color: var(--gold-light);
+  color: #7a5a0a;
+}
+
+.badge-lav {
+  background: var(--lav-light);
+  border-color: rgba(155, 142, 196, .32);
+  color: #5a4180;
+}
+
+.badge-sky {
+  background: var(--sky-light);
+  border-color: rgba(107, 168, 196, .32);
+  color: #2d6a94;
+}
+
+.diff-card:nth-child(1) { border-top: 3px solid var(--sage) !important; }
+.diff-card:nth-child(2) { border-top: 3px solid var(--gold) !important; }
+.diff-card:nth-child(3) { border-top: 3px solid var(--coral) !important; }
+.diff-card:nth-child(4) { border-top: 3px solid var(--lav) !important; }
+.diff-card:nth-child(5) { border-top: 3px solid var(--sky) !important; }
+.diff-card:nth-child(6) { border-top: 3px solid var(--coral) !important; }
+
+.diff-card:nth-child(1) .dc-icon { background: var(--sage-bg); color: var(--sage-dark); }
+.diff-card:nth-child(2) .dc-icon { background: var(--gold-bg); color: #7a5a0a; }
+.diff-card:nth-child(3) .dc-icon { background: var(--coral-bg); color: var(--coral-dark); }
+.diff-card:nth-child(4) .dc-icon { background: var(--lav-light); color: #5a4180; }
+.diff-card:nth-child(5) .dc-icon { background: var(--sky-light); color: #2d6a94; }
+.diff-card:nth-child(6) .dc-icon { background: var(--coral-bg); color: var(--coral-dark); }
+
+.diff-card:nth-child(1) h4 { color: var(--sage-dark); }
+.diff-card:nth-child(2) h4 { color: #7a5a0a; }
+.diff-card:nth-child(3) h4 { color: var(--coral-dark); }
+.diff-card:nth-child(4) h4 { color: #5a4180; }
+.diff-card:nth-child(5) h4 { color: #2d6a94; }
+.diff-card:nth-child(6) h4 { color: var(--coral-dark); }
+
+.clean-card-grid .ct { border-top-color: var(--sage) !important; }
+.clean-card-grid .ct-c { border-top-color: var(--coral) !important; }
+.clean-card-grid .ct-g { border-top-color: var(--gold) !important; }
+.clean-card-grid .ct-l { border-top-color: var(--lav) !important; }
+.clean-card-grid .ct-s { border-top-color: var(--sky) !important; }

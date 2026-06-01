@@ -6,6 +6,11 @@ const CONTACT_LINKS = {
   mapKadikoy: 'https://maps.app.goo.gl/wf5DHk16UqNkESe5A',
   mapKurtkoy: 'https://maps.app.goo.gl/iQE29KZyHXt4ZJNN6',
 };
+const MINI_ICONS = {
+  pin: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s7-5.3 7-12a7 7 0 0 0-14 0c0 6.7 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>',
+  map: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v14M15 6v14"/></svg>',
+  instagram: '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3"/><circle cx="16.5" cy="7.5" r=".8"/></svg>',
+};
 let gl = 'tr';
 let feedData = null;
 
@@ -332,15 +337,25 @@ function normalizeFooter() {
       '</div>' +
       '<div class="footer-col">' +
         '<h5><span class="tr-only">Şubeler</span><span class="en-only">Branches</span></h5>' +
-        '<a href="' + CONTACT_LINKS.instagramMain + '" target="_blank" rel="noopener">Instagram @gigglesandbloom</a>' +
-        '<a href="' + CONTACT_LINKS.instagramKadikoy + '" target="_blank" rel="noopener">Kadıköy Instagram</a>' +
-        '<a href="' + CONTACT_LINKS.instagramKurtkoy + '" target="_blank" rel="noopener">Kurtköy Instagram</a>' +
-        '<a href="' + CONTACT_LINKS.mapKadikoy + '" target="_blank" rel="noopener">Kadıköy Google Maps</a>' +
-        '<a href="' + CONTACT_LINKS.mapKurtkoy + '" target="_blank" rel="noopener">Kurtköy Google Maps</a>' +
+        '<div class="footer-branches">' +
+          footerBranchRow('Kadıköy', CONTACT_LINKS.mapKadikoy, CONTACT_LINKS.instagramKadikoy) +
+          footerBranchRow('Kurtköy', CONTACT_LINKS.mapKurtkoy, CONTACT_LINKS.instagramKurtkoy) +
+          '<a class="footer-main-social" href="' + CONTACT_LINKS.instagramMain + '" target="_blank" rel="noopener">' + MINI_ICONS.instagram + '<span>@gigglesandbloom</span></a>' +
+        '</div>' +
       '</div>' +
     '</div>' +
     '<div class="footer-bottom"><div>&copy; <span data-year></span> Giggles &amp; Bloom &mdash; Kadıköy &amp; Kurtköy, İstanbul</div></div>';
   updateYears();
+}
+
+function footerBranchRow(label, mapUrl, instagramUrl) {
+  return '<div class="footer-branch-row">' +
+    '<span class="footer-branch-label">' + MINI_ICONS.pin + '<span>' + escapeHtml(label) + '</span></span>' +
+    '<span class="footer-branch-actions">' +
+      '<a href="' + mapUrl + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + ' Google Maps">' + MINI_ICONS.map + '<span>Map</span></a>' +
+      '<a href="' + instagramUrl + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + ' Instagram">' + MINI_ICONS.instagram + '<span>IG</span></a>' +
+    '</span>' +
+  '</div>';
 }
 
 async function loadDynamicFeed() {

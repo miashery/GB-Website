@@ -437,6 +437,27 @@ p.desc{color:var(--mid);font-size:.9rem;line-height:1.65;max-width:680px;margin-
   text-align:center;color:var(--sage-dark);
   font-weight:600;font-size:.9rem;
 }
+.branch-contact-actions{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;margin:12px 0 14px;
+}
+.branch-contact-action{
+  display:flex;align-items:center;gap:10px;
+  border:1px solid var(--border);border-radius:14px;
+  padding:10px 12px;background:var(--white);
+  color:var(--ink);box-shadow:var(--shadow-xs);
+}
+.branch-contact-action:hover{
+  border-color:var(--sage-light);background:var(--sage-bg);color:var(--sage-dark);
+}
+.branch-contact-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:999px;
+  background:var(--gold-bg);color:#7a5a0a;
+  font-size:.85rem;font-weight:800;flex-shrink:0;
+}
+.branch-contact-action strong{display:block;font-size:.82rem}
+.branch-contact-action small{display:block;margin-top:2px;color:var(--muted);font-size:.72rem;line-height:1.25}
 
 /* ══════════════════════════════
    DIFF CARDS (six things)
@@ -492,7 +513,7 @@ footer{
 }
 .footer-inner{
   max-width:1200px;margin:0 auto;padding:0 24px;
-  display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:36px;
+  display:grid;grid-template-columns:1.6fr .9fr .9fr .9fr 1.45fr;gap:28px;
 }
 .footer-brand{
   font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;
@@ -502,6 +523,43 @@ footer{
 .footer-col h5{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.4);margin-bottom:12px}
 .footer-col a{display:block;font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:6px;transition:color .2s}
 .footer-col a:hover{color:#fff}
+.footer-branches{display:flex;flex-direction:column;gap:8px}
+.footer-branch-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:7px 8px;border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;background:rgba(255,255,255,.035);
+}
+.footer-branch-label,
+.footer-main-social,
+.footer-branch-actions a{
+  display:inline-flex;align-items:center;gap:6px;
+}
+.footer-branch-label{font-size:.82rem;color:rgba(255,255,255,.78);font-weight:700}
+.footer-branch-actions{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.footer-branch-actions a,
+.footer-main-social{
+  width:auto;margin:0;border-radius:999px;
+  color:rgba(255,255,255,.68);
+}
+.footer-branch-actions a{
+  padding:5px 7px;background:rgba(255,255,255,.06);
+  font-size:.7rem;font-weight:700;
+}
+.footer-branch-actions a:hover,
+.footer-main-social:hover{color:#fff;background:rgba(255,255,255,.1)}
+.footer-main-social{
+  padding:4px 2px;font-size:.78rem;
+}
+.footer-branch-label svg,
+.footer-branch-actions svg,
+.footer-main-social svg{
+  width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;
+}
+.footer-main-social svg rect,
+.footer-main-social svg circle,
+.footer-branch-actions svg rect,
+.footer-branch-actions svg circle{stroke:currentColor}
 .footer-bottom{
   max-width:1200px;margin:32px auto 0;padding:20px 24px 0;
   border-top:1px solid rgba(255,255,255,.08);
@@ -576,6 +634,7 @@ footer{
 }
 @media(max-width:680px){
   .g2,.g3,.g4,.g{grid-template-columns:1fr}
+  .branch-contact-actions{grid-template-columns:1fr}
   .stats-row{grid-template-columns:repeat(2,1fr)}
   .testimonial-grid{grid-template-columns:1fr}
   .hours-grid{grid-template-columns:1fr}

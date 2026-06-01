@@ -11,6 +11,8 @@ This is the living handover file for public website changes made by Codex after 
   - Kurtkoy: `@gigglesandbloom.kurtkoy`
   - main business: `@gigglesandbloom`
 - Added the founder-provided Google Maps links for Kadikoy and Kurtkoy to the shared footer/contact paths and dynamic branch cards/hours cards.
+- Refined the footer so branch contact is shown as two compact branch rows with icon-style map/Instagram actions instead of a long list of plain links.
+- Promoted branch map/Instagram links on `contact.html` into visible action cards.
 - Updated homepage structured data so the Organization references the main and branch Instagram profiles, and each branch LocalBusiness includes its branch Instagram and map link.
 - No phone number has been added yet; keep "coming soon" until the business channel is ready.
 

@@ -1,4 +1,11 @@
 ﻿const APP_URL = 'https://giggles-bloom.vercel.app';
+const CONTACT_LINKS = {
+  instagramMain: 'https://www.instagram.com/gigglesandbloom/',
+  instagramKadikoy: 'https://www.instagram.com/gigglesandbloom.kadikoy/',
+  instagramKurtkoy: 'https://www.instagram.com/gigglesandbloom.kurtkoy/',
+  mapKadikoy: 'https://maps.app.goo.gl/wf5DHk16UqNkESe5A',
+  mapKurtkoy: 'https://maps.app.goo.gl/iQE29KZyHXt4ZJNN6',
+};
 let gl = 'tr';
 let feedData = null;
 
@@ -323,8 +330,16 @@ function normalizeFooter() {
         '<a href="privacy.html"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>' +
         '<a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>' +
       '</div>' +
+      '<div class="footer-col">' +
+        '<h5><span class="tr-only">Şubeler</span><span class="en-only">Branches</span></h5>' +
+        '<a href="' + CONTACT_LINKS.instagramMain + '" target="_blank" rel="noopener">Instagram @gigglesandbloom</a>' +
+        '<a href="' + CONTACT_LINKS.instagramKadikoy + '" target="_blank" rel="noopener">Kadıköy Instagram</a>' +
+        '<a href="' + CONTACT_LINKS.instagramKurtkoy + '" target="_blank" rel="noopener">Kurtköy Instagram</a>' +
+        '<a href="' + CONTACT_LINKS.mapKadikoy + '" target="_blank" rel="noopener">Kadıköy Google Maps</a>' +
+        '<a href="' + CONTACT_LINKS.mapKurtkoy + '" target="_blank" rel="noopener">Kurtköy Google Maps</a>' +
+      '</div>' +
     '</div>' +
-    '<div class="footer-bottom"><div>&copy; <span data-year></span> Giggles &amp; Bloom &mdash; Kadıköy &amp; Kurtköy, Istanbul</div></div>';
+    '<div class="footer-bottom"><div>&copy; <span data-year></span> Giggles &amp; Bloom &mdash; Kadıköy &amp; Kurtköy, İstanbul</div></div>';
   updateYears();
 }
 
@@ -653,6 +668,7 @@ function renderBranches(branches) {
       const badge = isTr ? b.badge_tr : b.badge_en;
       const desc = isTr ? b.description_tr : b.description_en;
       const district = b.address_district || (b.branch_id === 'kadikoy' ? 'Kadıköy' : 'Kurtköy');
+      const links = branchContactLinks(b.branch_id);
 
       return '<div class="card hero-branch-card">' +
         '<div class="badge"><span class="dot ' + dotCls + '"></span>' + escapeHtml(badge || '') + '</div>' +
@@ -660,6 +676,10 @@ function renderBranches(branches) {
           '<strong>' + (b.floor_area_sqm || 0) + 'm²</strong> — ' + escapeHtml(desc || '') +
         '</p>' +
         '<div class="micro-location">' + escapeHtml(district) + ', İstanbul</div>' +
+        '<div class="btns" style="margin-top:10px">' +
+          '<a class="btn" href="' + links.map + '" target="_blank" rel="noopener">Google Maps</a>' +
+          '<a class="btn" href="' + links.instagram + '" target="_blank" rel="noopener">Instagram</a>' +
+        '</div>' +
       '</div>';
     }).join('');
 
@@ -685,6 +705,7 @@ function renderBranches(branches) {
   if (hoursGrid) {
     hoursGrid.innerHTML = branches.map(function(b) {
       const email = b.email || 'info@ggbloom.org';
+      const links = branchContactLinks(b.branch_id);
       const hours = (b.opening_time && b.closing_time)
         ? escapeHtml(b.opening_time.slice(0, 5)) + ' — ' + escapeHtml(b.closing_time.slice(0, 5))
         : '09:00 — 19:00';
@@ -692,9 +713,32 @@ function renderBranches(branches) {
         '<h4>' + escapeHtml(isTr ? b.name_tr : b.name_en) + '</h4>' +
         '<div class="hours-row"><span class="day">' + (isTr ? 'Her gün' : 'Daily') + '</span><span class="time">' + hours + '</span></div>' +
         '<div style="margin-top:12px;font-size:.78rem;color:var(--muted)">E-mail: <a href="mailto:' + escapeHtml(email) + '">' + escapeHtml(email) + '</a></div>' +
+        '<div class="btns" style="margin-top:10px">' +
+          '<a class="btn" href="' + links.map + '" target="_blank" rel="noopener">Google Maps</a>' +
+          '<a class="btn" href="' + links.instagram + '" target="_blank" rel="noopener">Instagram</a>' +
+        '</div>' +
       '</div>';
     }).join('');
   }
+}
+
+function branchContactLinks(branchId) {
+  if (branchId === 'kadikoy') {
+    return {
+      instagram: CONTACT_LINKS.instagramKadikoy,
+      map: CONTACT_LINKS.mapKadikoy,
+    };
+  }
+  if (branchId === 'kurtkoy') {
+    return {
+      instagram: CONTACT_LINKS.instagramKurtkoy,
+      map: CONTACT_LINKS.mapKurtkoy,
+    };
+  }
+  return {
+    instagram: CONTACT_LINKS.instagramMain,
+    map: CONTACT_LINKS.mapKadikoy,
+  };
 }
 
 function branchLabel(branchId) {

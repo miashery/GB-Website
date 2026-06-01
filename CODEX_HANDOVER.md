@@ -4,6 +4,22 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-01
 
+### Branch Social and Map Links
+
+- Added the official branch Instagram handles to public contact/footer surfaces:
+  - Kadikoy: `@gigglesandbloom.kadikoy`
+  - Kurtkoy: `@gigglesandbloom.kurtkoy`
+  - main business: `@gigglesandbloom`
+- Added the founder-provided Google Maps links for Kadikoy and Kurtkoy to the shared footer/contact paths and dynamic branch cards/hours cards.
+- Updated homepage structured data so the Organization references the main and branch Instagram profiles, and each branch LocalBusiness includes its branch Instagram and map link.
+- No phone number has been added yet; keep "coming soon" until the business channel is ready.
+
+Verification:
+
+- Public JS syntax check, homepage JSON-LD parse, and public-site `git diff --check` passed.
+
+## 2026-06-01
+
 ### SEO, Icon, and Contact-Safe Launch Plumbing
 
 - Added `robots.txt`, `sitemap.xml`, canonical/hreflang/social metadata to key pages, and a refreshed service worker cache list.

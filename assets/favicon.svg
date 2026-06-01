@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="G&amp;B">
+  <rect width="64" height="64" rx="15" fill="#FDF8F0"/>
+  <rect x="3" y="3" width="58" height="58" rx="13" fill="none" stroke="#E4DDD4" stroke-width="2"/>
+  <circle cx="48" cy="15" r="4.2" fill="#E07060"/>
+  <circle cx="53" cy="20" r="3" fill="#F5C84B"/>
+  <text x="32" y="38" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-weight="700" fill="#2D6F8A">G&amp;B</text>
+  <path d="M23 43c3 3 6 4.5 9.5 4.5S39 46 42 43" fill="none" stroke="#2D6F8A" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

@@ -66,7 +66,7 @@ function preparePwaShell() {
   if (!document.querySelector('meta[name="theme-color"]')) {
     const theme = document.createElement('meta');
     theme.name = 'theme-color';
-    theme.content = '#7a9e7e';
+    theme.content = '#2D6F8A';
     document.head.appendChild(theme);
   }
 
@@ -318,7 +318,7 @@ function normalizeFooter() {
         '<a href="' + APP_URL + '/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>' +
       '</div>' +
       '<div class="footer-col">' +
-        '<h5><span class="tr-only">Yardim</span><span class="en-only">Help</span></h5>' +
+        '<h5><span class="tr-only">Yardım</span><span class="en-only">Help</span></h5>' +
         '<a href="contact.html"><span class="tr-only">Hakkımızda</span><span class="en-only">About</span></a>' +
         '<a href="privacy.html"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>' +
         '<a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>' +
@@ -690,7 +690,7 @@ function renderBranches(branches) {
         : '09:00 — 19:00';
       return '<div class="hours-card">' +
         '<h4>' + escapeHtml(isTr ? b.name_tr : b.name_en) + '</h4>' +
-        '<div class="hours-row"><span class="day">' + (isTr ? 'Her gun' : 'Daily') + '</span><span class="time">' + hours + '</span></div>' +
+        '<div class="hours-row"><span class="day">' + (isTr ? 'Her gün' : 'Daily') + '</span><span class="time">' + hours + '</span></div>' +
         '<div style="margin-top:12px;font-size:.78rem;color:var(--muted)">E-mail: <a href="mailto:' + escapeHtml(email) + '">' + escapeHtml(email) + '</a></div>' +
       '</div>';
     }).join('');

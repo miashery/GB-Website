@@ -5,10 +5,16 @@
   "start_url": "index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#fbfaf7",
-  "theme_color": "#7a9e7e",
-  "orientation": "portrait-primary",
+  "background_color": "#FDF8F0",
+  "theme_color": "#2D6F8A",
+  "orientation": "any",
   "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
     {
       "src": "assets/logo.png",
       "sizes": "192x192",

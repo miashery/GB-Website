@@ -2,6 +2,20 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-01
+
+### SEO, Icon, and Contact-Safe Launch Plumbing
+
+- Added `robots.txt`, `sitemap.xml`, canonical/hreflang/social metadata to key pages, and a refreshed service worker cache list.
+- Added interim `assets/brand-mark.svg`, `assets/favicon.svg`, and `assets/og-image.png` so previews/favicons no longer depend on the older raster logo.
+- Added Organization/LocalBusiness structured data on the homepage for Kadikoy/Kurtkoy public search context without exposing personal phone numbers.
+- Corrected the generated Turkish SEO metadata on touched pages where Windows shell encoding had written `?` placeholders.
+- The clean official wordmark/Bloom Motif assets are still needed. The shared-drive logo photo is a social/circle lockup, not the production default logo.
+
+Verification:
+
+- Static source checks and webapp `npm run quality:check` are tracked in the main webapp handover for this same date.
+
 ## 2026-05-29
 
 ### Warmth Sprint V2 Public Polish

@@ -1,14 +1,23 @@
-﻿const CACHE_NAME = 'gb-public-v3';
+const CACHE_NAME = 'gb-public-v4';
 const CORE_ASSETS = [
   './',
   './index.html',
   './workshops.html',
   './play.html',
   './food.html',
+  './events.html',
+  './library.html',
+  './workspaces.html',
+  './wellbeing.html',
   './membership.html',
   './contact.html',
+  './privacy.html',
+  './robots.txt',
+  './sitemap.xml',
   './assets/site.css',
   './assets/site.js',
+  './assets/favicon.svg',
+  './assets/brand-mark.svg',
   './assets/logo.png'
 ];
 

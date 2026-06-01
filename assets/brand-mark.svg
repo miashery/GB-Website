@@ -1,0 +1,12 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Giggles &amp; Bloom brand mark</title>
+  <desc id="desc">A warm cream rounded-square mark with G and B initials and small bloom accents.</desc>
+  <rect width="512" height="512" rx="120" fill="#FDF8F0"/>
+  <rect x="22" y="22" width="468" height="468" rx="104" fill="none" stroke="#E4DDD4" stroke-width="16"/>
+  <circle cx="370" cy="138" r="34" fill="#E07060"/>
+  <circle cx="414" cy="178" r="24" fill="#F5C84B"/>
+  <circle cx="104" cy="360" r="28" fill="#7BCAC8"/>
+  <circle cx="142" cy="402" r="18" fill="#F4A6BA"/>
+  <text x="256" y="292" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="148" font-weight="700" fill="#2D6F8A">G&amp;B</text>
+  <path d="M184 328c24 32 50 48 79 48s55-16 79-48" fill="none" stroke="#2D6F8A" stroke-width="14" stroke-linecap="round"/>
+</svg>

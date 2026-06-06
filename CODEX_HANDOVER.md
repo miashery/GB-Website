@@ -4,6 +4,17 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-07
 
+### Public Handover Mojibake Audit
+
+- Removed raw mojibake marker examples from older verification notes so future scans do not report false positives from the handover itself.
+- No public HTML, CSS, JavaScript, SEO metadata, contact links, booking/payment logic, or app integrations were changed in this cleanup.
+
+Verification:
+
+- Repository-wide mojibake marker scan returns no matches in `C:/Codex/GB-Website/gb_site`.
+
+## 2026-06-07
+
 ### Public Launch Copy, SEO, and Safety Boundary Pass
 
 - Updated public launch copy so Kurtkoy is described as open, while Mini Play and daily activity availability remain subject to capacity, safety rules, and the daily programme.
@@ -120,7 +131,7 @@ Verification:
 - `node --check assets/site.js` passes.
 - `git diff --check` passes.
 - Targeted public-claim scan no longer finds the removed first/only/testimonial phrases.
-- Basic mojibake scans for `â`, `Ã`, and `Â` return no public-site matches.
+- Basic mojibake marker scans return no public-site matches.
 
 ## 2026-05-24
 
@@ -237,7 +248,7 @@ Relevant commit:
 
 Verification:
 
-- `rg -n 'ðŸ|Ã|Â|â|Ä|Å' workshops.html play.html` returns no matches.
+- A focused mojibake marker scan across `workshops.html` and `play.html` returns no matches.
 - A PowerShell local href scan found all relative HTML links point to existing files.
 - Attempting to start a local background HTTP server from this sandbox was blocked by the workspace policy, so production/mobile browser QA still needs to happen after deploy.
 

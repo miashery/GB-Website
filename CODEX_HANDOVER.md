@@ -2,6 +2,25 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-07
+
+### Public Launch Copy, SEO, and Safety Boundary Pass
+
+- Updated public launch copy so Kurtkoy is described as open, while Mini Play and daily activity availability remain subject to capacity, safety rules, and the daily programme.
+- Removed or softened unsupported public claims around formal university partnership, "first in Turkey", 50+ workshop types, LEGO/LSP certification, autism/ADHD positioning, and Layer 3 proof language.
+- Aligned `workshops.html` with the current operating taxonomy: Play Guided Moments, Play Workshops, Special Workshops, and Structured Series.
+- Strengthened `wellbeing.html` with canonical/hreflang/social metadata and a clear non-emergency, non-clinical support boundary.
+- Expanded `privacy.html` with clearer family, child, consent, payment, event request, and Social Lab data-use sections.
+- Added a static membership-tier fallback so `membership.html` no longer shows only a spinner if the live membership API is slow or unavailable.
+- Made the public app URL override-friendly in `assets/site.js` and updated `sitemap.xml` lastmod dates.
+- No POS, payment, receipt, branch-terminal, booking, or webapp operational logic was changed.
+
+Verification:
+
+- Static scans for risky launch claims and visible mojibake markers passed.
+- Public JS syntax, JSON-LD parse, and `git diff --check` passed.
+- Production still needs redeploy/live verification after push.
+
 ## 2026-06-01
 
 ### Branch Social and Map Links

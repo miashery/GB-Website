@@ -365,18 +365,30 @@ async function loadDynamicFeed() {
   }
 
   try {
-    const res = await fetch(APP_URL + '/api/public/upcoming', {
-      mode: 'cors',
-      headers: { Accept: 'application/json' },
-    });
-    if (!res.ok) throw new Error('API ' + res.status);
+    const [upcoming, workshopSessions] = await Promise.all([
+      fetchJson(APP_URL + '/api/public/upcoming'),
+      fetchJson(APP_URL + '/api/public/workshop-sessions?limit=12').catch(function() {
+        return { sessions: [] };
+      }),
+    ]);
 
-    feedData = await res.json();
+    feedData = Object.assign({}, upcoming, {
+      workshopSessions: workshopSessions.sessions || [],
+    });
     renderDynamicContent();
   } catch (error) {
     feedData = null;
     renderDynamicFallback();
   }
+}
+
+async function fetchJson(url) {
+  const res = await fetch(url, {
+    mode: 'cors',
+    headers: { Accept: 'application/json' },
+  });
+  if (!res.ok) throw new Error('API ' + res.status);
+  return res.json();
 }
 
 async function loadExperienceRates() {
@@ -454,7 +466,25 @@ function renderFeed(container, data) {
   const isTr = gl === 'tr';
   const items = [];
 
-  (data.events || []).slice(0, 3).forEach(function(event) {
+  (data.workshopSessions || []).slice(0, 4).forEach(function(session) {
+    items.push({
+      type: 'workshop-session',
+      tag: isTr ? session.category_tr : session.category_en,
+      tagClass: session.programme_kind === 'play_guided_moment' || session.programme_kind === 'play_workshop'
+        ? 'coral'
+        : session.programme_kind === 'public_event'
+          ? 'gold'
+          : '',
+      title: isTr ? session.title_tr : session.title_en,
+      date: formatDate(session.starts_at),
+      branch: isTr ? session.branch_name_tr : session.branch_name_en,
+      price: publicSessionPriceText(session),
+      seats: sessionSeatText(session),
+      badges: isTr ? session.badges_tr : session.badges_en,
+    });
+  });
+
+  (data.events || []).slice(0, items.length ? 2 : 3).forEach(function(event) {
     items.push({
       type: 'event',
       title: isTr ?event.name_tr : event.name_en,
@@ -463,7 +493,7 @@ function renderFeed(container, data) {
     });
   });
 
-  (data.workshops || []).slice(0, 3).forEach(function(workshop) {
+  if (!items.length) (data.workshops || []).slice(0, 3).forEach(function(workshop) {
     items.push({
       type: 'workshop',
       title: isTr ?workshop.name_tr : workshop.name_en,
@@ -497,18 +527,45 @@ function renderDynamicFallback() {
 }
 
 function renderFeedCard(item) {
-  const tag = item.type === 'event'
+  const tag = item.tag || (item.type === 'event'
     ?(gl === 'tr' ?'Etkinlik' : 'Event')
-    : (gl === 'tr' ?'Atölye' : 'Workshop');
-  const cls = item.type === 'event' ?'coral' : '';
+    : (gl === 'tr' ?'Atölye' : 'Workshop'));
+  const cls = item.tagClass || (item.type === 'event' ?'coral' : '');
   const href = item.type === 'event' ?'events.html' : 'workshops.html';
+  const badges = Array.isArray(item.badges) && item.badges.length
+    ? '<div class="fc-badges">' + item.badges.slice(0, 2).map(function(badge) {
+        return '<span>' + escapeHtml(badge) + '</span>';
+      }).join('') + '</div>'
+    : '';
+  const details = [item.seats, item.price].filter(Boolean).map(function(detail) {
+    return '<span>' + escapeHtml(detail) + '</span>';
+  }).join('');
 
   return '<a class="feed-card" href="' + href + '" style="text-decoration:none;color:inherit">' +
     '<span class="fc-tag ' + cls + '">' + escapeHtml(tag) + '</span>' +
+    badges +
     '<h4>' + escapeHtml(item.title || '') + '</h4>' +
     '<div class="fc-meta">' + escapeHtml(item.date || '') + '</div>' +
+    (details ? '<div class="fc-details">' + details + '</div>' : '') +
     '<div class="fc-branch">' + escapeHtml(gl === 'tr' ?'Şube: ' : 'Location: ') + escapeHtml(item.branch || '') + '</div>' +
     '</a>';
+}
+
+function publicSessionPriceText(session) {
+  const price = Number(session.price_kurus);
+  if (!Number.isFinite(price)) return gl === 'tr' ? 'Fiyat/talep bilgisi' : 'Price on request';
+  if (price <= 0) return gl === 'tr' ? 'Ücretsiz veya dahil' : 'Free or included';
+  return formatPrice(price);
+}
+
+function sessionSeatText(session) {
+  const capacity = Number(session.capacity);
+  const remaining = Number(session.remaining);
+  if (!Number.isFinite(capacity) || capacity <= 0) return '';
+  if (remaining <= 0) return gl === 'tr' ? 'Doldu' : 'Full';
+  return gl === 'tr'
+    ? remaining + '/' + capacity + ' yer'
+    : remaining + '/' + capacity + ' seats';
 }
 
 function renderPlayAvailability(items) {

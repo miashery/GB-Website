@@ -4,6 +4,23 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-07
 
+### Public Trust and Launch-Credibility Follow-up
+
+- Applied the agreed public-site-only trust pass after the Claude/ChatGPT review.
+- Removed the stale homepage `50+` workshop claim and softened the “new category/first in Istanbul” style positioning into safer family-third-space language.
+- Kept Kurtköy copy in an open/phased-capacity wording: the branch is open, while early-week service availability remains subject to capacity, safety rules, staff availability, and daily programme.
+- Softened cafe dietary claims so the public site does not promise gluten-free/coeliac-safe preparation.
+- Updated static and dynamic membership fallback names to launch-safe family pass names.
+- Added `cafe.html` as a redirect/fallback to the real Cafe/Food page so old links do not break.
+
+Verification:
+
+- `node -c assets/site.js` passes.
+- Static scan found no high-risk public phrases from the current review list, including stale opening-date wording, `50+`, LEGO/Serious Play, first/guaranteed/clinical/dietary-risk phrases, or visible mojibake markers.
+- Production still needs redeploy/live verification after push.
+
+## 2026-06-07
+
 ### Public Handover Mojibake Audit
 
 - Removed raw mojibake marker examples from older verification notes so future scans do not report false positives from the handover itself.

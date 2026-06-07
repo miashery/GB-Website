@@ -527,11 +527,52 @@ function renderDynamicContent() {
   renderBranches(feedData.playAvailability || []);
 }
 
+function isBloomLabFeedPage() {
+  return /(?:^|\/)workshops(?:\.html)?\/?$/.test(window.location.pathname || '');
+}
+
+function isPlayProgrammeKind(kind) {
+  return kind === 'play_guided_moment' || kind === 'play_workshop';
+}
+
+function bloomLabFallbackItems(isTr) {
+  return [
+    {
+      type: 'workshop',
+      tag: isTr ? 'BloomLab' : 'BloomLab',
+      tagClass: 'lav',
+      title: isTr ? 'Özel Atölye Programı' : 'Special Workshop Programme',
+      date: isTr ? 'Takvim yakında' : 'Schedule coming soon',
+      branch: isTr ? 'Kadıköy / Kurtköy' : 'Kadıköy / Kurtköy',
+    },
+    {
+      type: 'workshop',
+      tag: isTr ? 'Seri' : 'Series',
+      tagClass: 'gold',
+      title: isTr ? 'Yapılandırılmış Seri Atölyeleri' : 'Structured Series Workshops',
+      date: isTr ? 'Planlama aşamasında' : 'In planning',
+      branch: isTr ? 'Programa göre' : 'By programme',
+    },
+    {
+      type: 'workshop',
+      tag: isTr ? 'Topluluk' : 'Community',
+      tagClass: 'coral',
+      title: isTr ? 'Aile, yetişkin ve topluluk oturumları' : 'Family, adult, and community sessions',
+      date: isTr ? 'Özel talep alınır' : 'Requests welcome',
+      branch: isTr ? 'Programa göre' : 'By programme',
+    },
+  ];
+}
+
 function renderFeed(container, data) {
   const isTr = gl === 'tr';
   const items = [];
+  const bloomLabPage = isBloomLabFeedPage();
+  const workshopSessions = (data.workshopSessions || []).filter(function(session) {
+    return !bloomLabPage || !isPlayProgrammeKind(session.programme_kind);
+  });
 
-  (data.workshopSessions || []).slice(0, 4).forEach(function(session) {
+  workshopSessions.slice(0, 4).forEach(function(session) {
     items.push({
       type: 'workshop-session',
       tag: isTr ? session.category_tr : session.category_en,
@@ -549,7 +590,14 @@ function renderFeed(container, data) {
     });
   });
 
-  (data.events || []).slice(0, items.length ? 2 : 3).forEach(function(event) {
+  const eventItems = bloomLabPage
+    ? (data.events || []).filter(function(event) {
+        const name = ((isTr ? event.name_tr : event.name_en) || '').toLocaleLowerCase('tr');
+        return /atölye|workshop|bloom|seri|series|talk|konuş|topluluk|community/.test(name);
+      })
+    : (data.events || []);
+
+  eventItems.slice(0, items.length ? 2 : 3).forEach(function(event) {
     items.push({
       type: 'event',
       title: isTr ?event.name_tr : event.name_en,
@@ -557,6 +605,10 @@ function renderFeed(container, data) {
       branch: branchLabel(event.branch_id),
     });
   });
+
+  if (!items.length && bloomLabPage) {
+    items.push.apply(items, bloomLabFallbackItems(isTr));
+  }
 
   if (!items.length) (data.workshops || []).slice(0, 3).forEach(function(workshop) {
     items.push({

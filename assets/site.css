@@ -796,6 +796,8 @@ footer a:hover { color: #fff }
 }
 .feed-card .fc-tag.coral { color: var(--coral-dark); background: var(--coral-bg); border-color: var(--coral-light) }
 .feed-card .fc-tag.gold  { color: #7a5a0a; background: var(--gold-bg); border-color: var(--gold-light) }
+.feed-card .fc-tag.lav   { color: #5a4180; background: var(--lav-light); border-color: rgba(155, 142, 196, .32) }
+.feed-card .fc-tag.sky   { color: #2d6a94; background: var(--sky-light); border-color: rgba(107, 168, 196, .32) }
 .feed-card h4 { font-size: .88rem; margin-bottom: 4px; line-height: 1.3 }
 .feed-card .fc-meta { font-size: .76rem; color: var(--muted); margin-top: 6px }
 .feed-card .fc-badges {
@@ -2770,6 +2772,52 @@ footer .footer-bottom {
 .tier-card:nth-child(4) .tier-icon .gb-line-icon { color: #2d6a94; }
 .tier-card:nth-child(5) .gb-line-icon,
 .tier-card:nth-child(5) .tier-icon .gb-line-icon { color: #5a4180; }
+
+/* BloomLab public workshop narrative. Keeps workshops distinct from play pages. */
+.bloomlab-hero {
+  border-left: 4px solid var(--lav);
+}
+
+.bloomlab-hero .hero-inner {
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+}
+
+.bloomlab-kicker {
+  color: #5a4180;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.bloomlab-promise {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(237, 233, 247, .46)),
+    var(--white);
+}
+
+.bloomlab-method .card,
+.bloomlab-outcomes .card {
+  min-height: 170px;
+}
+
+.bloomlab-note {
+  background:
+    linear-gradient(135deg, rgba(237, 233, 247, .78), rgba(255, 255, 255, .74) 52%, rgba(253, 246, 232, .45)),
+    var(--white);
+  border-color: rgba(155, 142, 196, .28);
+}
+
+.bloomlab-note h3 {
+  margin-bottom: 8px;
+}
+
+@media(max-width: 760px) {
+  .bloomlab-hero .hero-inner {
+    grid-template-columns: 1fr;
+  }
+}
 
 .tier-card:nth-child(1) .btn { background: var(--sage); border-color: var(--sage); color: #fff; }
 .tier-card:nth-child(2) .btn { background: #8a6a1f; border-color: #8a6a1f; color: #fff; }

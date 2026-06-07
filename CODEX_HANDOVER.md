@@ -4,6 +4,23 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-07
 
+### BloomLab Workshop Page Repositioning
+
+- Rebuilt `workshops.html` around BloomLab as the non-play development/community workshop pillar: special workshops, structured series, parent/adult workshops, family/community sessions, and expert/organisation programmes.
+- Kept the workshop slogan visible while clarifying that Play Workshops and Guided Play Moments belong with the Play page experience rather than the BloomLab page.
+- Updated the public live programme feed so `workshops.html` filters out `play_guided_moment` and `play_workshop` sessions, using BloomLab-style fallback cards when no public BloomLab sessions are live yet.
+- Adjusted `play.html` so the Play Workshop call-to-action stays in the play context and the BloomLab page is framed as non-play workshops/series.
+- Added light BloomLab-specific visual rhythm in `assets/site.css`; no webapp, POS, payment, receipt, booking, or branch-terminal logic was changed.
+
+Verification:
+
+- `node -c assets/site.js` passed.
+- `workshops.html` JSON-LD parses correctly.
+- Static scan confirms the BloomLab page no longer contains the old play-workshop rate hooks or play-first programme-family headings.
+- `git diff --check` passed; only normal Windows LF/CRLF warnings were shown.
+
+## 2026-06-07
+
 ### Healthy Meals Public Copy Correction
 
 - Restored the public Healthy Meals positioning on the homepage and Cafe page after founder clarification that G&B is actively working with reputable suppliers.

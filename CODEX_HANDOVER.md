@@ -4,6 +4,18 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-07
 
+### Healthy Meals Public Copy Correction
+
+- Restored the public Healthy Meals positioning on the homepage and Cafe page after founder clarification that G&B is actively working with reputable suppliers.
+- Copy now mentions selected sugar-free, lower-sugar, healthy-substitute, gluten-free, and vegetarian options while retaining the allergen/cross-contact note.
+- Kept the wording as "working with suppliers" rather than claiming every item is already available or coeliac-safe.
+
+Verification:
+
+- Public-site syntax and text checks passed.
+
+## 2026-06-07
+
 ### Public Trust and Launch-Credibility Follow-up
 
 - Applied the agreed public-site-only trust pass after the Claude/ChatGPT review.

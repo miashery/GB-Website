@@ -11,6 +11,19 @@ const MINI_ICONS = {
   map: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v14M15 6v14"/></svg>',
   instagram: '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3"/><circle cx="16.5" cy="7.5" r=".8"/></svg>',
 };
+const NAV_ITEMS = [
+  { href: 'index.html', tr: 'Ana Sayfa', en: 'Home' },
+  { href: 'workshops.html', tr: 'Atölyeler', en: 'Workshops' },
+  { href: 'play.html', tr: 'Oyun', en: 'Play' },
+  { href: 'food.html', tr: 'Kafe', en: 'Cafe' },
+  { href: 'workspaces.html', tr: 'Çalışma Alanı', en: 'Workspace' },
+  { href: 'library.html', tr: 'Kitaplık', en: 'Library' },
+  { href: 'social-lab.html', tr: 'Social Lab', en: 'Social Lab' },
+  { href: 'wellbeing.html', tr: 'Destek', en: 'Support' },
+  { href: 'events.html', tr: 'Etkinlikler', en: 'Events' },
+  { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
+  { href: 'contact.html', tr: 'İletişim', en: 'Contact' },
+];
 let gl = 'tr';
 let feedData = null;
 
@@ -34,6 +47,7 @@ function gt() {
 
 document.addEventListener('DOMContentLoaded', function() {
   preparePwaShell();
+  normalizeHeaderNav();
   ensureMobileNav();
   normalizeFooter();
   enhancePublicCardIcons();
@@ -66,6 +80,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
   wireEventRequestForms();
 });
+
+function normalizeHeaderNav() {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  nav.setAttribute('aria-label', 'Primary');
+  nav.innerHTML = NAV_ITEMS.map(function(item) {
+    const active = current === item.href.toLowerCase();
+    return '<a' + (active ? ' class="active"' : '') + ' href="' + item.href + '">' + navItemLabel(item) + '</a>';
+  }).join('');
+}
+
+function navItemLabel(item) {
+  if (item.tr === item.en) return escapeHtml(item.en);
+  return '<span class="tr-only">' + escapeHtml(item.tr) + '</span><span class="en-only">' + escapeHtml(item.en) + '</span>';
+}
 
 function preparePwaShell() {
   if (!document.querySelector('link[rel="manifest"]')) {

@@ -83,11 +83,16 @@ img{max-width:100%;display:block}
 .brand-text .name{font-family:'Fraunces',serif;font-weight:800;font-size:16px;color:var(--brand-teal)}
 .brand-text .tag{font-size:10px;color:var(--muted);margin-top:1px}
 
-.nav{display:flex;flex-wrap:wrap;gap:2px;justify-content:center}
+.nav{
+  display:flex;flex-wrap:nowrap;gap:2px;justify-content:center;
+  min-width:0;overflow-x:auto;scrollbar-width:none;
+}
+.nav::-webkit-scrollbar{display:none}
 .nav a{
   font-size:11px;font-weight:600;color:var(--mid);
   padding:5px 9px;border-radius:8px;
   border:1px solid transparent;transition:all .2s;
+  flex:0 0 auto;white-space:nowrap;
 }
 .nav a:hover{background:var(--brand-teal-light);border-color:var(--brand-teal-light);color:var(--brand-teal)}
 .nav a.active{background:var(--brand-teal);color:#fff;border-color:var(--brand-teal)}

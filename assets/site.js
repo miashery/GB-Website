@@ -24,6 +24,17 @@ const NAV_ITEMS = [
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
   { href: 'contact.html', tr: 'İletişim', en: 'Contact' },
 ];
+const PUBLIC_CARD_ICONS = {
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h10a3 3 0 0 1 3 3v12H8a3 3 0 0 0-3 3z"/><path d="M5 4.5v15"/><path d="M9 8h5M9 11h6"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v3M17 3v3M4.5 8.5h15"/><rect x="4.5" y="5" width="15" height="15" rx="3"/><path d="M8 12h3M13 12h3M8 16h3"/></svg>',
+  cup: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h10v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M15 9h2.2a2.3 2.3 0 0 1 0 4.6H15"/><path d="M6 20h10"/></svg>',
+  flower: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.5c-1.4-3.2-5.8-2.5-5.8.9 0 2 2.2 3.2 4 3.5-2.4 1.8-2.3 5.4.7 6.2 2 .5 3.2-1.5 3.6-3.4 1.2 2.5 4.8 2.7 5.8-.2.7-2-1.3-3.4-3.3-3.8 2.7-1.4 2.9-5.2-.1-6.3-2-.8-3.6 1.1-4.9 3.1z"/><circle cx="12" cy="12" r="1.4"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M9 12h6"/></svg>',
+  people: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M3.5 19a6 6 0 0 1 12 0"/><path d="M16.5 10.5a2.4 2.4 0 1 0 0-4.8"/><path d="M17 14a4.7 4.7 0 0 1 3.5 4.5"/></svg>',
+  shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 18.5 6v5.4c0 4-2.7 7.6-6.5 9.1-3.8-1.5-6.5-5.1-6.5-9.1V6z"/><path d="m9 12 2 2 4-4"/></svg>',
+  spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c.9 2.8 2.7 4.6 5.5 5.5-2.8.9-4.6 2.7-5.5 5.5-.9-2.8-2.7-4.6-5.5-5.5 2.8-.9 4.6-2.7 5.5-5.5z"/><path d="M5.5 14.5c.45 1.35 1.3 2.2 2.6 2.65-1.3.45-2.15 1.3-2.6 2.65-.45-1.35-1.3-2.2-2.6-2.65 1.3-.45 2.15-1.3 2.6-2.65z"/></svg>',
+  workspace: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M9 20h6M12 16v4"/></svg>',
+};
 let gl = 'tr';
 let feedData = null;
 
@@ -242,19 +253,29 @@ function enhancePublicCardIcons() {
   const headings = document.querySelectorAll([
     '.clean-card-grid .card h4',
     '.g.g4 > .card h4',
+    '.g.g3 > .card h4',
+    '.track-card h3',
+    '.feature-card h3',
+    '.info-card strong',
   ].join(','));
 
   headings.forEach(function(heading, index) {
     if (heading.dataset.gbIconReady === '1') return;
+    if (heading.closest('.diff-card, .tier-card, .hero .card, footer')) return;
 
     stripLeadingClipart(heading);
 
     const icon = document.createElement('span');
     icon.className = 'gb-card-icon gb-card-icon-' + ((index % 6) + 1);
     icon.setAttribute('aria-hidden', 'true');
-    icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c.9 2.8 2.7 4.6 5.5 5.5-2.8.9-4.6 2.7-5.5 5.5-.9-2.8-2.7-4.6-5.5-5.5 2.8-.9 4.6-2.7 5.5-5.5Z"/><path d="M5.5 14.5c.45 1.35 1.3 2.2 2.6 2.65-1.3.45-2.15 1.3-2.6 2.65-.45-1.35-1.3-2.2-2.6-2.65 1.3-.45 2.15-1.3 2.6-2.65Z"/><path d="M18.5 15c.35 1.05 1 1.7 2 2-.95.35-1.6 1-2 2-.35-1-1-1.65-2-2 1-.3 1.65-.95 2-2Z"/></svg>';
+    icon.innerHTML = iconForHeading(heading);
     heading.insertBefore(icon, heading.firstChild);
     heading.dataset.gbIconReady = '1';
+  });
+
+  document.querySelectorAll('.info-card .ic-icon').forEach(function(icon, index) {
+    icon.classList.add('gb-card-icon', 'gb-card-icon-' + (((index + 2) % 6) + 1));
+    icon.innerHTML = PUBLIC_CARD_ICONS.spark;
   });
 }
 
@@ -268,6 +289,19 @@ function stripLeadingClipart(heading) {
   } else {
     first.remove();
   }
+}
+
+function iconForHeading(heading) {
+  const text = (heading.textContent || '').toLocaleLowerCase('tr');
+  if (/kitap|kütüphane|library|book|reading|yazar|author/.test(text)) return PUBLIC_CARD_ICONS.book;
+  if (/kafe|cafe|coffee|kahve|menü|menu|meal|snack|içecek|drink|diyet|diet/.test(text)) return PUBLIC_CARD_ICONS.cup;
+  if (/doğum|birthday|etkinlik|event|rezervasyon|booking|calendar|takvim|schedule|program/.test(text)) return PUBLIC_CARD_ICONS.calendar;
+  if (/destek|support|privacy|gizlilik|mahremiyet|wellbeing|psychology|psikoloji|parent|ebeveyn/.test(text)) return PUBLIC_CARD_ICONS.heart;
+  if (/topluluk|community|social|partner|okul|group|grup|aile|family/.test(text)) return PUBLIC_CARD_ICONS.people;
+  if (/güven|safe|kvkk|consent|onay/.test(text)) return PUBLIC_CARD_ICONS.shield;
+  if (/çalışma|workspace|cowork|work|station/.test(text)) return PUBLIC_CARD_ICONS.workspace;
+  if (/oyun|play|mini|guided|giggle/.test(text)) return PUBLIC_CARD_ICONS.flower;
+  return PUBLIC_CARD_ICONS.spark;
 }
 
 function ensureMobileNav() {

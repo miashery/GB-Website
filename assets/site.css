@@ -2709,7 +2709,11 @@ footer .footer-bottom {
 }
 
 .clean-card-grid .card h4,
-.g.g4 > .card h4 {
+.g.g3 > .card h4,
+.g.g4 > .card h4,
+.track-card h3,
+.feature-card h3,
+.info-card strong {
   align-items: center;
   display: flex;
   gap: 9px;
@@ -2723,6 +2727,10 @@ footer .footer-bottom {
   height: 32px;
   justify-content: center;
   width: 32px;
+}
+
+.info-card .gb-card-icon {
+  margin-top: 0;
 }
 
 .gb-card-icon svg {

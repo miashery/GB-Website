@@ -9,8 +9,10 @@ This is the living handover file for public website changes made by Codex after 
 - Rebuilt `social-lab.html` so the page leads with normal, everyday social wellbeing rather than consent/research warnings.
 - Positioned Social Lab as the networking and collaboration side of the Wellbeing pillar, separate from the private Support / Knowledge Centre flow on `wellbeing.html`.
 - Added the active academic coordination wording for Üsküdar University Psychology Department coordinator and academics, explicitly avoiding signed-agreement or partnership claims.
+- Follow-up refinement aligned the hero with founder/ChatGPT wording: Social Lab is for ordinary families and communities, with no labelling or research-subject tone.
+- Added a near-top benefits row for families, children, parents, community, and experts, so the value is visible before privacy mechanics.
 - Added a clearer G&B pillar map: Giggles = Play, Bloom = BloomLab, Wellbeing = Social Lab + Support, Work, and Events, with books, cafe/healthy meals, experts, institutions, and Family OS woven through the system.
-- Moved consent/privacy into a subtle trust note near the bottom, keeping the no-diagnosis/no-therapy/no-emergency-support boundary.
+- Moved consent/privacy into a subtle trust note near the bottom with clear consent-led, child-safe, parent-safe language.
 - Added light Social Lab-specific styling in `assets/site.css`; no webapp, POS, payment, receipt, booking, or branch-terminal logic was changed.
 
 Verification:
@@ -19,6 +21,7 @@ Verification:
 - `social-lab.html` JSON-LD parses correctly.
 - `git diff --check` passed; only normal Windows LF/CRLF warnings were shown.
 - Public Social Lab wording uses academic coordination / institutional-agreement language rather than partnership claims.
+- Follow-up scan confirms `social-lab.html` has no visible partnership claim, clinical wording, or research-subject wording.
 
 ## 2026-06-07
 

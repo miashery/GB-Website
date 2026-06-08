@@ -4,6 +4,27 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-08
 
+### Public Pillar Detail and Capacity Follow-Up
+
+- Deepened the previous public-site IA pass after founder review noted that important practical details were too thin.
+- Added a public branch-capacity snapshot on the homepage:
+  - Kadıköy: play 8 children, play workshop 6, BloomLab 8, workspace 8 stations;
+  - Kurtköy: mini play 4 children, play workshop 5, BloomLab 5, workspace 4 points.
+- Added clearer capacity and branch-flow notes to Play, BloomLab Workshops, Workspace, Events, and Contact/Visit.
+- Made the homepage pillar cards link to the right paired pages where a pillar contains two public paths, such as Workspace + Events, Social Lab + Support, and Library + Café.
+- Kept this as public-site copy/structure only; no webapp backend, payment, booking, Supabase, POS, or staff-terminal logic changed.
+
+Verification completed:
+
+- `assets/site.js` syntax check passed.
+- JSON-LD parse check passed for static HTML pages.
+- Local relative-link scan passed.
+- Launch-claim scan found no blocked overpromise markers from the current review list.
+
+Still required:
+
+- Redeploy `GB-Website` and live-check production after commit.
+
 ### Public Website Information Architecture Alignment
 
 - Reviewed the founder/ChatGPT public-site architecture direction and kept the change public-site-only.

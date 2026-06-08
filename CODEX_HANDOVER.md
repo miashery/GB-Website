@@ -7,10 +7,12 @@ This is the living handover file for public website changes made by Codex after 
 ### Public Pillar Detail and Capacity Follow-Up
 
 - Deepened the previous public-site IA pass after founder review noted that important practical details were too thin.
+- Follow-up refinement moved the workspace/cafe-working proposition to the top of the Work & Events page, while keeping `workspaces.html` as the deeper detail page.
 - Added a public branch-capacity snapshot on the homepage:
   - Kadıköy: play 8 children, play workshop 6, BloomLab 8, workspace 8 stations;
   - Kurtköy: mini play 4 children, play workshop 5, BloomLab 5, workspace 4 points.
 - Added clearer capacity and branch-flow notes to Play, BloomLab Workshops, Workspace, Events, and Contact/Visit.
+- Updated Work & Events metadata/structured description so the page includes family-friendly workspace as well as birthdays, private hire, school/group visits, corporate family days, author days, and partner events.
 - Made the homepage pillar cards link to the right paired pages where a pillar contains two public paths, such as Workspace + Events, Social Lab + Support, and Library + Café.
 - Kept this as public-site copy/structure only; no webapp backend, payment, booking, Supabase, POS, or staff-terminal logic changed.
 

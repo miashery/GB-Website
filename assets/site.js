@@ -13,16 +13,13 @@ const MINI_ICONS = {
 };
 const NAV_ITEMS = [
   { href: 'index.html', tr: 'Ana Sayfa', en: 'Home' },
-  { href: 'workshops.html', tr: 'Atölyeler', en: 'Workshops' },
-  { href: 'play.html', tr: 'Oyun', en: 'Play' },
-  { href: 'food.html', tr: 'Kafe', en: 'Cafe' },
-  { href: 'workspaces.html', tr: 'Çalışma Alanı', en: 'Workspace' },
-  { href: 'library.html', tr: 'Kitaplık', en: 'Library' },
-  { href: 'social-lab.html', tr: 'Social Lab', en: 'Social Lab' },
-  { href: 'wellbeing.html', tr: 'Destek', en: 'Support' },
-  { href: 'events.html', tr: 'Etkinlikler', en: 'Events' },
+  { href: 'play.html', tr: 'Giggles: Oyun', en: 'Play' },
+  { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
+  { href: 'social-lab.html', tr: 'Topluluk & Destek', en: 'Community & Support', activeFor: ['social-lab.html', 'wellbeing.html'] },
+  { href: 'events.html', tr: 'İş & Etkinlikler', en: 'Work & Events', activeFor: ['events.html', 'workspaces.html'] },
+  { href: 'food.html', tr: 'Kitap & Kafe', en: 'Books & Café', activeFor: ['food.html', 'cafe.html', 'library.html'] },
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
-  { href: 'contact.html', tr: 'İletişim', en: 'Contact' },
+  { href: 'contact.html', tr: 'Ziyaret', en: 'Visit' },
 ];
 const PUBLIC_CARD_ICONS = {
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h10a3 3 0 0 1 3 3v12H8a3 3 0 0 0-3 3z"/><path d="M5 4.5v15"/><path d="M9 8h5M9 11h6"/></svg>',
@@ -99,9 +96,16 @@ function normalizeHeaderNav() {
   const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
   nav.setAttribute('aria-label', 'Primary');
   nav.innerHTML = NAV_ITEMS.map(function(item) {
-    const active = current === item.href.toLowerCase();
+    const active = navItemIsActive(item, current);
     return '<a' + (active ? ' class="active"' : '') + ' href="' + item.href + '">' + navItemLabel(item) + '</a>';
   }).join('');
+}
+
+function navItemIsActive(item, current) {
+  if (current === item.href.toLowerCase()) return true;
+  return Array.isArray(item.activeFor) && item.activeFor.some(function(path) {
+    return current === path.toLowerCase();
+  });
 }
 
 function navItemLabel(item) {
@@ -384,9 +388,11 @@ function normalizeFooter() {
       '</div>' +
       '<div class="footer-col">' +
         '<h5><span class="tr-only">Keşfet</span><span class="en-only">Explore</span></h5>' +
-        '<a href="workshops.html"><span class="tr-only">Atölyeler</span><span class="en-only">Workshops</span></a>' +
-        '<a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>' +
-        '<a href="food.html"><span class="tr-only">Kafe</span><span class="en-only">Cafe</span></a>' +
+        '<a href="play.html"><span class="tr-only">Giggles: Oyun</span><span class="en-only">Giggles: Play</span></a>' +
+        '<a href="workshops.html"><span class="tr-only">BloomLab</span><span class="en-only">BloomLab</span></a>' +
+        '<a href="social-lab.html"><span class="tr-only">Topluluk &amp; Destek</span><span class="en-only">Community &amp; Support</span></a>' +
+        '<a href="events.html"><span class="tr-only">İş &amp; Etkinlikler</span><span class="en-only">Work &amp; Events</span></a>' +
+        '<a href="food.html"><span class="tr-only">Kitap &amp; Kafe</span><span class="en-only">Books &amp; Café</span></a>' +
         '<a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>' +
       '</div>' +
       '<div class="footer-col">' +

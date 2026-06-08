@@ -2,6 +2,39 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-08
+
+### Public Website Information Architecture Alignment
+
+- Reviewed the founder/ChatGPT public-site architecture direction and kept the change public-site-only.
+- Updated the shared runtime navigation to the clearer public structure:
+  - Home;
+  - Giggles: Play;
+  - BloomLab;
+  - Community & Support;
+  - Work & Events;
+  - Books & Café;
+  - Membership;
+  - Visit.
+- Preserved the existing dynamic public-site feeds and rate hooks; no webapp backend, POS, payment, workshop backend, membership backend, Supabase schema, or customer portal logic was changed.
+- Reframed homepage copy around the public promise: G&B as a warm family third place where children play and grow while parents breathe, work, connect and feel supported.
+- Simplified the homepage service map into the clarified public pillars while keeping branch details, books/café, institutions/partners, and Family OS woven in as supporting context.
+- Softened public Social Lab and Family OS homepage language so the site does not lead with research-heavy, clinical, or overpromised platform wording.
+- Updated Play, BloomLab, Events, and Workspace copy to make the pillar/sub-offering boundaries clearer:
+  - Giggle Garden / Giggle Sparks / Giggle Minis live on Play;
+  - BloomLab Special Workshops / BloomLab Series / Bloom Circles live on BloomLab;
+  - private, corporate/business, public, and member/restricted events live under Work & Events;
+  - Workspace is treated as the parent-work side of the Work pillar.
+
+Verification completed in this handover:
+
+- `assets/site.js` syntax check passed.
+- JSON-LD parse check passed for static HTML pages.
+- Local relative-link scan passed.
+- Launch-claim scan found no blocked overpromise markers from the current review list.
+- `git diff --check` passed.
+- Redeploy `GB-Website` and spot-check production navigation/header behavior after commit.
+
 ## 2026-06-07
 
 ### Social Lab Pillar Reframing

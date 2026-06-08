@@ -4,6 +4,24 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-07
 
+### Social Lab Pillar Reframing
+
+- Rebuilt `social-lab.html` so the page leads with normal, everyday social wellbeing rather than consent/research warnings.
+- Positioned Social Lab as the networking and collaboration side of the Wellbeing pillar, separate from the private Support / Knowledge Centre flow on `wellbeing.html`.
+- Added the active academic coordination wording for Üsküdar University Psychology Department coordinator and academics, explicitly avoiding signed-agreement or partnership claims.
+- Added a clearer G&B pillar map: Giggles = Play, Bloom = BloomLab, Wellbeing = Social Lab + Support, Work, and Events, with books, cafe/healthy meals, experts, institutions, and Family OS woven through the system.
+- Moved consent/privacy into a subtle trust note near the bottom, keeping the no-diagnosis/no-therapy/no-emergency-support boundary.
+- Added light Social Lab-specific styling in `assets/site.css`; no webapp, POS, payment, receipt, booking, or branch-terminal logic was changed.
+
+Verification:
+
+- `node -c assets/site.js` passed.
+- `social-lab.html` JSON-LD parses correctly.
+- `git diff --check` passed; only normal Windows LF/CRLF warnings were shown.
+- Public Social Lab wording uses academic coordination / institutional-agreement language rather than partnership claims.
+
+## 2026-06-07
+
 ### BloomLab Workshop Page Repositioning
 
 - Rebuilt `workshops.html` around BloomLab as the non-play development/community workshop pillar: special workshops, structured series, parent/adult workshops, family/community sessions, and expert/organisation programmes.
@@ -435,8 +453,8 @@ Verification:
 - Expanded `social-lab.html` so it no longer feels sparse.
 - Added public-safe sections covering:
   - the purpose of Social Lab as a research-informed family learning space;
-  - what the university/psychology partnership enables;
-  - what Social Lab does: observation, expert translation, community circles, programme improvement, privacy, and partnerships;
+  - what academic psychology coordination enables;
+  - what Social Lab does: observation, expert translation, community circles, programme improvement, privacy, and collaboration;
   - Neighbourhood Circle / Mahalle Cemberi as a family-community format;
   - how Kurtkoy can act as a neighbourhood satellite while Kadikoy acts as the larger workshop/research/event hub;
   - benefits for families, children, experts, and the local community;

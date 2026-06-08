@@ -2824,3 +2824,62 @@ footer .footer-bottom {
 .tier-card:nth-child(3) .btn { background: var(--coral); border-color: var(--coral); color: #fff; }
 .tier-card:nth-child(4) .btn { background: #2d6a94; border-color: #2d6a94; color: #fff; }
 .tier-card:nth-child(5) .btn { background: #5a4180; border-color: #5a4180; color: #fff; }
+
+/* Social Lab: normalise wellbeing, connection, and coordination before consent details. */
+.social-lab-hero {
+  border-left: 4px solid var(--lav);
+}
+
+.social-lab-hero .hero-inner {
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, .92fr);
+}
+
+.social-lab-coordination {
+  background:
+    linear-gradient(145deg, rgba(253, 246, 232, .72), rgba(255, 255, 255, .9) 54%, rgba(237, 233, 247, .38)),
+    var(--white);
+}
+
+.social-scale-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.social-lab-circle {
+  border-left: 4px solid var(--sage);
+  margin-top: 14px;
+}
+
+.social-lab-ecosystem {
+  background:
+    linear-gradient(135deg, rgba(235, 242, 238, .74), rgba(255, 255, 255, .72) 52%, rgba(253, 246, 232, .46)),
+    var(--white);
+  border-color: rgba(74, 124, 107, .2);
+}
+
+.social-lab-consent {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .92), rgba(237, 233, 247, .34)),
+    var(--white);
+  border-color: rgba(155, 142, 196, .22);
+  box-shadow: none;
+}
+
+.social-lab-consent h4 {
+  color: #5a4180;
+}
+
+.social-lab-consent p {
+  font-size: .84rem;
+}
+
+@media(max-width: 980px) {
+  .social-scale-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media(max-width: 760px) {
+  .social-lab-hero .hero-inner {
+    grid-template-columns: 1fr;
+  }
+}

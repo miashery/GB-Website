@@ -2,6 +2,25 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-09
+
+### Analytics and SEO URL Parity
+
+- Normalized public-site SEO URLs to the live production domain `https://www.gigglesbloom.com` across canonical, hreflang, OpenGraph, Twitter, JSON-LD, `robots.txt`, and `sitemap.xml` references.
+- Refreshed `sitemap.xml` `lastmod` values to `2026-06-09`.
+- Strengthened `library.html` metadata for local children’s bookstore/library search intent around Kadıköy, Kurtköy, children’s books, library, reading pods, lending, and author days.
+- Strengthened `workspaces.html` metadata for family-friendly workspace/cowork search intent, including Kadıköy 8-person and Kurtköy 4-person capacity.
+- Kept the existing Vercel Web Analytics static-site script pattern; no forms, booking, payment, app integration, or backend logic changed.
+
+Verification completed:
+
+- Confirmed no stale `gigglesandbloom.com` or bare `https://gigglesbloom.com` URLs remain in the public-site source.
+- Confirmed `robots.txt` is plain UTF-8 without a BOM after the URL rewrite.
+
+Still required:
+
+- Commit, push, deploy with `vercel --prod`, then live-check Vercel Analytics, `robots.txt`, `sitemap.xml`, and page source for Library/Workspace canonicals.
+
 ## 2026-06-08
 
 ### Public Pillar Detail and Capacity Follow-Up

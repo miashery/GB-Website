@@ -17,7 +17,8 @@ const NAV_ITEMS = [
   { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
   { href: 'social-lab.html', tr: 'Topluluk & Destek', en: 'Community & Support', activeFor: ['social-lab.html', 'wellbeing.html'] },
   { href: 'events.html', tr: 'İş & Etkinlikler', en: 'Work & Events', activeFor: ['events.html', 'workspaces.html'] },
-  { href: 'food.html', tr: 'Kitap & Kafe', en: 'Books & Café', activeFor: ['food.html', 'cafe.html', 'library.html'] },
+  { href: 'library.html', tr: 'Kitaplık', en: 'Books' },
+  { href: 'food.html', tr: 'Kafe & Restoran', en: 'Cafe & Restaurant', activeFor: ['food.html', 'cafe.html'] },
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
   { href: 'contact.html', tr: 'Ziyaret', en: 'Visit' },
 ];
@@ -404,7 +405,8 @@ function normalizeFooter() {
         '<a href="workshops.html"><span class="tr-only">BloomLab</span><span class="en-only">BloomLab</span></a>' +
         '<a href="social-lab.html"><span class="tr-only">Topluluk &amp; Destek</span><span class="en-only">Community &amp; Support</span></a>' +
         '<a href="events.html"><span class="tr-only">İş &amp; Etkinlikler</span><span class="en-only">Work &amp; Events</span></a>' +
-        '<a href="food.html"><span class="tr-only">Kitap &amp; Kafe</span><span class="en-only">Books &amp; Café</span></a>' +
+        '<a href="library.html"><span class="tr-only">Kitaplık</span><span class="en-only">Books</span></a>' +
+        '<a href="food.html"><span class="tr-only">Kafe &amp; Restoran</span><span class="en-only">Cafe &amp; Restaurant</span></a>' +
         '<a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>' +
       '</div>' +
       '<div class="footer-col">' +

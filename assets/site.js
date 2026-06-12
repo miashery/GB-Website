@@ -143,12 +143,24 @@ function updateYears() {
 
 function wireAccountButtons() {
   document.querySelectorAll('.btn-login').forEach(function(el) {
+    if (el.tagName === 'A') {
+      el.href = APP_URL + '/auth/signin';
+      el.target = '_blank';
+      el.rel = 'noopener';
+      return;
+    }
     el.addEventListener('click', function() {
       window.open(APP_URL + '/auth/signin', '_blank', 'noopener');
     });
   });
 
   document.querySelectorAll('.btn-join').forEach(function(el) {
+    if (el.tagName === 'A') {
+      el.href = APP_URL + '/auth/signup';
+      el.target = '_blank';
+      el.rel = 'noopener';
+      return;
+    }
     el.addEventListener('click', function() {
       window.open(APP_URL + '/auth/signup', '_blank', 'noopener');
     });
@@ -336,8 +348,8 @@ function ensureMobileNav() {
       '<div class="mobile-nav-brand">Giggles &amp; Bloom</div>' +
       '<div class="nav-links">' + nav.innerHTML + '</div>' +
       '<div class="mobile-nav-actions">' +
-        '<button class="btn-login" type="button"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></button>' +
-        '<button class="btn-join" type="button"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></button>' +
+        '<a class="btn-login" href="' + APP_URL + '/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>' +
+        '<a class="btn-join" href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></a>' +
       '</div>' +
     '</div>';
   document.body.appendChild(drawer);

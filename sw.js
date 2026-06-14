@@ -1,7 +1,9 @@
-const CACHE_NAME = 'gb-public-v6';
+const CACHE_NAME = 'gb-public-v7';
 const CORE_ASSETS = [
   './',
   './index.html',
+  './kadikoy.html',
+  './kurtkoy.html',
   './workshops.html',
   './play.html',
   './food.html',

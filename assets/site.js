@@ -20,7 +20,7 @@ const NAV_ITEMS = [
   { href: 'library.html', tr: 'Kitaplık', en: 'Books' },
   { href: 'food.html', tr: 'Kafe & Restoran', en: 'Cafe & Restaurant', activeFor: ['food.html', 'cafe.html'] },
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
-  { href: 'contact.html', tr: 'Ziyaret', en: 'Visit' },
+  { href: 'contact.html', tr: 'Ziyaret', en: 'Visit', activeFor: ['contact.html', 'kadikoy.html', 'kurtkoy.html'] },
 ];
 const PUBLIC_CARD_ICONS = {
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h10a3 3 0 0 1 3 3v12H8a3 3 0 0 0-3 3z"/><path d="M5 4.5v15"/><path d="M9 8h5M9 11h6"/></svg>',
@@ -423,8 +423,8 @@ function normalizeFooter() {
       '<div class="footer-col">' +
         '<h5><span class="tr-only">Şubeler</span><span class="en-only">Branches</span></h5>' +
         '<div class="footer-branches">' +
-          footerBranchRow('Kadıköy', CONTACT_LINKS.mapKadikoy, CONTACT_LINKS.instagramKadikoy) +
-          footerBranchRow('Kurtköy', CONTACT_LINKS.mapKurtkoy, CONTACT_LINKS.instagramKurtkoy) +
+          footerBranchRow('Kadıköy', 'kadikoy.html', CONTACT_LINKS.mapKadikoy, CONTACT_LINKS.instagramKadikoy) +
+          footerBranchRow('Kurtköy', 'kurtkoy.html', CONTACT_LINKS.mapKurtkoy, CONTACT_LINKS.instagramKurtkoy) +
           '<a class="footer-main-social" href="' + CONTACT_LINKS.instagramMain + '" target="_blank" rel="noopener">' + MINI_ICONS.instagram + '<span>@gigglesandbloom</span></a>' +
         '</div>' +
       '</div>' +
@@ -433,9 +433,9 @@ function normalizeFooter() {
   updateYears();
 }
 
-function footerBranchRow(label, mapUrl, instagramUrl) {
+function footerBranchRow(label, pageUrl, mapUrl, instagramUrl) {
   return '<div class="footer-branch-row">' +
-    '<span class="footer-branch-label">' + MINI_ICONS.pin + '<span>' + escapeHtml(label) + '</span></span>' +
+    '<a class="footer-branch-label" href="' + pageUrl + '">' + MINI_ICONS.pin + '<span>' + escapeHtml(label) + '</span></a>' +
     '<span class="footer-branch-actions">' +
       '<a href="' + mapUrl + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + ' Google Maps">' + MINI_ICONS.map + '<span>Map</span></a>' +
       '<a href="' + instagramUrl + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + ' Instagram">' + MINI_ICONS.instagram + '<span>IG</span></a>' +

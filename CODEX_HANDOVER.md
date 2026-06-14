@@ -544,3 +544,31 @@ Verification:
 - `social-lab.html` parser check passes.
 - Local links on `social-lab.html` resolve.
 - `git diff --check` passes.
+
+### Public Website: Branch Selector and Branch Guide Pages
+
+- Added a warm homepage branch selector so families can choose between:
+  - Kadıköy as the flagship family development centre;
+  - Kurtköy as the cozy healthy family lifestyle satellite.
+- Added `kadikoy.html` with:
+  - Kadıköy flagship positioning;
+  - play, BloomLab, workspace, books, events, and membership pathways;
+  - capacity notes for play, play workshops, BloomLab, and workspace;
+  - map, Instagram, visit, and event request CTAs.
+- Added `kurtkoy.html` with:
+  - Kurtköy satellite positioning;
+  - healthy cafe, books, mini play, selected workshops, workspace, Neighbour Circle, and birthday/private request pathways;
+  - capacity notes for mini play, play workshops, BloomLab, and work points;
+  - map, Instagram, visit, and event request CTAs.
+- Updated shared navigation so branch pages sit under `Visit` without adding more top-menu clutter.
+- Updated shared footer so Kadıköy and Kurtköy labels link to their branch guide pages while keeping Map and Instagram shortcuts.
+- Updated `sitemap.xml` and `sw.js` so the branch pages are crawlable and cached.
+- Kept this public-site-only: no backend, schema, POS, Beko, PayTR, Paraşüt, Daily Close, membership entitlement, Bloom Points, delivery, or partner/off-premises logic changed.
+
+Verification:
+
+- `node --check assets/site.js` passes.
+- HTML sanity check passes for `index.html`, `kadikoy.html`, and `kurtkoy.html`.
+- Local relative-link scan passes for the touched public pages.
+- `git diff --check` passes, aside from normal Windows LF/CRLF warnings.
+- Still needs live visual/UAT after production deploy: desktop, mobile, language toggle, branch CTAs, Google Maps links, Instagram links, and service-worker refresh.

@@ -572,3 +572,17 @@ Verification:
 - Local relative-link scan passes for the touched public pages.
 - `git diff --check` passes, aside from normal Windows LF/CRLF warnings.
 - Still needs live visual/UAT after production deploy: desktop, mobile, language toggle, branch CTAs, Google Maps links, Instagram links, and service-worker refresh.
+
+### Public Website: Static Header Screenshot/Tablet Hardening
+
+- Reviewed founder screenshots from 2026-06-15.
+- Found the visible header appearing through the middle of long page screenshots; this is consistent with a sticky/blurred public header being captured during full-page screenshot stitching and can also feel jumpy on some browsers.
+- Changed the public website header from sticky/translucent/blurred to static and solid cream.
+- Bumped the service-worker cache from `gb-public-v7` to `gb-public-v8` so the updated CSS is picked up after deploy.
+- Sitemap did not need a URL change for this CSS-only pass; branch pages are already listed.
+
+Verification:
+
+- `node --check assets/site.js` passes.
+- Local link scan passes for all 16 public HTML pages, with Vercel Analytics treated as a platform path.
+- `git diff --check` passes, aside from normal Windows LF/CRLF warnings.

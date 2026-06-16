@@ -142,30 +142,27 @@ function updateYears() {
   });
 }
 
-function wireAccountButtons() {
-  document.querySelectorAll('.btn-login').forEach(function(el) {
-    if (el.tagName === 'A') {
-      el.href = APP_URL + '/auth/signin';
-      el.target = '_blank';
-      el.rel = 'noopener';
-      return;
+function wireAccountButton(selector, path) {
+  document.querySelectorAll(selector).forEach(function(btn) {
+    var el = btn;
+    if (el.tagName !== 'A') {
+      var a = document.createElement('a');
+      a.className = el.className;
+      a.innerHTML = el.innerHTML;
+      var aria = el.getAttribute('aria-label');
+      if (aria) a.setAttribute('aria-label', aria);
+      el.parentNode.replaceChild(a, el);
+      el = a;
     }
-    el.addEventListener('click', function() {
-      window.open(APP_URL + '/auth/signin', '_blank', 'noopener');
-    });
+    el.href = APP_URL + path;
+    el.target = '_blank';
+    el.rel = 'noopener';
   });
+}
 
-  document.querySelectorAll('.btn-join').forEach(function(el) {
-    if (el.tagName === 'A') {
-      el.href = APP_URL + '/auth/signup';
-      el.target = '_blank';
-      el.rel = 'noopener';
-      return;
-    }
-    el.addEventListener('click', function() {
-      window.open(APP_URL + '/auth/signup', '_blank', 'noopener');
-    });
-  });
+function wireAccountButtons() {
+  wireAccountButton('.btn-login', '/auth/signin');
+  wireAccountButton('.btn-join', '/auth/signup');
 
   document.querySelectorAll('[data-tier-cta]').forEach(function(el) {
     el.href = APP_URL + '/auth/signup';

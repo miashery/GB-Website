@@ -55,8 +55,8 @@ function gt() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  preparePwaShell();
   normalizeHeaderNav();
+  preparePwaShell();
   ensureMobileNav();
   normalizeFooter();
   enhancePublicCardIcons();
@@ -100,6 +100,7 @@ function normalizeHeaderNav() {
     const active = navItemIsActive(item, current);
     return '<a' + (active ? ' class="active"' : '') + ' href="' + item.href + '">' + navItemLabel(item) + '</a>';
   }).join('');
+  nav.setAttribute('data-gb-nav-ready', '1');
 }
 
 function navItemIsActive(item, current) {

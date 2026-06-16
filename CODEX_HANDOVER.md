@@ -2,6 +2,24 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-16
+
+### Public Navigation Stability
+
+- Hardened the public-site shared header so the old per-page static menu does not visibly flash before `assets/site.js` normalizes it into the current canonical public navigation.
+- Moved header normalization to the first DOM-ready step, then marks the nav as ready after the canonical order/labels/active state are applied.
+- Added a small CSS reserve/opacity rule so the top navigation holds its space and fades in once normalized, with a no-script fallback.
+- No page URLs, SEO canonicals, sitemap entries, public forms, backend calls, booking/payment flows, or app integrations changed in this pass.
+
+Verification completed:
+
+- `node --check assets/site.js` passed.
+- Diff reviewed for `assets/site.js` and `assets/site.css`.
+
+Still required:
+
+- Commit, push, deploy with `vercel --prod`, then live-check the top menu on Home, Play, BloomLab, Work & Events, Books, Cafe, Membership, and Visit.
+
 ## 2026-06-09
 
 ### Analytics and SEO URL Parity

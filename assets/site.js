@@ -744,10 +744,17 @@ function renderMenuHighlights(items) {
   }
 
   container.innerHTML = items.slice(0, 6).map(function(item) {
-    const name = gl === 'tr' ?item.name_tr : item.name_en;
-    const desc = gl === 'tr' ?item.description_tr : item.description_en;
+    const isTr = gl === 'tr';
+    const name = isTr ? item.name_tr : item.name_en;
+    const desc = isTr ? item.description_tr : item.description_en;
+    const branchId = item.branch_id || item.branchId || '';
+    const branchName = branchLabel(branchId);
+    const branchScope = branchName
+      ? (isTr ? branchName + ' şubesi' : branchName + ' branch')
+      : (isTr ? 'Şubeye göre değişebilir' : 'May vary by branch');
     return '<div class="menu-card">' +
       '<div class="mc-top"><strong>' + escapeHtml(name || '') + '</strong><span>' + escapeHtml(formatPrice(item.price)) + '</span></div>' +
+      '<div class="menu-branch">' + escapeHtml(branchScope) + '</div>' +
       (desc ?'<p>' + escapeHtml(desc) + '</p>' : '') +
     '</div>';
   }).join('');

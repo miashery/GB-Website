@@ -1627,6 +1627,19 @@ button[type="submit"]:hover {
   white-space: nowrap;
 }
 
+.menu-branch {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 0 8px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--sage-bg);
+  color: var(--sage-dark);
+  font-size: .72rem;
+  font-weight: 800;
+}
+
 .menu-card p {
   color: var(--mid);
   font-size: .82rem;

@@ -4,6 +4,19 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-17
 
+### Branch-Specific Cafe Menu Clarity
+
+- Added a branch-specific menu/stock explanation to `food.html`, clarifying that Kadıköy and Kurtköy have separate stock, sales, VAT, and legal-entity records.
+- Added Kadıköy/Kurtköy branch rhythm cards so the public café page no longer implies both branches always carry the same items.
+- Updated the live cafe highlights renderer to show a compact branch scope badge on each menu item when branch data is available, with a safe branch-varying fallback.
+- Bumped the service-worker cache from `gb-public-v9` to `gb-public-v10` so returning devices pick up `food.html`, `assets/site.js`, and `assets/site.css` changes after deployment.
+
+Verification required:
+
+- Run local syntax/link checks.
+- Deploy with `vercel --prod`.
+- Live-check `https://www.gigglesbloom.com/food.html` in Turkish and English and confirm live menu cards show branch scope cleanly.
+
 ### Search Console Coverage Follow-Up
 
 - Reviewed the founder-provided 2026-06-16 Search Console coverage export. The export only included grouped issue counts, not the affected URLs:

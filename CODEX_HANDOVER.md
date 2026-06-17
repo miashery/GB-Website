@@ -2,6 +2,26 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-17
+
+### Search Console Coverage Follow-Up
+
+- Reviewed the founder-provided 2026-06-16 Search Console coverage export. The export only included grouped issue counts, not the affected URLs:
+  - 11 not found;
+  - 1 soft 404;
+  - 1 page with redirect;
+  - 1 alternate page with proper canonical;
+  - 4 crawled, currently not indexed.
+- Ran a local static HTML link check and found no missing local `href` or `src` targets in the public-site source.
+- Refreshed `sitemap.xml` `lastmod` values to `2026-06-17`.
+- Bumped the service-worker cache from `gb-public-v8` to `gb-public-v9` so returning devices pick up the refreshed public assets.
+
+Still required:
+
+- Deploy with `vercel --prod`.
+- Resubmit or validate the sitemap in Google Search Console.
+- If the 404/soft-404 count remains, export the affected URL list from Search Console because the summary CSV is not enough to identify which addresses Google is holding onto.
+
 ## 2026-06-16
 
 ### Public Navigation Stability

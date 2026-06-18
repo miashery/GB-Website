@@ -1600,6 +1600,57 @@ button[type="submit"]:hover {
   gap: 14px;
 }
 
+.menu-branch-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 16px;
+}
+
+.menu-branch-filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--mid);
+  padding: 8px 12px;
+  font: inherit;
+  font-size: .84rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(44,44,44,.03);
+}
+
+.menu-branch-filter-button small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--cream-dark);
+  color: var(--muted);
+  font-size: .72rem;
+}
+
+.menu-branch-filter-button.active {
+  border-color: var(--sage);
+  background: var(--sage-bg);
+  color: var(--sage-dark);
+}
+
+.menu-branch-filter-button.active small {
+  background: var(--white);
+  color: var(--sage-dark);
+}
+
+.menu-branch-filter-button:disabled {
+  cursor: not-allowed;
+  opacity: .48;
+}
+
 .menu-card {
   background: var(--white);
   border: 1px solid var(--border);

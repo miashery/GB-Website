@@ -35,6 +35,7 @@ const PUBLIC_CARD_ICONS = {
 };
 let gl = 'tr';
 let feedData = null;
+let activeMenuBranch = 'all';
 
 function ga(lang) {
   gl = lang;
@@ -738,12 +739,25 @@ function renderMenuHighlights(items) {
   const container = document.getElementById('menu-highlights');
   if (!container) return;
 
+  renderMenuBranchFilters(items);
+
   if (!items.length) {
     container.innerHTML = '<p class="feed-empty">' + escapeHtml(gl === 'tr' ?'Menü yakında yayınlanacak.' : 'Menu highlights coming soon.') + '</p>';
     return;
   }
 
-  container.innerHTML = items.slice(0, 6).map(function(item) {
+  const visibleItems = activeMenuBranch === 'all'
+    ? items
+    : items.filter(function(item) {
+        return (item.branch_id || item.branchId || '') === activeMenuBranch;
+      });
+
+  if (!visibleItems.length) {
+    container.innerHTML = '<p class="feed-empty">' + escapeHtml(gl === 'tr' ?'Bu şube için canlı ürün yakında yayınlanacak.' : 'Live items for this branch are coming soon.') + '</p>';
+    return;
+  }
+
+  container.innerHTML = visibleItems.slice(0, 6).map(function(item) {
     const isTr = gl === 'tr';
     const name = isTr ? item.name_tr : item.name_en;
     const desc = isTr ? item.description_tr : item.description_en;
@@ -758,6 +772,50 @@ function renderMenuHighlights(items) {
       (desc ?'<p>' + escapeHtml(desc) + '</p>' : '') +
     '</div>';
   }).join('');
+}
+
+function renderMenuBranchFilters(items) {
+  const grid = document.getElementById('menu-highlights');
+  if (!grid) return;
+
+  let controls = document.getElementById('menu-branch-filters');
+  if (!controls) {
+    controls = document.createElement('div');
+    controls.id = 'menu-branch-filters';
+    controls.className = 'menu-branch-filter';
+    grid.parentNode.insertBefore(controls, grid);
+  }
+
+  const counts = items.reduce(function(acc, item) {
+    const branchId = item.branch_id || item.branchId || '';
+    if (branchId) acc[branchId] = (acc[branchId] || 0) + 1;
+    acc.all += 1;
+    return acc;
+  }, { all: 0 });
+
+  const options = [
+    { id: 'all', tr: 'Tüm şubeler', en: 'All branches' },
+    { id: 'kadikoy', tr: 'Kadıköy', en: 'Kadıköy' },
+    { id: 'kurtkoy', tr: 'Kurtköy', en: 'Kurtköy' },
+  ];
+
+  controls.innerHTML = options.map(function(option) {
+    const count = counts[option.id] || 0;
+    const disabled = option.id !== 'all' && count === 0;
+    const active = activeMenuBranch === option.id;
+    const label = gl === 'tr' ? option.tr : option.en;
+    return '<button class="menu-branch-filter-button' + (active ? ' active' : '') + '" type="button" data-menu-branch="' + option.id + '"' + (disabled ? ' disabled' : '') + '>' +
+      '<span>' + escapeHtml(label) + '</span>' +
+      '<small>' + escapeHtml(String(count)) + '</small>' +
+    '</button>';
+  }).join('');
+
+  controls.querySelectorAll('[data-menu-branch]').forEach(function(button) {
+    button.addEventListener('click', function() {
+      activeMenuBranch = button.getAttribute('data-menu-branch') || 'all';
+      renderMenuHighlights(items);
+    });
+  });
 }
 
 async function loadMembershipPackages() {

@@ -4,6 +4,18 @@ This is the living handover file for public website changes made by Codex after 
 
 ## 2026-06-18
 
+### Branch Cafe Highlight Filter
+
+- Added a branch filter to the live cafe highlights on `food.html`: All branches, Kadikoy, and Kurtkoy.
+- The filter uses the existing public menu data and branch-owned menu rows; it does not add ordering, payments, delivery, stock changes, or backend schema.
+- Families can now separate visible cafe highlights by branch instead of reading a mixed list with only per-card branch badges.
+- Bumped the service-worker cache from `gb-public-v11` to `gb-public-v12` so returning devices pick up the updated cafe JavaScript/CSS after deployment.
+
+Verification required:
+
+- Deploy with `vercel --prod`.
+- Open `https://www.gigglesbloom.com/food.html`, switch Turkish/English, and confirm All/Kadikoy/Kurtkoy filters show the expected live item counts and cards.
+
 ### Public Header Stability Guard
 
 - Added a final CSS guard that forces the public website header/navigation to stay in normal document flow, with no sticky/fixed transform behavior. This targets tablet/full-page screenshot cases where the header could appear stitched through the middle of the page.

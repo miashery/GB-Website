@@ -2,6 +2,21 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-18
+
+### Public Header Stability Guard
+
+- Added a final CSS guard that forces the public website header/navigation to stay in normal document flow, with no sticky/fixed transform behavior. This targets tablet/full-page screenshot cases where the header could appear stitched through the middle of the page.
+- Bumped the service-worker cache from `gb-public-v10` to `gb-public-v11` so returning devices pick up the corrected public CSS after deployment.
+- Refreshed `sitemap.xml` `lastmod` values to `2026-06-18` because the shared public chrome changed across all public pages.
+- No public copy, forms, booking/payment flows, webapp backend, POS/Beko, or customer portal logic changed in this pass.
+
+Verification required:
+
+- Deploy with `vercel --prod`.
+- Hard-refresh or clear site data on affected tablets, then check Home, Play, BloomLab, Cafe, Membership, and Visit for header placement while scrolling.
+- If a long screenshot still shows the header in the middle, treat it as a browser screenshot stitching artifact and verify by normal scrolling/video capture.
+
 ## 2026-06-17
 
 ### Branch-Specific Cafe Menu Clarity

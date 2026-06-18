@@ -3203,3 +3203,14 @@ footer .footer-bottom {
     grid-template-columns: 1fr;
   }
 }
+
+/* Public header stability guard.
+   Some tablet browsers and full-page screenshot tools can stitch static headers
+   as if they were sticky; keep public navigation in normal document flow. */
+.header,
+.site-header {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+  will-change: auto !important;
+}

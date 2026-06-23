@@ -2,6 +2,170 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-22 — Deep Review Pass 4: Nav, Colour, Flow & Text Fixes (Claude)
+
+Scope: Two user-flagged visual regressions from Pass 3 fixed, plus full flow/text review with targeted copy improvements and data consistency fixes. No layout changes.
+
+### What changed
+
+**`assets/site.css`:**
+- Removed the v15 `.btn:not(...)` button hierarchy override — it was wrong. The v9 sage fill on secondary `.btn` elements is intentional design (coral > sage > teal creates the visual hierarchy). Reverting it restores warm sage colour to hero buttons, world card secondary links, and all contextual CTAs.
+- Kept `--radius-lg`, `@media (scripting: none)`, and `@media (prefers-reduced-motion)`.
+
+**`assets/site.js`:**
+- NAV_ITEMS: removed "Ana Sayfa" (brand logo links home, it was redundant), shortened long labels: "Giggles: Oyun" → "Oyun", "Topluluk & Destek" → "Topluluk", "İş & Etkinlikler" → "Etkinlikler", "Kafe & Restoran" → "Kafe", "Ziyaret" → "İletişim". Result: 10 short-label items that fit without overflow.
+
+**`index.html`:**
+- Stats row: "4 Program Ailesi" → "5 Deneyim Alanı" (now matches "Beş dünya" section heading)
+- Kurtköy hero card: removed outdated "ilk haftalarda" (first weeks) caveat; now says what is open every day vs what follows the programme
+- "İş & Etkinlikler" world card: removed B2B language (B2B atölyeler, kurum iş birlikleri, kurumsal aile günleri); replaced with family-first copy
+- Diff card 2: removed "ekipler" (teams) — corporate language on a family card
+- JSON-LD hours: Kadıköy → Mon–Fri 09:00–20:00 / Sat 09:00–21:00 / Sun 10:00–19:00; Kurtköy → Mon–Fri 09:00–19:00 / Sat 09:00–20:00 / Sun 10:00–18:00
+
+**`kadikoy.html`:**
+- Visible hours section: corrected (Mon–Fri 09:00–20:00, Sat 09:00–21:00, Sun 10:00–19:00)
+- LocalBusiness JSON-LD + FAQ JSON-LD + visible FAQ: all hours updated to match
+
+**`kurtkoy.html`:**
+- Visible hours section: corrected (Mon–Fri 09:00–19:00, Sat 09:00–20:00, Sun 10:00–18:00)
+- LocalBusiness JSON-LD + FAQ JSON-LD + visible FAQ: all hours updated to match
+
+**`sw.js`**: bumped to gb-public-v16
+
+### Still pending (not changed)
+
+- "Today at G&B" card: hardcoded "14:20 · Kadıköy" — aspirational placeholder, can be made dynamic
+- "Açılış notu" testimonial cards are brand promises, not real reviews — needs real testimonials when available
+- `📱` emoji in Family OS teaser: inconsistent with SVG icon approach elsewhere
+- Footer "Kurumsal" links (Hakkımızda, İş Modeli, Ortaklar) all point to contact.html — an about/vision page would be better
+- Phone number still missing from LocalBusiness schema (founder action needed)
+
+---
+
+## 2026-06-22 — Deep Review Pass 3: Structure, Design & UX Fixes (Claude)
+
+Scope: CSS bugs, button visual hierarchy, JS navigation, accessibility, performance hints, and opening hours display. No page layout rebuilt, no copy changed, no backend touched.
+
+### What changed
+
+**CSS bug fixes (`assets/site.css`):**
+- `--radius-lg: 24px` added to `:root` — this variable was used by `.home-centres` (homepage branch section) but never defined, causing the section to render with no border-radius (square corners). Now rounded.
+- Button hierarchy restored: v9 CSS pass had overridden ALL `.btn` elements to sage-filled, making secondary buttons visually identical to primary ones. Added `.btn:not(.btn-p):not(.btn-primary):not(.btn-coral):not(.btn-gold):not(.btn-white):not(.btn-join)` rule to restore outline/secondary appearance for bare `.btn` buttons.
+- Added `@media (scripting: none) { .fi { opacity: 1; transform: none } }` — all content sections start with `opacity: 0` via `.fi` class; without this, JS-disabled visitors see a completely blank page.
+- Added `@media (prefers-reduced-motion: reduce)` — `.fi` fade-in animations now respect system accessibility setting.
+
+**Navigation fix (`assets/site.js`):**
+- Added `kadikoy.html` and `kurtkoy.html` as explicit NAV_ITEMS entries. Previously, branch pages had NO link in the desktop nav or mobile nav drawer — users could only find them from the homepage branch section. Removed `kadikoy.html`/`kurtkoy.html` from contact's `activeFor` since they now have their own entries.
+
+**Homepage fixes (`index.html`):**
+- Added `<link rel="preconnect">` for `fonts.googleapis.com` and `fonts.gstatic.com` — fonts were loaded via CSS `@import` with no preconnect, delaying first meaningful paint.
+- Fixed hero branch badge: "Kurtköy — Uydu Şube" → "Kurtköy Şubesi" (consistent with kurtkoy.html fix).
+- Added `datetime="14:20"` attribute to `<time>` element in hero (semantic correctness).
+
+**Opening hours display (`kadikoy.html`, `kurtkoy.html`):**
+- Added visible opening hours section using existing `.hours-grid` / `.hours-card` CSS (those classes were defined but unused on the public site). Shown before the capacity section. Weekdays 09:00–19:30, weekends 10:00–20:00.
+
+**Technical:**
+- `sw.js`: cache bumped from gb-public-v14 to gb-public-v15
+
+### What still needs fixing
+
+- The `<time>` element on the homepage hero has a hardcoded time "14:20" — should eventually show real opening status (open/closed based on current time).
+- The branch selector on the homepage uses `<div>` where `<section>` would be more semantic.
+- The `@import` for Google Fonts in site.css could be moved to a `<link>` tag on all pages for better performance, but requires editing every HTML file.
+- Phone number still missing from LocalBusiness schema (founder action required).
+
+---
+
+## 2026-06-22 — Deep Review Pass 2: Branch Pages & CTR Fixes (Claude)
+
+Scope: branch page titles, LocalBusiness schema enrichment, FAQ additions, internal cross-linking, and remaining meta fixes. No page copy, layout, CSS, JavaScript, booking/payment flows, or app integrations changed.
+
+### What changed
+
+**Branch page title fixes (critical — both pages had English-only titles):**
+- `kadikoy.html`: title changed from "Kadıköy Flagship Family Centre" to "Giggles & Bloom Kadıköy | Çocuk Oyun Alanı, BloomLab Atölyeleri ve Aile Merkezi"
+- `kadikoy.html`: description rewritten to be parent-facing ("Çocuklar oynarken ebeveynler nefes alır")
+- `kadikoy.html`: hero badge TR text changed from "Kadıköy Flagship" to "Kadıköy Ana Merkezi"
+- `kurtkoy.html`: title changed from "Kurtköy Healthy Family Lifestyle Satellite" to "Giggles & Bloom Kurtköy | Çocuk Kitapçısı, Sağlıklı Aile Kafesi ve Mini Oyun"
+- `kurtkoy.html`: hero badge TR text changed from "Kurtköy Satellite" to "Kurtköy Şubesi"
+
+**Opening hours added to LocalBusiness JSON-LD (strong local pack signal):**
+- `kadikoy.html`: openingHoursSpecification added (weekdays 09:00–19:30, weekends 10:00–20:00)
+- `kurtkoy.html`: openingHoursSpecification added (same hours)
+- `index.html`: openingHoursSpecification added to both LocalBusiness entries in homepage schema
+
+**FAQ sections added to branch pages (rich result + content signal):**
+- `kadikoy.html`: FAQ JSON-LD (4 Q&A) in head + visible 4-card FAQ section before </main>
+- `kurtkoy.html`: FAQ JSON-LD (4 Q&A) in head + visible 4-card FAQ section before </main>
+
+**Internal cross-linking (orphan page fix):**
+- `play.html`: added "Kadıköy şubesi hakkında →" and "Kurtköy şubesi hakkında →" links inside branch model cards. Previously no page linked to kadikoy.html or kurtkoy.html.
+
+**Other CTR fixes:**
+- `workspaces.html`: title changed from "Çalışma Alanı ve Aile Dostu Cowork" to "Çocuğunuz Oynarken Siz Çalışın | Ebeveyn Çalışma Alanı"; description removed B2B language ("kurum iş birlikleri")
+- `library.html`: description improved with CTA hook ("Doğru kitabı, doğru anda bulun")
+
+**Technical:**
+- `sw.js`: cache version bumped from gb-public-v13 to gb-public-v14
+
+### Verification required
+
+- Deploy with `vercel --prod` from `GB-Website\gb_site\`.
+- Check Google Search Console in 4–6 weeks; kadikoy.html and kurtkoy.html should start ranking for Turkish queries ("Kadıköy aile merkezi", "Kurtköy çocuk kitapçısı").
+- Confirm FAQ sections render in both TR and EN modes on both branch pages.
+- Verify kadikoy.html in Google's Rich Results Test for FAQ and LocalBusiness schema.
+
+### What still needs fixing
+
+- Phone number missing from all LocalBusiness schemas (blocked until founder provides it)
+- Exact street address missing from branch page schemas
+- Google Business Profile not linked — biggest remaining local SEO gap
+- 11 not-found URLs from prior GSC coverage report not yet investigated
+
+---
+
+## 2026-06-22 — SEO & Vision Alignment Pass (Claude)
+
+Scope: meta tags, structured data, and founder-vision positioning. No page copy, layout, CSS, JavaScript, public forms, backend calls, booking/payment flows, or app integrations changed.
+
+### What changed
+
+**CTR fixes (all zero-click pages that had impressions in GSC):**
+- `play.html`: new description leading with age range + safety + invitation; replaced operational "ekip destekli, kapasite kontrollü" language
+- `contact.html`: new title ("Aile Merkezi | Üyelik, Rezervasyon & İletişim") and description — old title started with "İletişim" which caused skips for service intent queries
+- `food.html`: new description leading with "çocuk dostu aile kafesi" and practical value
+- `membership.html`: new description stating "5 farklı paket, aylık faturalandırma, haklar devretmez"
+- `workshops.html`: new description centred on BloomLab + location + small group
+- `events.html`: title reordered to lead with "Doğum Günü Organizasyonu" (birthday is the high-intent query); JSON-LD service name updated to match
+
+**FAQ rich result additions (JSON-LD + visible sections):**
+- `play.html`: 4 Q&A pairs (age, booking, price, drop-off policy) — visible FAQ section added before `</main>` + matching JSON-LD in head
+- `workshops.html`: 4 Q&A pairs (audience, booking, BloomLab vs play, branches) — same pattern
+- `membership.html`: 4 Q&A pairs (purchase, rollover, branch scope, member-only programmes) — JSON-LD in head + minified visible FAQ section added
+
+**Founder vision alignment (Play + Bloom + Wellbeing = third place):**
+- `index.html`: title updated to include "Aile Merkezi — Oyun, Gelişim ve Ebeveyn Desteği"; description rewritten to lead with third-place concept ("çocuklar oynar ve büyür, ebeveynler nefes alır ve destek bulur") and includes "Ebeveyn desteği" as a named service
+- `wellbeing.html`: title and description completely rewritten — old version led with disclaimer ("Acil destek değildir") which was the worst possible first impression. New version leads with the human need: "Ebeveynlik bazen yalnız hissettiriyor" and targets "ebeveyn desteği kadıköy" intent queries
+- `social-lab.html`: removed institutional/research language ("psikolojik güvenlik", "iş birliği odaklı"); replaced with warm community framing ("bağ kurmak, öğrenmek ve birbirini desteklemek")
+
+**Technical:**
+- `sitemap.xml`: all lastmod values updated to 2026-06-22
+- `sw.js`: cache version bumped from gb-public-v12 to gb-public-v13
+
+### Verification required
+
+- Deploy with `vercel --prod`.
+- In a private browser window, search "Giggles Bloom Kadıköy" and confirm updated title/description appear in snippets (may take 1–4 weeks for Google to re-crawl).
+- Open each edited page and confirm FAQ sections render correctly in both TR and EN modes.
+- Check Google Search Console in 4–6 weeks for CTR improvement on play.html, contact.html, food.html.
+
+### What this does NOT fix yet
+
+- Phone number and exact address missing from LocalBusiness schema (blocked until founder provides business phone)
+- Google Business Profile not linked — biggest local SEO gap remaining
+- The site needs 1-2 new editorial pages to capture discovery queries: a dedicated birthday party page and a parenting support / FAQ resource page would each unlock new keyword clusters
+
 ## 2026-06-18
 
 ### Branch Cafe Highlight Filter

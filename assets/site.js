@@ -12,15 +12,16 @@ const MINI_ICONS = {
   instagram: '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3"/><circle cx="16.5" cy="7.5" r=".8"/></svg>',
 };
 const NAV_ITEMS = [
-  { href: 'index.html', tr: 'Ana Sayfa', en: 'Home' },
-  { href: 'play.html', tr: 'Giggles: Oyun', en: 'Play' },
+  { href: 'play.html', tr: 'Oyun', en: 'Play', activeFor: ['play.html', 'index.html'] },
   { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
-  { href: 'social-lab.html', tr: 'Topluluk & Destek', en: 'Community & Support', activeFor: ['social-lab.html', 'wellbeing.html'] },
-  { href: 'events.html', tr: 'İş & Etkinlikler', en: 'Work & Events', activeFor: ['events.html', 'workspaces.html'] },
+  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'wellbeing.html'] },
+  { href: 'events.html', tr: 'Etkinlikler', en: 'Events', activeFor: ['events.html', 'workspaces.html'] },
   { href: 'library.html', tr: 'Kitaplık', en: 'Books' },
-  { href: 'food.html', tr: 'Kafe & Restoran', en: 'Cafe & Restaurant', activeFor: ['food.html', 'cafe.html'] },
+  { href: 'food.html', tr: 'Kafe', en: 'Café', activeFor: ['food.html', 'cafe.html'] },
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
-  { href: 'contact.html', tr: 'Ziyaret', en: 'Visit', activeFor: ['contact.html', 'kadikoy.html', 'kurtkoy.html'] },
+  { href: 'contact.html', tr: 'İletişim', en: 'Contact' },
+  { href: 'kadikoy.html', tr: 'Kadıköy', en: 'Kadıköy' },
+  { href: 'kurtkoy.html', tr: 'Kurtköy', en: 'Kurtköy' },
 ];
 const PUBLIC_CARD_ICONS = {
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h10a3 3 0 0 1 3 3v12H8a3 3 0 0 0-3 3z"/><path d="M5 4.5v15"/><path d="M9 8h5M9 11h6"/></svg>',
@@ -622,6 +623,7 @@ function renderFeed(container, data) {
       title: isTr ?event.name_tr : event.name_en,
       date: formatDate(event.starts_at),
       branch: branchLabel(event.branch_id),
+      seats: publicEventSeatText(event),
     });
   });
 
@@ -699,6 +701,16 @@ function sessionSeatText(session) {
   const remaining = Number(session.remaining);
   if (!Number.isFinite(capacity) || capacity <= 0) return '';
   if (remaining <= 0) return gl === 'tr' ? 'Doldu' : 'Full';
+  return gl === 'tr'
+    ? remaining + '/' + capacity + ' yer'
+    : remaining + '/' + capacity + ' seats';
+}
+
+function publicEventSeatText(event) {
+  const capacity = Number(event.total_capacity);
+  const remaining = Number(event.remaining_capacity);
+  if (!Number.isFinite(capacity) || capacity <= 0 || event.remaining_capacity === null || event.remaining_capacity === undefined) return '';
+  if (Number.isFinite(remaining) && remaining <= 0) return gl === 'tr' ? 'Kapasite dolu' : 'Full';
   return gl === 'tr'
     ? remaining + '/' + capacity + ' yer'
     : remaining + '/' + capacity + ' seats';

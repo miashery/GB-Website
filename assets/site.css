@@ -3265,3 +3265,28 @@ footer .footer-bottom {
   transform: none !important;
   will-change: auto !important;
 }
+
+/* ══════════════════════════════
+   v15 INCREMENTAL IMPROVEMENTS
+══════════════════════════════ */
+
+/* Fix: --radius-lg was used but never defined */
+:root {
+  --radius-lg: 24px;
+}
+
+/* Fix: no-JS and reduced-motion fallback for .fi fade-in animation */
+@media (scripting: none) {
+  .fi {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fi {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

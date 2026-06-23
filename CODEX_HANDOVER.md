@@ -2,6 +2,14 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-23 - Event request canonical taxonomy
+
+Scope: public website event request dropdown only; no layout, SEO, payment, booking, or schema work in this repo.
+
+- Updated `events.html` request-type options to send the Event System v2 canonical values used by the webapp (`family_celebration`, `engagement_celebration`, `private_hire`, `school_group_visit`, `corporate_family_event`, `partner_institution_event`, `member_only_event`, `invite_only_custom_group`) while keeping `workshop_request` as an enquiry/programme-planning option.
+- Bumped `sw.js` from `gb-public-v16` to `gb-public-v17` so returning devices pick up the dropdown after deployment.
+- Requires the main webapp SQL migration `20260623120000_event_system_v2_foundation.sql` before relying on canonical request inserts in production.
+
 ## 2026-06-22 — Deep Review Pass 4: Nav, Colour, Flow & Text Fixes (Claude)
 
 Scope: Two user-flagged visual regressions from Pass 3 fixed, plus full flow/text review with targeted copy improvements and data consistency fixes. No layout changes.

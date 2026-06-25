@@ -13,8 +13,15 @@ const MINI_ICONS = {
   map: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v14M15 6v14"/></svg>',
   instagram: '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3"/><circle cx="16.5" cy="7.5" r=".8"/></svg>',
 };
-const NAV_ITEMS = [
-  { href: 'index.html', tr: 'Ana Sayfa', en: 'Home', activeFor: ['index.html', ''] },
+const DESKTOP_NAV_ITEMS = [
+  { href: 'play.html', tr: 'Oyun', en: 'Play' },
+  { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
+  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'wellbeing.html'] },
+  { href: 'food.html', tr: 'Kafe & Kitap', en: 'Café & Books', activeFor: ['food.html', 'cafe.html', 'library.html'] },
+  { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
+  { href: 'contact.html', tr: 'Ziyaret', en: 'Visit', activeFor: ['contact.html', 'kadikoy.html', 'kurtkoy.html'] },
+];
+const DRAWER_NAV_ITEMS = [
   { href: 'play.html', tr: 'Oyun', en: 'Play' },
   { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
   { href: 'social-lab.html', tr: 'Topluluk', en: 'Community' },
@@ -24,7 +31,7 @@ const NAV_ITEMS = [
   { href: 'library.html', tr: 'Kitaplık', en: 'Books' },
   { href: 'food.html', tr: 'Kafe', en: 'Café', activeFor: ['food.html', 'cafe.html'] },
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
-  { href: 'contact.html', tr: 'İletişim', en: 'Contact' },
+  { href: 'contact.html', tr: 'Ziyaret', en: 'Visit' },
   { href: 'kadikoy.html', tr: 'Kadıköy', en: 'Kadıköy' },
   { href: 'kurtkoy.html', tr: 'Kurtköy', en: 'Kurtköy' },
 ];
@@ -62,6 +69,7 @@ function gt() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  applyPageThemeClass();
   normalizeHeaderNav();
   applyRedesignBranding();
   preparePwaShell();
@@ -104,11 +112,36 @@ function normalizeHeaderNav() {
 
   const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
   nav.setAttribute('aria-label', 'Primary');
-  nav.innerHTML = NAV_ITEMS.map(function(item) {
+  nav.innerHTML = navItemsHtml(DESKTOP_NAV_ITEMS, current);
+  nav.setAttribute('data-gb-nav-ready', '1');
+}
+
+function navItemsHtml(items, current) {
+  return items.map(function(item) {
     const active = navItemIsActive(item, current);
     return '<a' + (active ? ' class="active"' : '') + ' href="' + item.href + '">' + navItemLabel(item) + '</a>';
   }).join('');
-  nav.setAttribute('data-gb-nav-ready', '1');
+}
+
+function applyPageThemeClass() {
+  const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const themeByPage = {
+    'play.html': 'page-play',
+    'workshops.html': 'page-bloomlab',
+    'social-lab.html': 'page-community',
+    'wellbeing.html': 'page-support',
+    'events.html': 'page-events',
+    'workspaces.html': 'page-work',
+    'library.html': 'page-books',
+    'food.html': 'page-cafe',
+    'cafe.html': 'page-cafe',
+    'membership.html': 'page-membership',
+    'contact.html': 'page-visit',
+    'kadikoy.html': 'page-visit',
+    'kurtkoy.html': 'page-visit',
+  };
+  const theme = themeByPage[current];
+  if (theme) document.body.classList.add('page-themed', theme);
 }
 
 function navItemIsActive(item, current) {
@@ -388,7 +421,8 @@ function ensureMobileNav() {
 
 function syncMobileNav(drawer, nav) {
   const links = drawer.querySelector('.nav-links');
-  if (links) links.innerHTML = nav.innerHTML;
+  const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  if (links) links.innerHTML = navItemsHtml(DRAWER_NAV_ITEMS, current);
 
   let actions = drawer.querySelector('.mobile-nav-actions');
   if (!actions) {

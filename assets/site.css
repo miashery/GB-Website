@@ -4914,3 +4914,194 @@ body:not(.home-design-v3) .btn-coral {
     font-size: clamp(2rem, 13vw, 3.1rem);
   }
 }
+
+/* Claude reference alignment: compact desktop nav plus page-specific colour moods. */
+.home-design-v3 .hero-word-breathe {
+  color: var(--brand-teal);
+}
+
+.home-design-v3 .hero-word-grow {
+  color: var(--coral);
+}
+
+.home-design-v3 .hero-line-together {
+  color: #626a70;
+}
+
+body.page-play {
+  --page-accent: #2f91ad;
+  --page-accent-soft: #dceff0;
+  --page-accent-faint: rgba(47, 145, 173, .12);
+  --page-gradient: linear-gradient(180deg, #dfeff1 0, #eaf4f1 330px, var(--cream) 720px);
+}
+
+body.page-bloomlab {
+  --page-accent: #8a70c5;
+  --page-accent-soft: #e9e3f2;
+  --page-accent-faint: rgba(138, 112, 197, .13);
+  --page-gradient: linear-gradient(180deg, #e8e2f0 0, #eee8f2 330px, var(--cream) 720px);
+}
+
+body.page-community,
+body.page-support {
+  --page-accent: #86a07b;
+  --page-accent-soft: #e4ecdf;
+  --page-accent-faint: rgba(134, 160, 123, .14);
+  --page-gradient: linear-gradient(180deg, #e4ecdf 0, #eef2e8 330px, var(--cream) 720px);
+}
+
+body.page-events,
+body.page-work {
+  --page-accent: #d39a37;
+  --page-accent-soft: #f3e7cc;
+  --page-accent-faint: rgba(211, 154, 55, .15);
+  --page-gradient: linear-gradient(180deg, #f3e7cc 0, #f5eddb 330px, var(--cream) 720px);
+}
+
+body.page-books,
+body.page-cafe {
+  --page-accent: #c78483;
+  --page-accent-soft: #f4dfdf;
+  --page-accent-faint: rgba(199, 132, 131, .14);
+  --page-gradient: linear-gradient(180deg, #f4dfdf 0, #f4eadf 330px, var(--cream) 720px);
+}
+
+body.page-membership {
+  --page-accent: #496394;
+  --page-accent-soft: #dfe7f1;
+  --page-accent-faint: rgba(73, 99, 148, .13);
+  --page-gradient: linear-gradient(180deg, #dfe7f1 0, #edf0eb 330px, var(--cream) 720px);
+}
+
+body.page-visit {
+  --page-accent: #7d9276;
+  --page-accent-soft: #e7ebdf;
+  --page-accent-faint: rgba(125, 146, 118, .14);
+  --page-gradient: linear-gradient(180deg, #e7ebdf 0, #f1eadc 330px, var(--cream) 720px);
+}
+
+body.page-themed {
+  background: var(--page-gradient);
+}
+
+body.page-themed .nav a.active,
+body.page-themed .mobile-nav-inner .nav-links a.active {
+  box-shadow: inset 0 -2px 0 var(--page-accent);
+  color: var(--brand-teal);
+}
+
+body.page-themed .pt {
+  border-bottom: 0;
+  margin-bottom: 42px;
+  padding: clamp(54px, 8vw, 96px) 0 clamp(48px, 7vw, 86px);
+}
+
+body.page-themed .pt h1 {
+  font-size: clamp(3.4rem, 7vw, 5.75rem);
+  max-width: 980px;
+}
+
+body.page-themed .pt h1 em {
+  color: var(--page-accent);
+  font-style: italic;
+}
+
+body.page-themed .branch-story-hero h1 em {
+  color: var(--page-accent);
+  font-style: italic;
+}
+
+body.page-themed .branch-story-hero {
+  background: linear-gradient(135deg, rgba(255, 253, 248, .76), var(--page-accent-faint));
+  border-color: var(--page-accent-soft);
+}
+
+body.page-themed .page-kicker {
+  align-items: center;
+  background: rgba(255, 253, 248, .84);
+  border-radius: 999px;
+  color: var(--page-accent);
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 800;
+  gap: 10px;
+  letter-spacing: .09em;
+  margin-bottom: 26px;
+  padding: 8px 17px;
+  text-transform: uppercase;
+}
+
+body.page-themed .page-kicker > span:first-child {
+  background: var(--page-accent);
+  border-radius: 999px;
+  height: 8px;
+  width: 8px;
+}
+
+body.page-themed .pt .sub {
+  font-size: 19px;
+  line-height: 1.65;
+  max-width: 760px;
+}
+
+body.page-themed .hero,
+body.page-themed .highlight {
+  background: linear-gradient(135deg, var(--page-accent-faint), rgba(255, 253, 248, .7));
+  border-color: var(--page-accent-soft);
+}
+
+body.page-themed .hero .card,
+body.page-themed .highlight .card {
+  background: rgba(255, 253, 248, .9);
+}
+
+body.page-themed .btn-p,
+body.page-themed .btn-primary,
+body.page-themed button[type="submit"] {
+  background: var(--page-accent);
+  border-color: var(--page-accent);
+}
+
+body.page-themed .btn:hover {
+  border-color: var(--page-accent);
+  color: var(--page-accent) !important;
+}
+
+body.page-play .hero-coral,
+body.page-bloomlab .hero-lav {
+  margin-top: -18px;
+}
+
+@media (min-width: 981px) {
+  .nav {
+    display: flex;
+  }
+
+  .hamburger {
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 680px) {
+  body.page-themed .pt {
+    padding: 36px 0 42px;
+  }
+
+  body.page-themed .pt h1 {
+    font-size: clamp(2.7rem, 15vw, 4rem);
+  }
+
+  body.page-themed .pt .sub {
+    font-size: 16px;
+  }
+}

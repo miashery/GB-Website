@@ -43,6 +43,15 @@ Scope: public website visual design language only. No backend, booking, payment,
 - Bumped `sw.js` from `gb-public-v20` to `gb-public-v21`.
 - Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, and desktop/medium-width Playwright menu smoke passed across 13 public pages.
 
+### Founder screenshot correction follow-up
+
+- Corrected the desktop header to the Claude-style compact navigation set: Play, BloomLab, Community, Café & Books, Membership, and Visit. The separate Home link is intentionally removed because the logo is the home action.
+- Kept the fuller page list in the mobile drawer so Support, Events, Work, Books, Café, Kadıköy, and Kurtköy are still reachable on smaller screens.
+- Corrected the homepage hero word colours: `breathe` stays blue, `grow` is pink, and `Together, in one place` is a softer grey.
+- Added page mood classes and shared CSS tokens for page-specific top gradients/accent words. Play now uses the blue/teal mood and BloomLab the lavender/purple mood shown in the Claude references; the other public pages now also have a concise coloured headline phrase that follows the same system.
+- Bumped `sw.js` from `gb-public-v21` to `gb-public-v23`.
+- Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, corrected local reference check, and focused desktop/mobile Playwright smoke passed for the homepage navigation/hero colours, fuller mobile drawer, and coloured gradient/accent treatment across the themed public pages.
+
 Still pending:
 
 - Replace the temporary/low-resolution Claude logo with a founder-approved high-quality logo file when available.

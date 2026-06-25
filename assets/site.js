@@ -966,15 +966,21 @@ function renderBranches(branches) {
   // 1. Hero stack
   const heroStack = document.getElementById('branch-hero-stack');
   if (heroStack) {
-    const portalCard = heroStack.querySelector('.card:last-child');
+    const portalCard = heroStack.querySelector('[data-hero-portal-card]') || heroStack.querySelector('.card:last-child');
+    const isHomeHybrid = document.body.classList.contains('home-design-v3');
     const branchCards = branches.map(function(b) {
       const dotCls = b.branch_id === 'kadikoy' ? 'd-sage' : 'd-gold';
       const badge = isTr ? b.badge_tr : b.badge_en;
       const desc = isTr ? b.description_tr : b.description_en;
       const district = b.address_district || (b.branch_id === 'kadikoy' ? 'Kadıköy' : 'Kurtköy');
       const links = branchContactLinks(b.branch_id);
+      const photo = b.branch_id === 'kadikoy'
+        ? 'assets/redesign/kadikoy-day.jpeg'
+        : 'assets/redesign/kurtkoy-day.jpeg';
+      const photoAlt = 'Giggles & Bloom ' + district;
 
       return '<div class="card hero-branch-card">' +
+        (isHomeHybrid ? '<img class="hero-branch-thumb" src="' + photo + '" alt="' + escapeHtml(photoAlt) + '" loading="lazy">' : '') +
         '<div class="badge"><span class="dot ' + dotCls + '"></span>' + escapeHtml(badge || '') + '</div>' +
         '<p style="font-size:.83rem;color:var(--mid);line-height:1.6">' +
           '<strong>' + (b.floor_area_sqm || 0) + 'm²</strong> — ' + escapeHtml(desc || '') +

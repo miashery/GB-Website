@@ -13,6 +13,14 @@ Scope: public website visual design language only. No backend, booking, payment,
 - Updated `manifest.webmanifest` colours to the redesign cream/blue and bumped `sw.js` from `gb-public-v17` to `gb-public-v18`; the new wordmark is now cached by the service worker.
 - Adjusted the homepage first-viewport copy from parent-specific wording to more inclusive adult/grown-up wording, while leaving the broader SEO/content terminology audit for a dedicated pass.
 
+### Homepage hybrid follow-up
+
+- Refined the homepage after founder screenshot review: do not clone Claude's page structure wholesale.
+- Kept the current site's strength of early branch information and live branch-card replacement.
+- Borrowed selected Claude strengths: slim blue announcement strip, small photo accents inside the first-screen branch cards, calmer full-width section bands, a blue membership band, and a softer pink "Join our community" CTA card.
+- Bumped `sw.js` from `gb-public-v18` to `gb-public-v19` so returning visitors pick up the hybrid homepage.
+- Verification: `node --check assets/site.js`, `node --check sw.js`, local reference check, and desktop/mobile homepage render smoke passed.
+
 Still pending:
 
 - Replace the temporary/low-resolution Claude logo with a founder-approved high-quality logo file when available.

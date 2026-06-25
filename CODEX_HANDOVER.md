@@ -21,6 +21,19 @@ Scope: public website visual design language only. No backend, booking, payment,
 - Bumped `sw.js` from `gb-public-v18` to `gb-public-v19` so returning visitors pick up the hybrid homepage.
 - Verification: `node --check assets/site.js`, `node --check sw.js`, local reference check, and desktop/mobile homepage render smoke passed.
 
+### Homepage screenshot refinement follow-up
+
+- Removed the white Kadıköy stats strip from the homepage.
+- Tightened first-viewport hero spacing and removed the top hero branch photos so the main headline starts higher while the two branch cards remain visible.
+- Fixed the header `Join` button contrast to pure white text.
+- Replaced repeated exterior photos in `Our Spaces` with interior Claude redesign photos (`inside-cafe`, `inside-books`, `inside-play`).
+- Added a small explanatory intro card to the `Five worlds` section and made those section links quieter text-style links.
+- Rebuilt the Family OS block with an actual blue feature panel instead of a blank decorative panel.
+- Updated `Come visit` cards and live-rendered branch cards with phone, Google Maps, and Instagram links; added the shared phone to the footer.
+- Expanded the shared footer sentence to: "We exist to lighten the invisible load. A warm, trust-first third space for families."
+- Bumped `sw.js` from `gb-public-v19` to `gb-public-v20`.
+- Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, and desktop/mobile Playwright homepage smoke passed with mocked live branch data.
+
 Still pending:
 
 - Replace the temporary/low-resolution Claude logo with a founder-approved high-quality logo file when available.

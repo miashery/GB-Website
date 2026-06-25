@@ -5,6 +5,8 @@ const CONTACT_LINKS = {
   instagramKurtkoy: 'https://www.instagram.com/gigglesandbloom.kurtkoy/',
   mapKadikoy: 'https://maps.app.goo.gl/wf5DHk16UqNkESe5A',
   mapKurtkoy: 'https://maps.app.goo.gl/iQE29KZyHXt4ZJNN6',
+  phoneDisplay: '(+90) 0 553 345 65 67',
+  phoneTel: '+905533456567',
 };
 const MINI_ICONS = {
   pin: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s7-5.3 7-12a7 7 0 0 0-14 0c0 6.7 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>',
@@ -417,7 +419,8 @@ function normalizeFooter() {
     '<div class="footer-inner">' +
       '<div>' +
         '<div class="footer-brand">Giggles &amp; Bloom</div>' +
-        '<div class="footer-note"><span class="tr-only">Görünmez yükü hafifletmek için buradayız.</span><span class="en-only">We exist to lighten the invisible load.</span></div>' +
+        '<div class="footer-note"><span class="tr-only">Görünmez yükü hafifletmek için varız. Aileler için sıcak, güven öncelikli bir üçüncü alan.</span><span class="en-only">We exist to lighten the invisible load. A warm, trust-first third space for families.</span></div>' +
+        '<a class="footer-phone" href="tel:' + CONTACT_LINKS.phoneTel + '">' + CONTACT_LINKS.phoneDisplay + '</a>' +
       '</div>' +
       '<div class="footer-col">' +
         '<h5><span class="tr-only">Keşfet</span><span class="en-only">Explore</span></h5>' +
@@ -967,20 +970,14 @@ function renderBranches(branches) {
   const heroStack = document.getElementById('branch-hero-stack');
   if (heroStack) {
     const portalCard = heroStack.querySelector('[data-hero-portal-card]') || heroStack.querySelector('.card:last-child');
-    const isHomeHybrid = document.body.classList.contains('home-design-v3');
     const branchCards = branches.map(function(b) {
       const dotCls = b.branch_id === 'kadikoy' ? 'd-sage' : 'd-gold';
       const badge = isTr ? b.badge_tr : b.badge_en;
       const desc = isTr ? b.description_tr : b.description_en;
       const district = b.address_district || (b.branch_id === 'kadikoy' ? 'Kadıköy' : 'Kurtköy');
       const links = branchContactLinks(b.branch_id);
-      const photo = b.branch_id === 'kadikoy'
-        ? 'assets/redesign/kadikoy-day.jpeg'
-        : 'assets/redesign/kurtkoy-day.jpeg';
-      const photoAlt = 'Giggles & Bloom ' + district;
 
       return '<div class="card hero-branch-card">' +
-        (isHomeHybrid ? '<img class="hero-branch-thumb" src="' + photo + '" alt="' + escapeHtml(photoAlt) + '" loading="lazy">' : '') +
         '<div class="badge"><span class="dot ' + dotCls + '"></span>' + escapeHtml(badge || '') + '</div>' +
         '<p style="font-size:.83rem;color:var(--mid);line-height:1.6">' +
           '<strong>' + (b.floor_area_sqm || 0) + 'm²</strong> — ' + escapeHtml(desc || '') +
@@ -1022,10 +1019,11 @@ function renderBranches(branches) {
       return '<div class="hours-card">' +
         '<h4>' + escapeHtml(isTr ? b.name_tr : b.name_en) + '</h4>' +
         '<div class="hours-row"><span class="day">' + (isTr ? 'Her gün' : 'Daily') + '</span><span class="time">' + hours + '</span></div>' +
-        '<div style="margin-top:12px;font-size:.78rem;color:var(--muted)">E-mail: <a href="mailto:' + escapeHtml(email) + '">' + escapeHtml(email) + '</a></div>' +
-        '<div class="btns" style="margin-top:10px">' +
-          '<a class="btn" href="' + links.map + '" target="_blank" rel="noopener">Google Maps</a>' +
-          '<a class="btn" href="' + links.instagram + '" target="_blank" rel="noopener">Instagram</a>' +
+        '<div class="visit-contact-line">E-mail: <a href="mailto:' + escapeHtml(email) + '">' + escapeHtml(email) + '</a></div>' +
+        '<div class="visit-contact-line"><span class="tr-only">Telefon:</span><span class="en-only">Phone:</span> <a href="tel:' + CONTACT_LINKS.phoneTel + '">' + CONTACT_LINKS.phoneDisplay + '</a></div>' +
+        '<div class="visit-card-links">' +
+          '<a href="' + links.map + '" target="_blank" rel="noopener">Google Maps</a>' +
+          '<a href="' + links.instagram + '" target="_blank" rel="noopener">Instagram</a>' +
         '</div>' +
       '</div>';
     }).join('');

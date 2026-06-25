@@ -4459,3 +4459,334 @@ footer {
     padding: 48px 24px;
   }
 }
+
+/* Homepage screenshot refinement: keep the hybrid structure, tighten the first
+   viewport, and borrow the strongest Claude-style treatments selectively. */
+.btn-join,
+.btn-join:hover,
+.mobile-nav-actions .btn-join,
+.mobile-nav-actions .btn-join:hover,
+.header-actions .btn-join,
+.header-actions .btn-join:hover {
+  color: #fff !important;
+}
+
+.home-design-v3 main {
+  padding-top: 28px;
+}
+
+.home-design-v3 .hero-home {
+  margin-bottom: 0;
+}
+
+.home-design-v3 .hero-home-inner {
+  align-items: start;
+  gap: clamp(28px, 4vw, 56px);
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, .82fr);
+  padding: clamp(30px, 4vw, 48px) clamp(24px, 4vw, 48px);
+}
+
+.home-design-v3 .hero-home h1 {
+  max-width: 660px;
+}
+
+.home-design-v3 .hero-home .hero-sub {
+  max-width: 620px;
+}
+
+.home-design-v3 .hero-home .btns {
+  margin-top: 24px;
+}
+
+.home-design-v3 .hero-home .hero-tag {
+  margin-bottom: 18px;
+  padding: 6px 14px;
+}
+
+.home-design-v3 .hero-trust {
+  margin-top: 24px;
+  padding-top: 18px;
+}
+
+.home-design-v3 .hero-branch-stack {
+  align-self: start;
+  gap: 14px;
+}
+
+.home-design-v3 .hero-branch-card {
+  gap: 8px;
+  padding: 14px;
+}
+
+.home-design-v3 .hero-branch-thumb,
+.home-design-v3 .home-hero-photo-card {
+  display: none;
+}
+
+.home-design-v3 .stats-row {
+  display: none;
+}
+
+.home-design-v3 .branch-selector {
+  margin-top: 0;
+  padding-top: 66px;
+}
+
+.home-design-v3 .centre-photo-card img,
+.home-design-v3 .centre-photo-card-wide img {
+  filter: saturate(.96) contrast(.98);
+}
+
+.home-design-v3 .home-worlds-section {
+  max-width: 1120px;
+}
+
+.home-design-v3 .worlds-intro-card {
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(220px, .55fr) minmax(0, 1fr);
+  margin: 28px 0;
+  padding: 24px 28px;
+}
+
+.home-design-v3 .worlds-kicker {
+  color: var(--sage-dark);
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.home-design-v3 .worlds-intro-card h3 {
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  margin: 0;
+}
+
+.home-design-v3 .worlds-intro-card p {
+  color: var(--mid);
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.home-design-v3 .home-worlds-section .card {
+  min-height: 0;
+}
+
+.home-design-v3 .home-worlds-section .btns {
+  gap: 16px;
+  margin-top: auto;
+}
+
+.home-design-v3 .home-worlds-section .btns .btn,
+.home-design-v3 .home-worlds-section .btns .btn-p {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--brand-teal);
+  min-height: 0;
+  padding: 0;
+}
+
+.home-design-v3 .home-worlds-section .btns .btn:hover,
+.home-design-v3 .home-worlds-section .btns .btn-p:hover {
+  background: transparent;
+  color: var(--coral) !important;
+  transform: none;
+}
+
+.home-design-v3 .home-family-os-section .highlight {
+  border-radius: 28px;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, .84fr);
+  padding: 0;
+}
+
+.home-design-v3 .home-family-os-section .highlight::after {
+  content: none;
+}
+
+.home-design-v3 .family-os-copy {
+  padding: clamp(36px, 5vw, 64px);
+}
+
+.home-design-v3 .family-os-badge {
+  align-items: center;
+  background: var(--sage-bg);
+  border-radius: 999px;
+  color: var(--sage-dark);
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 800;
+  gap: 9px;
+  margin-bottom: 22px;
+  padding: 8px 16px;
+}
+
+.home-design-v3 .family-os-badge span:first-child {
+  background: var(--sage);
+  border-radius: 999px;
+  height: 8px;
+  width: 8px;
+}
+
+.home-design-v3 .family-os-copy h2 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  margin: 0 0 22px;
+  max-width: 650px;
+}
+
+.home-design-v3 .family-os-copy p {
+  color: var(--mid);
+  font-size: 17px;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 680px;
+}
+
+.home-design-v3 .family-os-copy .btns {
+  gap: 22px;
+  margin-top: 34px;
+}
+
+.home-design-v3 .family-os-panel {
+  background: var(--sky);
+  display: grid;
+  gap: 18px;
+  padding: clamp(36px, 5vw, 64px);
+  place-content: center;
+}
+
+.home-design-v3 .family-os-panel > div {
+  align-items: center;
+  background: rgba(255, 253, 248, .88);
+  border-radius: 16px;
+  color: var(--brand-teal);
+  display: flex;
+  font-size: 17px;
+  font-weight: 800;
+  gap: 14px;
+  min-height: 60px;
+  padding: 15px 22px;
+}
+
+.home-design-v3 .family-os-panel > div span:first-child {
+  background: var(--brand-teal);
+  border-radius: 999px;
+  height: 10px;
+  width: 10px;
+}
+
+.home-design-v3 .home-visit-section > .hours-grid {
+  max-width: 1060px;
+}
+
+.home-design-v3 .home-visit-section .hours-card {
+  border: 0;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: clamp(26px, 4vw, 42px);
+}
+
+.visit-contact-line {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.visit-contact-line a {
+  color: var(--sage-dark);
+  font-weight: 700;
+}
+
+.visit-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.visit-card-links a {
+  background: var(--white);
+  border: 1px solid rgba(73, 99, 148, .14);
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(44, 44, 44, .06);
+  color: var(--brand-teal);
+  font-size: 13px;
+  font-weight: 800;
+  padding: 9px 14px;
+}
+
+.visit-card-links a:hover {
+  border-color: rgba(73, 99, 148, .28);
+  color: var(--coral);
+}
+
+.home-design-v3 .join-banner,
+.home-design-v3 .join-banner h2,
+.home-design-v3 .join-banner p,
+.home-design-v3 .join-banner a:not(.btn-white) {
+  color: var(--white) !important;
+}
+
+.home-design-v3 .join-banner .btn-white {
+  background: var(--white) !important;
+  color: var(--brand-teal) !important;
+}
+
+.footer-phone {
+  color: rgba(255, 255, 255, .72);
+  display: inline-flex;
+  font-size: .82rem;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.footer-phone:hover {
+  color: var(--white);
+}
+
+@media (max-width: 920px) {
+  .home-design-v3 .hero-home-inner,
+  .home-design-v3 .worlds-intro-card,
+  .home-design-v3 .home-family-os-section .highlight {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .home-design-v3 main {
+    padding-top: 14px;
+  }
+
+  .home-design-v3 .hero-home-inner {
+    padding: 18px;
+  }
+
+  .home-design-v3 .hero-home .hero-tag {
+    font-size: 11.5px;
+    margin-bottom: 12px;
+    padding: 5px 10px;
+  }
+
+  .home-design-v3 .worlds-intro-card {
+    padding: 20px;
+  }
+
+  .home-design-v3 .family-os-copy,
+  .home-design-v3 .family-os-panel {
+    padding: 30px 20px;
+  }
+
+  .home-design-v3 .family-os-panel > div {
+    font-size: 15px;
+  }
+}

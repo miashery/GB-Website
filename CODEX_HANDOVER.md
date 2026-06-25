@@ -65,6 +65,14 @@ Scope: public website visual design language only. No backend, booking, payment,
 - Replaced the stale `Phone: Coming soon` text in the Visit page branch cards with `(+90) 0 553 345 65 67` as a tap-to-call link.
 - Bumped `sw.js` from `gb-public-v24` to `gb-public-v25`.
 
+### Selective public photo placement
+
+- Used a small number of already-curated public-site marketing assets rather than adding every newly shared photo.
+- Added the branded espresso photo to the Cafe page hero, the Kurtkoy bookshelves photo to the Library page hero, and the Kurtkoy bookshop/mini-play interior photo to the Kurtkoy branch hero and social preview image.
+- Left duplicate and lower-resolution cafe/table photos unused for now.
+- Bumped `sw.js` from `gb-public-v25` to `gb-public-v26`.
+- Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, local reference check (`checked=349`), and Chrome desktop/mobile smoke passed for Cafe, Library, and Kurtkoy image rendering with no horizontal overflow. Local browser blocked external fonts/API calls as expected under network restrictions.
+
 Still pending:
 
 - Replace the temporary/low-resolution Claude logo with a founder-approved high-quality logo file when available.

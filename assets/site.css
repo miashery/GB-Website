@@ -235,6 +235,39 @@ main{flex:1;max-width:1200px;margin:0 auto;padding:32px 24px 72px;width:100%}
 .hero-gold{background:linear-gradient(135deg,rgba(212,168,83,.05),rgba(245,230,192,.08))}
 .hero-lav{background:linear-gradient(135deg,rgba(165,147,194,.05),rgba(228,221,240,.08))}
 
+.card.hero-photo-card {
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.hero-photo-card img {
+  display: block;
+  height: clamp(190px, 24vw, 260px);
+  object-fit: cover;
+  width: 100%;
+}
+
+.hero-photo-copy {
+  padding: 18px 20px 20px;
+}
+
+.hero-photo-copy .badge {
+  margin-bottom: 10px;
+}
+
+.cafe-photo-card img {
+  object-position: center 58%;
+}
+
+.library-photo-card img {
+  object-position: center center;
+}
+
+.branch-story-media-interior img {
+  object-position: center 58%;
+}
+
 /* ══════════════════════════════
    CARDS & GRIDS
 ══════════════════════════════ */
@@ -5137,6 +5170,18 @@ body.page-bloomlab .hero-lav {
   margin-top: -18px;
 }
 
+.branch-story-media.branch-story-media-interior {
+  align-self: center;
+  height: clamp(390px, 36vw, 520px);
+  min-height: 390px;
+}
+
+.branch-story-media.branch-story-media-interior img {
+  height: 100%;
+  min-height: 0;
+  object-position: center 58%;
+}
+
 @media (min-width: 981px) {
   .nav {
     display: flex;
@@ -5168,5 +5213,10 @@ body.page-bloomlab .hero-lav {
 
   body.page-themed .pt .sub {
     font-size: 16px;
+  }
+
+  .branch-story-media.branch-story-media-interior {
+    height: 340px;
+    min-height: 340px;
   }
 }

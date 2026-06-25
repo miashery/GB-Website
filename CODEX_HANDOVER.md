@@ -60,6 +60,11 @@ Scope: public website visual design language only. No backend, booking, payment,
 - Bumped `sw.js` from `gb-public-v23` to `gb-public-v24`.
 - Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, local reference check, and focused desktop/mobile map embed smoke passed for Visit, Kadıköy, and Kurtköy.
 
+### Visit phone correction
+
+- Replaced the stale `Phone: Coming soon` text in the Visit page branch cards with `(+90) 0 553 345 65 67` as a tap-to-call link.
+- Bumped `sw.js` from `gb-public-v24` to `gb-public-v25`.
+
 Still pending:
 
 - Replace the temporary/low-resolution Claude logo with a founder-approved high-quality logo file when available.

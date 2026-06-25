@@ -34,6 +34,15 @@ Scope: public website visual design language only. No backend, booking, payment,
 - Bumped `sw.js` from `gb-public-v19` to `gb-public-v20`.
 - Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, and desktop/mobile Playwright homepage smoke passed with mocked live branch data.
 
+### Menu and inner-page styling follow-up
+
+- Expanded the shared public navigation source of truth to include all primary public pages: Home, Play, BloomLab, Community, Support, Events, Work, Books, Café, Membership, Contact, Kadıköy, and Kurtköy.
+- Fixed existing hard-coded mobile drawers so they resync from the shared nav list instead of keeping stale/missing page links.
+- Added a medium-width breakpoint so the full menu moves into the hamburger drawer instead of silently cropping.
+- Added shared inner-page styling alignment so non-home pages use the same warmer redesign typography, card, hero, section, and button treatment.
+- Bumped `sw.js` from `gb-public-v20` to `gb-public-v21`.
+- Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, and desktop/medium-width Playwright menu smoke passed across 13 public pages.
+
 Still pending:
 
 - Replace the temporary/low-resolution Claude logo with a founder-approved high-quality logo file when available.

@@ -14,10 +14,13 @@ const MINI_ICONS = {
   instagram: '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3"/><circle cx="16.5" cy="7.5" r=".8"/></svg>',
 };
 const NAV_ITEMS = [
-  { href: 'play.html', tr: 'Oyun', en: 'Play', activeFor: ['play.html', 'index.html'] },
+  { href: 'index.html', tr: 'Ana Sayfa', en: 'Home', activeFor: ['index.html', ''] },
+  { href: 'play.html', tr: 'Oyun', en: 'Play' },
   { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
-  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'wellbeing.html'] },
-  { href: 'events.html', tr: 'Etkinlikler', en: 'Events', activeFor: ['events.html', 'workspaces.html'] },
+  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community' },
+  { href: 'wellbeing.html', tr: 'Destek', en: 'Support' },
+  { href: 'events.html', tr: 'Etkinlikler', en: 'Events' },
+  { href: 'workspaces.html', tr: 'Çalışma', en: 'Work' },
   { href: 'library.html', tr: 'Kitaplık', en: 'Books' },
   { href: 'food.html', tr: 'Kafe', en: 'Café', activeFor: ['food.html', 'cafe.html'] },
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
@@ -359,7 +362,11 @@ function ensureMobileNav() {
     headerActions.appendChild(hamburger);
   }
 
-  if (document.getElementById('mobileNav')) return;
+  const existingDrawer = document.getElementById('mobileNav');
+  if (existingDrawer) {
+    syncMobileNav(existingDrawer, nav);
+    return;
+  }
 
   const drawer = document.createElement('div');
   drawer.className = 'mobile-nav';
@@ -376,6 +383,24 @@ function ensureMobileNav() {
       '</div>' +
     '</div>';
   document.body.appendChild(drawer);
+  syncMobileNav(drawer, nav);
+}
+
+function syncMobileNav(drawer, nav) {
+  const links = drawer.querySelector('.nav-links');
+  if (links) links.innerHTML = nav.innerHTML;
+
+  let actions = drawer.querySelector('.mobile-nav-actions');
+  if (!actions) {
+    actions = document.createElement('div');
+    actions.className = 'mobile-nav-actions';
+    const inner = drawer.querySelector('.mobile-nav-inner') || drawer;
+    inner.appendChild(actions);
+  }
+
+  actions.innerHTML =
+    '<a class="btn-login" href="' + APP_URL + '/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>' +
+    '<a class="btn-join" href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></a>';
 }
 
 function wireMobileNav() {

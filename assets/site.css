@@ -4790,3 +4790,127 @@ footer {
     font-size: 15px;
   }
 }
+
+/* Shared nav and inner-page alignment after the homepage refinement pass. */
+.nav {
+  gap: 0;
+  overflow: visible;
+}
+
+.nav a {
+  font-size: 13.5px;
+  padding: 7px 9px;
+}
+
+.mobile-nav-inner {
+  width: min(360px, 92vw);
+}
+
+.mobile-nav-inner .nav-links {
+  display: grid;
+  gap: 6px;
+}
+
+.mobile-nav-inner .nav-links a {
+  align-items: center;
+  border-bottom: 0;
+  border-radius: 14px;
+  display: flex;
+  min-height: 40px;
+  padding: 10px 14px;
+}
+
+.mobile-nav-actions {
+  margin-top: 18px;
+}
+
+body:not(.home-design-v3) main {
+  max-width: 1120px;
+  padding-top: 44px;
+}
+
+body:not(.home-design-v3) .pt {
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 34px;
+  padding-bottom: 22px;
+}
+
+body:not(.home-design-v3) .pt h1 {
+  color: var(--ink);
+  font-size: clamp(2.4rem, 5vw, 4.25rem);
+  line-height: 1.04;
+  max-width: 760px;
+}
+
+body:not(.home-design-v3) .pt .sub {
+  color: var(--mid);
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 720px;
+}
+
+body:not(.home-design-v3) .hero,
+body:not(.home-design-v3) .form-card,
+body:not(.home-design-v3) .dynamic-section,
+body:not(.home-design-v3) .mission-bar,
+body:not(.home-design-v3) .highlight {
+  background: rgba(255, 253, 248, .78);
+  border-color: var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+body:not(.home-design-v3) .sec {
+  margin-top: 52px;
+}
+
+body:not(.home-design-v3) .card,
+body:not(.home-design-v3) .track-card,
+body:not(.home-design-v3) .feature-card,
+body:not(.home-design-v3) .price-card,
+body:not(.home-design-v3) .feed-card,
+body:not(.home-design-v3) .hours-card,
+body:not(.home-design-v3) .testimonial,
+body:not(.home-design-v3) .tier-card,
+body:not(.home-design-v3) .diff-card {
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+body:not(.home-design-v3) .sec-label {
+  color: var(--sage-dark);
+  letter-spacing: .12em;
+}
+
+body:not(.home-design-v3) .btn-p,
+body:not(.home-design-v3) .btn-primary,
+body:not(.home-design-v3) button[type="submit"] {
+  background: var(--brand-teal);
+  border-color: var(--brand-teal);
+  color: #fff;
+}
+
+body:not(.home-design-v3) .btn-coral {
+  background: var(--coral);
+  border-color: var(--coral);
+}
+
+@media (max-width: 1180px) {
+  .nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 680px) {
+  body:not(.home-design-v3) main {
+    padding-top: 24px;
+  }
+
+  body:not(.home-design-v3) .pt h1 {
+    font-size: clamp(2rem, 13vw, 3.1rem);
+  }
+}

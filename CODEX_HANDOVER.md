@@ -52,6 +52,14 @@ Scope: public website visual design language only. No backend, booking, payment,
 - Bumped `sw.js` from `gb-public-v21` to `gb-public-v23`.
 - Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, corrected local reference check, and focused desktop/mobile Playwright smoke passed for the homepage navigation/hero colours, fuller mobile drawer, and coloured gradient/accent treatment across the themed public pages.
 
+### Visit and branch map follow-up
+
+- Added responsive lazy-loaded Google Maps embeds to the Visit page for Kadıköy and Kurtköy, while keeping direct Google Maps buttons as fallback actions.
+- Added matching embedded map sections to `kadikoy.html` and `kurtkoy.html` after opening hours.
+- Added shared map-card CSS so the maps match the redesign card language and stack cleanly on mobile.
+- Bumped `sw.js` from `gb-public-v23` to `gb-public-v24`.
+- Verification: `node --check assets/site.js`, `node --check sw.js`, `git diff --check`, local reference check, and focused desktop/mobile map embed smoke passed for Visit, Kadıköy, and Kurtköy.
+
 Still pending:
 
 - Replace the temporary/low-resolution Claude logo with a founder-approved high-quality logo file when available.

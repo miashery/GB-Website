@@ -2,6 +2,24 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-25 - Claude redesign styling alignment
+
+Scope: public website visual design language only. No backend, booking, payment, event request endpoint, schema migration, or form payload changes.
+
+- Reviewed `C:\Codex\giggles-bloom-redesign\HANDOFF.md` and the 11 `.dc.html` reference designs as visual specs, not drop-in production code.
+- Copied Claude redesign assets into `assets/redesign/` without overwriting the existing public-site assets.
+- Updated `assets/site.css` to use the redesign palette, typography, card radii, button treatments, header/footer treatment, form fields, hero/section tints, and responsive spacing across the existing static pages.
+- Updated `assets/site.js` to swap the visible header brand image to `assets/redesign/logo-wordmark.png` at runtime and align existing `theme-color` meta tags to the new blue.
+- Updated `manifest.webmanifest` colours to the redesign cream/blue and bumped `sw.js` from `gb-public-v17` to `gb-public-v18`; the new wordmark is now cached by the service worker.
+- Adjusted the homepage first-viewport copy from parent-specific wording to more inclusive adult/grown-up wording, while leaving the broader SEO/content terminology audit for a dedicated pass.
+
+Still pending:
+
+- Replace the temporary/low-resolution Claude logo with a founder-approved high-quality logo file when available.
+- Decide whether to rebuild each page structurally from the `.dc.html` designs, or continue applying the design system incrementally to the current static pages.
+- Complete a broader wording audit for parent/guardian/couple assumptions across the public site and the webapp.
+- Live UAT after deployment: header logo, mobile nav, event request form, dynamic feed/menu sections, language toggle, and service-worker refresh on returning devices.
+
 ## 2026-06-23 - Event request canonical taxonomy
 
 Scope: public website event request dropdown only; no layout, SEO, payment, booking, or schema work in this repo.

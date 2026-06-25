@@ -58,6 +58,7 @@ function gt() {
 
 document.addEventListener('DOMContentLoaded', function() {
   normalizeHeaderNav();
+  applyRedesignBranding();
   preparePwaShell();
   ensureMobileNav();
   normalizeFooter();
@@ -117,6 +118,25 @@ function navItemLabel(item) {
   return '<span class="tr-only">' + escapeHtml(item.tr) + '</span><span class="en-only">' + escapeHtml(item.en) + '</span>';
 }
 
+function getSiteAssetPath(fileName) {
+  const script = document.querySelector('script[src$="assets/site.js"], script[src*="assets/site.js?"]');
+  const scriptSrc = script ? script.getAttribute('src') : 'assets/site.js';
+  const base = scriptSrc.replace(/site\.js(?:\?.*)?$/, '');
+  return base + fileName.replace(/^assets\//, '');
+}
+
+function applyRedesignBranding() {
+  const logoSrc = getSiteAssetPath('redesign/logo-wordmark.png');
+  document.querySelectorAll('.brand img, .brand-logo').forEach(function(img) {
+    img.src = logoSrc;
+    img.alt = 'Giggles & Bloom';
+  });
+
+  document.querySelectorAll('meta[name="theme-color"]').forEach(function(meta) {
+    meta.content = '#496394';
+  });
+}
+
 function preparePwaShell() {
   if (!document.querySelector('link[rel="manifest"]')) {
     const manifest = document.createElement('link');
@@ -128,7 +148,7 @@ function preparePwaShell() {
   if (!document.querySelector('meta[name="theme-color"]')) {
     const theme = document.createElement('meta');
     theme.name = 'theme-color';
-    theme.content = '#2D6F8A';
+    theme.content = '#496394';
     document.head.appendChild(theme);
   }
 

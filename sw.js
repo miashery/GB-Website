@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gb-public-v17';
+const CACHE_NAME = 'gb-public-v18';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -20,7 +20,8 @@ const CORE_ASSETS = [
   './assets/site.js',
   './assets/favicon.svg',
   './assets/brand-mark.svg',
-  './assets/logo.png'
+  './assets/logo.png',
+  './assets/redesign/logo-wordmark.png'
 ];
 
 self.addEventListener('install', event => {

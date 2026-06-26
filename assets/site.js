@@ -708,9 +708,10 @@ function renderFeed(container, data) {
     items.push({
       type: 'event',
       title: isTr ?event.name_tr : event.name_en,
-      date: formatDate(event.starts_at),
+      date: formatEventDateRange(event),
       branch: branchLabel(event.branch_id),
       seats: publicEventSeatText(event),
+      badges: event.is_ongoing ? [isTr ? 'Devam ediyor' : 'Happening now'] : [],
       href: event.detail_path ? APP_URL + event.detail_path : 'events.html',
     });
   });
@@ -803,10 +804,13 @@ function publicEventSeatText(event) {
   const capacity = Number(event.total_capacity);
   const remaining = Number(event.remaining_capacity);
   if (!Number.isFinite(capacity) || capacity <= 0 || event.remaining_capacity === null || event.remaining_capacity === undefined) return '';
-  if (Number.isFinite(remaining) && remaining <= 0) return gl === 'tr' ? 'Kapasite dolu' : 'Full';
+  const suffix = event.is_multi_day
+    ? (gl === 'tr' ? 'toplam yer' : 'total seats')
+    : (gl === 'tr' ? 'yer' : 'seats');
+  if (Number.isFinite(remaining) && remaining <= 0) return gl === 'tr' ? 'Toplam kapasite dolu' : 'Total capacity full';
   return gl === 'tr'
-    ? remaining + '/' + capacity + ' yer'
-    : remaining + '/' + capacity + ' seats';
+    ? remaining + '/' + capacity + ' ' + suffix
+    : remaining + '/' + capacity + ' ' + suffix;
 }
 
 function renderPlayAvailability(items) {
@@ -1156,6 +1160,39 @@ function formatDate(iso) {
     });
   } catch (error) {
     return iso;
+  }
+}
+
+function formatEventDateRange(event) {
+  if (!event || !event.starts_at) return '';
+  if (!event.ends_at || istanbulDateKey(event.starts_at) === istanbulDateKey(event.ends_at)) {
+    return formatDate(event.starts_at);
+  }
+  return formatShortDate(event.starts_at) + ' - ' + formatShortDate(event.ends_at);
+}
+
+function formatShortDate(iso) {
+  try {
+    return new Date(iso).toLocaleDateString(gl === 'tr' ? 'tr-TR' : 'en-GB', {
+      timeZone: 'Europe/Istanbul',
+      day: 'numeric',
+      month: 'short',
+    });
+  } catch (error) {
+    return iso || '';
+  }
+}
+
+function istanbulDateKey(iso) {
+  try {
+    return new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Istanbul',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(new Date(iso));
+  } catch (error) {
+    return iso || '';
   }
 }
 

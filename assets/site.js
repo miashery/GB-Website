@@ -633,6 +633,10 @@ function isBloomLabFeedPage() {
   return /(?:^|\/)workshops(?:\.html)?\/?$/.test(window.location.pathname || '');
 }
 
+function isEventsFeedPage() {
+  return /(?:^|\/)events(?:\.html)?\/?$/.test(window.location.pathname || '');
+}
+
 function isPlayProgrammeKind(kind) {
   return kind === 'play_guided_moment' || kind === 'play_workshop';
 }
@@ -670,11 +674,12 @@ function renderFeed(container, data) {
   const isTr = gl === 'tr';
   const items = [];
   const bloomLabPage = isBloomLabFeedPage();
+  const eventsPage = isEventsFeedPage();
   const workshopSessions = (data.workshopSessions || []).filter(function(session) {
     return !bloomLabPage || !isPlayProgrammeKind(session.programme_kind);
   });
 
-  workshopSessions.slice(0, 4).forEach(function(session) {
+  if (!eventsPage) workshopSessions.slice(0, 4).forEach(function(session) {
     items.push({
       type: 'workshop-session',
       tag: isTr ? session.category_tr : session.category_en,
@@ -699,18 +704,24 @@ function renderFeed(container, data) {
       })
     : (data.events || []);
 
-  eventItems.slice(0, items.length ? 2 : 3).forEach(function(event) {
+  eventItems.slice(0, eventsPage ? 6 : (items.length ? 2 : 3)).forEach(function(event) {
     items.push({
       type: 'event',
       title: isTr ?event.name_tr : event.name_en,
       date: formatDate(event.starts_at),
       branch: branchLabel(event.branch_id),
       seats: publicEventSeatText(event),
+      href: event.detail_path ? APP_URL + event.detail_path : 'events.html',
     });
   });
 
   if (!items.length && bloomLabPage) {
     items.push.apply(items, bloomLabFallbackItems(isTr));
+  }
+
+  if (!items.length && eventsPage) {
+    container.innerHTML = '<div class="feed-empty">' + escapeHtml(isTr ?'Yayına alınmış etkinlikler yakında burada görünecek.' : 'Published events will appear here soon.') + '</div>';
+    return;
   }
 
   if (!items.length) (data.workshops || []).slice(0, 3).forEach(function(workshop) {
@@ -751,7 +762,7 @@ function renderFeedCard(item) {
     ?(gl === 'tr' ?'Etkinlik' : 'Event')
     : (gl === 'tr' ?'Atölye' : 'Workshop'));
   const cls = item.tagClass || (item.type === 'event' ?'coral' : '');
-  const href = item.type === 'event' ?'events.html' : 'workshops.html';
+  const href = item.href || (item.type === 'event' ?'events.html' : 'workshops.html');
   const badges = Array.isArray(item.badges) && item.badges.length
     ? '<div class="fc-badges">' + item.badges.slice(0, 2).map(function(badge) {
         return '<span>' + escapeHtml(badge) + '</span>';

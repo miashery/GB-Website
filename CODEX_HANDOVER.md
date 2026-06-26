@@ -2,6 +2,15 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-26 - Event-day public event feed
+
+Scope: public website event-day visibility only. No backend, payment, form payload, schema, or request endpoint changes.
+
+- Added a live upcoming public events section to `events.html`.
+- Updated `assets/site.js` so the Events page is event-first and event feed cards open the webapp public detail path from `detail_path` when the webapp API provides it.
+- Added an Events-page-specific empty state for when no events are currently published.
+- Bumped `sw.js` from `gb-public-v26` to `gb-public-v27`.
+
 ## 2026-06-25 - Claude redesign styling alignment
 
 Scope: public website visual design language only. No backend, booking, payment, event request endpoint, schema migration, or form payload changes.

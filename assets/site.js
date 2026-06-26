@@ -1044,7 +1044,7 @@ function renderBranches(branches) {
       const dotCls = b.branch_id === 'kadikoy' ? 'd-sage' : 'd-gold';
       const badge = isTr ? b.badge_tr : b.badge_en;
       const desc = isTr ? b.description_tr : b.description_en;
-      const district = b.address_district || (b.branch_id === 'kadikoy' ? 'Kadıköy' : 'Kurtköy');
+      const district = publicBranchDistrict(b);
       const links = branchContactLinks(b.branch_id);
 
       return '<div class="card hero-branch-card">' +
@@ -1098,6 +1098,13 @@ function renderBranches(branches) {
       '</div>';
     }).join('');
   }
+}
+
+function publicBranchDistrict(branch) {
+  if (!branch) return '';
+  if (branch.branch_id === 'kadikoy') return 'Fikirtepe, Kadıköy';
+  if (branch.branch_id === 'kurtkoy') return 'Kurtköy, Pendik';
+  return branch.address_district || '';
 }
 
 function branchContactLinks(branchId) {

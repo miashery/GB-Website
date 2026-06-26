@@ -2,6 +2,14 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-26 - Event Link And Branch Address Hotfix
+
+Scope: public website launch-day correction only. No schema, payment, form payload, or backend changes in this repo.
+
+- Updated `assets/site.js` so live-rendered homepage branch cards normalize public location display instead of trusting stale branch-feed districts: Kadıköy shows `Fikirtepe, Kadıköy`; Kurtköy shows `Kurtköy, Pendik`.
+- Bumped `sw.js` from `gb-public-v27` to `gb-public-v28` so returning devices refresh the corrected branch-card JS.
+- Related webapp fix is in the main repo: public event detail pages now use the warmer website-style layout, Istanbul time formatting, branch address overrides, branch fallback imagery when Instagram URLs are not direct images, and contact/directions/calendar actions for visitors who do not want to register immediately.
+
 ## 2026-06-26 - Event-day public event feed
 
 Scope: public website event-day visibility only. No backend, payment, form payload, schema, or request endpoint changes.

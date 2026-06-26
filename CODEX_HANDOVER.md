@@ -2,6 +2,19 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-26 - Ongoing Event Feed Polish
+
+Scope: public website event-page polish tied to the ongoing/multi-day event visibility fix. No backend, schema, payment, or request-form payload changes in this repo.
+
+- Updated live event feed cards to use the webapp's `ends_at`, `is_ongoing`, and `is_multi_day` fields when available.
+- Event cards now show date ranges for multi-day events and a `Devam ediyor / Happening now` badge for ongoing events.
+- Seat text now says total capacity when a multi-day event is shown, instead of implying a single-day capacity.
+- Replaced the misplaced workspace-focused hero block on `events.html` with event-specific public-event/private-request copy and CTAs.
+- Updated the Events feed heading/copy from only "upcoming" to live/upcoming public events.
+- Removed stale "first weeks" Kurtköy wording from `play.html`; the Play page now matches the current open-branch positioning.
+- Bumped `sw.js` from `gb-public-v28` to `gb-public-v30`.
+- Verification: passed `node --check assets/site.js` using the bundled Codex Node runtime.
+
 ## 2026-06-26 - Event Link And Branch Address Hotfix
 
 Scope: public website launch-day correction only. No schema, payment, form payload, or backend changes in this repo.

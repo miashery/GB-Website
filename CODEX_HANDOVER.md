@@ -2,6 +2,14 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-26 - Webapp Custom Domain Link Fix
+
+Scope: public website domain correction only. No backend, schema, form payload, payment, or event logic changes.
+
+- Updated the shared `APP_URL` fallback in `assets/site.js` from the Vercel preview-style domain to `https://webapp.gigglesbloom.com`.
+- Bumped `sw.js` from `gb-public-v30` to `gb-public-v31` so returning devices pick up the corrected public event, join, sign-in, and API links without losing the ongoing/multi-day event feed polish.
+- Related webapp fix is in the main repo: `giggles-bloom.vercel.app` now redirects to `webapp.gigglesbloom.com`.
+
 ## 2026-06-26 - Ongoing Event Feed Polish
 
 Scope: public website event-page polish tied to the ongoing/multi-day event visibility fix. No backend, schema, payment, or request-form payload changes in this repo.

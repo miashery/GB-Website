@@ -1,4 +1,4 @@
-﻿const APP_URL = window.GB_APP_URL || 'https://giggles-bloom.vercel.app';
+const APP_URL = window.GB_APP_URL || 'https://webapp.gigglesbloom.com';
 const CONTACT_LINKS = {
   instagramMain: 'https://www.instagram.com/gigglesandbloom/',
   instagramKadikoy: 'https://www.instagram.com/gigglesandbloom.kadikoy/',

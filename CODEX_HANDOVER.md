@@ -2,6 +2,19 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-29 - Dynamic Kurtköy Story Stop Hydration
+
+Scope: public website hydration only, paired with the approved webapp Story Stop subsystem. No static form payloads, POS, Beko, PayTR, Paraşüt, Daily Close, membership entitlement, Bloom Points, delivery, or child media logic changed.
+
+- Added dynamic Kurtköy bookshop/Story Stop field hydration in `assets/site.js`, reading from `https://webapp.gigglesbloom.com/api/public/bookshop-experience?branch_id=kurtkoy`.
+- Marked homepage and `kurtkoy.html` phrase/theme/starter-price fields with safe `data-bookshop-*` attributes.
+- Left static copy as the fallback if SQL is not applied, no live theme exists, or the API is unavailable.
+- Bumped `sw.js` from `gb-public-v32` to `gb-public-v33` so returning visitors refresh the hydration code.
+
+Needs live UAT:
+
+- After the webapp SQL migration is applied and a live Kurtköy theme is saved, confirm homepage and `kurtkoy.html` show the admin-edited public phrase/theme/starter price.
+
 ## 2026-06-29 - Kurtköy Bookstore-First Positioning Pass
 
 Scope: public website copy/positioning only. No webapp code, form payload, schema, POS, Beko, PayTR, Paraşüt, Daily Close, membership entitlement, Bloom Points, delivery, or partner/off-premises logic changed.
@@ -20,7 +33,7 @@ Scope: public website copy/positioning only. No webapp code, form payload, schem
 
 Deferred:
 
-- Portal-editable Story Destination / Story Passport administration remains a separate webapp/database scope. It should be designed from existing products, events/workshops, branch configuration, and daily tracking needs before any migration.
+- Superseded by the 2026-06-29 dynamic Story Stop hydration/webapp pass: portal-editable Story Stop labels/themes/starter price and paper-sheet upload now exist in the paired webapp repo, pending SQL and live UAT.
 - `Uçan Hikâyeler / Stories That Fly` remains intentionally absent from public Kurtköy copy in this sprint.
 
 ## 2026-06-26 - Webapp Custom Domain Link Fix

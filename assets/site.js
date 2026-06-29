@@ -99,6 +99,10 @@ document.addEventListener('DOMContentLoaded', function() {
     loadExperienceRates();
   }
 
+  if (document.querySelector('[data-bookshop-field], [data-bookshop-price]')) {
+    loadBookshopExperience();
+  }
+
   if (document.getElementById('membership-grid')) {
     loadMembershipPackages();
   }
@@ -614,6 +618,54 @@ function experienceRateText(offering, locale) {
     return isTr ? 'Ücretsiz, kapasiteye bağlı' : 'Complimentary, subject to capacity';
   }
   return isTr ? 'Fiyat/talep bilgisi için ekiple görüşün' : 'Ask the team for price/request details';
+}
+
+async function loadBookshopExperience() {
+  try {
+    const data = await fetchJson(APP_URL + '/api/public/bookshop-experience?branch_id=kurtkoy');
+    renderBookshopExperience(data || {});
+  } catch (error) {}
+}
+
+function renderBookshopExperience(data) {
+  if (!data || data.enabled === false) return;
+
+  const settings = data.settings || {};
+  const theme = data.live_theme || {};
+  setLocalizedBookshopField('bookshop-campaign', settings.public_tagline_tr, settings.public_tagline_en);
+  setLocalizedBookshopField('bookshop-heading', settings.public_heading_tr, settings.public_heading_en);
+  setLocalizedBookshopField('bookshop-intro', settings.public_intro_tr, settings.public_intro_en);
+  setLocalizedBookshopField('bookshop-story-label', settings.story_stop_label_tr, settings.story_stop_label_en);
+  setLocalizedBookshopField('bookshop-passport-label', settings.passport_label_tr, settings.passport_label_en);
+
+  setLocalizedBookshopField('bookshop-theme-title', theme.title_tr, theme.title_en);
+  setLocalizedBookshopField(
+    'bookshop-theme-summary',
+    theme.public_summary_tr || theme.book_focus_tr || theme.experience_prompt_tr,
+    theme.public_summary_en || theme.book_focus_en || theme.experience_prompt_en
+  );
+  setLocalizedBookshopField('bookshop-theme-focus', theme.book_focus_tr, theme.book_focus_en);
+  setLocalizedBookshopField('bookshop-experience-prompt', theme.experience_prompt_tr, theme.experience_prompt_en);
+  setLocalizedBookshopField('bookshop-passport-task', theme.passport_task_tr, theme.passport_task_en);
+  setLocalizedBookshopField('bookshop-starter-item', theme.starter_item_name_tr, theme.starter_item_name_en);
+
+  const price = Number(theme.starter_price_kurus || settings.starter_price_kurus);
+  if (Number.isFinite(price) && price > 0) {
+    document.querySelectorAll('[data-bookshop-price]').forEach(function(el) {
+      el.textContent = '₺' + Math.round(price / 100).toLocaleString('tr-TR');
+    });
+  }
+}
+
+function setLocalizedBookshopField(field, trText, enText) {
+  if (!trText && !enText) return;
+  document.querySelectorAll('[data-bookshop-field="' + field + '"]').forEach(function(el) {
+    const trEl = el.querySelector('.tr-only');
+    const enEl = el.querySelector('.en-only');
+    if (trEl && trText) trEl.textContent = trText;
+    if (enEl && enText) enEl.textContent = enText;
+    if (!trEl && !enEl) el.textContent = gl === 'tr' ? (trText || enText || '') : (enText || trText || '');
+  });
 }
 
 function renderDynamicContent() {

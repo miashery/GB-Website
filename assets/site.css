@@ -275,6 +275,7 @@ main{flex:1;max-width:1200px;margin:0 auto;padding:32px 24px 72px;width:100%}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
 
 .card{
   background:var(--white);border:1px solid var(--border);
@@ -745,7 +746,7 @@ footer{
   .category-banner{grid-template-columns:1fr}
 }
 @media(max-width:680px){
-  .g2,.g3,.g4,.g{grid-template-columns:1fr}
+  .g2,.g3,.g4,.g5,.g{grid-template-columns:1fr}
   .branch-contact-actions{grid-template-columns:1fr}
   .stats-row{grid-template-columns:repeat(2,1fr)}
   .testimonial-grid{grid-template-columns:1fr}

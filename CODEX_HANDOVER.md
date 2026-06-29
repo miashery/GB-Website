@@ -2,6 +2,27 @@
 
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
+## 2026-06-29 - Kurtköy Bookstore-First Positioning Pass
+
+Scope: public website copy/positioning only. No webapp code, form payload, schema, POS, Beko, PayTR, Paraşüt, Daily Close, membership entitlement, Bloom Points, delivery, or partner/off-premises logic changed.
+
+- Locked the Kurtköy public entry point to `Giggles & Bloom Kurtköy — Çocuk Kitapçısı ve Aile Kafesi` with the campaign line `Kitaplardan Deneyime / From Books to Experiences`.
+- Rebuilt `kurtkoy.html` around the 30-day conversion sprint: Story Passport, weekly Story Stop, book-led first visit, small discovery purchase, mini experience, return trigger, opening hours, phone, Instagram, map, and child-safety boundaries.
+- Updated homepage announcement, hero branch card, branch selector, and visit-note copy so Kurtköy is no longer introduced first as a broad play/workshop/everything branch.
+- Aligned related pages:
+  - `play.html`: Kurtköy play begins with a book and supports the Story Stop.
+  - `library.html`: Kurtköy books are the beginning of the visit, not just shelves.
+  - `food.html`: Kurtköy café supports book discovery and the family pause.
+  - `membership.html`: Kurtköy membership is a later bridge after Story Passport/repeat behavior.
+  - `workshops.html`: Kurtköy workshops are selected book-led experiences, not the cold-entry message.
+- Added a small `.g5` responsive grid helper for the five-step Kurtköy flow.
+- Bumped `sw.js` from `gb-public-v31` to `gb-public-v32` and refreshed touched sitemap `lastmod` values to `2026-06-29`.
+
+Deferred:
+
+- Portal-editable Story Destination / Story Passport administration remains a separate webapp/database scope. It should be designed from existing products, events/workshops, branch configuration, and daily tracking needs before any migration.
+- `Uçan Hikâyeler / Stories That Fly` remains intentionally absent from public Kurtköy copy in this sprint.
+
 ## 2026-06-26 - Webapp Custom Domain Link Fix
 
 Scope: public website domain correction only. No backend, schema, form payload, payment, or event logic changes.

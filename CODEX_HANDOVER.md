@@ -1,5 +1,17 @@
 # Codex Handover Log
 
+## 2026-06-29 - Upbeat Story Stop Public Fallback
+
+Scope: public website Story Stop display resilience only. No form payloads, POS, Beko, PayTR, Paraşüt, Daily Close, membership entitlement, Bloom Points, delivery, media sharing, or webapp schema changed in this repo.
+
+- Added an upbeat Kurtköy Story Stop fallback when the public webapp API is unavailable, disabled, empty, or carrying clearly negative/test placeholder text.
+- The fallback keeps the public page future-facing: shelf discovery, children choosing books, Story Passport moment, and the default ₺150 starter target.
+- Bumped `sw.js` from `gb-public-v33` to `gb-public-v34` so returning devices refresh the public fallback logic.
+
+Needs live UAT:
+
+- Temporarily test with no live Story Stop API/theme and confirm homepage/Kurtköy still show the upbeat shelf-discovery message rather than empty or negative content.
+
 This is the living handover file for public website changes made by Codex after the Claude limit/freeze period. Keep adding dated entries here before handing work back to Claude or another assistant.
 
 ## 2026-06-29 - Dynamic Kurtköy Story Stop Hydration

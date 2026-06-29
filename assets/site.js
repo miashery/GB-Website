@@ -624,11 +624,16 @@ async function loadBookshopExperience() {
   try {
     const data = await fetchJson(APP_URL + '/api/public/bookshop-experience?branch_id=kurtkoy');
     renderBookshopExperience(data || {});
-  } catch (error) {}
+  } catch (error) {
+    renderBookshopFallback();
+  }
 }
 
 function renderBookshopExperience(data) {
-  if (!data || data.enabled === false) return;
+  if (!data || data.enabled === false) {
+    renderBookshopFallback();
+    return;
+  }
 
   const settings = data.settings || {};
   const theme = data.live_theme || {};
@@ -638,23 +643,77 @@ function renderBookshopExperience(data) {
   setLocalizedBookshopField('bookshop-story-label', settings.story_stop_label_tr, settings.story_stop_label_en);
   setLocalizedBookshopField('bookshop-passport-label', settings.passport_label_tr, settings.passport_label_en);
 
-  setLocalizedBookshopField('bookshop-theme-title', theme.title_tr, theme.title_en);
+  const hasPublicTheme = hasPositiveBookshopTheme(theme);
+  const displayTheme = hasPublicTheme ? theme : upbeatBookshopFallbackTheme();
+  setLocalizedBookshopField('bookshop-theme-title', displayTheme.title_tr, displayTheme.title_en);
   setLocalizedBookshopField(
     'bookshop-theme-summary',
-    theme.public_summary_tr || theme.book_focus_tr || theme.experience_prompt_tr,
-    theme.public_summary_en || theme.book_focus_en || theme.experience_prompt_en
+    displayTheme.public_summary_tr || displayTheme.book_focus_tr || displayTheme.experience_prompt_tr,
+    displayTheme.public_summary_en || displayTheme.book_focus_en || displayTheme.experience_prompt_en
   );
-  setLocalizedBookshopField('bookshop-theme-focus', theme.book_focus_tr, theme.book_focus_en);
-  setLocalizedBookshopField('bookshop-experience-prompt', theme.experience_prompt_tr, theme.experience_prompt_en);
-  setLocalizedBookshopField('bookshop-passport-task', theme.passport_task_tr, theme.passport_task_en);
-  setLocalizedBookshopField('bookshop-starter-item', theme.starter_item_name_tr, theme.starter_item_name_en);
+  setLocalizedBookshopField('bookshop-theme-focus', displayTheme.book_focus_tr, displayTheme.book_focus_en);
+  setLocalizedBookshopField('bookshop-experience-prompt', displayTheme.experience_prompt_tr, displayTheme.experience_prompt_en);
+  setLocalizedBookshopField('bookshop-passport-task', displayTheme.passport_task_tr, displayTheme.passport_task_en);
+  setLocalizedBookshopField('bookshop-starter-item', displayTheme.starter_item_name_tr, displayTheme.starter_item_name_en);
 
-  const price = Number(theme.starter_price_kurus || settings.starter_price_kurus);
+  const price = Number(displayTheme.starter_price_kurus || settings.starter_price_kurus);
   if (Number.isFinite(price) && price > 0) {
     document.querySelectorAll('[data-bookshop-price]').forEach(function(el) {
       el.textContent = '₺' + Math.round(price / 100).toLocaleString('tr-TR');
     });
   }
+}
+
+function renderBookshopFallback() {
+  const theme = upbeatBookshopFallbackTheme();
+  setLocalizedBookshopField('bookshop-campaign', 'Kitaplardan Deneyime', 'From Books to Experiences');
+  setLocalizedBookshopField('bookshop-story-label', 'Bu Haftanın Hikâye Durağı', "This Week's Story Stop");
+  setLocalizedBookshopField('bookshop-passport-label', 'Hikâye Pasaportu', 'Story Passport');
+  setLocalizedBookshopField('bookshop-theme-title', theme.title_tr, theme.title_en);
+  setLocalizedBookshopField('bookshop-theme-summary', theme.public_summary_tr, theme.public_summary_en);
+  setLocalizedBookshopField('bookshop-theme-focus', theme.book_focus_tr, theme.book_focus_en);
+  setLocalizedBookshopField('bookshop-experience-prompt', theme.experience_prompt_tr, theme.experience_prompt_en);
+  setLocalizedBookshopField('bookshop-passport-task', theme.passport_task_tr, theme.passport_task_en);
+  setLocalizedBookshopField('bookshop-starter-item', theme.starter_item_name_tr, theme.starter_item_name_en);
+  document.querySelectorAll('[data-bookshop-price]').forEach(function(el) {
+    el.textContent = '₺150';
+  });
+}
+
+function upbeatBookshopFallbackTheme() {
+  return {
+    title_tr: 'Bu hafta raftan yeni bir hikâye doğuyor',
+    title_en: 'A new story is taking shape on the shelf',
+    public_summary_tr: 'Kurtköy ekibi bu haftanın Hikâye Durağı’nı raftaki kitaplar ve çocukların ilgisine göre hazırlıyor. Bugün uğrayın; çocuklar bir kitap seçsin, ilk Hikâye Pasaportu anısını alsın.',
+    public_summary_en: 'The Kurtköy team is shaping this week’s Story Stop from the books on the shelf and what children are noticing. Visit today; children can choose a book and collect a first Story Passport moment.',
+    book_focus_tr: 'Raf keşfi: çocukların bugün seçtiği kitaplar yarının temasını kurar.',
+    book_focus_en: 'Shelf discovery: the books children choose today help shape tomorrow’s theme.',
+    experience_prompt_tr: 'Bir kitap seç, kapağına bak, küçük bir soru sor ve hikâyeyi birlikte başlat.',
+    experience_prompt_en: 'Choose a book, look at the cover, ask one small question, and begin the story together.',
+    passport_task_tr: 'İlk damga veya küçük çizim anı ile Hikâye Pasaportuna başla.',
+    passport_task_en: 'Begin the Story Passport with a first stamp or small drawing moment.',
+    starter_item_name_tr: 'Küçük kitap keşfi',
+    starter_item_name_en: 'Small book discovery',
+    starter_price_kurus: 15000,
+  };
+}
+
+function hasPositiveBookshopTheme(theme) {
+  const title = [theme && theme.title_tr, theme && theme.title_en].filter(Boolean).join(' ');
+  const summary = [
+    theme && theme.public_summary_tr,
+    theme && theme.public_summary_en,
+    theme && theme.book_focus_tr,
+    theme && theme.book_focus_en,
+    theme && theme.experience_prompt_tr,
+    theme && theme.experience_prompt_en,
+  ].filter(Boolean).join(' ');
+  if (!title.trim() && !summary.trim()) return false;
+  return !negativeBookshopText(title + ' ' + summary);
+}
+
+function negativeBookshopText(text) {
+  return /\b(no theme|no live|none|empty|not ready|negative|low footfall|no sales|failed|closed|disabled|placeholder|test)\b|tema yok|satış yok|hazır değil|kapalı|negatif|düşük trafik|test/i.test(text || '');
 }
 
 function setLocalizedBookshopField(field, trText, enText) {

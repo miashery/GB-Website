@@ -1,5 +1,17 @@
 # Codex Handover Log
 
+## 2026-06-30 - Search Console Sitemap Refresh
+
+Scope: public website sitemap/cache metadata only. No page copy, form payloads, webapp schema, POS, Beko, PayTR, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, or media-sharing logic changed in this repo.
+
+- Refreshed all public website `sitemap.xml` `lastmod` values to `2026-06-30` so Google Search Console sees the current public-site crawl surface after the recent Kurtköy, Story Stop, events, and design passes.
+- Bumped `sw.js` from `gb-public-v35` to `gb-public-v36` so returning devices pick up the refreshed sitemap/cache bundle.
+- The paired webapp repo now has its own conservative `sitemap.ts` and `robots.ts`; this public-site sitemap remains the main SEO sitemap for `www.gigglesbloom.com`.
+
+Needs live UAT:
+
+- After deploy, open `https://www.gigglesbloom.com/sitemap.xml`, confirm `2026-06-30` lastmod values, and resubmit/validate the sitemap in Google Search Console.
+
 ## 2026-06-30 - Kurtköy Story Stop Request Prefill
 
 Scope: public website CTA and form-prefill only. No webapp schema, POS, Beko, PayTR, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, or media-sharing logic changed in this repo.

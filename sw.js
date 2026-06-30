@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gb-public-v34';
+const CACHE_NAME = 'gb-public-v35';
 const CORE_ASSETS = [
   './',
   './index.html',

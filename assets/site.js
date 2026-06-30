@@ -243,8 +243,60 @@ function wireAccountButtons() {
   });
 }
 
+function setRequestFormValue(form, name, value) {
+  const field = form.querySelector('[name="' + name + '"]');
+  if (!field) return;
+  if (field.type === 'checkbox') {
+    field.checked = Boolean(value);
+    return;
+  }
+  field.value = value;
+}
+
+function localizeStoryStopRequestForm(form) {
+  const card = form.closest('.form-card');
+  if (!card) return;
+
+  const heading = card.querySelector('.sec-h');
+  if (heading) {
+    heading.innerHTML = '<span class="tr-only">Hikâye Durağı veya kitapçı ziyareti talebi</span><span class="en-only">Story Stop or bookshop visit request</span>';
+  }
+
+  const desc = card.querySelector('.desc');
+  if (desc) {
+    desc.innerHTML = '<span class="tr-only">Kurtköy çocuk kitapçısı, Hikâye Pasaportu, haftalık tema veya kitap önerileri hakkında bilgi almak için ulaşabileceğimiz bilgileri bırakın.</span><span class="en-only">Leave reachable details for Kurtköy bookshop, Story Passport, weekly theme, or book recommendation questions.</span>';
+  }
+}
+
+function prefillEventRequestForm(form) {
+  const params = new URLSearchParams(window.location.search);
+  const branch = params.get('branch');
+  const type = params.get('type');
+  const storyStop = params.get('story_stop') === '1';
+
+  if (branch) setRequestFormValue(form, 'branch_id', branch);
+  if (type) setRequestFormValue(form, 'event_type', type);
+
+  if (!storyStop) return;
+
+  localizeStoryStopRequestForm(form);
+  setRequestFormValue(form, 'branch_id', 'kurtkoy');
+  setRequestFormValue(form, 'event_type', 'other');
+  setRequestFormValue(form, 'expected_children_count', '0');
+  setRequestFormValue(form, 'expected_adults_count', '1');
+  setRequestFormValue(form, 'play_area_needed', false);
+  setRequestFormValue(form, 'guided_activity_needed', false);
+  setRequestFormValue(form, 'workspace_needed', false);
+
+  const notes = form.querySelector('[name="notes"]');
+  if (notes && !notes.value.trim()) {
+    notes.value = 'Kurtköy Hikâye Durağı / Hikâye Pasaportu hakkında bilgi almak ve kitapçı ziyareti planlamak istiyorum. / I would like information about the Kurtköy Story Stop / Story Passport and planning a bookshop visit.';
+  }
+}
+
 function wireEventRequestForms() {
   document.querySelectorAll('[data-event-request-form]').forEach(function(form) {
+    prefillEventRequestForm(form);
     const status = form.querySelector('[data-event-request-status]');
     form.addEventListener('submit', async function(event) {
       event.preventDefault();
@@ -277,6 +329,9 @@ function wireEventRequestForms() {
         budget_range: data.get('budget_range'),
         notes: data.get('notes'),
         kvkk_contact_consent: data.get('kvkk_contact_consent') === 'on',
+        source_detail: new URLSearchParams(window.location.search).get('story_stop') === '1' ? 'story_stop_interest' : '',
+        story_passport_interest: new URLSearchParams(window.location.search).get('story_stop') === '1',
+        starter_offer_interest: new URLSearchParams(window.location.search).get('story_stop') === '1',
         company_website: data.get('company_website') || '',
       };
 

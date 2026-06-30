@@ -1,5 +1,19 @@
 # Codex Handover Log
 
+## 2026-06-30 - Kurtköy Story Stop Request Prefill
+
+Scope: public website CTA and form-prefill only. No webapp schema, POS, Beko, PayTR, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, or media-sharing logic changed in this repo.
+
+- Changed Kurtköy Story Stop CTAs from the generic contact page to `events.html?branch=kurtkoy&type=other&story_stop=1#request`.
+- Added public-site request-form prefill for Story Stop traffic: Kurtköy branch, `Other` request type, neutral visitor counts, non-play/workspace checkboxes off, and a bilingual Story Stop / Story Passport note.
+- Reframed the Events request-form heading/description when reached from the Story Stop CTA, so it reads as a bookshop/Story Stop visit request instead of only birthday/private-event copy.
+- Included the constrained `story_stop_interest` context in the public request payload so the webapp admin inbox can badge it correctly.
+- Bumped `sw.js` from `gb-public-v34` to `gb-public-v35`.
+
+Needs live UAT:
+
+- After deploy, open Kurtköy > “Ziyaret planla”, confirm the form is prefilled/reframed, submit a test request, and confirm Admin > Event Requests shows the Story Stop badge.
+
 ## 2026-06-29 - Upbeat Story Stop Public Fallback
 
 Scope: public website Story Stop display resilience only. No form payloads, POS, Beko, PayTR, Paraşüt, Daily Close, membership entitlement, Bloom Points, delivery, media sharing, or webapp schema changed in this repo.

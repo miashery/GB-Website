@@ -142,7 +142,7 @@ function applyPageThemeClass() {
     'membership.html': 'page-membership',
     'contact.html': 'page-visit',
     'kadikoy.html': 'page-visit',
-    'kurtkoy.html': 'page-visit',
+    'kurtkoy.html': 'page-kurtkoy',
   };
   const theme = themeByPage[current];
   if (theme) document.body.classList.add('page-themed', theme);
@@ -1224,6 +1224,7 @@ function renderBranches(branches) {
         '</p>' +
         '<div class="micro-location">' + escapeHtml(district) + ', İstanbul</div>' +
         '<div class="btns" style="margin-top:10px">' +
+          '<a class="btn ' + (b.branch_id === 'kurtkoy' ? 'btn-gold' : 'btn-p') + '" href="' + links.page + '">' + (isTr ? 'Şube sayfası →' : 'Branch guide →') + '</a>' +
           '<a class="btn" href="' + links.map + '" target="_blank" rel="noopener">Google Maps</a>' +
           '<a class="btn" href="' + links.instagram + '" target="_blank" rel="noopener">Instagram</a>' +
         '</div>' +
@@ -1262,6 +1263,7 @@ function renderBranches(branches) {
         '<div class="visit-contact-line">E-mail: <a href="mailto:' + escapeHtml(email) + '">' + escapeHtml(email) + '</a></div>' +
         '<div class="visit-contact-line"><span class="tr-only">Telefon:</span><span class="en-only">Phone:</span> <a href="tel:' + CONTACT_LINKS.phoneTel + '">' + CONTACT_LINKS.phoneDisplay + '</a></div>' +
         '<div class="visit-card-links">' +
+          '<a href="' + links.page + '">' + (isTr ? 'Şube sayfası' : 'Branch guide') + '</a>' +
           '<a href="' + links.map + '" target="_blank" rel="noopener">Google Maps</a>' +
           '<a href="' + links.instagram + '" target="_blank" rel="noopener">Instagram</a>' +
         '</div>' +
@@ -1280,17 +1282,20 @@ function publicBranchDistrict(branch) {
 function branchContactLinks(branchId) {
   if (branchId === 'kadikoy') {
     return {
+      page: 'kadikoy.html',
       instagram: CONTACT_LINKS.instagramKadikoy,
       map: CONTACT_LINKS.mapKadikoy,
     };
   }
   if (branchId === 'kurtkoy') {
     return {
+      page: 'kurtkoy.html',
       instagram: CONTACT_LINKS.instagramKurtkoy,
       map: CONTACT_LINKS.mapKurtkoy,
     };
   }
   return {
+    page: 'contact.html',
     instagram: CONTACT_LINKS.instagramMain,
     map: CONTACT_LINKS.mapKadikoy,
   };

@@ -1,5 +1,19 @@
 # Codex Handover Log
 
+## 2026-06-30 - Kurtköy Accent And Branch Links
+
+Scope: public website styling/navigation polish only. No form payloads, webapp schema, POS, Beko, PayTR, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Added the themed Kurtköy page class so the `Çocuk Kitapçısı ve Aile Kafesi / Children’s Bookshop and Family Café` headline phrase uses the page accent colour.
+- Added direct branch-page actions to the homepage hero branch-status cards, including the dynamic API-hydrated branch cards, so visitors get `Şube sayfası / Branch guide` alongside Google Maps and Instagram.
+- Added branch-page links to dynamically rendered visit/hour cards.
+- Bumped `sw.js` from `gb-public-v36` to `gb-public-v37` so returning devices refresh the public polish.
+
+Needs live UAT:
+
+- After deploy, open the homepage in TR and EN, confirm the branch status cards include branch-page, Maps, and Instagram actions.
+- Open `kurtkoy.html`, confirm the bookshop/family-cafe phrase is visibly accented, and hard-refresh/unregister the service worker if an older cache persists.
+
 ## 2026-06-30 - Search Console Sitemap Refresh
 
 Scope: public website sitemap/cache metadata only. No page copy, form payloads, webapp schema, POS, Beko, PayTR, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, or media-sharing logic changed in this repo.

@@ -5057,6 +5057,13 @@ body.page-work {
   --page-gradient: linear-gradient(180deg, #f3e7cc 0, #f5eddb 330px, var(--cream) 720px);
 }
 
+body.page-kurtkoy {
+  --page-accent: #d4a853;
+  --page-accent-soft: #f3e7cc;
+  --page-accent-faint: rgba(212, 168, 83, .18);
+  --page-gradient: linear-gradient(180deg, #f4ead4 0, #f5eddb 330px, var(--cream) 720px);
+}
+
 body.page-books,
 body.page-cafe {
   --page-accent: #c78483;

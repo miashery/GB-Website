@@ -1,5 +1,23 @@
 # Codex Handover Log
 
+## 2026-07-02 - Cafe And Books Public Page Repositioning
+
+Scope: public website `food.html` content/SEO polish only. No webapp code, form payloads, schema, POS, Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed.
+
+- Repositioned `food.html` from a cafe-first page into a stronger `Kafe & Kitap / Cafe & Books` public page.
+- Updated title, meta description, social preview copy, and structured data so the page now signals children's bookshop + family cafe, not only food.
+- Strengthened the healthy cafe-food wording in the hero, SEO copy, and menu cards so the page clearly says the cafe offers healthy family food alongside books.
+- Added a book-adjacent cafe hero, branch-aware cafe positioning, catalog and branch-guide CTAs, and safer menu/allergen/child-supervision language.
+- Reduced overlap with `kurtkoy.html` by keeping detailed Story Stop, Story Passport, weekly book rhythm, and Kurtköy-first-visit flow on the Kurtköy branch page.
+- Kept the existing live cafe highlights section powered by the webapp public menu feed.
+- Updated `sitemap.xml` lastmod for `food.html` to `2026-07-02`.
+- Bumped `sw.js` from `gb-public-v37` to `gb-public-v38` so returning visitors refresh the page.
+
+Needs live UAT:
+
+- After deploy, open `https://www.gigglesbloom.com/food.html` in TR and EN and confirm the page leads with healthy cafe + books, the CTAs go to Books, Kurtköy details, catalog, cafe contact, and live cafe highlights.
+- Hard-refresh or unregister the public service worker if an older cafe-only page persists on returning devices.
+
 ## 2026-06-30 - Kurtköy Accent And Branch Links
 
 Scope: public website styling/navigation polish only. No form payloads, webapp schema, POS, Beko, PayTR, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

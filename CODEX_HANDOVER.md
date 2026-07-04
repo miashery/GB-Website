@@ -1,5 +1,26 @@
 # Codex Handover Log
 
+## 2026-07-04 - Address QR Codes And Social Lab Deep Page
+
+Scope: public website direction UX and Social Lab public content only. No webapp code, Supabase schema, POS, Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or child/customer/staff private data logic changed.
+
+- Pulled the latest laptop public-site commit first (`bdd185f Reposition cafe page around books and healthy food`) and built on top of it, so the café/books update remains intact.
+- Added local SVG Google Maps QR codes for Kadıköy and Kurtköy under `assets/qr/`.
+- Added small bilingual QR direction cards to `contact.html`, `kadikoy.html`, and `kurtkoy.html` map sections.
+- Added `social-lab-community-wellbeing.html` as an off-menu deeper Social Lab page for experts, institutions, families, and community wellbeing stakeholders.
+- Linked the deeper Social Lab page from `social-lab.html` without adding it to the primary navigation.
+- Kept the Social Lab copy warm and consent-led: no diagnosis, no labelling, no family/child testing language, and no overclaiming of formal university partnership.
+- Verified the public academic naming against Üsküdar University: Faculty of Humanities and Social Sciences, including Psychology, Psychology (English), and Sociology.
+- Updated `assets/site.js` so the Community nav highlight applies on the deeper Social Lab page.
+- Updated `sitemap.xml` for the changed branch/contact/Social Lab pages and added the new page.
+- Bumped `sw.js` from `gb-public-v38` to `gb-public-v39` so returning visitors refresh the new public assets.
+
+Needs live UAT:
+
+- After deploy, open `contact.html`, `kadikoy.html`, and `kurtkoy.html`, scan both QR codes with a phone, and confirm they open the intended Google Maps directions.
+- Open `social-lab.html`, follow the deeper-view CTA, and confirm `social-lab-community-wellbeing.html` reads as community wellbeing and expert collaboration, not research/testing.
+- Hard-refresh or unregister the public service worker if older pages persist on returning devices.
+
 ## 2026-07-02 - Cafe And Books Public Page Repositioning
 
 Scope: public website `food.html` content/SEO polish only. No webapp code, form payloads, schema, POS, Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed.

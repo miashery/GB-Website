@@ -16,7 +16,7 @@ const MINI_ICONS = {
 const DESKTOP_NAV_ITEMS = [
   { href: 'play.html', tr: 'Oyun', en: 'Play' },
   { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
-  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'wellbeing.html'] },
+  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'social-lab-community-wellbeing.html', 'wellbeing.html'] },
   { href: 'food.html', tr: 'Kafe & Kitap', en: 'Café & Books', activeFor: ['food.html', 'cafe.html', 'library.html'] },
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
   { href: 'contact.html', tr: 'Ziyaret', en: 'Visit', activeFor: ['contact.html', 'kadikoy.html', 'kurtkoy.html'] },
@@ -24,7 +24,7 @@ const DESKTOP_NAV_ITEMS = [
 const DRAWER_NAV_ITEMS = [
   { href: 'play.html', tr: 'Oyun', en: 'Play' },
   { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
-  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community' },
+  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'social-lab-community-wellbeing.html'] },
   { href: 'wellbeing.html', tr: 'Destek', en: 'Support' },
   { href: 'events.html', tr: 'Etkinlikler', en: 'Events' },
   { href: 'workspaces.html', tr: 'Çalışma', en: 'Work' },
@@ -133,6 +133,7 @@ function applyPageThemeClass() {
     'play.html': 'page-play',
     'workshops.html': 'page-bloomlab',
     'social-lab.html': 'page-community',
+    'social-lab-community-wellbeing.html': 'page-community',
     'wellbeing.html': 'page-support',
     'events.html': 'page-events',
     'workspaces.html': 'page-work',

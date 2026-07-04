@@ -560,6 +560,54 @@ p.desc{color:var(--mid);font-size:.9rem;line-height:1.65;max-width:680px;margin-
   width: 100%;
 }
 
+.map-qr-row {
+  align-items: center;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: auto minmax(0, 1fr);
+  margin: 0 16px 16px;
+  padding-top: 14px;
+}
+
+.map-qr-card {
+  align-items: center;
+  background:
+    linear-gradient(145deg, rgba(235, 242, 238, .72), rgba(255, 255, 255, .94)),
+    var(--white);
+  border: 1px solid rgba(74, 124, 107, .18);
+  border-radius: 18px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+}
+
+.map-qr-card img {
+  background: #fffdf8;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: block;
+  height: 92px;
+  padding: 6px;
+  width: 92px;
+}
+
+.map-qr-copy strong {
+  color: var(--ink);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.2;
+}
+
+.map-qr-copy span {
+  color: var(--muted);
+  display: block;
+  font-size: .76rem;
+  line-height: 1.45;
+  margin-top: 4px;
+}
+
 @media (max-width: 760px) {
   .branch-map-grid {
     grid-template-columns: 1fr;
@@ -569,6 +617,12 @@ p.desc{color:var(--mid);font-size:.9rem;line-height:1.65;max-width:680px;margin-
     align-items: flex-start;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .map-qr-row,
+  .map-qr-card {
+    align-items: flex-start;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -3340,12 +3394,103 @@ footer .footer-bottom {
   font-size: .84rem;
 }
 
+.social-lab-deep-link {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(237, 233, 247, .56), rgba(255, 255, 255, .9) 58%, rgba(235, 242, 238, .46)),
+    var(--white);
+  border-color: rgba(155, 142, 196, .22);
+  display: flex;
+  gap: 22px;
+  justify-content: space-between;
+}
+
+.social-lab-deep-link p {
+  margin: 8px 0 0;
+}
+
+.social-lab-deep-link .btn {
+  flex-shrink: 0;
+}
+
+.social-impact-hero {
+  align-items: center;
+}
+
+.social-impact-hero em {
+  color: #7b66ad;
+}
+
+.social-impact-media {
+  position: relative;
+}
+
+.social-impact-media figcaption {
+  background: rgba(255, 253, 248, .92);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  bottom: 18px;
+  box-shadow: var(--shadow-sm);
+  color: var(--ink);
+  font-size: .78rem;
+  font-weight: 800;
+  left: 18px;
+  max-width: 78%;
+  padding: 10px 12px;
+  position: absolute;
+}
+
+.social-impact-promise,
+.social-impact-ethics {
+  background:
+    linear-gradient(135deg, rgba(255, 247, 250, .84), rgba(255, 255, 255, .9) 52%, rgba(237, 233, 247, .4)),
+    var(--white);
+  border-color: rgba(239, 143, 166, .24);
+}
+
+.social-impact-flow {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.social-impact-flow .card {
+  min-height: 194px;
+}
+
+.social-impact-bridge {
+  border-left: 4px solid var(--lav);
+  margin-top: 14px;
+}
+
+.social-impact-bridge .hero-inner {
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+}
+
+.social-impact-bridge-card {
+  background:
+    linear-gradient(145deg, rgba(235, 242, 238, .7), rgba(255, 255, 255, .92)),
+    var(--white);
+}
+
+.social-impact-cta {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(73, 99, 148, .12), rgba(255, 255, 255, .84) 50%, rgba(239, 143, 166, .16)),
+    var(--white);
+  border-color: rgba(73, 99, 148, .18);
+}
+
 @media(max-width: 980px) {
   .social-benefit-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .social-scale-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .social-impact-flow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -3357,6 +3502,22 @@ footer .footer-bottom {
 
   .social-benefit-grid {
     grid-template-columns: 1fr;
+  }
+
+  .social-lab-deep-link {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .social-impact-flow,
+  .social-impact-bridge .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .social-impact-media figcaption {
+    bottom: 12px;
+    left: 12px;
+    max-width: calc(100% - 24px);
   }
 }
 

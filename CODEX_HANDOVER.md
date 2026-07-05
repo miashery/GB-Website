@@ -1,5 +1,21 @@
 # Codex Handover Log
 
+## 2026-07-05 - Dynamic Branch Hours And Public Notices
+
+Scope: public website branch-hours display only. No form payloads, webapp payment logic, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Updated `assets/site.js` so Home, Visit, Kadıköy, and Kurtköy branch-hour cards can render weekly schedules and bilingual public notices from the webapp public feed.
+- Kept safe static fallback hours in the HTML for visitors if the public API or new SQL is not ready.
+- Added live-update targets to `contact.html`, `kadikoy.html`, and `kurtkoy.html`.
+- Added light styling for compact branch-hours blocks and temporary/holiday notices.
+- Updated `sitemap.xml` `lastmod` for Home, Visit, Kadıköy, and Kurtköy to `2026-07-05`.
+- Bumped `sw.js` from `gb-public-v39` to `gb-public-v40`.
+
+Needs live UAT:
+
+- After the webapp SQL and deploy are live, edit a harmless branch notice in Admin > Branches and confirm it appears correctly on Home, Visit, Kadıköy, and Kurtköy in TR/EN.
+- Hard-refresh or unregister the public service worker if older branch hours persist.
+
 ## 2026-07-04 - Address QR Codes And Social Lab Deep Page
 
 Scope: public website direction UX and Social Lab public content only. No webapp code, Supabase schema, POS, Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or child/customer/staff private data logic changed.

@@ -4990,6 +4990,37 @@ footer {
   color: var(--coral);
 }
 
+.branch-hours-notice {
+  background: rgba(239, 139, 165, .12);
+  border: 1px solid rgba(239, 139, 165, .28);
+  border-radius: 14px;
+  color: var(--coral-dark);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 14px;
+  padding: 10px 12px;
+}
+
+.branch-hours-mini {
+  background: rgba(245, 249, 247, .9);
+  border: 1px solid rgba(127, 166, 154, .22);
+  border-radius: 16px;
+  margin: 14px 0;
+  padding: 14px;
+}
+
+.branch-hours-mini > strong {
+  color: var(--sage-dark);
+  display: block;
+  font-size: 13px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.branch-hours-mini .hours-row {
+  font-size: 13px;
+}
+
 .home-design-v3 .join-banner,
 .home-design-v3 .join-banner h2,
 .home-design-v3 .join-banner p,

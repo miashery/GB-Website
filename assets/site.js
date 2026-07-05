@@ -90,7 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
   if (
     document.getElementById('dynamic-feed') ||
     document.getElementById('play-availability') ||
-    document.getElementById('menu-highlights')
+    document.getElementById('menu-highlights') ||
+    document.querySelector('[data-branch-hours-card]')
   ) {
     loadDynamicFeed();
   }
@@ -1255,12 +1256,9 @@ function renderBranches(branches) {
     hoursGrid.innerHTML = branches.map(function(b) {
       const email = b.email || 'info@ggbloom.org';
       const links = branchContactLinks(b.branch_id);
-      const hours = (b.opening_time && b.closing_time)
-        ? escapeHtml(b.opening_time.slice(0, 5)) + ' — ' + escapeHtml(b.closing_time.slice(0, 5))
-        : '09:00 — 19:00';
       return '<div class="hours-card">' +
         '<h4>' + escapeHtml(isTr ? b.name_tr : b.name_en) + '</h4>' +
-        '<div class="hours-row"><span class="day">' + (isTr ? 'Her gün' : 'Daily') + '</span><span class="time">' + hours + '</span></div>' +
+        branchHoursRowsHtml(b) +
         '<div class="visit-contact-line">E-mail: <a href="mailto:' + escapeHtml(email) + '">' + escapeHtml(email) + '</a></div>' +
         '<div class="visit-contact-line"><span class="tr-only">Telefon:</span><span class="en-only">Phone:</span> <a href="tel:' + CONTACT_LINKS.phoneTel + '">' + CONTACT_LINKS.phoneDisplay + '</a></div>' +
         '<div class="visit-card-links">' +
@@ -1268,9 +1266,126 @@ function renderBranches(branches) {
           '<a href="' + links.map + '" target="_blank" rel="noopener">Google Maps</a>' +
           '<a href="' + links.instagram + '" target="_blank" rel="noopener">Instagram</a>' +
         '</div>' +
+        branchNoticeHtml(b) +
       '</div>';
     }).join('');
   }
+
+  document.querySelectorAll('[data-branch-hours-card]').forEach(function(card) {
+    const branchId = card.getAttribute('data-branch-hours-card');
+    const branch = branches.find(function(b) { return b.branch_id === branchId; });
+    if (!branch) return;
+
+    const rows = card.querySelector('[data-branch-hours-rows]');
+    if (rows) rows.innerHTML = branchHoursRowsHtml(branch);
+
+    const notice = card.querySelector('[data-branch-notice]');
+    if (notice) {
+      const text = branchNoticeText(branch);
+      if (text) {
+        notice.textContent = text;
+        notice.hidden = false;
+      } else {
+        notice.hidden = true;
+      }
+    }
+  });
+}
+
+const BRANCH_WEEK_DAYS = [
+  { day: 'monday', tr: 'Pazartesi', en: 'Monday' },
+  { day: 'tuesday', tr: 'Salı', en: 'Tuesday' },
+  { day: 'wednesday', tr: 'Çarşamba', en: 'Wednesday' },
+  { day: 'thursday', tr: 'Perşembe', en: 'Thursday' },
+  { day: 'friday', tr: 'Cuma', en: 'Friday' },
+  { day: 'saturday', tr: 'Cumartesi', en: 'Saturday' },
+  { day: 'sunday', tr: 'Pazar', en: 'Sunday' },
+];
+
+function fallbackWeeklyHours(branchId) {
+  const hours = branchId === 'kadikoy'
+    ? [['09:00', '20:00'], ['09:00', '20:00'], ['09:00', '20:00'], ['09:00', '20:00'], ['09:00', '20:00'], ['09:00', '21:00'], ['10:00', '19:00']]
+    : [['09:00', '19:00'], ['09:00', '19:00'], ['09:00', '19:00'], ['09:00', '19:00'], ['09:00', '19:00'], ['09:00', '20:00'], ['10:00', '18:00']];
+
+  return BRANCH_WEEK_DAYS.map(function(day, index) {
+    return { day: day.day, is_open: true, opens: hours[index][0], closes: hours[index][1] };
+  });
+}
+
+function normalizeBranchWeeklyHours(branch) {
+  const raw = Array.isArray(branch.weekly_hours) && branch.weekly_hours.length
+    ? branch.weekly_hours
+    : fallbackWeeklyHours(branch.branch_id);
+  const byDay = raw.reduce(function(acc, row) {
+    if (row && row.day) acc[row.day] = row;
+    return acc;
+  }, {});
+
+  return BRANCH_WEEK_DAYS.map(function(day) {
+    const row = byDay[day.day] || {};
+    const isOpen = row.is_open !== false;
+    return {
+      day: day.day,
+      labelTr: day.tr,
+      labelEn: day.en,
+      is_open: isOpen,
+      opens: isOpen ? shortTime(row.opens || branch.opening_time || '09:00') : '',
+      closes: isOpen ? shortTime(row.closes || branch.closing_time || '19:00') : '',
+    };
+  });
+}
+
+function branchHoursRowsHtml(branch) {
+  const rows = normalizeBranchWeeklyHours(branch);
+  const grouped = [];
+  rows.forEach(function(row) {
+    const key = row.is_open ? row.opens + '-' + row.closes : 'closed';
+    const previous = grouped[grouped.length - 1];
+    if (previous && previous.key === key) {
+      previous.rows.push(row);
+    } else {
+      grouped.push({ key: key, rows: [row], is_open: row.is_open, opens: row.opens, closes: row.closes });
+    }
+  });
+
+  return grouped.map(function(group) {
+    const dayLabel = dayRangeLabel(group.rows);
+    const timeLabel = group.is_open
+      ? escapeHtml(group.opens + ' — ' + group.closes)
+      : escapeHtml(gl === 'tr' ? 'Kapalı' : 'Closed');
+    return '<div class="hours-row"><span class="day">' + escapeHtml(dayLabel) + '</span><span class="time">' + timeLabel + '</span></div>';
+  }).join('');
+}
+
+function dayRangeLabel(rows) {
+  if (!rows.length) return '';
+  if (rows.length === 1) return gl === 'tr' ? rows[0].labelTr : rows[0].labelEn;
+
+  const first = rows[0];
+  const last = rows[rows.length - 1];
+  if (first.day === 'monday' && last.day === 'friday' && rows.length === 5) {
+    return gl === 'tr' ? 'Pazartesi — Cuma' : 'Monday — Friday';
+  }
+  if (first.day === 'saturday' && last.day === 'sunday' && rows.length === 2) {
+    return gl === 'tr' ? 'Hafta sonu' : 'Weekend';
+  }
+  return (gl === 'tr' ? first.labelTr + ' — ' + last.labelTr : first.labelEn + ' — ' + last.labelEn);
+}
+
+function branchNoticeText(branch) {
+  return (gl === 'tr' ? branch.public_notice_tr : branch.public_notice_en) ||
+    branch.public_notice_tr ||
+    branch.public_notice_en ||
+    '';
+}
+
+function branchNoticeHtml(branch) {
+  const text = branchNoticeText(branch);
+  return text ? '<div class="branch-hours-notice">' + escapeHtml(text) + '</div>' : '';
+}
+
+function shortTime(value) {
+  return String(value || '').slice(0, 5) || '09:00';
 }
 
 function publicBranchDistrict(branch) {

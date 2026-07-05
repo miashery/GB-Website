@@ -1,5 +1,13 @@
 # Codex Handover Log
 
+## 2026-07-05 - Kurtköy Dynamic Heading Accent Fix
+
+Scope: public website rendering fix only. No webapp code, Supabase schema, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or private data logic changed.
+
+- Fixed the Kurtköy page dynamic bookshop heading so the live webapp copy keeps the second-line `<em>` accent colour instead of flattening to black after API load.
+- Normalized the public heading display to `Kurtköy` and `Café` when older dynamic settings return ASCII-only text.
+- Bumped `sw.js` from `gb-public-v41` to `gb-public-v42`.
+
 ## 2026-07-05 - Kurtköy Bookshop Intro Polish
 
 Scope: public website copy polish only. No webapp code, Supabase schema, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or private data logic changed.

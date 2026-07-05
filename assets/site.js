@@ -695,7 +695,7 @@ function renderBookshopExperience(data) {
   const settings = data.settings || {};
   const theme = data.live_theme || {};
   setLocalizedBookshopField('bookshop-campaign', settings.public_tagline_tr, settings.public_tagline_en);
-  setLocalizedBookshopField('bookshop-heading', settings.public_heading_tr, settings.public_heading_en);
+  setBookshopHeading(settings.public_heading_tr, settings.public_heading_en);
   setLocalizedBookshopField(
     'bookshop-intro',
     polishedBookshopIntro(settings.public_intro_tr, 'tr'),
@@ -725,6 +725,37 @@ function renderBookshopExperience(data) {
   }
 }
 
+function setBookshopHeading(trText, enText) {
+  const tr = polishedBookshopHeading(trText, 'tr');
+  const en = polishedBookshopHeading(enText, 'en');
+  document.querySelectorAll('[data-bookshop-field="bookshop-heading"]').forEach(function(el) {
+    el.innerHTML =
+      '<span class="tr-only">' + tr.main + '<br><em>' + tr.accent + '.</em></span>' +
+      '<span class="en-only">' + en.main + '<br><em>' + en.accent + '.</em></span>';
+  });
+}
+
+function polishedBookshopHeading(text, locale) {
+  const fallback = locale === 'tr'
+    ? 'Giggles & Bloom Kurtköy — Çocuk Kitapçısı ve Aile Kafesi'
+    : "Giggles & Bloom Kurtköy — Children's Bookshop and Family Café";
+  const value = String(text || fallback)
+    .replace(/\bKurtkoy\b/g, 'Kurtköy')
+    .replace(/\bCafe\b/g, 'Café')
+    .trim();
+  const parts = value.split(/\s+[—-]\s+/);
+  if (parts.length >= 2) {
+    return {
+      main: escapeHtml(parts[0].trim()),
+      accent: escapeHtml(parts.slice(1).join(' — ').replace(/[.。]+$/, '').trim()),
+    };
+  }
+  return {
+    main: escapeHtml(locale === 'tr' ? 'Giggles & Bloom Kurtköy' : 'Giggles & Bloom Kurtköy'),
+    accent: escapeHtml(value.replace(/[.。]+$/, '')),
+  };
+}
+
 function polishedBookshopIntro(text, locale) {
   const value = String(text || '').trim();
   const oldTr = 'Çocuk kitapları, aile kafesi ve kitaplardan doğan küçük deneyimler.';
@@ -735,6 +766,18 @@ function polishedBookshopIntro(text, locale) {
       : 'At Kurtköy, children’s books are the starting point. The family café, Mini Play Corner and weekly Story Stop turn each chosen book into a warm little experience children can explore, talk about and remember.';
   }
   return value;
+}
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, function(char) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    }[char] || char;
+  });
 }
 
 function renderBookshopFallback() {

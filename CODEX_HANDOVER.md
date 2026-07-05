@@ -1,5 +1,13 @@
 # Codex Handover Log
 
+## 2026-07-05 - Kurtköy Bookshop Intro Polish
+
+Scope: public website copy polish only. No webapp code, Supabase schema, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or private data logic changed.
+
+- Replaced the Kurtköy hero intro with warmer bookshop-first copy in Turkish and English.
+- Added a public-site guard so if the live webapp API still returns the old default intro, the website presents the polished sentence instead. Custom admin-written intro copy still wins.
+- Bumped `sw.js` from `gb-public-v40` to `gb-public-v41`.
+
 ## 2026-07-05 - Dynamic Branch Hours And Public Notices
 
 Scope: public website branch-hours display only. No form payloads, webapp payment logic, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

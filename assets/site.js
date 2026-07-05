@@ -696,7 +696,11 @@ function renderBookshopExperience(data) {
   const theme = data.live_theme || {};
   setLocalizedBookshopField('bookshop-campaign', settings.public_tagline_tr, settings.public_tagline_en);
   setLocalizedBookshopField('bookshop-heading', settings.public_heading_tr, settings.public_heading_en);
-  setLocalizedBookshopField('bookshop-intro', settings.public_intro_tr, settings.public_intro_en);
+  setLocalizedBookshopField(
+    'bookshop-intro',
+    polishedBookshopIntro(settings.public_intro_tr, 'tr'),
+    polishedBookshopIntro(settings.public_intro_en, 'en')
+  );
   setLocalizedBookshopField('bookshop-story-label', settings.story_stop_label_tr, settings.story_stop_label_en);
   setLocalizedBookshopField('bookshop-passport-label', settings.passport_label_tr, settings.passport_label_en);
 
@@ -719,6 +723,18 @@ function renderBookshopExperience(data) {
       el.textContent = '₺' + Math.round(price / 100).toLocaleString('tr-TR');
     });
   }
+}
+
+function polishedBookshopIntro(text, locale) {
+  const value = String(text || '').trim();
+  const oldTr = 'Çocuk kitapları, aile kafesi ve kitaplardan doğan küçük deneyimler.';
+  const oldEn = "Children's books, family cafe, and small experiences born from books.";
+  if (!value || value === oldTr || value === oldEn) {
+    return locale === 'tr'
+      ? 'Kurtköy’de çocuk kitapları ilk durak. Aile kafesi, Mini Oyun Köşesi ve haftalık Hikâye Durağı; seçilen kitabı çocuğun keşfedebileceği, anlatabileceği ve hatırlayacağı sıcak bir küçük deneyime dönüştürür.'
+      : 'At Kurtköy, children’s books are the starting point. The family café, Mini Play Corner and weekly Story Stop turn each chosen book into a warm little experience children can explore, talk about and remember.';
+  }
+  return value;
 }
 
 function renderBookshopFallback() {

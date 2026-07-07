@@ -1,5 +1,19 @@
 # Codex Handover Log
 
+## 2026-07-07 - Journal Palette Differentiation Polish
+
+Scope: public website Journal presentation polish only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Changed `journal.html` and its CSS from the Kurtköy/gold-led branch palette to a distinct Journal palette: brand teal, sky, and lavender.
+- Reduced the Journal landing hero title scale and made the headline explicitly Journal-led so it feels less like the Kurtköy branch page.
+- Updated Journal card/empty-state hover and border accents to match the new editorial palette.
+- Bumped `sw.js` from `gb-public-v44` to `gb-public-v45`.
+
+Needs live UAT:
+
+- After deploy, open `https://www.gigglesbloom.com/journal.html` in TR/EN on desktop and mobile.
+- Confirm the page no longer reads visually as the Kurtköy branch page and the hero type aligns with other main pages.
+
 ## 2026-07-07 - Journal Public Design Polish
 
 Scope: public website Journal presentation polish only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

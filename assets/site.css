@@ -5315,9 +5315,12 @@ body.page-themed .branch-story-hero {
 }
 
 body.page-journal {
-  --page-accent: var(--gold);
-  --page-accent-soft: var(--gold-light);
-  --page-accent-faint: rgba(251, 240, 212, .58);
+  --page-accent: var(--brand-teal);
+  --page-accent-soft: var(--sky-light);
+  --page-accent-faint: rgba(232, 243, 248, .66);
+  --journal-accent: var(--brand-teal);
+  --journal-accent-soft: var(--sky-light);
+  --journal-accent-alt: var(--lav);
 }
 
 .journal-highlight-grid {
@@ -5341,7 +5344,7 @@ body.page-journal {
 }
 
 .journal-card:hover {
-  border-color: rgba(201, 149, 42, .34);
+  border-color: rgba(73, 99, 148, .26);
   box-shadow: var(--shadow-lg);
   color: var(--ink);
   transform: translateY(-2px);
@@ -5380,8 +5383,8 @@ body.page-journal {
 
 .journal-empty {
   align-items: center;
-  background: linear-gradient(135deg, rgba(251, 240, 212, .72), rgba(232, 243, 248, .58), rgba(255, 253, 248, .94));
-  border: 1px dashed rgba(201, 149, 42, .38);
+  background: linear-gradient(135deg, rgba(232, 243, 248, .74), rgba(231, 226, 243, .44), rgba(255, 253, 248, .94));
+  border: 1px dashed rgba(73, 99, 148, .28);
   border-radius: 22px;
   color: var(--mid);
   display: grid;
@@ -5400,7 +5403,7 @@ body.page-journal {
 }
 
 .journal-page-hero {
-  background: linear-gradient(135deg, rgba(255, 253, 248, .95), rgba(251, 240, 212, .5) 68%, rgba(232, 243, 248, .54));
+  background: linear-gradient(135deg, rgba(255, 253, 248, .96), rgba(232, 243, 248, .62) 62%, rgba(231, 226, 243, .48));
   border: 1px solid var(--border);
   border-radius: 28px;
   box-shadow: var(--shadow-lg);
@@ -5411,18 +5414,19 @@ body.page-journal {
 }
 
 .journal-page-hero h1 {
-  font-size: clamp(3rem, 7vw, 6.25rem);
-  line-height: .98;
+  font-size: clamp(2.45rem, 5vw, 4.65rem);
+  line-height: 1.04;
+  max-width: 760px;
 }
 
 .journal-page-hero em {
-  color: var(--gold);
+  color: var(--journal-accent);
 }
 
 .journal-promise-list {
   align-content: center;
   align-self: center;
-  background: linear-gradient(160deg, rgba(232, 243, 248, .78), rgba(255, 253, 248, .46));
+  background: linear-gradient(160deg, rgba(232, 243, 248, .86), rgba(231, 226, 243, .4), rgba(255, 253, 248, .54));
   border-radius: 24px;
   display: grid;
   gap: 12px;
@@ -5432,7 +5436,7 @@ body.page-journal {
 .journal-promise-list > div {
   align-items: flex-start;
   background: rgba(255, 253, 248, .88);
-  border: 1px solid rgba(107, 168, 196, .2);
+  border: 1px solid rgba(73, 99, 148, .14);
   border-radius: 16px;
   box-shadow: 0 10px 22px rgba(44, 42, 39, .05);
   display: grid;
@@ -5441,7 +5445,7 @@ body.page-journal {
 }
 
 .journal-promise-list > div > strong {
-  color: var(--brand-teal);
+  color: var(--journal-accent);
   display: block;
   font-size: .82rem;
   font-weight: 800;

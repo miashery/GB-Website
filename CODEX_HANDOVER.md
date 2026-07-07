@@ -1,5 +1,20 @@
 # Codex Handover Log
 
+## 2026-07-07 - Journal Public Design Polish
+
+Scope: public website Journal presentation polish only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Removed internal "publishing gate" / "Open in webapp" wording from `journal.html` and replaced it with reader-facing Journal copy.
+- Fixed the Journal hero promise panel so nested language spans no longer render as overlapping/clipped chips.
+- Improved Journal article card, empty-state, and hero background styling to better match the current G&B public-site design language.
+- Slightly increased dark-footer text contrast across the static website.
+- Bumped `sw.js` from `gb-public-v43` to `gb-public-v44`.
+
+Needs live UAT:
+
+- After deploy, open `https://www.gigglesbloom.com/journal.html` in TR/EN on desktop and mobile.
+- Confirm the promise cards do not overlap, latest article cards are readable, and no public copy mentions internal publication gates.
+
 ## 2026-07-07 - Public Journal Entry Points
 
 Scope: public website Journal entry points only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

@@ -676,8 +676,8 @@ function renderJournalHighlights(articles) {
   if (!items.length) {
     container.innerHTML =
       '<div class="journal-empty">' +
-        '<strong>' + escapeHtml(isTr ? 'İlk Journal yazıları yayın kapısından geçiyor.' : 'The first Journal articles are passing the publishing gate.') + '</strong>' +
-        '<span>' + escapeHtml(isTr ? 'Kaynaklar, iki dil ve insan onayı tamamlandıkça burada görünecekler.' : 'They will appear here as sources, both languages, and human review are completed.') + '</span>' +
+        '<strong>' + escapeHtml(isTr ? 'Journal rafı yavaş yavaş doluyor.' : 'The Journal shelf is slowly filling.') + '</strong>' +
+        '<span>' + escapeHtml(isTr ? 'İlk yazılar hazırlandıkça burada aileler için sakin, kaynaklı ve iki dilli bir bilgi alanı oluşacak.' : 'As the first pieces are prepared, this will become a calm, sourced, bilingual knowledge space for families.') + '</span>' +
       '</div>';
     return;
   }

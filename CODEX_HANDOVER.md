@@ -1,5 +1,22 @@
 # Codex Handover Log
 
+## 2026-07-07 - Public Journal Entry Points
+
+Scope: public website Journal entry points only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Added `journal.html` as a public G&B Journal landing page with bilingual positioning, governance promises, and an upbeat empty state.
+- Added Journal to the generated desktop/mobile navigation and footer explore links.
+- Added dynamic "latest from the Journal" sections to `index.html` and `wellbeing.html`, powered by the webapp public Journal API and safe fallback copy when no published articles are live.
+- Added Journal card/page styling in `assets/site.css`.
+- Updated `sitemap.xml` for `journal.html`, home, and wellbeing.
+- Bumped `sw.js` from `gb-public-v42` to `gb-public-v43`.
+
+Needs live UAT:
+
+- After deploy, open `https://www.gigglesbloom.com/journal.html`, home, and wellbeing in TR/EN.
+- Confirm an approved-but-not-published article does not appear.
+- Publish one safe Journal test article from the webapp, confirm it appears on the public website sections, then recall it and confirm it disappears after cache refresh.
+
 ## 2026-07-05 - Kurtköy Dynamic Heading Accent Fix
 
 Scope: public website rendering fix only. No webapp code, Supabase schema, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or private data logic changed.

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gb-public-v42';
+const CACHE_NAME = 'gb-public-v43';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -11,6 +11,7 @@ const CORE_ASSETS = [
   './library.html',
   './workspaces.html',
   './wellbeing.html',
+  './journal.html',
   './social-lab-community-wellbeing.html',
   './membership.html',
   './contact.html',

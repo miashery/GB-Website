@@ -17,6 +17,7 @@ const DESKTOP_NAV_ITEMS = [
   { href: 'play.html', tr: 'Oyun', en: 'Play' },
   { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
   { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'social-lab-community-wellbeing.html', 'wellbeing.html'] },
+  { href: 'journal.html', tr: 'Journal', en: 'Journal' },
   { href: 'food.html', tr: 'Kafe & Kitap', en: 'Café & Books', activeFor: ['food.html', 'cafe.html', 'library.html'] },
   { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
   { href: 'contact.html', tr: 'Ziyaret', en: 'Visit', activeFor: ['contact.html', 'kadikoy.html', 'kurtkoy.html'] },
@@ -26,6 +27,7 @@ const DRAWER_NAV_ITEMS = [
   { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
   { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'social-lab-community-wellbeing.html'] },
   { href: 'wellbeing.html', tr: 'Destek', en: 'Support' },
+  { href: 'journal.html', tr: 'Journal', en: 'Journal' },
   { href: 'events.html', tr: 'Etkinlikler', en: 'Events' },
   { href: 'workspaces.html', tr: 'Çalışma', en: 'Work' },
   { href: 'library.html', tr: 'Kitaplık', en: 'Books' },
@@ -48,6 +50,7 @@ const PUBLIC_CARD_ICONS = {
 };
 let gl = 'tr';
 let feedData = null;
+let journalData = null;
 let activeMenuBranch = 'all';
 
 function ga(lang) {
@@ -108,6 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
     loadMembershipPackages();
   }
 
+  if (document.getElementById('journal-highlights')) {
+    loadJournalHighlights();
+  }
+
   wireEventRequestForms();
 });
 
@@ -136,6 +143,7 @@ function applyPageThemeClass() {
     'social-lab.html': 'page-community',
     'social-lab-community-wellbeing.html': 'page-community',
     'wellbeing.html': 'page-support',
+    'journal.html': 'page-journal',
     'events.html': 'page-events',
     'workspaces.html': 'page-work',
     'library.html': 'page-books',
@@ -548,6 +556,7 @@ function normalizeFooter() {
         '<a href="workshops.html"><span class="tr-only">BloomLab</span><span class="en-only">BloomLab</span></a>' +
         '<a href="social-lab.html"><span class="tr-only">Topluluk &amp; Destek</span><span class="en-only">Community &amp; Support</span></a>' +
         '<a href="events.html"><span class="tr-only">İş &amp; Etkinlikler</span><span class="en-only">Work &amp; Events</span></a>' +
+        '<a href="journal.html">Journal</a>' +
         '<a href="library.html"><span class="tr-only">Kitaplık</span><span class="en-only">Books</span></a>' +
         '<a href="food.html"><span class="tr-only">Kafe &amp; Restoran</span><span class="en-only">Cafe &amp; Restaurant</span></a>' +
         '<a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>' +
@@ -617,6 +626,77 @@ async function fetchJson(url) {
   });
   if (!res.ok) throw new Error('API ' + res.status);
   return res.json();
+}
+
+async function loadJournalHighlights() {
+  try {
+    const data = await fetchJson(APP_URL + '/api/public/journal?limit=6');
+    journalData = (data && data.articles) || [];
+    renderJournalHighlights(journalData);
+  } catch (error) {
+    journalData = [];
+    renderJournalHighlights(journalData);
+  }
+}
+
+function journalArticleCopy(article) {
+  const isTr = gl === 'tr';
+  return {
+    title: isTr ? (article.title_tr || article.title_en) : (article.title_en || article.title_tr),
+    summary: isTr
+      ? (article.summary_tr || article.seo_line_tr || article.summary_en || article.seo_line_en)
+      : (article.summary_en || article.seo_line_en || article.summary_tr || article.seo_line_tr),
+    evidence: isTr ? (article.evidence_label_tr || article.evidence_label_en) : (article.evidence_label_en || article.evidence_label_tr),
+    type: journalTypeLabel(article.content_type, isTr),
+  };
+}
+
+function journalTypeLabel(type, isTr) {
+  const labels = {
+    article: { tr: 'Makale', en: 'Article' },
+    parent_guide: { tr: 'Aile rehberi', en: 'Family guide' },
+    practice_note: { tr: 'G&B notu', en: 'G&B note' },
+    seasonal_parent_guide: { tr: 'Dönemsel rehber', en: 'Seasonal guide' },
+    faq: { tr: 'SSS', en: 'FAQ' },
+    visual_guide: { tr: 'Görsel rehber', en: 'Visual guide' },
+    video: { tr: 'Video notları', en: 'Video notes' },
+    podcast: { tr: 'Podcast notları', en: 'Podcast notes' },
+  };
+  return isTr ? (labels[type] && labels[type].tr) || type : (labels[type] && labels[type].en) || type;
+}
+
+function renderJournalHighlights(articles) {
+  const container = document.getElementById('journal-highlights');
+  if (!container) return;
+  const isTr = gl === 'tr';
+  const items = Array.isArray(articles) ? articles.filter(function(article) {
+    return article && article.slug && article.title_en && article.title_tr;
+  }) : [];
+
+  if (!items.length) {
+    container.innerHTML =
+      '<div class="journal-empty">' +
+        '<strong>' + escapeHtml(isTr ? 'İlk Journal yazıları yayın kapısından geçiyor.' : 'The first Journal articles are passing the publishing gate.') + '</strong>' +
+        '<span>' + escapeHtml(isTr ? 'Kaynaklar, iki dil ve insan onayı tamamlandıkça burada görünecekler.' : 'They will appear here as sources, both languages, and human review are completed.') + '</span>' +
+      '</div>';
+    return;
+  }
+
+  container.innerHTML = items.slice(0, 6).map(function(article) {
+    const copy = journalArticleCopy(article);
+    const href = APP_URL + '/journal/' + encodeURIComponent(article.slug);
+    const meta = [
+      copy.type,
+      copy.evidence,
+      article.reading_minutes ? (isTr ? article.reading_minutes + ' dk' : article.reading_minutes + ' min') : null,
+    ].filter(Boolean);
+    return '<a class="journal-card" href="' + href + '" target="_blank" rel="noopener">' +
+      '<span class="journal-card-kicker">' + escapeHtml(meta.join(' · ')) + '</span>' +
+      '<strong>' + escapeHtml(copy.title || 'G&B Journal') + '</strong>' +
+      (copy.summary ? '<p>' + escapeHtml(copy.summary) + '</p>' : '') +
+      '<span class="journal-card-link">' + escapeHtml(isTr ? 'Oku →' : 'Read →') + '</span>' +
+    '</a>';
+  }).join('');
 }
 
 async function loadExperienceRates() {
@@ -844,6 +924,10 @@ function setLocalizedBookshopField(field, trText, enText) {
 }
 
 function renderDynamicContent() {
+  if (document.getElementById('journal-highlights') && Array.isArray(journalData)) {
+    renderJournalHighlights(journalData);
+  }
+
   if (!feedData) {
     renderDynamicFallback();
     return;

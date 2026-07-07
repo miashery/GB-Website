@@ -684,13 +684,13 @@ function renderJournalHighlights(articles) {
 
   container.innerHTML = items.slice(0, 6).map(function(article) {
     const copy = journalArticleCopy(article);
-    const href = APP_URL + '/journal/' + encodeURIComponent(article.slug);
+    const href = '/journal/' + encodeURIComponent(article.slug);
     const meta = [
       copy.type,
       copy.evidence,
       article.reading_minutes ? (isTr ? article.reading_minutes + ' dk' : article.reading_minutes + ' min') : null,
     ].filter(Boolean);
-    return '<a class="journal-card" href="' + href + '" target="_blank" rel="noopener">' +
+    return '<a class="journal-card" href="' + href + '">' +
       '<span class="journal-card-kicker">' + escapeHtml(meta.join(' · ')) + '</span>' +
       '<strong>' + escapeHtml(copy.title || 'G&B Journal') + '</strong>' +
       (copy.summary ? '<p>' + escapeHtml(copy.summary) + '</p>' : '') +

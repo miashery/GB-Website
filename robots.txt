@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.gigglesbloom.com/sitemap.xml
+Sitemap: https://www.gigglesbloom.com/journal-sitemap.xml

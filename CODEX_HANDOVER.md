@@ -1,5 +1,19 @@
 # Codex Handover Log
 
+## 2026-07-07 - Journal Main-Domain Routing
+
+Scope: public website Journal routing and SEO entry points only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Added `vercel.json` rewrites so `https://www.gigglesbloom.com/journal/<slug>` and `https://www.gigglesbloom.com/journal-sitemap.xml` are served by the webapp while preserving the visible `www` URL.
+- Added supporting rewrites for the webapp article assets under `/_next`, `/brand`, and app icons so proxied article pages can load CSS, JS, and branding correctly.
+- Updated `journal.html` and dynamic Journal cards so article links stay on `/journal/<slug>` instead of opening `webapp.gigglesbloom.com`.
+- Added the Journal sitemap to `robots.txt`, added the first live article URL to `sitemap.xml`, and bumped `sw.js` from `gb-public-v45` to `gb-public-v46`.
+
+Needs live UAT:
+
+- After both deployments, open `https://www.gigglesbloom.com/journal/why-play-is-serious-child-development` and confirm the visible URL remains on `www`, the article styling/assets load, and article links from `journal.html` do not open a new webapp tab.
+- In Search Console, submit/inspect `https://www.gigglesbloom.com/journal-sitemap.xml` after the deployment is live.
+
 ## 2026-07-07 - Journal Palette Differentiation Polish
 
 Scope: public website Journal presentation polish only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

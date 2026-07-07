@@ -632,10 +632,10 @@ async function loadJournalHighlights() {
   try {
     const data = await fetchJson(APP_URL + '/api/public/journal?limit=6');
     journalData = (data && data.articles) || [];
-    renderJournalHighlights(journalData);
+    renderJournalHighlights(journalData, data && data.degraded === true);
   } catch (error) {
     journalData = [];
-    renderJournalHighlights(journalData);
+    renderJournalHighlights(journalData, true);
   }
 }
 
@@ -665,7 +665,7 @@ function journalTypeLabel(type, isTr) {
   return isTr ? (labels[type] && labels[type].tr) || type : (labels[type] && labels[type].en) || type;
 }
 
-function renderJournalHighlights(articles) {
+function renderJournalHighlights(articles, degraded) {
   const container = document.getElementById('journal-highlights');
   if (!container) return;
   const isTr = gl === 'tr';
@@ -676,8 +676,8 @@ function renderJournalHighlights(articles) {
   if (!items.length) {
     container.innerHTML =
       '<div class="journal-empty">' +
-        '<strong>' + escapeHtml(isTr ? 'Journal rafı yavaş yavaş doluyor.' : 'The Journal shelf is slowly filling.') + '</strong>' +
-        '<span>' + escapeHtml(isTr ? 'İlk yazılar hazırlandıkça burada aileler için sakin, kaynaklı ve iki dilli bir bilgi alanı oluşacak.' : 'As the first pieces are prepared, this will become a calm, sourced, bilingual knowledge space for families.') + '</span>' +
+        '<strong>' + escapeHtml(degraded ? (isTr ? 'Journal rafı yenileniyor.' : 'The Journal shelf is refreshing.') : (isTr ? 'Journal rafı yavaş yavaş doluyor.' : 'The Journal shelf is slowly filling.')) + '</strong>' +
+        '<span>' + escapeHtml(degraded ? (isTr ? 'Yayınlanmış yazılar kısa süre içinde yeniden görünecek. Bu sırada G&B dünyalarını keşfedebilirsiniz.' : 'Published articles should appear again shortly. In the meantime, you can explore the G&B worlds.') : (isTr ? 'İlk yazılar hazırlandıkça burada aileler için sakin, kaynaklı ve iki dilli bir bilgi alanı oluşacak.' : 'As the first pieces are prepared, this will become a calm, sourced, bilingual knowledge space for families.')) + '</span>' +
       '</div>';
     return;
   }
@@ -925,7 +925,7 @@ function setLocalizedBookshopField(field, trText, enText) {
 
 function renderDynamicContent() {
   if (document.getElementById('journal-highlights') && Array.isArray(journalData)) {
-    renderJournalHighlights(journalData);
+    renderJournalHighlights(journalData, false);
   }
 
   if (!feedData) {

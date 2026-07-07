@@ -1,5 +1,17 @@
 # Codex Handover Log
 
+## 2026-07-08 - Journal Empty-State Degraded Copy
+
+Scope: public website Journal empty-state copy only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Updated `assets/site.js` so `journal.html` distinguishes a temporarily degraded Journal feed from a genuinely empty Journal shelf.
+- If the API fails or returns `degraded: true` with no articles, the public page now says the Journal shelf is refreshing rather than implying no articles have been published yet.
+- Bumped `sw.js` from `gb-public-v46` to `gb-public-v47` so returning browsers pick up the copy fix.
+
+Needs live UAT:
+
+- After deploy, open `https://www.gigglesbloom.com/journal.html` in a fresh/private browser and confirm a published card appears. If the feed is temporarily degraded, confirm the empty copy says the shelf is refreshing.
+
 ## 2026-07-07 - Journal Main-Domain Routing
 
 Scope: public website Journal routing and SEO entry points only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

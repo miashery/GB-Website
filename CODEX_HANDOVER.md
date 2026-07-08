@@ -1,5 +1,19 @@
 # Codex Handover Log
 
+## 2026-07-08 - Journal Language Continuity
+
+Scope: public website Journal linking/cache polish only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Parasut, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Updated `assets/site.js` so the selected TR/EN language is also stored in a lightweight `gb_lang` cookie for proxied Journal article pages.
+- Journal cards now link to `/journal/<slug>?lang=tr/en`, so readers who browse the public site in English do not land on the Turkish article by default.
+- Preserved the degraded Journal feed empty-state copy across language switches.
+- Bumped `sw.js` from `gb-public-v47` to `gb-public-v48` so returning browsers pick up the language-link fix.
+
+Needs live UAT:
+
+- After deploy, open `https://www.gigglesbloom.com/journal.html`, switch to EN, click the published article, and confirm the article opens in EN on the `www.gigglesbloom.com/journal/<slug>` URL. Repeat in TR.
+- In a fresh/private browser, confirm the Journal empty/degraded copy remains truthful after toggling TR/EN.
+
 ## 2026-07-08 - Journal Empty-State Degraded Copy
 
 Scope: public website Journal empty-state copy only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

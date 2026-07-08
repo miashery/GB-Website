@@ -51,6 +51,7 @@ const PUBLIC_CARD_ICONS = {
 let gl = 'tr';
 let feedData = null;
 let journalData = null;
+let journalDegraded = false;
 let activeMenuBranch = 'all';
 
 function ga(lang) {
@@ -62,6 +63,9 @@ function ga(lang) {
 
   try {
     localStorage.setItem('gb_lang', gl);
+  } catch (error) {}
+  try {
+    document.cookie = 'gb_lang=' + gl + ';path=/;max-age=31536000;SameSite=Lax';
   } catch (error) {}
 
   renderDynamicContent();
@@ -82,7 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   try {
     const savedLang = localStorage.getItem('gb_lang');
-    if (savedLang === 'en') ga('en');
+    const cookieLang = (document.cookie.match(/(?:^|;\s*)gb_lang=(tr|en)\b/) || [])[1];
+    if (savedLang === 'en' || (!savedLang && cookieLang === 'en')) ga('en');
   } catch (error) {}
 
   updateYears();
@@ -632,10 +637,12 @@ async function loadJournalHighlights() {
   try {
     const data = await fetchJson(APP_URL + '/api/public/journal?limit=6');
     journalData = (data && data.articles) || [];
-    renderJournalHighlights(journalData, data && data.degraded === true);
+    journalDegraded = data && data.degraded === true;
+    renderJournalHighlights(journalData, journalDegraded);
   } catch (error) {
     journalData = [];
-    renderJournalHighlights(journalData, true);
+    journalDegraded = true;
+    renderJournalHighlights(journalData, journalDegraded);
   }
 }
 
@@ -684,7 +691,7 @@ function renderJournalHighlights(articles, degraded) {
 
   container.innerHTML = items.slice(0, 6).map(function(article) {
     const copy = journalArticleCopy(article);
-    const href = '/journal/' + encodeURIComponent(article.slug);
+    const href = '/journal/' + encodeURIComponent(article.slug) + '?lang=' + encodeURIComponent(gl);
     const meta = [
       copy.type,
       copy.evidence,
@@ -925,7 +932,7 @@ function setLocalizedBookshopField(field, trText, enText) {
 
 function renderDynamicContent() {
   if (document.getElementById('journal-highlights') && Array.isArray(journalData)) {
-    renderJournalHighlights(journalData, false);
+    renderJournalHighlights(journalData, journalDegraded);
   }
 
   if (!feedData) {

@@ -988,6 +988,15 @@ function bloomLabFallbackItems(isTr) {
   ];
 }
 
+function publicWorkshopSessionHref(session) {
+  if (!session) return 'workshops.html';
+  if (session.detail_path) return APP_URL + session.detail_path;
+  if (session.id) {
+    return APP_URL + '/portal-parent/experiences?workshop_session_id=' + encodeURIComponent(String(session.id)) + '#workshop-sessions';
+  }
+  return APP_URL + '/portal-parent/experiences#workshop-sessions';
+}
+
 function renderFeed(container, data) {
   const isTr = gl === 'tr';
   const items = [];
@@ -1012,6 +1021,7 @@ function renderFeed(container, data) {
       price: publicSessionPriceText(session),
       seats: sessionSeatText(session),
       badges: isTr ? session.badges_tr : session.badges_en,
+      href: publicWorkshopSessionHref(session),
     });
   });
 

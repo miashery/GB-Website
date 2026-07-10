@@ -1,5 +1,18 @@
 # Codex Handover Log
 
+## 2026-07-10 - Public Workshop Session Card Links
+
+Scope: public website dynamic feed link routing only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Parasut, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Fixed dynamic workshop/session cards in `assets/site.js` so published workshop-style items no longer fall through to the generic `workshops.html` page.
+- Cards now prefer a provided `detail_path`; otherwise they carry the public workshop session id into the parent experiences flow at `webapp.gigglesbloom.com/portal-parent/experiences?...#workshop-sessions`.
+- Bumped `sw.js` from `gb-public-v48` to `gb-public-v49` so returning browsers pick up the link-routing fix.
+
+Needs live UAT:
+
+- After deploy, open the public page where the item appears, click the visible workshop/event card, and confirm it does not return to `https://www.gigglesbloom.com/workshops.html`.
+- Confirm the target lands on the webapp experiences/workshop sessions area and staff/parent booking guidance remains understandable.
+
 ## 2026-07-08 - Journal Language Continuity
 
 Scope: public website Journal linking/cache polish only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Parasut, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

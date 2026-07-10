@@ -1,5 +1,19 @@
 # Codex Handover Log
 
+## 2026-07-10 - Workshop Companion Fallback Routing
+
+Scope: public website Vercel routing only. No public-site copy rewrite, schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Added a public-site Vercel fallback rewrite for `/workshops/:id/companion` so stale/shared companion links on `www.gigglesbloom.com` are served by the webapp companion route instead of Vercel's `404: NOT_FOUND`.
+- Added a scoped API rewrite for `/api/public/workshop-companion/:path*` so the proxied companion page can call its public registration/tracker/feedback APIs if opened on the `www` domain.
+- The canonical click path is controlled by the webapp: public workshop detail buttons now open `https://webapp.gigglesbloom.com/workshops/<id>/companion?lang=...` directly.
+
+Needs live UAT:
+
+- Deploy the public website and webapp.
+- From `https://www.gigglesbloom.com/workshops/<session-id>?lang=en`, click `Open phone flow` and confirm it opens the companion flow, not the Vercel 404 page.
+- Confirm a direct stale URL such as `https://www.gigglesbloom.com/workshops/<session-id>/companion?lang=en` also resolves after deploy.
+
 ## 2026-07-10 - Public Workshop Detail Routing
 
 Scope: public website workshop link routing and Vercel rewrite only. No public-site copy rewrite, schema, private data, POS/Beko, PayTR, iyzico/Token, Parasut, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

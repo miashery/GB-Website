@@ -13,6 +13,14 @@
       "destination": "https://webapp.gigglesbloom.com/workshops/:id"
     },
     {
+      "source": "/workshops/:id/companion",
+      "destination": "https://webapp.gigglesbloom.com/workshops/:id/companion"
+    },
+    {
+      "source": "/api/public/workshop-companion/:path*",
+      "destination": "https://webapp.gigglesbloom.com/api/public/workshop-companion/:path*"
+    },
+    {
       "source": "/_next/:path*",
       "destination": "https://webapp.gigglesbloom.com/_next/:path*"
     },

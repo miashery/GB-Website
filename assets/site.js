@@ -990,11 +990,12 @@ function bloomLabFallbackItems(isTr) {
 
 function publicWorkshopSessionHref(session) {
   if (!session) return 'workshops.html';
-  if (session.detail_path) return APP_URL + session.detail_path;
-  if (session.id) {
-    return APP_URL + '/portal-parent/experiences?workshop_session_id=' + encodeURIComponent(String(session.id)) + '#workshop-sessions';
-  }
-  return APP_URL + '/portal-parent/experiences#workshop-sessions';
+  const detailPath = session.detail_path || (session.id ? '/workshops/' + encodeURIComponent(String(session.id)) : '');
+  if (!detailPath) return 'workshops.html';
+  const href = /^https?:\/\//i.test(detailPath)
+    ? detailPath
+    : (detailPath.charAt(0) === '/' ? detailPath : '/' + detailPath);
+  return href + (href.indexOf('?') === -1 ? '?' : '&') + 'lang=' + encodeURIComponent(gl || 'tr');
 }
 
 function renderFeed(container, data) {

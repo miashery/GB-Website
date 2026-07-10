@@ -9,6 +9,10 @@
       "destination": "https://webapp.gigglesbloom.com/journal/:slug"
     },
     {
+      "source": "/workshops/:id",
+      "destination": "https://webapp.gigglesbloom.com/workshops/:id"
+    },
+    {
       "source": "/_next/:path*",
       "destination": "https://webapp.gigglesbloom.com/_next/:path*"
     },

@@ -1,5 +1,19 @@
 # Codex Handover Log
 
+## 2026-07-10 - Public Workshop Detail Routing
+
+Scope: public website workshop link routing and Vercel rewrite only. No public-site copy rewrite, schema, private data, POS/Beko, PayTR, iyzico/Token, Parasut, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.
+
+- Updated `assets/site.js` so dynamic workshop/session cards now open `/workshops/<session-id>?lang=tr/en` when a public session id exists.
+- Removed the fallback that sent workshop cards into `webapp.gigglesbloom.com/portal-parent/experiences...`, which forced visitors toward login before they could read the public detail.
+- Added a Vercel rewrite for `/workshops/:id` to the webapp public workshop detail renderer while preserving the visible `www.gigglesbloom.com` URL.
+- Bumped `sw.js` from `gb-public-v49` to `gb-public-v50` so returning browsers pick up the routing fix.
+
+Needs live UAT:
+
+- After deploying both repos, open the public home page in TR and EN, click the visible workshop card, and confirm it opens `https://www.gigglesbloom.com/workshops/<session-id>?lang=tr/en` instead of a login page.
+- Submit one harmless request from the public detail page and confirm it reaches Admin > Event Requests in the webapp.
+
 ## 2026-07-10 - Public Workshop Session Card Links
 
 Scope: public website dynamic feed link routing only. No webapp schema, private data, POS/Beko, PayTR, iyzico/Token, Parasut, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

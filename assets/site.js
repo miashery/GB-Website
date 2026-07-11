@@ -1125,21 +1125,23 @@ function sessionSeatText(session) {
   if (!Number.isFinite(capacity) || capacity <= 0) return '';
   if (remaining <= 0) return gl === 'tr' ? 'Doldu' : 'Full';
   return gl === 'tr'
-    ? remaining + '/' + capacity + ' yer'
-    : remaining + '/' + capacity + ' seats';
+    ? remaining + ' yer uygun'
+    : remaining + ' seats available';
 }
 
 function publicEventSeatText(event) {
   const capacity = Number(event.total_capacity);
   const remaining = Number(event.remaining_capacity);
   if (!Number.isFinite(capacity) || capacity <= 0 || event.remaining_capacity === null || event.remaining_capacity === undefined) return '';
-  const suffix = event.is_multi_day
-    ? (gl === 'tr' ? 'toplam yer' : 'total seats')
-    : (gl === 'tr' ? 'yer' : 'seats');
   if (Number.isFinite(remaining) && remaining <= 0) return gl === 'tr' ? 'Toplam kapasite dolu' : 'Total capacity full';
+  if (event.is_multi_day) {
+    return gl === 'tr'
+      ? remaining + ' toplam yer uygun'
+      : remaining + ' total seats available';
+  }
   return gl === 'tr'
-    ? remaining + '/' + capacity + ' ' + suffix
-    : remaining + '/' + capacity + ' ' + suffix;
+    ? remaining + ' yer uygun'
+    : remaining + ' seats available';
 }
 
 function renderPlayAvailability(items) {

@@ -1,5 +1,17 @@
 # Codex Handover Log
 
+## 2026-07-11 - Public Workshop Availability Wording
+
+Scope: public website dynamic feed copy only. No schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, stock, payment processing, membership entitlement, Bloom Points, WhatsApp provider, or AI logic changed in this repo.
+
+- Updated dynamic workshop/session and event card availability text so families see simple availability such as `5 seats available` / `5 yer uygun` instead of ratio-style copy like `5/5 seats`.
+- This supports the webapp companion/advance workflow by making public capacity copy clearer for late arrivals and families deciding whether to request a place.
+
+Needs live UAT:
+
+- Deploy the public website.
+- Open the home page in TR and EN and confirm workshop/event cards show availability text without ratio wording.
+
 ## 2026-07-10 - Workshop Companion Fallback Routing
 
 Scope: public website Vercel routing only. No public-site copy rewrite, schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, product stock, payment, membership entitlement, Bloom Points, WhatsApp provider, AI agent, or media-sharing logic changed in this repo.

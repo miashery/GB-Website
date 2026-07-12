@@ -1,5 +1,18 @@
 # Codex Handover Log
 
+## 2026-07-12 - Public Website Static Quality Baseline
+
+Scope: read-only website QA tooling and documentation only. No public page design, content, routing behavior, service-worker version, dynamic API behavior, payment, webapp schema, or laptop-authored public change was altered.
+
+- Added `scripts/static-site-check.mjs` to validate every root/corporate HTML document's metadata and local `href`/`src` targets.
+- The check also validates sitemap hosts and targets, both robots sitemap declarations, service-worker core assets/versioning, and the required Journal/workshop/companion Vercel rewrites.
+- Dynamic Journal and workshop detail URLs are accepted only when backed by the approved rewrite contract; missing local files still fail the check.
+
+Verification:
+
+- Run `node scripts/static-site-check.mjs` after public website edits and before deployment.
+- Continue live TR/EN, mobile, service-worker refresh, and dynamic-feed UAT after Vercel deployment; this static check does not replace browser or live API testing.
+
 ## 2026-07-11 - Public Workshop Availability Wording
 
 Scope: public website dynamic feed copy only. No schema, private data, POS/Beko, PayTR, iyzico/Token, Paraşüt, Daily Close, stock, payment processing, membership entitlement, Bloom Points, WhatsApp provider, or AI logic changed in this repo.

@@ -70,6 +70,14 @@ for (const file of htmlFiles) {
   const content = readFileSync(file, "utf8");
   const label = relative(root, file).replaceAll("\\", "/");
 
+  if (content.includes("https://giggles-bloom.vercel.app")) {
+    errors.push(`${label}: uses the retired temporary webapp hostname.`);
+  }
+
+  if (content.includes("&scaron;")) {
+    errors.push(`${label}: contains the non-Turkish š entity; use ş instead.`);
+  }
+
   const isVerificationFile = /^google[a-z0-9]+\.html$/i.test(label);
   if (!isVerificationFile) {
     for (const required of [/<html[^>]+lang=/i, /<meta[^>]+name=["']viewport["']/i, /<title>[^<]+<\/title>/i]) {

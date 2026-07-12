@@ -1,5 +1,21 @@
 # Codex Handover Log
 
+## 2026-07-13 - Domain, Turkish Integrity, And Responsive QA
+
+Scope: public link correctness, deterministic static QA, SEO wording, and a narrow responsive overflow repair. No dynamic API contract, webapp schema, payment, branch data, workshop/event behavior, or laptop-authored product feature was removed.
+
+- Replaced all public-source links to the retired `giggles-bloom.vercel.app` hostname with `https://webapp.gigglesbloom.com`.
+- Extended `scripts/static-site-check.mjs` so retired app-domain links and the non-Turkish `š` entity fail release checks.
+- Corrected remaining `š` entities, including Kadıköy hours and workspace SEO metadata.
+- Fixed the full-width home bands so viewport scrollbar math cannot create horizontal movement on phone or desktop.
+- Updated home SEO wording from parent-only positioning to family/community and adult language.
+- Refreshed affected sitemap dates and bumped the service-worker cache to `gb-public-v51`.
+
+Verification:
+
+- `node scripts/static-site-check.mjs` passes across 18 HTML documents.
+- Post-deploy UAT must confirm every portal/catalog link uses the custom webapp domain and the service worker refreshes on a returning phone.
+
 ## 2026-07-12 - Public Website Static Quality Baseline
 
 Scope: read-only website QA tooling and documentation only. No public page design, content, routing behavior, service-worker version, dynamic API behavior, payment, webapp schema, or laptop-authored public change was altered.

@@ -4789,6 +4789,7 @@ footer {
 
 /* Full-bleed bands use viewport math; clip the scrollbar-width remainder so
    they never create horizontal page movement on desktop or mobile. */
+html,
 body.home-design-v3 {
   overflow-x: clip;
 }

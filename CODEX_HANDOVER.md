@@ -1,5 +1,10 @@
 # Codex Handover Log
 
+## 2026-07-13 - Live Overflow Follow-Up
+
+- Post-deploy browser QA found an 8px root scroll-width remainder from the homepage full-bleed bands even though body clipping was active.
+- Applied the same clipping boundary to the root document and bumped the service-worker cache to `gb-public-v52` so returning devices receive the CSS correction.
+
 ## 2026-07-13 - Domain, Turkish Integrity, And Responsive QA
 
 Scope: public link correctness, deterministic static QA, SEO wording, and a narrow responsive overflow repair. No dynamic API contract, webapp schema, payment, branch data, workshop/event behavior, or laptop-authored product feature was removed.

@@ -74,6 +74,23 @@ for (const file of htmlFiles) {
     errors.push(`${label}: uses the retired temporary webapp hostname.`);
   }
 
+  if (content.includes('/_vercel/insights/script.js')) {
+    errors.push(`${label}: loads analytics directly instead of waiting for optional consent.`);
+  }
+
+  for (const [iframe] of content.matchAll(/<iframe\b[^>]*>/gi)) {
+    if (!iframe.includes("google.com/maps/embed")) continue;
+    if (!/\bdata-external-service=["']google-maps["']/i.test(iframe)) {
+      errors.push(`${label}: Google Maps iframe is missing the external-service consent marker.`);
+    }
+    if (!/\bdata-src=["']https:\/\/www\.google\.com\/maps\/embed/i.test(iframe)) {
+      errors.push(`${label}: Google Maps iframe must keep its URL in data-src until consent.`);
+    }
+    if (/(?:^|\s)src\s*=/i.test(iframe)) {
+      errors.push(`${label}: Google Maps iframe loads before external-content consent.`);
+    }
+  }
+
   if (content.includes("&scaron;")) {
     errors.push(`${label}: contains the non-Turkish š entity; use ş instead.`);
   }
@@ -95,6 +112,19 @@ for (const file of htmlFiles) {
 }
 
 const vercel = JSON.parse(readFileSync(join(root, "vercel.json"), "utf8"));
+const globalHeaders = new Map((vercel.headers || [])
+  .flatMap((entry) => entry.source === "/(.*)" ? (entry.headers || []) : [])
+  .map((header) => [header.key, header.value]));
+for (const header of [
+  "Strict-Transport-Security",
+  "Referrer-Policy",
+  "X-Content-Type-Options",
+  "X-Frame-Options",
+  "Permissions-Policy",
+]) {
+  if (!globalHeaders.has(header)) errors.push(`vercel.json: missing public security header '${header}'.`);
+}
+
 const rewriteSources = new Set((vercel.rewrites || []).map((item) => item.source));
 for (const source of [
   "/journal-sitemap.xml",
@@ -147,6 +177,39 @@ for (const coreAsset of [
 
 if (!/const CACHE_NAME = 'gb-public-v\d+';/.test(serviceWorker)) {
   warnings.push("sw.js: cache name does not use the expected versioned gb-public-vN format.");
+}
+
+const siteScript = readFileSync(join(root, "assets", "site.js"), "utf8");
+for (const privacyContract of [
+  "gb_privacy_preferences",
+  "initPrivacyControls",
+  "loadOptionalAnalytics",
+  "prepareExternalContent",
+]) {
+  if (!siteScript.includes(privacyContract)) {
+    errors.push(`assets/site.js: privacy control contract is missing '${privacyContract}'.`);
+  }
+}
+
+const privacyNotice = readFileSync(join(root, "privacy.html"), "utf8");
+for (const noticeTopic of ["Vercel", "Google Maps", "Supabase", "Resend", "KVKK", "GDPR"]) {
+  if (!privacyNotice.includes(noticeTopic)) {
+    errors.push(`privacy.html: notice is missing the '${noticeTopic}' disclosure.`);
+  }
+}
+
+const securityContactPath = join(root, ".well-known", "security.txt");
+if (!existsSync(securityContactPath)) {
+  errors.push(".well-known/security.txt is missing.");
+} else {
+  const securityContact = readFileSync(securityContactPath, "utf8");
+  for (const marker of [
+    "Contact: mailto:info@ggbloom.org",
+    "Canonical: https://www.gigglesbloom.com/.well-known/security.txt",
+    "Policy: https://www.gigglesbloom.com/privacy.html",
+  ]) {
+    if (!securityContact.includes(marker)) errors.push(`security.txt: missing '${marker}'.`);
+  }
 }
 
 for (const warning of warnings) console.warn(`WARNING: ${warning}`);

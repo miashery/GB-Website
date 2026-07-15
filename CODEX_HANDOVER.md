@@ -1,5 +1,25 @@
 # Codex Handover Log
 
+## 2026-07-15 - Public Security Header And Contact Hardening
+
+- Added HSTS, strict referrer handling, MIME-sniffing protection, clickjacking denial, and a restrictive permissions policy to the Vercel public-site configuration.
+- Added `/.well-known/security.txt` with the official support contact, bilingual preference, canonical URL, expiry, and public privacy-policy link.
+- These controls support the VakıfBank/PayTR technical review but do not claim PCI, bank, legal, or provider certification. The public website does not collect card details and remains separate from future provider-hosted checkout.
+
+Verification is included with the 2026-07-15 privacy/static-site checks. Live response-header and `security.txt` UAT remain required after deployment.
+
+## 2026-07-15 - Public Privacy, Cookie, Analytics, And Map Controls
+
+- Removed unconditional Vercel Web Analytics loading from every public HTML page. Optional, cookieless analytics now loads dynamically only after an affirmative visitor choice.
+- Added a bilingual consent banner, granular preference panel, persistent privacy-choice control, a 180-day versioned preference cookie, and a direct footer control. Essential language and site operation remain available when optional processing is declined.
+- Changed four Google Maps embeds to click-to-load placeholders. Visitors can enable embedded maps or open directions directly without loading Google content inside the site.
+- Replaced the short privacy page with a bilingual KVKK/GDPR-oriented notice covering controller context, data categories, purposes and legal bases, children and sensitive data, providers and transfers, retention, rights, and a concrete technology inventory.
+- Updated the sitemap date and bumped the service-worker cache to `gb-public-v53`.
+
+Verification: the static/privacy guard passed all 18 HTML pages, `assets/site.js` syntax passed, and the repository diff check passed. Clean-device network UAT remains required after deployment.
+
+Manual closure remains: founder/legal counsel must confirm the exact registered controller/trade names and addresses shown on branch/service documents, retention periods, and international-transfer wording. Complete live consent, decline, revoke, TR/EN, mobile, map, and analytics-network UAT after deployment.
+
 ## 2026-07-13 - Live Overflow Follow-Up
 
 - Post-deploy browser QA found an 8px root scroll-width remainder from the homepage full-bleed bands even though body clipping was active.

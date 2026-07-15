@@ -8,6 +8,9 @@ const CONTACT_LINKS = {
   phoneDisplay: '(+90) 0 553 345 65 67',
   phoneTel: '+905533456567',
 };
+const PRIVACY_PREFERENCES_COOKIE = 'gb_privacy_preferences';
+const PRIVACY_NOTICE_VERSION = '2026-07-15';
+const PRIVACY_PREFERENCES_MAX_AGE = 60 * 60 * 24 * 180;
 const MINI_ICONS = {
   pin: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s7-5.3 7-12a7 7 0 0 0-14 0c0 6.7 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>',
   map: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v14M15 6v14"/></svg>',
@@ -65,7 +68,7 @@ function ga(lang) {
     localStorage.setItem('gb_lang', gl);
   } catch (error) {}
   try {
-    document.cookie = 'gb_lang=' + gl + ';path=/;max-age=31536000;SameSite=Lax';
+    writeSiteCookie('gb_lang', gl, 31536000);
   } catch (error) {}
 
   renderDynamicContent();
@@ -82,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
   preparePwaShell();
   ensureMobileNav();
   normalizeFooter();
+  initPrivacyControls();
   enhancePublicCardIcons();
 
   try {
@@ -148,6 +152,7 @@ function applyPageThemeClass() {
     'social-lab.html': 'page-community',
     'social-lab-community-wellbeing.html': 'page-community',
     'wellbeing.html': 'page-support',
+    'privacy.html': 'page-support',
     'journal.html': 'page-journal',
     'events.html': 'page-events',
     'workspaces.html': 'page-work',
@@ -575,6 +580,7 @@ function normalizeFooter() {
         '<h5><span class="tr-only">Yardım</span><span class="en-only">Help</span></h5>' +
         '<a href="contact.html"><span class="tr-only">Hakkımızda</span><span class="en-only">About</span></a>' +
         '<a href="privacy.html"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>' +
+        '<button class="footer-privacy-button" type="button" onclick="gbOpenPrivacyPreferences()"><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>' +
         '<a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>' +
       '</div>' +
       '<div class="footer-col">' +
@@ -588,6 +594,211 @@ function normalizeFooter() {
     '</div>' +
     '<div class="footer-bottom"><div>&copy; <span data-year></span> Giggles &amp; Bloom &mdash; Kadıköy &amp; Kurtköy, İstanbul</div></div>';
   updateYears();
+}
+
+function siteCookieSuffix(maxAge) {
+  const host = window.location.hostname.toLowerCase();
+  const parts = ['Path=/', 'Max-Age=' + maxAge, 'SameSite=Lax'];
+  if (host === 'gigglesbloom.com' || host.endsWith('.gigglesbloom.com')) {
+    parts.push('Domain=.gigglesbloom.com');
+  }
+  if (window.location.protocol === 'https:') parts.push('Secure');
+  return parts.join(';');
+}
+
+function writeSiteCookie(name, value, maxAge) {
+  document.cookie = name + '=' + encodeURIComponent(value) + ';' + siteCookieSuffix(maxAge);
+}
+
+function readSiteCookie(name) {
+  const row = document.cookie.split(';').map(function(item) { return item.trim(); }).find(function(item) {
+    return item.indexOf(name + '=') === 0;
+  });
+  if (!row) return '';
+  const value = row.slice(name.length + 1);
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+    return value;
+  }
+}
+
+function readPrivacyPreferences() {
+  const raw = readSiteCookie(PRIVACY_PREFERENCES_COOKIE);
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed.version !== PRIVACY_NOTICE_VERSION) return null;
+    return {
+      version: PRIVACY_NOTICE_VERSION,
+      analytics: parsed.analytics === true,
+      external: parsed.external === true,
+      updatedAt: parsed.updatedAt || '',
+    };
+  } catch (error) {
+    return null;
+  }
+}
+
+function savePrivacyPreferences(next) {
+  const previousAnalyticsLoaded = Boolean(document.getElementById('gb-vercel-analytics'));
+  const preferences = {
+    version: PRIVACY_NOTICE_VERSION,
+    analytics: next.analytics === true,
+    external: next.external === true,
+    updatedAt: new Date().toISOString(),
+  };
+  writeSiteCookie(PRIVACY_PREFERENCES_COOKIE, JSON.stringify(preferences), PRIVACY_PREFERENCES_MAX_AGE);
+  closePrivacyPreferences();
+  removePrivacyBanner();
+
+  if (previousAnalyticsLoaded && !preferences.analytics) {
+    window.location.reload();
+    return;
+  }
+  applyPrivacyPreferences(preferences);
+}
+
+function applyPrivacyPreferences(preferences) {
+  if (preferences && preferences.analytics) loadOptionalAnalytics();
+  prepareExternalContent(preferences && preferences.external === true);
+}
+
+function loadOptionalAnalytics() {
+  if (document.getElementById('gb-vercel-analytics')) return;
+  window.va = window.va || function() { (window.vaq = window.vaq || []).push(arguments); };
+  const script = document.createElement('script');
+  script.id = 'gb-vercel-analytics';
+  script.defer = true;
+  script.src = '/_vercel/insights/script.js';
+  document.head.appendChild(script);
+}
+
+function prepareExternalContent(allowed) {
+  document.querySelectorAll('iframe[data-external-service="google-maps"]').forEach(function(frame) {
+    const wrapper = frame.parentElement;
+    if (!wrapper) return;
+
+    if (allowed) {
+      if (!frame.getAttribute('src')) frame.setAttribute('src', frame.getAttribute('data-src') || '');
+      frame.hidden = false;
+      const placeholder = wrapper.querySelector('.external-content-placeholder');
+      if (placeholder) placeholder.remove();
+      return;
+    }
+
+    frame.hidden = true;
+    frame.removeAttribute('src');
+    if (wrapper.querySelector('.external-content-placeholder')) return;
+
+    const isKurtkoy = (frame.getAttribute('title') || '').toLowerCase().includes('kurt');
+    const directMapUrl = isKurtkoy ? CONTACT_LINKS.mapKurtkoy : CONTACT_LINKS.mapKadikoy;
+    const placeholder = document.createElement('div');
+    placeholder.className = 'external-content-placeholder';
+    placeholder.innerHTML =
+      '<strong><span class="tr-only">Google Haritalar kapalı</span><span class="en-only">Google Maps is off</span></strong>' +
+      '<p><span class="tr-only">Haritayı bu sayfada göstermek Google ile veri paylaşabilir. İsterseniz haritayı etkinleştirin veya doğrudan açın.</span><span class="en-only">Showing the map here may share data with Google. You can enable it or open directions directly.</span></p>' +
+      '<div class="external-content-actions">' +
+        '<button type="button" class="btn btn-p" data-enable-maps><span class="tr-only">Haritayı etkinleştir</span><span class="en-only">Enable map</span></button>' +
+        '<a class="btn" href="' + directMapUrl + '" target="_blank" rel="noopener"><span class="tr-only">Google Maps’te aç</span><span class="en-only">Open in Google Maps</span></a>' +
+      '</div>';
+    placeholder.querySelector('[data-enable-maps]').addEventListener('click', function() {
+      const current = readPrivacyPreferences() || { analytics: false };
+      savePrivacyPreferences({ analytics: current.analytics, external: true });
+    });
+    wrapper.appendChild(placeholder);
+  });
+}
+
+function privacyChoiceMarkup(preferences) {
+  const analyticsChecked = preferences && preferences.analytics ? ' checked' : '';
+  const externalChecked = preferences && preferences.external ? ' checked' : '';
+  return '<div class="privacy-modal-backdrop" id="privacyPreferencesModal">' +
+    '<section class="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacyPreferencesTitle">' +
+      '<div class="privacy-modal-heading">' +
+        '<div><span class="eyebrow"><span class="tr-only">GİZLİLİK</span><span class="en-only">PRIVACY</span></span>' +
+        '<h2 id="privacyPreferencesTitle"><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></h2></div>' +
+        '<button type="button" class="privacy-modal-close" data-close-privacy aria-label="Close">×</button>' +
+      '</div>' +
+      '<p><span class="tr-only">Siteyi çalıştırmak için gerekli teknolojiler her zaman açıktır. Diğer seçenekler siz izin verene kadar kapalı kalır.</span><span class="en-only">Technologies needed to run the site are always active. Other options stay off until you choose them.</span></p>' +
+      '<div class="privacy-option privacy-option-essential"><div><strong><span class="tr-only">Gerekli</span><span class="en-only">Essential</span></strong><small><span class="tr-only">Dil, güvenlik ve tercihlerinizi hatırlama.</span><span class="en-only">Language, security, and remembering your choices.</span></small></div><span class="privacy-always-on"><span class="tr-only">Her zaman açık</span><span class="en-only">Always on</span></span></div>' +
+      '<label class="privacy-option"><div><strong><span class="tr-only">İsteğe bağlı analiz</span><span class="en-only">Optional analytics</span></strong><small><span class="tr-only">Vercel Web Analytics ile toplu, çerezsiz site kullanım ölçümü.</span><span class="en-only">Aggregate, cookieless site-use measurement with Vercel Web Analytics.</span></small></div><input id="privacyAnalytics" type="checkbox"' + analyticsChecked + '></label>' +
+      '<label class="privacy-option"><div><strong><span class="tr-only">Haritalar ve dış içerik</span><span class="en-only">Maps and external content</span></strong><small><span class="tr-only">Google Haritalar yalnızca bu seçeneği açarsanız yüklenir.</span><span class="en-only">Google Maps loads only when you enable this choice.</span></small></div><input id="privacyExternal" type="checkbox"' + externalChecked + '></label>' +
+      '<p class="privacy-detail-link"><a href="privacy.html"><span class="tr-only">Veri ve Gizlilik bildirimini okuyun</span><span class="en-only">Read the Data &amp; Privacy notice</span></a></p>' +
+      '<div class="privacy-actions">' +
+        '<button type="button" class="btn" data-essential-only><span class="tr-only">Yalnızca gerekli</span><span class="en-only">Essential only</span></button>' +
+        '<button type="button" class="btn btn-p" data-save-privacy><span class="tr-only">Seçimlerimi kaydet</span><span class="en-only">Save my choices</span></button>' +
+      '</div>' +
+    '</section>' +
+  '</div>';
+}
+
+function openPrivacyPreferences() {
+  if (document.getElementById('privacyPreferencesModal')) return;
+  document.body.insertAdjacentHTML('beforeend', privacyChoiceMarkup(readPrivacyPreferences()));
+  const modal = document.getElementById('privacyPreferencesModal');
+  modal.querySelector('[data-close-privacy]').addEventListener('click', closePrivacyPreferences);
+  modal.querySelector('[data-essential-only]').addEventListener('click', function() {
+    savePrivacyPreferences({ analytics: false, external: false });
+  });
+  modal.querySelector('[data-save-privacy]').addEventListener('click', function() {
+    savePrivacyPreferences({
+      analytics: modal.querySelector('#privacyAnalytics').checked,
+      external: modal.querySelector('#privacyExternal').checked,
+    });
+  });
+  modal.addEventListener('click', function(event) {
+    if (event.target === modal) closePrivacyPreferences();
+  });
+  document.body.classList.add('privacy-modal-open');
+  modal.querySelector('[data-close-privacy]').focus();
+}
+
+function closePrivacyPreferences() {
+  const modal = document.getElementById('privacyPreferencesModal');
+  if (modal) modal.remove();
+  document.body.classList.remove('privacy-modal-open');
+}
+
+function removePrivacyBanner() {
+  const banner = document.getElementById('privacyBanner');
+  if (banner) banner.remove();
+}
+
+function showPrivacyBanner() {
+  if (document.getElementById('privacyBanner')) return;
+  document.body.insertAdjacentHTML('beforeend',
+    '<aside class="privacy-banner" id="privacyBanner" aria-label="Privacy choices">' +
+      '<div class="privacy-banner-inner"><div><strong><span class="tr-only">Seçim sizin</span><span class="en-only">The choice is yours</span></strong>' +
+      '<p><span class="tr-only">Gerekli teknolojileri kullanıyoruz. İsteğe bağlı analiz ve Google Haritalar siz izin verene kadar kapalıdır.</span><span class="en-only">We use essential technologies. Optional analytics and Google Maps stay off until you allow them.</span></p></div>' +
+      '<div class="privacy-actions"><button type="button" class="btn" data-banner-essential><span class="tr-only">Yalnızca gerekli</span><span class="en-only">Essential only</span></button>' +
+      '<button type="button" class="btn" data-banner-choices><span class="tr-only">Tercihler</span><span class="en-only">Choices</span></button>' +
+      '<button type="button" class="btn btn-p" data-banner-allow><span class="tr-only">İsteğe bağlıları aç</span><span class="en-only">Allow optional</span></button></div></div>' +
+    '</aside>');
+  const banner = document.getElementById('privacyBanner');
+  banner.querySelector('[data-banner-essential]').addEventListener('click', function() {
+    savePrivacyPreferences({ analytics: false, external: false });
+  });
+  banner.querySelector('[data-banner-choices]').addEventListener('click', openPrivacyPreferences);
+  banner.querySelector('[data-banner-allow]').addEventListener('click', function() {
+    savePrivacyPreferences({ analytics: true, external: true });
+  });
+}
+
+function initPrivacyControls() {
+  window.gbOpenPrivacyPreferences = openPrivacyPreferences;
+  if (!document.getElementById('privacyPreferencesTrigger')) {
+    const trigger = document.createElement('button');
+    trigger.id = 'privacyPreferencesTrigger';
+    trigger.className = 'privacy-preferences-trigger';
+    trigger.type = 'button';
+    trigger.innerHTML = '<span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span>';
+    trigger.addEventListener('click', openPrivacyPreferences);
+    document.body.appendChild(trigger);
+  }
+  const preferences = readPrivacyPreferences();
+  applyPrivacyPreferences(preferences);
+  if (!preferences) showPrivacyBanner();
 }
 
 function footerBranchRow(label, pageUrl, mapUrl, instagramUrl) {

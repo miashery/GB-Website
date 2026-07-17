@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gb-public-v55';
+const CACHE_NAME = 'gb-public-v56';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -19,9 +19,10 @@ const CORE_ASSETS = [
   './robots.txt',
   './sitemap.xml',
   './assets/site.css',
+  './assets/tokens.css',
+  './assets/design-system.css',
   './assets/site.js',
   './assets/favicon.svg',
-  './assets/brand-mark.svg',
   './assets/qr/kadikoy-map.svg',
   './assets/qr/kurtkoy-map.svg',
   './assets/logo.png',

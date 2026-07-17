@@ -6,6 +6,7 @@
 <title>Social Lab Deep Dive | Community Wellbeing, Experts & Families | Giggles &amp; Bloom</title>
 <meta name="description" content="Giggles & Bloom Social Lab connects families, experts, universities and neighbourhoods through consent-led community wellbeing programmes in plain family language.">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/design-system.css">
 <link rel="canonical" href="https://www.gigglesbloom.com/social-lab-community-wellbeing.html">
 <link rel="alternate" hreflang="tr" href="https://www.gigglesbloom.com/social-lab-community-wellbeing.html">
 <link rel="alternate" hreflang="en" href="https://www.gigglesbloom.com/social-lab-community-wellbeing.html">
@@ -14,7 +15,7 @@
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="robots" content="index,follow">
-<meta name="theme-color" content="#2D6F8A">
+<meta name="theme-color" content="#496394">
 <meta property="og:site_name" content="Giggles &amp; Bloom">
 <meta property="og:title" content="Social Lab | Community Wellbeing, Experts & Families | Giggles &amp; Bloom">
 <meta property="og:description" content="A warm, consent-led bridge between family life, expert contribution, neighbourhood connection and social wellbeing.">
@@ -29,26 +30,64 @@
 <meta name="twitter:image" content="https://www.gigglesbloom.com/assets/redesign/inside-cafe.jpeg">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Giggles & Bloom Social Lab Community Wellbeing","description":"Consent-led community wellbeing programmes connecting families, experts, universities, neighbourhoods and social contribution work.","provider":{"@id":"https://www.gigglesbloom.com/#organization","name":"Giggles & Bloom"},"areaServed":["Kadıköy","Kurtköy","Pendik","İstanbul"],"availableLanguage":["tr","en"],"url":"https://www.gigglesbloom.com/social-lab-community-wellbeing.html"}</script>
 </head>
-<body>
+<body class="page-themed page-community">
 <a class="skip" href="#main"><span class="tr-only">İçeriğe atla</span><span class="en-only">Skip to content</span></a>
-<header class="site-header">
-  <div class="bar">
-    <a class="brand" href="index.html">
-      <img src="assets/brand-mark.svg" alt="Giggles &amp; Bloom">
-      <div class="brand-text">
-        <div class="name">Giggles &amp; Bloom</div>
-        <div class="tag">Kadıköy &amp; Kurtköy, İstanbul</div>
-      </div>
+<!-- GB-SHELL:HEADER:START -->
+<header class="header" data-site-shell="header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Giggles & Bloom home">
+      <img class="brand-logo" src="assets/redesign/logo-wordmark.png" alt="Giggles & Bloom">
+      <span class="brand-location">Kadıköy &amp; Kurtköy<br>İstanbul</span>
     </a>
-    <nav class="nav" aria-label="Primary"></nav>
+    <nav class="nav" aria-label="Primary navigation">
+        <a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>
+        <a href="workshops.html">BloomLab</a>
+        <a href="social-lab.html" class="active" aria-current="page"><span class="tr-only">Topluluk</span><span class="en-only">Community</span></a>
+        <a href="journal.html">Journal</a>
+        <a href="food.html"><span class="tr-only">Kafe & Kitap</span><span class="en-only">Cafe & Books</span></a>
+        <a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>
+        <a href="contact.html"><span class="tr-only">Ziyaret</span><span class="en-only">Visit</span></a>
+    </nav>
     <div class="header-actions">
-      <button class="btn-login" type="button"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></button>
-      <button class="btn-join" type="button"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></button>
-      <button id="ls" class="lang" onclick="gt()" aria-label="Switch language"><span>TR</span><span>EN</span></button>
+      <a class="btn-login" href="https://webapp.gigglesbloom.com/auth/signin"><span class="tr-only">Giriş</span><span class="en-only">Sign in</span></a>
+      <a class="btn-join" href="https://webapp.gigglesbloom.com/auth/signup"><span class="tr-only">Katıl</span><span class="en-only">Join</span></a>
+      <button class="lang-sw" id="ls" type="button" onclick="gt()" aria-label="Türkçe ve İngilizce arasında geçiş yap"><span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span></button>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Menüyü aç" aria-controls="mobileNav" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
-
+<div class="gb-announcement" role="status">
+  <span class="announcement-dot" aria-hidden="true"></span>
+  <span class="tr-only">Kurtköy açık: çocuk kitapçısı, aile kafesi ve kitaplardan doğan küçük deneyimler.</span>
+  <span class="en-only">Kurtköy is open: children’s bookshop, family cafe and small experiences born from books.</span>
+</div>
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-inner" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="mobile-nav-head">
+      <img src="assets/redesign/logo-wordmark.png" alt="Giggles & Bloom">
+      <button class="mobile-nav-close" id="mobileNavClose" type="button" aria-label="Menüyü kapat">×</button>
+    </div>
+    <nav class="nav-links" aria-label="Mobile navigation">
+        <a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>
+        <a href="workshops.html">BloomLab</a>
+        <a href="social-lab.html" class="active" aria-current="page"><span class="tr-only">Topluluk</span><span class="en-only">Community</span></a>
+        <a href="journal.html">Journal</a>
+        <a href="events.html"><span class="tr-only">Etkinlikler</span><span class="en-only">Events</span></a>
+        <a href="workspaces.html"><span class="tr-only">Çalışma Alanı</span><span class="en-only">Workspaces</span></a>
+        <a href="library.html"><span class="tr-only">Kitaplar</span><span class="en-only">Books</span></a>
+        <a href="food.html"><span class="tr-only">Kafe</span><span class="en-only">Cafe</span></a>
+        <a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>
+        <a href="contact.html"><span class="tr-only">Ziyaret</span><span class="en-only">Visit</span></a>
+        <a href="kadikoy.html">Kadıköy</a>
+        <a href="kurtkoy.html">Kurtköy</a>
+    </nav>
+    <div class="mobile-nav-actions">
+      <a class="btn-login" href="https://webapp.gigglesbloom.com/auth/signin"><span class="tr-only">Giriş</span><span class="en-only">Sign in</span></a>
+      <a class="btn-join" href="https://webapp.gigglesbloom.com/auth/signup"><span class="tr-only">Katıl</span><span class="en-only">Join</span></a>
+    </div>
+  </div>
+</div>
+<!-- GB-SHELL:HEADER:END -->
 <main id="main">
   <section class="branch-story-hero social-impact-hero fi">
     <div>
@@ -180,7 +219,48 @@
   </section>
 </main>
 
-<footer></footer>
+<!-- GB-SHELL:FOOTER:START -->
+<footer data-site-shell="footer">
+  <div class="footer-inner">
+    <div class="footer-intro">
+      <img src="assets/redesign/logo-wordmark.png" alt="Giggles & Bloom">
+      <p><span class="tr-only">Görünmez yükü hafifletmek için varız. Aileler için sıcak, güven öncelikli bir üçüncü alan.</span><span class="en-only">We exist to lighten the invisible load. A warm, trust-first third space for families.</span></p>
+      <a class="footer-phone" href="tel:+905533456567">(+90) 0 553 345 65 67</a>
+    </div>
+    <div class="footer-col">
+      <h2><span class="tr-only">Keşfet</span><span class="en-only">Explore</span></h2>
+      <a href="play.html"><span class="tr-only">Oyun</span><span class="en-only">Play</span></a>
+      <a href="workshops.html">BloomLab</a>
+      <a href="social-lab.html"><span class="tr-only">Topluluk &amp; Destek</span><span class="en-only">Community &amp; Support</span></a>
+      <a href="events.html"><span class="tr-only">Etkinlikler</span><span class="en-only">Events</span></a>
+      <a href="journal.html">Journal</a>
+    </div>
+    <div class="footer-col">
+      <h2><span class="tr-only">G&B Dünyası</span><span class="en-only">G&B worlds</span></h2>
+      <a href="library.html"><span class="tr-only">Kitaplar</span><span class="en-only">Books</span></a>
+      <a href="food.html"><span class="tr-only">Kafe</span><span class="en-only">Cafe</span></a>
+      <a href="workspaces.html"><span class="tr-only">Çalışma Alanları</span><span class="en-only">Workspaces</span></a>
+      <a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>
+      <a href="contact.html"><span class="tr-only">Ziyaret</span><span class="en-only">Visit</span></a>
+    </div>
+    <div class="footer-col footer-branches">
+      <h2><span class="tr-only">Şubeler</span><span class="en-only">Branches</span></h2>
+      <a href="kadikoy.html">Kadıköy</a>
+      <a href="kurtkoy.html">Kurtköy</a>
+      <a href="https://www.instagram.com/gigglesandbloom/" target="_blank" rel="noopener">@gigglesandbloom</a>
+      <a href="contact.html"><span class="tr-only">Haritalar &amp; iletişim</span><span class="en-only">Maps &amp; contact</span></a>
+    </div>
+    <div class="footer-col">
+      <h2><span class="tr-only">Hesap &amp; Gizlilik</span><span class="en-only">Account &amp; privacy</span></h2>
+      <a href="https://webapp.gigglesbloom.com/auth/signup"><span class="tr-only">Katıl</span><span class="en-only">Join</span></a>
+      <a href="https://webapp.gigglesbloom.com/auth/signin"><span class="tr-only">Giriş</span><span class="en-only">Sign in</span></a>
+      <a href="privacy.html"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>
+      <button class="footer-privacy-button" type="button" onclick="gbOpenPrivacyPreferences()"><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span data-year></span> Giggles &amp; Bloom — Kadıköy &amp; Kurtköy, İstanbul</div>
+</footer>
+<!-- GB-SHELL:FOOTER:END -->
 <script src="assets/site.js"></script>
 </body>
 </html>

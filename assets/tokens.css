@@ -1,0 +1,94 @@
+/* Giggles & Bloom public design tokens v2.1
+   Raw colour, radius, shadow, spacing, and type values live here. */
+:root {
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-text: 'Hanken Grotesk', system-ui, sans-serif;
+
+  --canvas: #f4eede;
+  --canvas-2: #efe7d8;
+  --surface: #fffdf8;
+  --surface-soft: rgba(255, 253, 248, .82);
+  --surface-warm: #fbf7ee;
+  --ink: #2b2f38;
+  --mid: #4a5160;
+  --muted: #5a6168;
+  --faint: #868e9b;
+  --white: #fffdf8;
+  --hairline: rgba(73, 99, 148, .1);
+  --border: rgba(73, 99, 148, .14);
+
+  --brand-blue: #496394;
+  --brand-blue-dark: #3a4f78;
+  --brand-blue-soft: #e7edf6;
+  --sage: #8c9c7e;
+  --sage-dark: #647158;
+  --sage-light: #dce5d4;
+  --sage-bg: #eef3e9;
+  --coral: #f198a8;
+  --coral-dark: #b8475c;
+  --coral-light: #fbdde3;
+  --coral-bg: #fdf0f3;
+  --gold: #c79a3a;
+  --gold-dark: #916c1f;
+  --gold-light: #f4e4bf;
+  --gold-bg: #fbf0d4;
+  --lilac: #6f5fa6;
+  --lilac-dark: #574783;
+  --lilac-light: #e7e2f3;
+  --sky: #a5d4dd;
+  --sky-light: #e6f3f6;
+  --play: #2f91ad;
+  --play-dark: #226f84;
+  --play-soft: #e2f1f2;
+  --footer-bg: #292f3a;
+  --success: #2f7d58;
+  --success-soft: #e6f2eb;
+  --warning: #a56b16;
+  --warning-soft: #fbf0d4;
+  --danger: #b8475c;
+  --danger-soft: #fdf0f3;
+
+  --journal-accent: #496394;
+  --journal-soft: #e8f2f3;
+  --journal-warm: #f7e9e8;
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 80px;
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-pill: 999px;
+  --shadow-xs: 0 1px 3px rgba(73, 99, 148, .06);
+  --shadow-sm: 0 8px 22px rgba(73, 99, 148, .1);
+  --shadow-lg: 0 24px 52px -28px rgba(73, 99, 148, .42);
+  --focus-ring: 0 0 0 3px rgba(73, 99, 148, .22);
+  --container: 1120px;
+  --container-reading: 720px;
+  --header-height: 76px;
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+
+  /* Compatibility aliases retained while legacy components are retired. */
+  --brand-teal: var(--brand-blue);
+  --brand-teal-light: var(--brand-blue-soft);
+  --cream: var(--canvas);
+  --cream-dark: var(--canvas-2);
+  --lav: var(--lilac);
+  --lav-light: var(--lilac-light);
+  --green: var(--success);
+  --blue: var(--brand-blue);
+  --radius: var(--radius-md);
+  --radius-lg: var(--radius-md);
+  --radius-soft: var(--radius-md);
+  --radius-blob: var(--radius-md);
+  --shadow: var(--shadow-sm);
+  --shadow-cozy: var(--shadow-sm);
+  --shadow-cozy-lift: var(--shadow-lg);
+  --accent: var(--brand-blue);
+}

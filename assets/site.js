@@ -11,35 +11,6 @@ const CONTACT_LINKS = {
 const PRIVACY_PREFERENCES_COOKIE = 'gb_privacy_preferences';
 const PRIVACY_NOTICE_VERSION = '2026-07-15';
 const PRIVACY_PREFERENCES_MAX_AGE = 60 * 60 * 24 * 180;
-const MINI_ICONS = {
-  pin: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s7-5.3 7-12a7 7 0 0 0-14 0c0 6.7 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>',
-  map: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2V6Z"/><path d="M9 4v14M15 6v14"/></svg>',
-  instagram: '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3"/><circle cx="16.5" cy="7.5" r=".8"/></svg>',
-};
-const DESKTOP_NAV_ITEMS = [
-  { href: 'play.html', tr: 'Oyun', en: 'Play' },
-  { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
-  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'social-lab-community-wellbeing.html', 'wellbeing.html'] },
-  { href: 'journal.html', tr: 'Journal', en: 'Journal' },
-  { href: 'food.html', tr: 'Kafe & Kitap', en: 'Café & Books', activeFor: ['food.html', 'cafe.html', 'library.html'] },
-  { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
-  { href: 'contact.html', tr: 'Ziyaret', en: 'Visit', activeFor: ['contact.html', 'kadikoy.html', 'kurtkoy.html'] },
-];
-const DRAWER_NAV_ITEMS = [
-  { href: 'play.html', tr: 'Oyun', en: 'Play' },
-  { href: 'workshops.html', tr: 'BloomLab', en: 'BloomLab' },
-  { href: 'social-lab.html', tr: 'Topluluk', en: 'Community', activeFor: ['social-lab.html', 'social-lab-community-wellbeing.html'] },
-  { href: 'wellbeing.html', tr: 'Destek', en: 'Support' },
-  { href: 'journal.html', tr: 'Journal', en: 'Journal' },
-  { href: 'events.html', tr: 'Etkinlikler', en: 'Events' },
-  { href: 'workspaces.html', tr: 'Çalışma', en: 'Work' },
-  { href: 'library.html', tr: 'Kitaplık', en: 'Books' },
-  { href: 'food.html', tr: 'Kafe', en: 'Café', activeFor: ['food.html', 'cafe.html'] },
-  { href: 'membership.html', tr: 'Üyelik', en: 'Membership' },
-  { href: 'contact.html', tr: 'Ziyaret', en: 'Visit' },
-  { href: 'kadikoy.html', tr: 'Kadıköy', en: 'Kadıköy' },
-  { href: 'kurtkoy.html', tr: 'Kurtköy', en: 'Kurtköy' },
-];
 const PUBLIC_CARD_ICONS = {
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h10a3 3 0 0 1 3 3v12H8a3 3 0 0 0-3 3z"/><path d="M5 4.5v15"/><path d="M9 8h5M9 11h6"/></svg>',
   calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v3M17 3v3M4.5 8.5h15"/><rect x="4.5" y="5" width="15" height="15" rx="3"/><path d="M8 12h3M13 12h3M8 16h3"/></svg>',
@@ -79,12 +50,7 @@ function gt() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  applyPageThemeClass();
-  normalizeHeaderNav();
-  applyRedesignBranding();
   preparePwaShell();
-  ensureMobileNav();
-  normalizeFooter();
   initPrivacyControls();
   enhancePublicCardIcons();
 
@@ -126,78 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   wireEventRequestForms();
 });
-
-function normalizeHeaderNav() {
-  const nav = document.querySelector('.nav');
-  if (!nav) return;
-
-  const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  nav.setAttribute('aria-label', 'Primary');
-  nav.innerHTML = navItemsHtml(DESKTOP_NAV_ITEMS, current);
-  nav.setAttribute('data-gb-nav-ready', '1');
-}
-
-function navItemsHtml(items, current) {
-  return items.map(function(item) {
-    const active = navItemIsActive(item, current);
-    return '<a' + (active ? ' class="active"' : '') + ' href="' + item.href + '">' + navItemLabel(item) + '</a>';
-  }).join('');
-}
-
-function applyPageThemeClass() {
-  const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  const themeByPage = {
-    'play.html': 'page-play',
-    'workshops.html': 'page-bloomlab',
-    'social-lab.html': 'page-community',
-    'social-lab-community-wellbeing.html': 'page-community',
-    'wellbeing.html': 'page-support',
-    'privacy.html': 'page-support',
-    'journal.html': 'page-journal',
-    'events.html': 'page-events',
-    'workspaces.html': 'page-work',
-    'library.html': 'page-books',
-    'food.html': 'page-cafe',
-    'cafe.html': 'page-cafe',
-    'membership.html': 'page-membership',
-    'contact.html': 'page-visit',
-    'kadikoy.html': 'page-visit',
-    'kurtkoy.html': 'page-kurtkoy',
-  };
-  const theme = themeByPage[current];
-  if (theme) document.body.classList.add('page-themed', theme);
-}
-
-function navItemIsActive(item, current) {
-  if (current === item.href.toLowerCase()) return true;
-  return Array.isArray(item.activeFor) && item.activeFor.some(function(path) {
-    return current === path.toLowerCase();
-  });
-}
-
-function navItemLabel(item) {
-  if (item.tr === item.en) return escapeHtml(item.en);
-  return '<span class="tr-only">' + escapeHtml(item.tr) + '</span><span class="en-only">' + escapeHtml(item.en) + '</span>';
-}
-
-function getSiteAssetPath(fileName) {
-  const script = document.querySelector('script[src$="assets/site.js"], script[src*="assets/site.js?"]');
-  const scriptSrc = script ? script.getAttribute('src') : 'assets/site.js';
-  const base = scriptSrc.replace(/site\.js(?:\?.*)?$/, '');
-  return base + fileName.replace(/^assets\//, '');
-}
-
-function applyRedesignBranding() {
-  const logoSrc = getSiteAssetPath('redesign/logo-wordmark.png');
-  document.querySelectorAll('.brand img, .brand-logo').forEach(function(img) {
-    img.src = logoSrc;
-    img.alt = 'Giggles & Bloom';
-  });
-
-  document.querySelectorAll('meta[name="theme-color"]').forEach(function(meta) {
-    meta.content = '#496394';
-  });
-}
 
 function preparePwaShell() {
   if (!document.querySelector('link[rel="manifest"]')) {
@@ -458,64 +352,6 @@ function iconForHeading(heading) {
   return PUBLIC_CARD_ICONS.spark;
 }
 
-function ensureMobileNav() {
-  const headerActions = document.querySelector('.header-actions');
-  const nav = document.querySelector('.nav');
-  if (!headerActions || !nav) return;
-
-  let hamburger = document.getElementById('hamburger');
-  if (!hamburger) {
-    hamburger = document.createElement('button');
-    hamburger.className = 'hamburger';
-    hamburger.id = 'hamburger';
-    hamburger.type = 'button';
-    hamburger.setAttribute('aria-label', 'Menu');
-    hamburger.innerHTML = '<span></span><span></span><span></span>';
-    headerActions.appendChild(hamburger);
-  }
-
-  const existingDrawer = document.getElementById('mobileNav');
-  if (existingDrawer) {
-    syncMobileNav(existingDrawer, nav);
-    return;
-  }
-
-  const drawer = document.createElement('div');
-  drawer.className = 'mobile-nav';
-  drawer.id = 'mobileNav';
-  drawer.setAttribute('aria-hidden', 'true');
-  drawer.innerHTML =
-    '<div class="mobile-nav-inner" role="dialog" aria-modal="true" aria-label="Site menu">' +
-      '<button class="mobile-nav-close" id="mobileNavClose" type="button" aria-label="Close menu">x</button>' +
-      '<div class="mobile-nav-brand">Giggles &amp; Bloom</div>' +
-      '<div class="nav-links">' + nav.innerHTML + '</div>' +
-      '<div class="mobile-nav-actions">' +
-        '<a class="btn-login" href="' + APP_URL + '/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>' +
-        '<a class="btn-join" href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></a>' +
-      '</div>' +
-    '</div>';
-  document.body.appendChild(drawer);
-  syncMobileNav(drawer, nav);
-}
-
-function syncMobileNav(drawer, nav) {
-  const links = drawer.querySelector('.nav-links');
-  const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  if (links) links.innerHTML = navItemsHtml(DRAWER_NAV_ITEMS, current);
-
-  let actions = drawer.querySelector('.mobile-nav-actions');
-  if (!actions) {
-    actions = document.createElement('div');
-    actions.className = 'mobile-nav-actions';
-    const inner = drawer.querySelector('.mobile-nav-inner') || drawer;
-    inner.appendChild(actions);
-  }
-
-  actions.innerHTML =
-    '<a class="btn-login" href="' + APP_URL + '/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>' +
-    '<a class="btn-join" href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></a>';
-}
-
 function wireMobileNav() {
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
@@ -525,13 +361,18 @@ function wireMobileNav() {
   function close() {
     mobileNav.classList.remove('open');
     mobileNav.setAttribute('aria-hidden', 'true');
+    hamburger.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('nav-open');
+    hamburger.focus();
   }
 
   hamburger.addEventListener('click', function() {
     mobileNav.classList.add('open');
     mobileNav.setAttribute('aria-hidden', 'false');
+    hamburger.setAttribute('aria-expanded', 'true');
     document.body.classList.add('nav-open');
+    const closeButton = document.getElementById('mobileNavClose');
+    if (closeButton) closeButton.focus();
   });
 
   if (navClose) navClose.addEventListener('click', close);
@@ -547,53 +388,6 @@ function wireMobileNav() {
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') close();
   });
-}
-
-function normalizeFooter() {
-  const footer = document.querySelector('footer');
-  if (!footer) return;
-
-  footer.innerHTML =
-    '<div class="footer-inner">' +
-      '<div>' +
-        '<div class="footer-brand">Giggles &amp; Bloom</div>' +
-        '<div class="footer-note"><span class="tr-only">Görünmez yükü hafifletmek için varız. Aileler için sıcak, güven öncelikli bir üçüncü alan.</span><span class="en-only">We exist to lighten the invisible load. A warm, trust-first third space for families.</span></div>' +
-        '<a class="footer-phone" href="tel:' + CONTACT_LINKS.phoneTel + '">' + CONTACT_LINKS.phoneDisplay + '</a>' +
-      '</div>' +
-      '<div class="footer-col">' +
-        '<h5><span class="tr-only">Keşfet</span><span class="en-only">Explore</span></h5>' +
-        '<a href="play.html"><span class="tr-only">Giggles: Oyun</span><span class="en-only">Giggles: Play</span></a>' +
-        '<a href="workshops.html"><span class="tr-only">BloomLab</span><span class="en-only">BloomLab</span></a>' +
-        '<a href="social-lab.html"><span class="tr-only">Topluluk &amp; Destek</span><span class="en-only">Community &amp; Support</span></a>' +
-        '<a href="events.html"><span class="tr-only">İş &amp; Etkinlikler</span><span class="en-only">Work &amp; Events</span></a>' +
-        '<a href="journal.html">Journal</a>' +
-        '<a href="library.html"><span class="tr-only">Kitaplık</span><span class="en-only">Books</span></a>' +
-        '<a href="food.html"><span class="tr-only">Kafe &amp; Restoran</span><span class="en-only">Cafe &amp; Restaurant</span></a>' +
-        '<a href="membership.html"><span class="tr-only">Üyelik</span><span class="en-only">Membership</span></a>' +
-      '</div>' +
-      '<div class="footer-col">' +
-        '<h5><span class="tr-only">Hesap</span><span class="en-only">Account</span></h5>' +
-        '<a href="' + APP_URL + '/auth/signup" target="_blank" rel="noopener"><span class="tr-only">Üye Ol</span><span class="en-only">Join</span></a>' +
-        '<a href="' + APP_URL + '/auth/signin" target="_blank" rel="noopener"><span class="tr-only">Giriş Yap</span><span class="en-only">Sign In</span></a>' +
-      '</div>' +
-      '<div class="footer-col">' +
-        '<h5><span class="tr-only">Yardım</span><span class="en-only">Help</span></h5>' +
-        '<a href="contact.html"><span class="tr-only">Hakkımızda</span><span class="en-only">About</span></a>' +
-        '<a href="privacy.html"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>' +
-        '<button class="footer-privacy-button" type="button" onclick="gbOpenPrivacyPreferences()"><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>' +
-        '<a href="contact.html"><span class="tr-only">İletişim</span><span class="en-only">Contact</span></a>' +
-      '</div>' +
-      '<div class="footer-col">' +
-        '<h5><span class="tr-only">Şubeler</span><span class="en-only">Branches</span></h5>' +
-        '<div class="footer-branches">' +
-          footerBranchRow('Kadıköy', 'kadikoy.html', CONTACT_LINKS.mapKadikoy, CONTACT_LINKS.instagramKadikoy) +
-          footerBranchRow('Kurtköy', 'kurtkoy.html', CONTACT_LINKS.mapKurtkoy, CONTACT_LINKS.instagramKurtkoy) +
-          '<a class="footer-main-social" href="' + CONTACT_LINKS.instagramMain + '" target="_blank" rel="noopener">' + MINI_ICONS.instagram + '<span>@gigglesandbloom</span></a>' +
-        '</div>' +
-      '</div>' +
-    '</div>' +
-    '<div class="footer-bottom"><div>&copy; <span data-year></span> Giggles &amp; Bloom &mdash; Kadıköy &amp; Kurtköy, İstanbul</div></div>';
-  updateYears();
 }
 
 function siteCookieSuffix(maxAge) {
@@ -830,16 +624,6 @@ function initPrivacyControls() {
   const preferences = readPrivacyPreferences();
   applyPrivacyPreferences(preferences);
   if (!preferences) showPrivacyBanner();
-}
-
-function footerBranchRow(label, pageUrl, mapUrl, instagramUrl) {
-  return '<div class="footer-branch-row">' +
-    '<a class="footer-branch-label" href="' + pageUrl + '">' + MINI_ICONS.pin + '<span>' + escapeHtml(label) + '</span></a>' +
-    '<span class="footer-branch-actions">' +
-      '<a href="' + mapUrl + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + ' Google Maps">' + MINI_ICONS.map + '<span>Map</span></a>' +
-      '<a href="' + instagramUrl + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + ' Instagram">' + MINI_ICONS.instagram + '<span>IG</span></a>' +
-    '</span>' +
-  '</div>';
 }
 
 async function loadDynamicFeed() {

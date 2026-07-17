@@ -1,5 +1,21 @@
 # Codex Handover Log
 
+## 2026-07-17 - Public Design System v2 Migration
+
+- Applied the founder-approved public Design System v2 across all 16 functional root pages using shared colour, typography, spacing, radius, shadow, hierarchy, and responsive tokens.
+- Standardised the public shell as static, accessible HTML with one desktop navigation, one mobile drawer, consistent active states, TR/EN controls, authentication actions, announcement bar, and footer. Runtime JavaScript no longer rebuilds the header or footer.
+- Adopted Newsreader and Hanken Grotesk, retired legacy public fonts, and kept the founder-approved Claude-designed wordmark (`assets/redesign/logo-wordmark.png`) as the documented logo exception to the supplied audit package.
+- Added page-world accents, canonical `.page-hero` / `.page-intro` hierarchy, restrained card and button treatments, compact privacy controls, and responsive desktop/tablet/mobile behaviour without changing events, workshops, journal, branch, privacy, authentication, or dynamic API contracts.
+- Added `assets/tokens.css`, `assets/design-system.css`, the idempotent shell synchroniser, contributor rules, and stronger static guards for shell, brand, type, encoding, privacy, assets, rewrites, and retired markup. Service-worker cache is now `gb-public-v56`.
+
+Verification: the 18-page static-site gate and JavaScript syntax checks passed. Local Playwright rendering passed at 1440px, 1024px, and 390px with no horizontal overflow, the approved logo loaded, desktop/mobile navigation worked, TR/EN switching worked, and privacy preferences opened correctly. External font/API/map requests were blocked only by the isolated QA environment; no application error was observed.
+
+Needs live UAT: deploy to Vercel, hard-refresh or clear the installed PWA cache, then test TR/EN, desktop/mobile navigation, privacy accept/decline/customise/revoke, analytics consent, Google Maps consent, dynamic events/workshops/journal content, and both branch links on the production domain.
+
+Needs SQL/manual action: no SQL. Deployment and live network/consent checks only.
+
+Deferred: authenticated webapp/portal visual migration remains a separate scoped phase; this public rollout does not alter portal operations, payment, POS/Beko, Paraşüt, Daily Close, staff roles, or schemas.
+
 ## 2026-07-17 - Compact Accessible Privacy Controls
 
 - Reduced the first-visit privacy notice from a wide page-level panel to a compact G&B-styled consent bar with concise bilingual copy, a direct privacy-notice link, and clear essential/optional choices.

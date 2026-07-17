@@ -69,9 +69,48 @@ const htmlFiles = [
 for (const file of htmlFiles) {
   const content = readFileSync(file, "utf8");
   const label = relative(root, file).replaceAll("\\", "/");
+  const usesPublicRuntime = content.includes("assets/site.js");
 
   if (content.includes("https://giggles-bloom.vercel.app")) {
     errors.push(`${label}: uses the retired temporary webapp hostname.`);
+  }
+
+  if (/Fraunces|DM Sans/i.test(content)) {
+    errors.push(`${label}: uses a retired public-site font.`);
+  }
+
+  if (/class=["'][^"']*\bsite-header\b/i.test(content)) {
+    errors.push(`${label}: uses the retired runtime header class.`);
+  }
+
+  const classTokens = [...content.matchAll(/class=["']([^"']*)["']/gi)]
+    .flatMap((match) => match[1].split(/\s+/).filter(Boolean));
+  if (classTokens.some((token) => token === "pt" || token === "sub")) {
+    errors.push(`${label}: uses retired page-title classes; use page-hero and page-intro.`);
+  }
+
+  if (/Ã.|Ä.|Å./u.test(content)) {
+    errors.push(`${label}: contains likely mojibake; keep Turkish copy as UTF-8.`);
+  }
+
+  if (usesPublicRuntime) {
+    for (const requiredShell of [
+      'data-site-shell="header"',
+      'data-site-shell="footer"',
+      'href="assets/design-system.css"',
+      'src="assets/redesign/logo-wordmark.png"',
+      '<meta name="theme-color" content="#496394">',
+    ]) {
+      if (!content.includes(requiredShell)) errors.push(`${label}: canonical public shell is missing '${requiredShell}'.`);
+    }
+
+    const headerStarts = [...content.matchAll(/GB-SHELL:HEADER:START/g)].length;
+    const footerStarts = [...content.matchAll(/GB-SHELL:FOOTER:START/g)].length;
+    if (headerStarts !== 1) errors.push(`${label}: expected one canonical header marker, found ${headerStarts}.`);
+    if (footerStarts !== 1) errors.push(`${label}: expected one canonical footer marker, found ${footerStarts}.`);
+
+    const activeLinks = [...content.matchAll(/aria-current=["']page["']/g)].length;
+    if (activeLinks > 3) errors.push(`${label}: has ${activeLinks} active navigation links; expected at most desktop + mobile section + branch.`);
   }
 
   if (content.includes('/_vercel/insights/script.js')) {
@@ -167,8 +206,11 @@ for (const coreAsset of [
   "./journal.html",
   "./workshops.html",
   "./assets/site.css",
+  "./assets/tokens.css",
+  "./assets/design-system.css",
   "./assets/site.js",
   "./assets/favicon.svg",
+  "./assets/redesign/logo-wordmark.png",
 ]) {
   if (!serviceWorker.includes(`'${coreAsset}'`)) errors.push(`sw.js: core cache is missing '${coreAsset}'.`);
   const localPath = join(root, coreAsset.slice(2));
@@ -180,6 +222,26 @@ if (!/const CACHE_NAME = 'gb-public-v\d+';/.test(serviceWorker)) {
 }
 
 const siteScript = readFileSync(join(root, "assets", "site.js"), "utf8");
+if (/Fraunces|DM Sans/i.test(siteScript)) errors.push("assets/site.js: uses a retired public-site font.");
+if (/Ã.|Ä.|Å./u.test(siteScript)) errors.push("assets/site.js: contains likely mojibake; keep Turkish copy as UTF-8.");
+for (const retiredShellFunction of [
+  "normalizeHeaderNav",
+  "applyRedesignBranding",
+  "ensureMobileNav",
+  "normalizeFooter",
+]) {
+  if (siteScript.includes(retiredShellFunction)) {
+    errors.push(`assets/site.js: retired runtime shell function '${retiredShellFunction}' must not return.`);
+  }
+}
+
+const publicCss = readFileSync(join(root, "assets", "site.css"), "utf8");
+if (/Fraunces|DM Sans/i.test(publicCss)) errors.push("assets/site.css: uses a retired public-site font.");
+
+const designSystemCss = readFileSync(join(root, "assets", "design-system.css"), "utf8");
+if (/#[0-9a-f]{3,8}\b/i.test(designSystemCss)) {
+  errors.push("assets/design-system.css: raw hex colour found; add it to assets/tokens.css first.");
+}
 for (const privacyContract of [
   "gb_privacy_preferences",
   "initPrivacyControls",

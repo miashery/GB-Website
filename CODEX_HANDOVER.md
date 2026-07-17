@@ -1,5 +1,14 @@
 # Codex Handover Log
 
+## 2026-07-18 - Public Readability And Journal Scale Polish
+
+- Restored explicit high-contrast text colours for the homepage membership band in the final shared design layer, preventing shared neutral heading/description rules or stale stylesheet combinations from producing dark copy on the blue background.
+- Reduced the Journal landing-page display title to the same visual hierarchy as the site's other primary heroes, with fixed desktop, tablet, phone, and small-phone sizes so it does not grow excessively on wide screens.
+- Bumped the service-worker cache to `gb-public-v57` so returning browsers and installed PWAs receive the corrected design stylesheet.
+- Reviewed the separately rendered Next.js Journal article surface on the live public-domain rewrite. Its public header, navigation, footer, English locale, article layout, and responsive width contract are present; at a 2040px desktop viewport the article title renders at approximately 57px with no horizontal overflow. No article runtime or publishing behaviour changed in this polish.
+
+Verification: `node scripts/static-site-check.mjs`, JavaScript syntax checks, and Playwright desktop/phone measurements pass. The membership heading/description now resolve to high-contrast light palette tokens on the blue band; the Journal title resolves to 64px desktop and 38px small-phone sizes; neither surface has horizontal overflow. The separately rendered Next.js Journal article also passed live desktop shell/locale/overflow inspection. No SQL or manual data action is required; deployment and live/PWA cache refresh remain the only operational steps.
+
 ## 2026-07-17 - Public Design System v2 Migration
 
 - Applied the founder-approved public Design System v2 across all 16 functional root pages using shared colour, typography, spacing, radius, shadow, hierarchy, and responsive tokens.

@@ -340,6 +340,17 @@ body.page-themed .page-hero .page-intro { max-width: 680px; color: var(--mid); f
 .sec-h { max-width: 800px; margin: 0 0 var(--space-2); color: var(--ink); font-size: clamp(28px, 3vw, 34px); font-weight: 500; line-height: 1.12; }
 .desc { max-width: 720px; margin-bottom: var(--space-4); color: var(--mid); font-size: 16px; line-height: 1.65; }
 
+/* Homepage membership is a dark brand band, so shared neutral copy must not win. */
+body.home-design-v3 .home-membership-section > .sec-label {
+  color: var(--brand-blue-soft);
+}
+body.home-design-v3 .home-membership-section > .sec-h {
+  color: var(--white);
+}
+body.home-design-v3 .home-membership-section > .desc {
+  color: var(--sky-light);
+}
+
 .hero,
 .journal-page-hero,
 .branch-story-hero {
@@ -353,6 +364,13 @@ body.page-themed .hero,
 body.page-themed .highlight,
 body.page-themed .branch-story-hero,
 body.page-themed .journal-page-hero { border-color: color-mix(in srgb, var(--page-accent) 28%, transparent); background: var(--surface); }
+
+/* Journal stays editorial without becoming larger than the site's primary heroes. */
+body.page-journal .journal-page-hero h1 {
+  max-width: 700px;
+  font-size: 64px;
+  line-height: 1.02;
+}
 
 .hero-home { border-radius: 0; box-shadow: none; }
 .hero-home h1 { font-family: var(--font-display); font-weight: 500; letter-spacing: 0; }
@@ -480,6 +498,7 @@ footer {
   .nav { display: none; }
   .hamburger { display: block; }
   .footer-inner { grid-template-columns: minmax(230px, 1.5fr) repeat(2, 1fr); }
+  body.page-journal .journal-page-hero h1 { font-size: 54px; }
 }
 
 @media (max-width: 760px) {
@@ -499,6 +518,7 @@ footer {
   body.page-themed .page-hero,
   .page-hero { margin-top: var(--space-5); padding: 0; }
   .page-hero h1, body.page-themed .page-hero h1 { font-size: clamp(36px, 11vw, 46px); }
+  body.page-journal .journal-page-hero h1 { font-size: 44px; }
   .page-hero .page-intro, body.page-themed .page-hero .page-intro, .hero-home .hero-sub { font-size: 16px; }
   .sec, .dynamic-section { margin-block: var(--space-5); }
   .sec-h { font-size: 28px; }
@@ -527,6 +547,7 @@ footer {
   .footer-intro { grid-column: auto; }
   .privacy-banner .privacy-actions { grid-template-columns: 1fr 1fr; }
   .privacy-banner .privacy-choice-link { grid-column: 1 / -1; grid-row: 2; }
+  body.page-journal .journal-page-hero h1 { font-size: 38px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

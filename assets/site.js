@@ -733,8 +733,40 @@ function privacyChoiceMarkup(preferences) {
   '</div>';
 }
 
+let privacyPreferencesOpener = null;
+
+function handlePrivacyModalKeydown(event) {
+  const modal = document.getElementById('privacyPreferencesModal');
+  if (!modal) return;
+
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closePrivacyPreferences();
+    return;
+  }
+
+  if (event.key !== 'Tab') return;
+  const focusable = Array.from(modal.querySelectorAll(
+    'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )).filter(function(element) {
+    return !element.hidden && element.getClientRects().length > 0;
+  });
+  if (!focusable.length) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
 function openPrivacyPreferences() {
   if (document.getElementById('privacyPreferencesModal')) return;
+  privacyPreferencesOpener = document.activeElement;
   document.body.insertAdjacentHTML('beforeend', privacyChoiceMarkup(readPrivacyPreferences()));
   const modal = document.getElementById('privacyPreferencesModal');
   modal.querySelector('[data-close-privacy]').addEventListener('click', closePrivacyPreferences);
@@ -751,6 +783,7 @@ function openPrivacyPreferences() {
     if (event.target === modal) closePrivacyPreferences();
   });
   document.body.classList.add('privacy-modal-open');
+  document.addEventListener('keydown', handlePrivacyModalKeydown);
   modal.querySelector('[data-close-privacy]').focus();
 }
 
@@ -758,6 +791,11 @@ function closePrivacyPreferences() {
   const modal = document.getElementById('privacyPreferencesModal');
   if (modal) modal.remove();
   document.body.classList.remove('privacy-modal-open');
+  document.removeEventListener('keydown', handlePrivacyModalKeydown);
+  if (privacyPreferencesOpener instanceof HTMLElement && privacyPreferencesOpener.isConnected) {
+    privacyPreferencesOpener.focus();
+  }
+  privacyPreferencesOpener = null;
 }
 
 function removePrivacyBanner() {
@@ -768,11 +806,11 @@ function removePrivacyBanner() {
 function showPrivacyBanner() {
   if (document.getElementById('privacyBanner')) return;
   document.body.insertAdjacentHTML('beforeend',
-    '<aside class="privacy-banner" id="privacyBanner" aria-label="Privacy choices">' +
-      '<div class="privacy-banner-inner"><div><strong><span class="tr-only">Seçim sizin</span><span class="en-only">The choice is yours</span></strong>' +
-      '<p><span class="tr-only">Gerekli teknolojileri kullanıyoruz. İsteğe bağlı analiz ve Google Haritalar siz izin verene kadar kapalıdır.</span><span class="en-only">We use essential technologies. Optional analytics and Google Maps stay off until you allow them.</span></p></div>' +
+    '<aside class="privacy-banner" id="privacyBanner" aria-labelledby="privacyBannerTitle">' +
+      '<div class="privacy-banner-inner"><div class="privacy-banner-copy"><strong id="privacyBannerTitle"><span class="tr-only">Gizlilik, sizin seçiminiz</span><span class="en-only">Privacy, your choice</span></strong>' +
+      '<p><span class="tr-only">Gerekli teknolojiler açıktır; isteğe bağlı analiz ve haritalar izninizi bekler.</span><span class="en-only">Essential technology is on; optional analytics and maps wait for your permission.</span> <a href="privacy.html"><span class="tr-only">Ayrıntılar</span><span class="en-only">Details</span></a></p></div>' +
       '<div class="privacy-actions"><button type="button" class="btn" data-banner-essential><span class="tr-only">Yalnızca gerekli</span><span class="en-only">Essential only</span></button>' +
-      '<button type="button" class="btn" data-banner-choices><span class="tr-only">Tercihler</span><span class="en-only">Choices</span></button>' +
+      '<button type="button" class="privacy-choice-link" data-banner-choices><span class="tr-only">Tercihler</span><span class="en-only">Choices</span></button>' +
       '<button type="button" class="btn btn-p" data-banner-allow><span class="tr-only">İsteğe bağlıları aç</span><span class="en-only">Allow optional</span></button></div></div>' +
     '</aside>');
   const banner = document.getElementById('privacyBanner');
@@ -787,15 +825,8 @@ function showPrivacyBanner() {
 
 function initPrivacyControls() {
   window.gbOpenPrivacyPreferences = openPrivacyPreferences;
-  if (!document.getElementById('privacyPreferencesTrigger')) {
-    const trigger = document.createElement('button');
-    trigger.id = 'privacyPreferencesTrigger';
-    trigger.className = 'privacy-preferences-trigger';
-    trigger.type = 'button';
-    trigger.innerHTML = '<span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span>';
-    trigger.addEventListener('click', openPrivacyPreferences);
-    document.body.appendChild(trigger);
-  }
+  const legacyTrigger = document.getElementById('privacyPreferencesTrigger');
+  if (legacyTrigger) legacyTrigger.remove();
   const preferences = readPrivacyPreferences();
   applyPrivacyPreferences(preferences);
   if (!preferences) showPrivacyBanner();

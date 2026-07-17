@@ -1,5 +1,15 @@
 # Codex Handover Log
 
+## 2026-07-17 - Compact Accessible Privacy Controls
+
+- Reduced the first-visit privacy notice from a wide page-level panel to a compact G&B-styled consent bar with concise bilingual copy, a direct privacy-notice link, and clear essential/optional choices.
+- Removed the persistent floating privacy pill because the footer already provides a durable `Privacy choices / Gizlilik tercihleri` action on every page.
+- Kept the consent model unchanged: essential operation remains available; optional Vercel analytics and embedded Google Maps remain off until affirmative consent; visitors can still decline, customise, revisit, and revoke.
+- Added keyboard focus trapping, Escape-to-close, and focus restoration to the preferences dialog. Mobile actions now use a two-button row with the detailed choices link below, avoiding clipped Turkish labels.
+- Bumped the service-worker cache to `gb-public-v55`.
+
+Verification: JavaScript syntax and the 18-page static-site guard passed. Playwright checks passed at 1440x900 and 390x844, including banner size, no horizontal overflow, dialog focus, and Escape close. Live analytics/map network and consent-revocation UAT remain required after deployment.
+
 ## 2026-07-15 - Public Security Header And Contact Hardening
 
 - Added HSTS, strict referrer handling, MIME-sniffing protection, clickjacking denial, and a restrictive permissions policy to the Vercel public-site configuration.

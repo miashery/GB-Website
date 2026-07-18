@@ -3562,7 +3562,7 @@ footer .footer-bottom {
 }
 
 ::selection {
-  background: var(--coral);
+  background: var(--coral-dark);
   color: var(--white);
 }
 
@@ -5456,7 +5456,7 @@ body:not(.home-design-v3) .btn-coral {
 }
 
 .home-design-v3 .hero-word-grow {
-  color: var(--coral);
+  color: var(--coral-dark);
 }
 
 .home-design-v3 .hero-line-together {

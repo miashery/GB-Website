@@ -1,5 +1,14 @@
 # Codex Handover Log
 
+## 2026-07-18 - Round 2 Cross-Repo Contrast Guard
+
+- Confirmed the static Journal shelf and rewritten Next.js Journal articles share `/api/public/journal`; the empty shelf is only the pre-fetch/degraded fallback, not a separate content source.
+- Changed the homepage `grow` accent and browser text-selection background from pale decorative coral to the accessible dark-coral token.
+- Advanced the service-worker cache to `gb-public-v58` so returning browsers receive the contrast correction.
+- The substantive Round 2 font/token and dynamic Journal/event/workshop route work lives in the sibling `GigglesBloom` webapp repository. No static dynamic-content contract, payment flow, or schema changed here.
+
+Verification: the 18-page static-site gate, JavaScript syntax checks, and Git whitespace check passed. Deploy, hard-refresh/PWA refresh, and inspect TR/EN at phone/tablet/desktop widths. No SQL is required.
+
 ## 2026-07-18 - Public Readability And Journal Scale Polish
 
 - Restored explicit high-contrast text colours for the homepage membership band in the final shared design layer, preventing shared neutral heading/description rules or stale stylesheet combinations from producing dark copy on the blue background.

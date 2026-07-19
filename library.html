@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8">
@@ -51,7 +51,7 @@
     <div class="header-actions">
       <a class="btn-login" href="https://webapp.gigglesbloom.com/auth/signin"><span class="tr-only">Giriş</span><span class="en-only">Sign in</span></a>
       <a class="btn-join" href="https://webapp.gigglesbloom.com/auth/signup"><span class="tr-only">Katıl</span><span class="en-only">Join</span></a>
-      <button class="lang-sw" id="ls" type="button" onclick="gt()" aria-label="Türkçe ve İngilizce arasında geçiş yap"><span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span></button>
+      <button class="lang-sw" id="ls" type="button" data-language-toggle aria-label="Türkçe ve İngilizce arasında geçiş yap"><span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span></button>
       <button class="hamburger" id="hamburger" type="button" aria-label="Menüyü aç" aria-controls="mobileNav" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -164,7 +164,7 @@
       <a href="https://webapp.gigglesbloom.com/auth/signup"><span class="tr-only">Katıl</span><span class="en-only">Join</span></a>
       <a href="https://webapp.gigglesbloom.com/auth/signin"><span class="tr-only">Giriş</span><span class="en-only">Sign in</span></a>
       <a href="privacy.html"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>
-      <button class="footer-privacy-button" type="button" onclick="gbOpenPrivacyPreferences()"><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>
+      <button class="footer-privacy-button" type="button" data-open-privacy-preferences><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>
     </div>
   </div>
   <div class="footer-bottom">© <span data-year></span> Giggles &amp; Bloom — Kadıköy &amp; Kurtköy, İstanbul</div>

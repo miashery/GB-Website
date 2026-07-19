@@ -1,12 +1,15 @@
 {
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/((?!journal/|journal-sitemap\\.xml|workshops/|menu/|api/|_next/|brand/|favicon\\.svg|icon\\.svg).*)",
       "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' https://va.vercel-scripts.com 'sha256-+ZKbhdyVcQ5gnMMCVeasyYN50xesz7C6YhQjJjFY/FQ=' 'sha256-LhRJ1SRT2JCg6uW6YiqLZrXPBa6vdH8eVJGgTYfXtjI=' 'sha256-dZO29sNcLOOfPjjF9Lh8vXJTjUbDKYzHe9sYkPRoJUY=' 'sha256-xxl/Yp3N4YlKfFO8BPNenhEtPJKyyE3OLWiIGlKzdAo=' 'sha256-p3St0pdtWpc6FWCbOhXKecrYcqY+puHSKr6eq5vaF1M=' 'sha256-OM9jMoDI8t6M0TvXiXFWCwud7A3lOlsQ9WZymfWhMYY=' 'sha256-9r0B8M0Ji5qysySYrJPXlyt0gBbBIaD7rWpm7mKIW6g=' 'sha256-XZW8Tj5Qqj56eb3yDPtmEvDM4qSky0UN+AtjM8HMug8=' 'sha256-PeGniovuAdroOyGVwdvGZFD+oXo96Dx61wVGtNboY44=' 'sha256-OQ13eBRWw9tnO27zuoj7dcNvvACu+XG3f/X0QIfuEhQ=' 'sha256-vVAFEZFPsEnoTOYkEE4kBROy78lxkv+4SuLTxVsOr4A=' 'sha256-V6/PBsgNnVm5uy1uoJhScflU/P5Kk/zXoPRGDVuYGH0=' 'sha256-uQucGHVwAlnIL1wzfz1hPOl+4OwHhoqn3sZBWKPhtyw=' 'sha256-Psi86s0ZbnZ1rkiolYpZ7EMuDLN3AI7swwek6nAXRZI=' 'sha256-LeeIUFyGCvkeRboxHNBiBcRUbds9PTLJ4Aj7mA8bdik=' 'sha256-pFHDmRtVG/PzTqN6dhGJy8IpPnofWk+N+qi7play+9k=' 'sha256-h1ZjRsy+Q0IXUitPWXpVJTFmVLiOSqS4M/OJcjaqrz8='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; media-src 'self' blob: https:; connect-src 'self' https://webapp.gigglesbloom.com https://*.supabase.co wss://*.supabase.co https://vitals.vercel-insights.com https://va.vercel-scripts.com; frame-src 'self' https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com https://www.paytr.com https://*.paytr.com; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" },
+        { "key": "X-DNS-Prefetch-Control", "value": "off" },
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
       ]
     }
@@ -27,6 +30,10 @@
     {
       "source": "/workshops/:id/companion",
       "destination": "https://webapp.gigglesbloom.com/workshops/:id/companion"
+    },
+    {
+      "source": "/menu/:branch",
+      "destination": "https://webapp.gigglesbloom.com/menu/:branch"
     },
     {
       "source": "/api/public/workshop-companion/:path*",

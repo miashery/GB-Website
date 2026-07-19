@@ -52,6 +52,7 @@ function gt() {
 document.addEventListener('DOMContentLoaded', function() {
   preparePwaShell();
   initPrivacyControls();
+  wireSecuritySafeControls();
   enhancePublicCardIcons();
 
   try {
@@ -92,6 +93,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   wireEventRequestForms();
 });
+
+function wireSecuritySafeControls() {
+  document.querySelectorAll('[data-language-toggle]').forEach(function(button) {
+    button.addEventListener('click', gt);
+  });
+
+  document.querySelectorAll('[data-open-privacy-preferences]').forEach(function(button) {
+    button.addEventListener('click', openPrivacyPreferences);
+  });
+}
 
 function preparePwaShell() {
   if (!document.querySelector('link[rel="manifest"]')) {

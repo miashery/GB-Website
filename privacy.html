@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="tr">
 <head>
 <meta charset="utf-8">
@@ -50,7 +50,7 @@
     <div class="header-actions">
       <a class="btn-login" href="https://webapp.gigglesbloom.com/auth/signin"><span class="tr-only">Giriş</span><span class="en-only">Sign in</span></a>
       <a class="btn-join" href="https://webapp.gigglesbloom.com/auth/signup"><span class="tr-only">Katıl</span><span class="en-only">Join</span></a>
-      <button class="lang-sw" id="ls" type="button" onclick="gt()" aria-label="Türkçe ve İngilizce arasında geçiş yap"><span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span></button>
+      <button class="lang-sw" id="ls" type="button" data-language-toggle aria-label="Türkçe ve İngilizce arasında geçiş yap"><span class="ll t">TR</span><span class="ll e">EN</span><span class="lk" aria-hidden="true"></span></button>
       <button class="hamburger" id="hamburger" type="button" aria-label="Menüyü aç" aria-controls="mobileNav" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -106,7 +106,7 @@
           <span class="en-only">We limit service data to its purpose. Separate choices such as marketing, photo use, optional analytics, and external content are not made a condition of service.</span>
         </p>
         <div class="btns">
-          <button class="btn btn-p" type="button" onclick="gbOpenPrivacyPreferences()"><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>
+          <button class="btn btn-p" type="button" data-open-privacy-preferences><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>
           <a class="btn" href="mailto:info@ggbloom.org">info@ggbloom.org</a>
         </div>
       </div>
@@ -162,7 +162,7 @@
     <h2 class="sec-h"><span class="tr-only">Çerezler ve benzer teknolojiler</span><span class="en-only">Cookies and similar technologies</span></h2>
     <div class="g g2">
       <article class="card"><h3><span class="tr-only">Gerekli ve işlevsel</span><span class="en-only">Essential and functional</span></h3><p><strong>gb_lang</strong> — <span class="tr-only">dil seçiminizi 1 yıl hatırlar.</span><span class="en-only">remembers your language for 1 year.</span></p><p><strong>gb_privacy_preferences</strong> — <span class="tr-only">gizlilik seçimlerinizi 180 gün hatırlar.</span><span class="en-only">remembers your privacy choices for 180 days.</span></p><p><span class="tr-only">Family OS, güvenli oturum için Supabase kimlik doğrulama/oturum teknolojilerini yapılandırılmış oturum süresi boyunca kullanır. Dil, PWA ve arayüz tercihleri cihazınızdaki yerel depolamada da tutulabilir.</span><span class="en-only">Family OS uses Supabase authentication/session technologies for secure sign-in for the configured session period. Language, PWA, and interface preferences may also be held in local device storage.</span></p></article>
-      <article class="card"><h3><span class="tr-only">İsteğe bağlı</span><span class="en-only">Optional</span></h3><p><strong>Vercel Web Analytics</strong> — <span class="tr-only">toplu ve çerezsiz kullanım ölçümü; yalnızca izin verirseniz yüklenir. Şu anda Google Analytics kullanmıyoruz.</span><span class="en-only">aggregate, cookieless usage measurement; it loads only if you allow it. We do not currently use Google Analytics.</span></p><p><strong>Google Maps</strong> — <span class="tr-only">harita gömüsü yalnızca dış içeriğe izin verirseniz yüklenir. Yol tarifini haritayı sitemizde yüklemeden de doğrudan açabilirsiniz.</span><span class="en-only">the embedded map loads only if you allow external content. You can open directions directly without loading the map on our site.</span></p><div class="btns"><button class="btn btn-p" type="button" onclick="gbOpenPrivacyPreferences()"><span class="tr-only">Tercihlerimi yönet</span><span class="en-only">Manage my choices</span></button></div></article>
+      <article class="card"><h3><span class="tr-only">İsteğe bağlı</span><span class="en-only">Optional</span></h3><p><strong>Vercel Web Analytics</strong> — <span class="tr-only">toplu ve çerezsiz kullanım ölçümü; yalnızca izin verirseniz yüklenir. Şu anda Google Analytics kullanmıyoruz.</span><span class="en-only">aggregate, cookieless usage measurement; it loads only if you allow it. We do not currently use Google Analytics.</span></p><p><strong>Google Maps</strong> — <span class="tr-only">harita gömüsü yalnızca dış içeriğe izin verirseniz yüklenir. Yol tarifini haritayı sitemizde yüklemeden de doğrudan açabilirsiniz.</span><span class="en-only">the embedded map loads only if you allow external content. You can open directions directly without loading the map on our site.</span></p><div class="btns"><button class="btn btn-p" type="button" data-open-privacy-preferences><span class="tr-only">Tercihlerimi yönet</span><span class="en-only">Manage my choices</span></button></div></article>
     </div>
   </section>
 
@@ -222,7 +222,7 @@
       <a href="https://webapp.gigglesbloom.com/auth/signup"><span class="tr-only">Katıl</span><span class="en-only">Join</span></a>
       <a href="https://webapp.gigglesbloom.com/auth/signin"><span class="tr-only">Giriş</span><span class="en-only">Sign in</span></a>
       <a href="privacy.html"><span class="tr-only">Veri &amp; Gizlilik</span><span class="en-only">Data &amp; Privacy</span></a>
-      <button class="footer-privacy-button" type="button" onclick="gbOpenPrivacyPreferences()"><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>
+      <button class="footer-privacy-button" type="button" data-open-privacy-preferences><span class="tr-only">Gizlilik tercihleri</span><span class="en-only">Privacy choices</span></button>
     </div>
   </div>
   <div class="footer-bottom">© <span data-year></span> Giggles &amp; Bloom — Kadıköy &amp; Kurtköy, İstanbul</div>

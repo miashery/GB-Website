@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { dirname, extname, join, normalize, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -38,6 +39,7 @@ function isRewriteBacked(pathname) {
   return (
     /^\/journal\/[^/]+$/.test(pathname) ||
     /^\/workshops\/[^/]+(?:\/companion)?$/.test(pathname) ||
+    /^\/menu\/[^/]+$/.test(pathname) ||
     pathname.startsWith("/api/public/workshop-companion/") ||
     pathname === "/_vercel/insights/script.js" ||
     pathname.startsWith("/_next/") ||
@@ -117,6 +119,18 @@ for (const file of htmlFiles) {
     errors.push(`${label}: loads analytics directly instead of waiting for optional consent.`);
   }
 
+  if (/\son[a-z]+\s*=/i.test(content)) {
+    errors.push(`${label}: contains an inline event handler that the strict CSP will block.`);
+  }
+
+  for (const script of content.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    const attributes = script[1] || "";
+    const body = script[2] || "";
+    if (/\bsrc\s*=/i.test(attributes)) continue;
+    if (/\btype=["']application\/ld\+json["']/i.test(attributes)) continue;
+    if (body.trim()) errors.push(`${label}: contains executable inline JavaScript; move it to assets/site.js.`);
+  }
+
   for (const [iframe] of content.matchAll(/<iframe\b[^>]*>/gi)) {
     if (!iframe.includes("google.com/maps/embed")) continue;
     if (!/\bdata-external-service=["']google-maps["']/i.test(iframe)) {
@@ -151,8 +165,8 @@ for (const file of htmlFiles) {
 }
 
 const vercel = JSON.parse(readFileSync(join(root, "vercel.json"), "utf8"));
-const globalHeaders = new Map((vercel.headers || [])
-  .flatMap((entry) => entry.source === "/(.*)" ? (entry.headers || []) : [])
+const staticHeaderEntry = (vercel.headers || []).find((entry) => entry.source.includes("(?!journal/"));
+const globalHeaders = new Map((staticHeaderEntry?.headers || [])
   .map((header) => [header.key, header.value]));
 for (const header of [
   "Strict-Transport-Security",
@@ -164,12 +178,30 @@ for (const header of [
   if (!globalHeaders.has(header)) errors.push(`vercel.json: missing public security header '${header}'.`);
 }
 
+const csp = globalHeaders.get("Content-Security-Policy") || "";
+for (const directive of ["default-src 'self'", "object-src 'none'", "frame-ancestors 'none'", "script-src-attr 'none'"]) {
+  if (!csp.includes(directive)) errors.push(`vercel.json: static CSP is missing '${directive}'.`);
+}
+if (/script-src[^;]*'unsafe-inline'/.test(csp)) {
+  errors.push("vercel.json: static script-src must not allow unsafe-inline.");
+}
+
+for (const file of htmlFiles) {
+  const content = readFileSync(file, "utf8");
+  const label = relative(root, file).replaceAll("\\", "/");
+  for (const match of content.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    const hash = `'sha256-${createHash("sha256").update(match[1]).digest("base64")}'`;
+    if (!csp.includes(hash)) errors.push(`${label}: JSON-LD hash ${hash} is missing from the static CSP.`);
+  }
+}
+
 const rewriteSources = new Set((vercel.rewrites || []).map((item) => item.source));
 for (const source of [
   "/journal-sitemap.xml",
   "/journal/:slug",
   "/workshops/:id",
   "/workshops/:id/companion",
+  "/menu/:branch",
   "/api/public/workshop-companion/:path*",
   "/_next/:path*",
   "/brand/:path*",

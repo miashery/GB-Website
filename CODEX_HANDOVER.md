@@ -1,5 +1,21 @@
 # Codex Handover Log
 
+## 2026-07-19 - Public CSP, Safe Controls, Menu Route, and SSR Boundary
+
+- Hardened the static public-site Content Security Policy without weakening the dynamic Next.js routes served through Vercel rewrites.
+- Removed executable inline scripts and inline event handlers from public HTML; language and privacy controls are now wired from `assets/site.js`.
+- Added build-time checks that reject new inline handlers/scripts and verify every JSON-LD script hash against the deployed CSP.
+- Added the public `/menu/:branch` rewrite for the new bilingual, printable branch cafe menu.
+- Kept dynamic Journal, workshop, menu, API, Next.js asset, brand, and icon routes outside the static header rule so their server-rendered responses retain the webapp security policy.
+- Static HTML remains directly renderable for crawlers; dynamic rewritten pages remain server-rendered by the webapp.
+
+Live UAT after deployment:
+
+- Re-run Mozilla Observatory and confirm the CSP is detected on static pages.
+- Check TR/EN and privacy-choice controls on desktop and mobile.
+- Open `/menu/kurtkoy` and `/menu/kadikoy`, then test print preview.
+- Inspect a Journal article and workshop detail response to confirm its Next.js CSP is not replaced by the static-site CSP.
+
 ## 2026-07-18 - Round 2 Cross-Repo Contrast Guard
 
 - Confirmed the static Journal shelf and rewritten Next.js Journal articles share `/api/public/journal`; the empty shelf is only the pre-fetch/degraded fallback, not a separate content source.

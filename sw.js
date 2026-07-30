@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gb-public-v58';
+const CACHE_NAME = 'gb-public-v59';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -25,6 +25,9 @@ const CORE_ASSETS = [
   './assets/favicon.svg',
   './assets/qr/kadikoy-map.svg',
   './assets/qr/kurtkoy-map.svg',
+  './assets/centres/kadikoy-cafe-interior.webp',
+  './assets/centres/kadikoy-library-interior.webp',
+  './assets/centres/kadikoy-play-interior.webp',
   './assets/logo.png',
   './assets/redesign/logo-wordmark.png'
 ];

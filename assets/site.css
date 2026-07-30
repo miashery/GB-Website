@@ -5779,6 +5779,66 @@ body.page-bloomlab .hero-lav {
   object-position: center 58%;
 }
 
+.kadikoy-interior-section {
+  display: grid;
+  gap: 14px;
+}
+
+.kadikoy-interior-intro {
+  color: var(--mid);
+  font-size: 1rem;
+  line-height: 1.72;
+  max-width: 760px;
+}
+
+.kadikoy-interior-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+  margin-top: 12px;
+}
+
+.kadikoy-interior-photo {
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(44, 42, 39, .1);
+  border-radius: 8px;
+  box-shadow: 0 18px 38px rgba(44, 42, 39, .1);
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.kadikoy-interior-photo img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .45s ease;
+  width: 100%;
+}
+
+.kadikoy-interior-photo-wide img {
+  object-position: center 58%;
+}
+
+.kadikoy-interior-photo figcaption {
+  background: linear-gradient(180deg, transparent, rgba(26, 31, 38, .86));
+  bottom: 0;
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 750;
+  left: 0;
+  line-height: 1.4;
+  padding: 48px 18px 16px;
+  position: absolute;
+  right: 0;
+}
+
+@media (hover: hover) {
+  .kadikoy-interior-photo:hover img {
+    transform: scale(1.025);
+  }
+}
+
 @media (min-width: 981px) {
   .nav {
     display: flex;
@@ -5796,6 +5856,10 @@ body.page-bloomlab .hero-lav {
 
   .hamburger {
     display: flex;
+  }
+
+  .kadikoy-interior-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -5815,6 +5879,10 @@ body.page-bloomlab .hero-lav {
   .branch-story-media.branch-story-media-interior {
     height: 340px;
     min-height: 340px;
+  }
+
+  .kadikoy-interior-photo {
+    aspect-ratio: 4 / 3;
   }
 }
 

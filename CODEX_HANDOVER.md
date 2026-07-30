@@ -1,5 +1,30 @@
 # Codex Handover Log
 
+## 2026-07-30 - Kadıköy Interior Photography
+
+- Selected three distinct, people-free Kadıköy interior photographs from the
+  founder-provided Marketing drive set and prepared responsive WebP versions:
+  the café/counter view, library and reading corridor, and play area.
+- Replaced the Kadıköy page's repeated exterior hero with the café interior,
+  including the social preview image, so the branch promise is visible before
+  scrolling.
+- Added a compact bilingual `Mekânın içinden / Inside Kadıköy` section using
+  the library and play photographs with descriptive alternative text and
+  captions. The section stays two-column on larger screens and becomes a
+  stable single-column gallery on phones.
+- Added all three images to the offline cache, advanced it to
+  `gb-public-v59`, and refreshed the Kadıköy sitemap date.
+
+Source files:
+
+- `1785437539185.jpg` -> `assets/centres/kadikoy-cafe-interior.webp`
+- `1785437539532.jpg` -> `assets/centres/kadikoy-library-interior.webp`
+- `1785437539667.jpg` -> `assets/centres/kadikoy-play-interior.webp`
+
+Verification required after deployment: Kadıköy TR/EN at desktop, tablet and
+phone widths; image crop and loading; no horizontal overflow; PWA/cache refresh.
+No SQL or webapp data change is required.
+
 ## 2026-07-19 - Public CSP, Safe Controls, Menu Route, and SSR Boundary
 
 - Hardened the static public-site Content Security Policy without weakening the dynamic Next.js routes served through Vercel rewrites.

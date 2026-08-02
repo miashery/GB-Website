@@ -1,5 +1,19 @@
 # Codex Handover Log
 
+## 2026-08-02 - Balanced Homepage Branch Story
+
+- Replaced the Kurtköy-only announcement with a bilingual message confirming
+  that both Kadıköy and Kurtköy are open while keeping their distinct public
+  positioning clear.
+- Updated the homepage three-photo row to show exactly one Kadıköy interior
+  image and retain two Kurtköy images, with branch-specific bilingual captions.
+- Reviewed Claude Design's copied `CHANGELOG-session.md` as an audit reference
+  only. The older `live/` copy was deliberately not imported over the current
+  production source.
+- Advanced the public service-worker cache to `gb-public-v60`.
+- No webapp, database, payment, POS, role, or operational behaviour changed in
+  this public-site slice.
+
 ## 2026-07-30 - Kadıköy Interior Photography
 
 - Selected three distinct, people-free Kadıköy interior photographs from the

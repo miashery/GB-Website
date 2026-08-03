@@ -5015,6 +5015,92 @@ footer {
   padding: 14px;
 }
 
+.home-design-v3 .hero-branch-identity {
+  display: grid;
+  gap: 3px;
+}
+
+.home-design-v3 .hero-branch-kicker {
+  color: var(--sage-dark);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.home-design-v3 .hero-branch-card-kurtkoy .hero-branch-kicker {
+  color: var(--gold-dark);
+}
+
+.home-design-v3 .hero-branch-title {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.home-design-v3 .hero-branch-description {
+  color: var(--mid);
+  font-size: .84rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.home-design-v3 .hero-branch-actions {
+  margin-top: 2px !important;
+}
+
+.home-design-v3 .hero-portal-card {
+  align-items: center;
+  background: var(--sage-bg);
+  border: 1px solid var(--sage-light);
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 24px;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 22px 24px;
+}
+
+.home-design-v3 .hero-portal-copy {
+  display: grid;
+  gap: 6px;
+  max-width: 720px;
+}
+
+.home-design-v3 .hero-portal-eyebrow {
+  color: var(--sage-dark);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.home-design-v3 .hero-portal-card h2 {
+  color: var(--ink);
+  font-size: 1.55rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.home-design-v3 .hero-portal-card p {
+  color: var(--mid);
+  font-size: .88rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.home-design-v3 .hero-portal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
 .home-design-v3 .hero-branch-thumb,
 .home-design-v3 .home-hero-photo-card {
   display: none;
@@ -5295,6 +5381,14 @@ body.home-design-v3 {
   .home-design-v3 .home-family-os-section .highlight {
     grid-template-columns: 1fr;
   }
+
+  .home-design-v3 .hero-portal-card {
+    grid-template-columns: 1fr;
+  }
+
+  .home-design-v3 .hero-portal-actions {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 680px) {
@@ -5304,6 +5398,19 @@ body.home-design-v3 {
 
   .home-design-v3 .hero-home-inner {
     padding: 18px;
+  }
+
+  .home-design-v3 .hero-portal-card {
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .home-design-v3 .hero-portal-actions {
+    width: 100%;
+  }
+
+  .home-design-v3 .hero-portal-actions .btn {
+    flex: 1 1 150px;
   }
 
   .home-design-v3 .hero-home .hero-tag {

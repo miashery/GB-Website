@@ -1411,29 +1411,36 @@ function renderBranches(branches) {
   // 1. Hero stack
   const heroStack = document.getElementById('branch-hero-stack');
   if (heroStack) {
-    const portalCard = heroStack.querySelector('[data-hero-portal-card]') || heroStack.querySelector('.card:last-child');
     const branchCards = branches.map(function(b) {
       const dotCls = b.branch_id === 'kadikoy' ? 'd-sage' : 'd-gold';
       const badge = isTr ? b.badge_tr : b.badge_en;
       const desc = isTr ? b.description_tr : b.description_en;
       const district = publicBranchDistrict(b);
       const links = branchContactLinks(b.branch_id);
+      const branchName = isTr ? b.name_tr : b.name_en;
+      const tagline = b.branch_id === 'kadikoy'
+        ? (isTr ? 'Öncü aile gelişim merkezi' : 'Flagship family development centre')
+        : (isTr ? 'Çocuk kitapçısı ve aile kafesi' : 'Children\'s bookshop and family café');
 
-      return '<div class="card hero-branch-card">' +
+      return '<article class="card hero-branch-card hero-branch-card-' + escapeHtml(b.branch_id) + '">' +
         '<div class="badge"><span class="dot ' + dotCls + '"></span>' + escapeHtml(badge || '') + '</div>' +
-        '<p style="font-size:.83rem;color:var(--mid);line-height:1.6">' +
+        '<div class="hero-branch-identity">' +
+          '<span class="hero-branch-kicker">' + escapeHtml(branchName || b.branch_id) + '</span>' +
+          '<h2 class="hero-branch-title">' + escapeHtml(tagline) + '</h2>' +
+        '</div>' +
+        '<p class="hero-branch-description">' +
           '<strong>' + (b.floor_area_sqm || 0) + 'm²</strong> — ' + escapeHtml(desc || '') +
         '</p>' +
         '<div class="micro-location">' + escapeHtml(district) + ', İstanbul</div>' +
-        '<div class="btns" style="margin-top:10px">' +
+        '<div class="btns hero-branch-actions">' +
           '<a class="btn ' + (b.branch_id === 'kurtkoy' ? 'btn-gold' : 'btn-p') + '" href="' + links.page + '">' + (isTr ? 'Şube sayfası →' : 'Branch guide →') + '</a>' +
           '<a class="btn" href="' + links.map + '" target="_blank" rel="noopener">Google Maps</a>' +
           '<a class="btn" href="' + links.instagram + '" target="_blank" rel="noopener">Instagram</a>' +
         '</div>' +
-      '</div>';
+      '</article>';
     }).join('');
 
-    heroStack.innerHTML = branchCards + (portalCard ? portalCard.outerHTML : '');
+    heroStack.innerHTML = branchCards;
     wireAccountButtons(); // Re-wire the portal button
   }
 

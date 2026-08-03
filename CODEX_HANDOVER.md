@@ -1,5 +1,28 @@
 # Codex Handover Log
 
+## 2026-08-03 - Homepage Branch Identity and Portal Balance
+
+- Restored the distinct bilingual identity line inside each first-viewport
+  branch card: Kadıköy is the flagship family development centre; Kurtköy is
+  the children's bookshop and family café.
+- Kept operational branch facts, status, location, maps and Instagram, but
+  improved their hierarchy so the public promise appears before dimensions
+  and facilities.
+- Replaced the isolated right-column member-portal card with a full-width
+  digital bridge below the homepage hero and both branch cards. It now offers
+  direct sign-in plus a quieter account-creation action without leaving an
+  empty desktop column.
+- Pointed the member-portal action at the generic sign-in route. The webapp now
+  resolves the verified role after sign-in, so administrators are not sent to
+  the customer portal by this shared public CTA.
+- Added responsive desktop/tablet/phone styles using the existing G&B type,
+  colour, radius and shadow tokens; advanced the public cache to
+  `gb-public-v61`.
+
+Verification: static-site integrity, JavaScript syntax, whitespace, and
+responsive rendered checks. No SQL, payment, POS, role grant, or operational
+schema change is required.
+
 ## 2026-08-02 - Balanced Homepage Branch Story
 
 - Replaced the Kurtköy-only announcement with a bilingual message confirming

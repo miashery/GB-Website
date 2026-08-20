@@ -1,5 +1,32 @@
 # Codex Handover Log
 
+## 2026-08-20 - Family OS Navigation Clarity
+
+- Audited public-site links and confirmed there were no missing local `href` or
+  `src` targets. The working webapp destination remains the canonical,
+  role-aware sign-in route at
+  `https://webapp.gigglesbloom.com/auth/signin`.
+- Corrected the information architecture that made Family OS look broken:
+  - `Learn about Family OS` now opens the dedicated explanation at
+    `membership.html#family-os`;
+  - `Open portal` goes directly to the role-aware sign-in page;
+  - account creation remains a separate, explicit action.
+- Added a bilingual Family OS explanation to the membership page and made clear
+  that a Family OS account is free and separate from a paid membership plan.
+- Added static-site contract checks so Family OS cannot silently be routed back
+  to a generic membership destination or lose its canonical portal link.
+- Refreshed the homepage and membership sitemap dates and bumped the public
+  service-worker cache to `gb-public-v62`.
+
+Needs live UAT:
+
+- Deploy the public site and verify the three Family OS paths in TR and EN on
+  desktop and mobile.
+- Sign in through `Open portal` with an admin, branch/staff account, and ordinary
+  customer account; confirm each role reaches its correct portal.
+
+No SQL or webapp runtime change is required for this correction.
+
 ## 2026-08-03 - Homepage Branch Identity and Portal Balance
 
 - Restored the distinct bilingual identity line inside each first-viewport

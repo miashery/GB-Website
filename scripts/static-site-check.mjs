@@ -292,6 +292,22 @@ for (const noticeTopic of ["Vercel", "Google Maps", "Supabase", "Resend", "KVKK"
   }
 }
 
+const homepage = readFileSync(join(root, "index.html"), "utf8");
+const membershipPage = readFileSync(join(root, "membership.html"), "utf8");
+const familyOsSignIn = "https://webapp.gigglesbloom.com/auth/signin";
+if (!membershipPage.includes('id="family-os"')) {
+  errors.push("membership.html: Family OS explanation anchor is missing.");
+}
+if (!homepage.includes('href="membership.html#family-os"')) {
+  errors.push("index.html: Family OS information links must use membership.html#family-os.");
+}
+if (!homepage.includes(`href="${familyOsSignIn}"`) || !membershipPage.includes(`href="${familyOsSignIn}"`)) {
+  errors.push("Family OS: homepage and membership page must both expose the canonical portal sign-in route.");
+}
+if (/Family OS (?:Vision|Vizyonu)/i.test(homepage)) {
+  errors.push("index.html: retired Family OS Vision label must not replace a real information or account destination.");
+}
+
 const securityContactPath = join(root, ".well-known", "security.txt");
 if (!existsSync(securityContactPath)) {
   errors.push(".well-known/security.txt is missing.");

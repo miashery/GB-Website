@@ -37,6 +37,7 @@ const drawerNav = [
   { href: 'events.html', tr: 'Etkinlikler', en: 'Events' },
   { href: 'workspaces.html', tr: 'Çalışma Alanı', en: 'Workspaces' },
   { href: 'library.html', tr: 'Kitaplar', en: 'Books' },
+  { href: `${appUrl}/stories`, tr: 'Masallar', en: 'Stories' },
   { href: 'food.html', tr: 'Kafe', en: 'Cafe' },
   ...primaryNav.slice(5),
   { href: 'kadikoy.html', tr: 'Kadıköy', en: 'Kadıköy' },
@@ -116,6 +117,7 @@ const footer = `<!-- GB-SHELL:FOOTER:START -->
       <a href="social-lab.html"><span class="tr-only">Topluluk &amp; Destek</span><span class="en-only">Community &amp; Support</span></a>
       <a href="events.html"><span class="tr-only">Etkinlikler</span><span class="en-only">Events</span></a>
       <a href="journal.html">Journal</a>
+      <a href="${appUrl}/stories"><span class="tr-only">Masallar</span><span class="en-only">Stories</span></a>
     </div>
     <div class="footer-col">
       <h2><span class="tr-only">G&B Dünyası</span><span class="en-only">G&B worlds</span></h2>
